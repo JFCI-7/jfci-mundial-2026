@@ -1,17 +1,23 @@
 // ============== api/predictions.js — Vercel Node.js serverless function ==============
 // Persistencia de quiniela por usuario (hash de email + PIN opcional).
-// Storage: Vercel KV (Redis) — 256MB gratis, ~2.5M usuarios.
+// Storage: Vercel KV / Upstash Redis — 256MB gratis, ~2.5M usuarios.
 //
-// Endpoints:
-//   GET    /api/predictions?u=<hash64>  → 200 { data, updated_at } | 404
-//   PUT    /api/predictions?u=<hash64>  → 200 { ok, updated_at }   (body: { data })
+// Endpoints (cliente):
+//   GET    /api/predictions?u=<hash64>  → 200 { data, updated_at, version } | 404
+//   PUT    /api/predictions?u=<hash64>  → 200 { ok, updated_at }
 //   DELETE /api/predictions?u=<hash64>  → 200 { ok }
 //
-// Variables de entorno requeridas (Vercel las inyecta al conectar Vercel KV):
-//   - KV_REST_API_URL
-//   - KV_REST_API_TOKEN
+// Variables de entorno (inyectadas por Vercel al conectar Vercel KV o
+// Upstash for Redis integration):
+//   - KV_REST_API_URL    → Upstash REST endpoint
+//   - KV_REST_API_TOKEN  → bearer token
 //
 // Si no están configuradas → 503 "kv_unavailable" (cliente cae a local).
+//
+// API REST de Upstash:
+//   GET    {base}/get/{key}                 → { result: "<stringified-json>" } | 404
+//   POST   {base}/set/{key}/{value}?EX=N    → { result: "OK" }
+//   DELETE {base}/del/{key}                 → { result: 1 }
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -23,6 +29,7 @@ const CORS_HEADERS = {
 const MAX_BODY_BYTES = 100 * 1024;
 const HASH_REGEX = /^[a-f0-9]{64}$/;
 const KV_KEY_PREFIX = "u:";
+const DEFAULT_TTL_SECONDS = 60 * 60 * 24 * 365; // 1 año
 
 function jsonResponse(status, payload) {
   return new Response(JSON.stringify(payload), {
@@ -37,38 +44,51 @@ function getHashFromUrl(request) {
   return hash.toLowerCase().trim();
 }
 
+function kvBase() {
+  return (process.env.KV_REST_API_URL || "").replace(/\/+$/, "");
+}
+
+// ==== Upstash REST ====
 async function kvGet(key) {
-  const url = `${process.env.KV_REST_API_URL}/${encodeURIComponent(key)}`;
-  const r = await fetch(url, {
+  const r = await fetch(`${kvBase()}/get/${encodeURIComponent(key)}`, {
     method: "GET",
     headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
     signal: AbortSignal.timeout(8000),
   });
   if (r.status === 404) return null;
   if (!r.ok) throw new Error(`kv_get_${r.status}`);
-  return r.json();
+  const json = await r.json();
+  // Upstash devuelve { result: "<JSON string>" }. Upstash también puede devolver
+  // directamente el objeto si el value es un JSON object, pero la forma más
+  // confiable es stringificar en el SET y parsear aquí.
+  if (json && typeof json.result === "string") {
+    try { return JSON.parse(json.result); } catch { return json.result; }
+  }
+  return json && json.result !== undefined ? json.result : null;
 }
 
-async function kvSet(key, value) {
-  const url = `${process.env.KV_REST_API_URL}/${encodeURIComponent(key)}`;
-  const r = await fetch(url, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(value),
-    signal: AbortSignal.timeout(8000),
-  });
-  if (!r.ok) throw new Error(`kv_set_${r.status}`);
+async function kvSet(key, value, ttlSeconds = DEFAULT_TTL_SECONDS) {
+  // SET key value EX ttl — payload como string JSON en la URL path.
+  // (Upstash REST acepta el value URL-encoded en el path.)
+  const encodedValue = encodeURIComponent(JSON.stringify(value));
+  const r = await fetch(
+    `${kvBase()}/set/${encodeURIComponent(key)}/${encodedValue}?EX=${ttlSeconds}`,
+    {
+      method: "POST",
+      headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
+      signal: AbortSignal.timeout(8000),
+    }
+  );
+  if (!r.ok) {
+    let body = "";
+    try { body = await r.text(); } catch {}
+    throw new Error(`kv_set_${r.status}: ${body.slice(0, 200)}`);
+  }
   return r.json();
 }
 
 async function kvDel(key) {
-  const url = `${process.env.KV_REST_API_URL}/${encodeURIComponent(key)}/`;
-  // La API de Vercel KV acepta `?` para DEL. Alternativamente, usamos POST con EX.
-  // Probamos el método estándar: POST a /<key> con `?` no — usamos el endpoint de DEL.
-  const r = await fetch(url, {
+  const r = await fetch(`${kvBase()}/del/${encodeURIComponent(key)}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
     signal: AbortSignal.timeout(8000),
@@ -96,7 +116,7 @@ export default async function handler(request) {
     return new Response(null, { status: 204, headers: CORS_HEADERS });
   }
 
-  // Verificar que Vercel KV esté configurado
+  // Verificar que Vercel KV / Upstash esté configurado
   if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
     return jsonResponse(503, { error: "kv_unavailable", message: "Sync not configured" });
   }
