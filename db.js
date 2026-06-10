@@ -34,32 +34,48 @@ const DB = (() => {
   };
 
   const createSchema = () => {
-    db.run(`
-      CREATE TABLE IF NOT EXISTS user_scores (
-        match_id   TEXT PRIMARY KEY,
-        home_score INTEGER NOT NULL,
-        away_score INTEGER NOT NULL,
-        status     TEXT NOT NULL,
-        updated_at TEXT NOT NULL
-      );
-      CREATE TABLE IF NOT EXISTS predictions (
-        match_id   TEXT PRIMARY KEY,
-        home_pred  INTEGER NOT NULL,
-        away_pred  INTEGER NOT NULL,
-        updated_at TEXT NOT NULL
-      );
-      // Migración: añadir columna winner para eliminatorias
-      try { run("ALTER TABLE predictions ADD COLUMN winner TEXT"); } catch (_) {}
-      CREATE TABLE IF NOT EXISTS notes (
-        match_id   TEXT PRIMARY KEY,
-        text       TEXT,
-        updated_at TEXT NOT NULL
-      );
-      CREATE TABLE IF NOT EXISTS preferences (
-        key   TEXT PRIMARY KEY,
-        value TEXT
-      );
-    `);
+    // IMPORTANTE: cada statement se ejecuta por separado. sql.js 1.10.3 no
+    // maneja bien multi-statement cuando dentro del string hay un try/catch
+    // JS que contiene comillas, lo que produce errores tipo
+    // "near '/': syntax error". Un statement por llamada = 100% confiable.
+    db.run(`CREATE TABLE IF NOT EXISTS user_scores (
+      match_id   TEXT PRIMARY KEY,
+      home_score INTEGER NOT NULL,
+      away_score INTEGER NOT NULL,
+      status     TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    )`);
+
+    db.run(`CREATE TABLE IF NOT EXISTS predictions (
+      match_id   TEXT PRIMARY KEY,
+      home_pred  INTEGER NOT NULL,
+      away_pred  INTEGER NOT NULL,
+      updated_at TEXT NOT NULL
+    )`);
+
+    // Migración: añadir columna winner para eliminatorias.
+    // Comprobamos primero si la columna existe (PRAGMA table_info) para no
+    // depender de un try/catch externo al try del run().
+    try {
+      const cols = db.exec("PRAGMA table_info(predictions)");
+      const hasWinner = cols[0] && cols[0].values.some(row => row[1] === "winner");
+      if (!hasWinner) {
+        db.run("ALTER TABLE predictions ADD COLUMN winner TEXT");
+      }
+    } catch (_) { /* tabla aún no existe → se creará en pasos siguientes */ }
+
+    db.run(`CREATE TABLE IF NOT EXISTS notes (
+      match_id   TEXT PRIMARY KEY,
+      text       TEXT,
+      updated_at TEXT NOT NULL
+    )`);
+
+    db.run(`CREATE TABLE IF NOT EXISTS preferences (
+      key   TEXT PRIMARY KEY,
+      value TEXT
+    )`);
+
+    save();
   };
 
   const save = () => {
