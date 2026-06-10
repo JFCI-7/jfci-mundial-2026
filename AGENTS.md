@@ -118,4 +118,6 @@ python3 server.py
   - Sin password real (pass-the-hash).
   - Last-write-wins en conflictos (no hay merge).
   - Si olvidas el email o PIN, no hay recovery.
+- Sign out: `clearUserCredentials()` borra `userid` y `last_sync` (las predicciones locales quedan). Si el usuario también quiere borrar las predicciones locales, hay un segundo botón en el modal de sign out (`#signout-confirm-modal`) que llama a `wipeLocalData()` antes de `clearUserCredentials()`. El server mantiene los datos, así que re-login siempre restaura.
+- Mobile navbar: el botón hamburguesa no usa Bootstrap JS (no se carga). El handler nativo vive en `components.js#setupNavbarToggle()` y toggle la clase `.show` en `#mainNav` con `aria-expanded` correcto. Cierra con click fuera, click en link, o Escape.
 

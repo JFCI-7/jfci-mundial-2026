@@ -202,6 +202,8 @@ function injectSharedParts(currentPage) {
   applyI18n();
   // Asocia el click del switcher
   setupLangSwitcher();
+  // Asocia el click del toggler del navbar (no usamos Bootstrap JS)
+  setupNavbarToggle();
   // Título del documento (en caso de que applyI18n no se haya ejecutado)
   const titleKey = PAGE_TITLES[currentPage];
   if (titleKey && window.I18N) document.title = I18N.t(titleKey);
@@ -287,6 +289,49 @@ function setupLangSwitcher() {
       btn.focus();
     }
   });
+}
+
+// ============== NAVBAR TOGGLE (mobile hamburger) ==============
+// No usamos Bootstrap JS, así que el atributo data-bs-toggle no funciona.
+// Implementamos el toggle manualmente: añade/quita .show en #mainNav.
+function setupNavbarToggle() {
+  const toggler = document.querySelector(".navbar-toggler");
+  const target = document.getElementById("mainNav");
+  if (!toggler || !target) return;
+
+  const setOpen = (isOpen) => {
+    target.classList.toggle("show", isOpen);
+    toggler.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    toggler.classList.toggle("collapsed", !isOpen);
+  };
+
+  toggler.addEventListener("click", e => {
+    e.stopPropagation();
+    setOpen(!target.classList.contains("show"));
+  });
+
+  // Click fuera del menú → cierra.
+  document.addEventListener("click", e => {
+    if (!target.classList.contains("show")) return;
+    if (target.contains(e.target) || toggler.contains(e.target)) return;
+    setOpen(false);
+  });
+
+  // Click en un link del menú → cierra (antes de navegar).
+  target.querySelectorAll(".nav-link").forEach(link => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+
+  // Esc cierra el menú.
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && target.classList.contains("show")) {
+      setOpen(false);
+      toggler.focus();
+    }
+  });
+
+  // Al pasar el breakpoint md (768px) Bootstrap CSS muestra el menú siempre.
+  // No necesitamos reset manual porque `.show` no afecta el display en >=md.
 }
 
 // ============== MINI SPINNER (navbar) ==============

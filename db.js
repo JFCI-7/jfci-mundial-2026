@@ -253,6 +253,17 @@ const DB = (() => {
     emitSync();
   };
 
+  // wipeLocalData: borra las 4 tablas del usuario pero NO toca userid/last_sync
+  // (la auth se debe limpiar aparte con clearUserCredentials).
+  // El server mantiene los datos, así que un re-login con el mismo email los
+  // restaura vía pullFromServer → importData.
+  const wipeLocalData = () => {
+    run("DELETE FROM predictions");
+    run("DELETE FROM user_scores");
+    run("DELETE FROM notes");
+    run("DELETE FROM preferences");
+  };
+
   // ===== SYNC =====
   const exportData = () => {
     return {
@@ -458,7 +469,7 @@ const DB = (() => {
     setNote, getNote,
     setPref, getPref,
     // Auth + sync
-    setUserCredentials, getUserId, clearUserCredentials,
+    setUserCredentials, getUserId, clearUserCredentials, wipeLocalData,
     pullFromServer, pushToServerNow, schedulePush,
     getSyncState, getLastSync, onSyncChange,
     validateEmail, validatePin,

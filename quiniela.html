@@ -139,6 +139,27 @@
     </div>
   </div>
 
+  <div id="signout-confirm-modal" class="modal-mundial" hidden>
+    <div class="modal-overlay" data-close></div>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-mundial-content">
+        <button type="button" class="modal-close-btn" data-close aria-label="Cerrar">
+          <i class="ri-close-line" aria-hidden="true"></i>
+        </button>
+        <div class="text-center mb-3">
+          <i class="ri-logout-box-r-line auth-icon" aria-hidden="true"></i>
+        </div>
+        <h3 class="bebas text-center mb-2" data-i18n="auth.signOutTitle">¿Cerrar sesión?</h3>
+        <p class="text-muted text-center small mb-4" data-i18n="auth.signOutBody">Tu quiniela seguirá guardada en este dispositivo y en el servidor. Si inicias sesión de nuevo con el mismo email, volverás a ver tus predicciones.</p>
+        <div class="d-grid gap-2">
+          <button type="button" id="btn-signout-keep" class="btn btn-primary fw-bold" data-i18n="auth.signOutKeep">Cerrar sesión (mantener datos)</button>
+          <button type="button" id="btn-signout-wipe" class="btn btn-link text-danger p-0 small" data-i18n="auth.signOutWipe">Cerrar y borrar local</button>
+          <button type="button" class="btn btn-outline-secondary mt-2" data-close data-i18n="common.cancel">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="db.js"></script>
   <script src="seed.js"></script>
   <script src="api.js"></script>

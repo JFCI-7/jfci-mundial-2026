@@ -519,13 +519,8 @@ function setupAuth() {
     }
   });
 
-  // Cerrar sesión
-  signoutBtn.addEventListener("click", () => {
-    if (!confirm(t("auth.signOutConfirm"))) return;
-    DB.clearUserCredentials();
-    updateSyncUI();
-    showToast(t("auth.signOut"), "info", 2500);
-  });
+  // Cerrar sesión — abre modal con 2 opciones
+  signoutBtn.addEventListener("click", openSignoutConfirm);
 
   // Si ya hay user, intentar pull silencioso al cargar
   if (DB.getUserId()) {
@@ -540,6 +535,50 @@ function setupAuth() {
   } else {
     updateSyncUI();
   }
+}
+
+// Modal de confirmación de sign out con 2 opciones: mantener o borrar local.
+function openSignoutConfirm() {
+  const modal = document.getElementById("signout-confirm-modal");
+  if (!modal) return;
+  const keepBtn = document.getElementById("btn-signout-keep");
+  const wipeBtn = document.getElementById("btn-signout-wipe");
+  if (!keepBtn || !wipeBtn) return;
+
+  const close = () => { modal.hidden = true; document.body.style.overflow = ""; };
+  const onKeep = () => {
+    DB.clearUserCredentials();
+    close();
+    updateSyncUI();
+    renderPredictions();
+    showToast(t("auth.signOut"), "info", 2500);
+    cleanup();
+  };
+  const onWipe = () => {
+    DB.wipeLocalData();
+    DB.clearUserCredentials();
+    close();
+    updateSyncUI();
+    renderPredictions();
+    showToast(t("auth.signOut"), "info", 2500);
+    cleanup();
+  };
+  const onBackdrop = e => { if (e.target.matches("[data-close]")) close(); };
+  const onKey = e => { if (e.key === "Escape") { close(); cleanup(); } };
+  const cleanup = () => {
+    keepBtn.removeEventListener("click", onKeep);
+    wipeBtn.removeEventListener("click", onWipe);
+    modal.removeEventListener("click", onBackdrop);
+    document.removeEventListener("keydown", onKey);
+  };
+
+  keepBtn.addEventListener("click", onKeep);
+  wipeBtn.addEventListener("click", onWipe);
+  modal.addEventListener("click", onBackdrop);
+  document.addEventListener("keydown", onKey);
+
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
 }
 
 function updateSyncUI() {
