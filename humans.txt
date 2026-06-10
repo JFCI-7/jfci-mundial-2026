@@ -1,0 +1,65 @@
+/* TEAM */
+Site: Mundial 2026 Tracker
+Site URL: https://mundial2026.example.com
+Contact: contacto@centuriati.example.com
+Twitter: @centuriati
+Location: México, USA, Canadá
+Last update: 2026/06/10
+Doctype: HTML5
+Generator: Vanilla JS + Bootstrap 5.3
+
+/* DEVELOPER */
+Company: CenturiaTI — Centuria Tecnologías de la Información
+Role: Diseño, desarrollo y mantenimiento
+Developer: Jesus Islas
+Site: https://centuriati.example.com
+Email: jesus.islas@centuriati.example.com
+Twitter: @jesusislasdev
+Stack: HTML5, CSS3, JavaScript ES2022, Bootstrap 5.3, Remix Icon 4, Apache ECharts 5
+Persistence: sql.js (SQLite in-browser, localStorage)
+
+/* THANKS */
+Built with love for football fans in México, USA, Canadá y todo el mundo.
+
+/* SITE */
+Description: Sigue los 104 partidos del Mundial 2026 (México · USA · Canadá): 48 selecciones, 16 estadios, 7 fases. Datos en vivo desde la API oficial, predicciones, quiniela, estadísticas y 150 datos curiosos de la historia de la Copa Mundial.
+Language: Español (es-MX)
+Charset: UTF-8
+Standards: HTML5, CSS3, ES2022, WAI-ARIA
+License: MIT
+Repository: https://github.com/centuriati/mundial-2026
+
+/* DATA SOURCES */
+- Datos en vivo: https://worldcup26.ir (API REST, sin autenticación)
+- Banderas: lipis/flag-icons v7.5.0 (SVG vectoriales, MIT)
+- Iconos: Remix Icon 4.2.0 (Apache 2.0)
+- UI: Bootstrap 5.3.2 (MIT)
+- Charts: Apache ECharts 5.5.1 (Apache 2.0)
+- Datos curiosos: Catálogo local `worldcup_facts_150_ES.json` (19 categorías, CC-BY 4.0)
+- Calendario del torneo: `mundial2026_calendario.json` (104 partidos, 48 selecciones, 16 estadios)
+
+/* TECHNICAL */
+Backend: Static + Vercel serverless proxy (`/api/proxy/*` → `https://worldcup26.ir`)
+Hosting: Vercel
+Build: pnpm install && node build.mjs (vendoriza flag-icons + ECharts a /vendor/)
+Browser support: Chrome 100+, Firefox 100+, Safari 15+, Edge 100+
+Mobile: iOS 15+, Android 10+
+
+/* COMPONENTS */
+Components: 8 vistas HTML independientes (Grupos, Calendario, Eliminatorias, Quiniela, Timeline, Sedes, Estadísticas, Datos Curiosos).
+Components: Navbar sticky con theme toggle, footer con crédito del proyecto.
+Components: Loader fullscreen con progress bar.
+Components: Banner de partidos en vivo en home.
+Components: Notificaciones de goles con toasts.
+Components: Quiniela con tabs por fase (grupos, 32avos, octavos, cuartos, semis, final) y multiplicador de puntos.
+Components: 4 charts ECharts en Estadísticas (donut, barras, línea, barras horizontales).
+Components: 150 datos curiosos con búsqueda y filtro por categoría.
+
+/* ACCESSIBILITY */
+Honors: prefers-reduced-motion, prefers-color-scheme
+ARIA: aria-label, aria-hidden, aria-live, aria-atomic
+Keyboard: Tab navigation, Enter/Space, Escape
+Contrast: WCAG 2.1 AA (light y dark mode)
+
+//* STANDARDS */
+Components follow W3C HTML5 and WAI-ARIA Authoring Practices.

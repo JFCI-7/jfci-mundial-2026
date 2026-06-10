@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="150 datos curiosos, récords y curiosidades de la historia de la Copa Mundial de la FIFA." />
+  <title>Mundial 2026 · Datos Curiosos</title>
+  <link rel="icon" type="image/png" href="img/copa_del_mundo.png" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main class="container-fluid py-4">
+    <div id="server-banner" class="server-banner" hidden>
+      <div class="server-banner-icon"><i class="ri-alert-line" aria-hidden="true"></i></div>
+      <div class="server-banner-body">
+        <strong data-i18n="banner.server.title">Servidor incorrecto.</strong>
+        <span data-i18n="banner.server.body">Estás usando</span> <code>python3 -m http.server</code> <span data-i18n="banner.server.body2">(servidor estático, sin proxy CORS). Para ver datos en vivo de la API, ejecuta:</span>
+        <code class="server-banner-cmd" id="server-banner-cmd">python3 server.py</code>
+        <button id="server-banner-copy" class="btn btn-sm btn-outline-light ms-2" aria-label="Copiar comando">
+          <i class="ri-file-copy-line" aria-hidden="true"></i> Copiar
+        </button>
+      </div>
+      <button id="server-banner-close" class="server-banner-close" aria-label="Cerrar">
+        <i class="ri-close-line" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3 small text-muted">
+      <span><i class="ri-book-shelf-line" aria-hidden="true"></i> <span id="data-source" data-i18n="meta.dataSource.facts">500 datos · Catálogo local</span></span>
+      <span><i class="ri-file-list-line" aria-hidden="true"></i> <span id="last-refresh" data-i18n="meta.lastRefresh">—</span></span>
+    </div>
+
+    <section class="view active">
+      <h2 class="bebas section-title"><i class="ri-sparkling-2-line" aria-hidden="true"></i> <span data-i18n="facts.title">Datos Curiosos de los Mundiales</span></h2>
+
+      <div class="filter-bar p-3 rounded mb-3">
+        <div class="row g-2 align-items-center">
+          <div class="col-12 col-md-7">
+            <label for="fact-search" class="form-label small mb-1" data-i18n="common.search">Buscar</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text"><i class="ri-search-line" aria-hidden="true"></i></span>
+              <input id="fact-search" type="search" class="form-control" data-i18n-placeholder="facts.search.placeholder" placeholder="Ej. gol, 1950, mascota, Mbappé…" autocomplete="off" />
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <label for="fact-category" class="form-label small mb-1" data-i18n="facts.category.all">Categoría</label>
+            <select id="fact-category" class="form-select form-select-sm">
+              <option value="" data-i18n="facts.category.all">Todas</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-2 text-md-end">
+            <label class="form-label small mb-1 d-block">&nbsp;</label>
+            <button id="btn-fact-random" class="btn btn-sm btn-primary w-100" type="button" data-i18n-title="facts.btn.randomTitle" title="Dato aleatorio">
+              <i class="ri-shuffle-line" aria-hidden="true"></i> <span data-i18n="facts.btn.random">Sorpréndeme</span>
+            </button>
+          </div>
+        </div>
+        <div class="small text-muted mt-2" id="fact-count"></div>
+      </div>
+
+      <div id="facts-list" class="row g-3"></div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="db.js"></script>
+  <script src="seed.js"></script>
+  <script src="api.js"></script>
+  <script src="i18n.js"></script>
+  <script src="components.js"></script>
+  <script src="app.js"></script>
+
+  <!-- Fallback: render directo de los facts.
+       Si app.js no renderizó (por cualquier razón), este script lo hace.
+       Es independiente de app.js, sólo depende del JSON local y el DOM. -->
+  <script>
+  (function () {
+    const FACT_ICONS = {
+      "Historia": "ri-time-line", "History": "ri-time-line",
+      "Goles": "ri-football-line", "Goals": "ri-football-line",
+      "Asistencia": "ri-group-line", "Attendance": "ri-group-line",
+      "Anfitriones": "ri-home-4-line", "Hosts": "ri-home-4-line",
+      "Campeones": "ri-trophy-line", "Champions": "ri-trophy-line",
+      "Continentes": "ri-earth-line", "Continents": "ri-earth-line",
+      "Cultura": "ri-palette-line", "Culture": "ri-palette-line",
+      "Eliminatorias": "ri-flow-chart", "Qualifiers": "ri-flow-chart",
+      "Estadios": "ri-building-2-line", "Stadiums": "ri-building-2-line",
+      "Finales": "ri-medal-line", "Finals": "ri-medal-line",
+      "Finanzas": "ri-money-dollar-circle-line", "Finance": "ri-money-dollar-circle-line",
+      "Jugadores": "ri-user-star-line", "Players": "ri-user-star-line",
+      "Mascotas": "ri-bear-smile-line", "Mascots": "ri-bear-smile-line",
+      "Partidos": "ri-calendar-event-line", "Matches": "ri-calendar-event-line",
+      "Premios": "ri-award-line", "Awards": "ri-award-line",
+      "Récords": "ri-bar-chart-star-line", "Records": "ri-bar-chart-star-line",
+      "Tarjetas": "ri-file-warning-line", "Cards": "ri-file-warning-line",
+      "Tecnología": "ri-cpu-line", "Technology": "ri-cpu-line",
+      "Televisión": "ri-tv-line", "Television": "ri-tv-line",
+    };
+    const FACT_COLORS = {
+      "Historia": "var(--secondary)", "History": "var(--secondary)",
+      "Goles": "var(--primary)", "Goals": "var(--primary)",
+      "Asistencia": "var(--accent-2)", "Attendance": "var(--accent-2)",
+      "Anfitriones": "var(--accent)", "Hosts": "var(--accent)",
+      "Campeones": "var(--accent-2)", "Champions": "var(--accent-2)",
+      "Continentes": "var(--secondary)", "Continents": "var(--secondary)",
+      "Cultura": "var(--primary)", "Culture": "var(--primary)",
+      "Eliminatorias": "var(--accent)", "Qualifiers": "var(--accent)",
+      "Estadios": "var(--text-muted)", "Stadiums": "var(--text-muted)",
+      "Finales": "var(--primary)", "Finals": "var(--primary)",
+      "Finanzas": "var(--accent-2)", "Finance": "var(--accent-2)",
+      "Jugadores": "var(--primary)", "Players": "var(--primary)",
+      "Mascotas": "var(--accent-2)", "Mascots": "var(--accent-2)",
+      "Partidos": "var(--secondary)", "Matches": "var(--secondary)",
+      "Premios": "var(--accent-2)", "Awards": "var(--accent-2)",
+      "Récords": "var(--primary)", "Records": "var(--primary)",
+      "Tarjetas": "var(--accent)", "Cards": "var(--accent)",
+      "Tecnología": "var(--secondary)", "Technology": "var(--secondary)",
+      "Televisión": "var(--secondary)", "Television": "var(--secondary)",
+    };
+
+    const STATE = { all: [], filtered: [] };
+
+    function escapeHtmlInline(s) {
+      return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[c]);
+    }
+
+    function t(key, vars) {
+      return window.I18N ? I18N.t(key, vars) : key;
+    }
+
+    function renderCard(f) {
+      const icon = FACT_ICONS[f.categoria] || "ri-sparkling-2-line";
+      const color = FACT_COLORS[f.categoria] || "var(--secondary)";
+      // Traduce la categoría para mostrarla en el idioma actual.
+      const catKey = "facts.cat." + f.categoria;
+      const catLabel = (window.I18N && I18N.t(catKey) !== catKey) ? I18N.t(catKey) : f.categoria;
+      const sourceLabel = t("facts.source");
+      const source = f.url_fuente
+        ? '<a href="' + escapeHtmlInline(f.url_fuente) + '" target="_blank" rel="noopener" class="fact-source"><i class="ri-external-link-line" aria-hidden="true"></i> ' + escapeHtmlInline(f.fuente || sourceLabel) + '</a>'
+        : (f.fuente ? '<span class="fact-source"><i class="ri-bookmark-line" aria-hidden="true"></i> ' + escapeHtmlInline(f.fuente) + '</span>' : "");
+      return '<div class="col-12 col-md-6 col-lg-4">'
+        + '<article class="fact-card">'
+        +   '<div class="fact-head">'
+        +     '<span class="fact-num">#' + f.id + '</span>'
+        +     '<span class="fact-tag" style="--cat-color: ' + color + '">'
+        +       '<i class="' + icon + '" aria-hidden="true"></i> ' + escapeHtmlInline(catLabel)
+        +     '</span>'
+        +   '</div>'
+        +   '<p class="fact-body">' + escapeHtmlInline(f.dato) + '</p>'
+        +   (source ? '<footer class="fact-foot">' + source + '</footer>' : "")
+        + '</article>'
+        + '</div>';
+    }
+
+    function applyFilters() {
+      const search = (document.getElementById("fact-search")?.value || "").toLowerCase().trim();
+      const cat = document.getElementById("fact-category")?.value || "";
+      STATE.filtered = STATE.all.filter(f => {
+        if (cat && f.categoria !== cat) return false;
+        if (search) {
+          const hay = (f.dato + " " + f.categoria + " " + (f.fuente || "")).toLowerCase();
+          if (!hay.includes(search)) return false;
+        }
+        return true;
+      });
+      renderCards();
+    }
+
+    function renderCards() {
+      const list = document.getElementById("facts-list");
+      const counter = document.getElementById("fact-count");
+      if (!list) return;
+      const total = STATE.all.length, shown = STATE.filtered.length;
+      if (counter) {
+        if (shown === total) {
+          counter.innerHTML = t("facts.countAll", { total: total }).replace("{total}", "<strong>" + total + "</strong>");
+        } else {
+          counter.innerHTML = t("facts.count", { shown: shown, total: total })
+            .replace("{shown}", "<strong>" + shown + "</strong>")
+            .replace("{total}", "<strong>" + total + "</strong>");
+        }
+      }
+      if (!shown) {
+        list.innerHTML = '<div class="col-12"><div class="card-mundial p-4 text-center"><i class="ri-search-eye-line" style="font-size:2.5rem;color:var(--text-muted)"></i><p class="text-muted mt-2 mb-0">' + escapeHtmlInline(t("facts.empty")) + '</p></div></div>';
+        return;
+      }
+      list.innerHTML = STATE.filtered.map(renderCard).join("");
+    }
+
+    function populateCategorySelect() {
+      const sel = document.getElementById("fact-category");
+      if (!sel) return;
+      const cats = Array.from(new Set(STATE.all.map(f => f.categoria))).sort((a, b) => a.localeCompare(b, "es"));
+      const allLabel = escapeHtmlInline(t("facts.category.all"));
+      sel.innerHTML = '<option value="">' + allLabel + '</option>' +
+        cats.map(c => {
+          const catKey = "facts.cat." + c;
+          const label = (window.I18N && I18N.t(catKey) !== catKey) ? I18N.t(catKey) : c;
+          return '<option value="' + escapeHtmlInline(c) + '">' + escapeHtmlInline(label) + '</option>';
+        }).join("");
+    }
+
+    function showRandom() {
+      if (!STATE.filtered.length) return;
+      const idx = Math.floor(Math.random() * STATE.filtered.length);
+      const cards = document.querySelectorAll("#facts-list .fact-card");
+      const target = cards[idx];
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        target.classList.remove("fact-card-pulse");
+        void target.offsetWidth;
+        target.classList.add("fact-card-pulse");
+      }
+    }
+
+    function getJsonPath() {
+      const lang = (window.I18N && I18N.lang) || "es";
+      return lang === "en" ? "./worldcup_facts_500_EN.json" : "./worldcup_facts_150_ES.json";
+    }
+
+    async function init() {
+      const list = document.getElementById("facts-list");
+      if (!list) {
+        console.warn("[facts-fallback] #facts-list no existe");
+        return;
+      }
+      // Si app.js ya renderizó cards, no hacemos nada.
+      if (list.querySelector(".fact-card")) {
+        console.log("[facts-fallback] app.js ya renderizó, saltando");
+        return;
+      }
+      const jsonPath = getJsonPath();
+      console.log("[facts-fallback] init: cargando JSON local…", jsonPath);
+      try {
+        const r = await fetch(jsonPath, { cache: "no-store" });
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        const data = await r.json();
+        STATE.all = Array.isArray(data.datos) ? data.datos : [];
+        console.log("[facts-fallback] cargados", STATE.all.length, "datos");
+      } catch (e) {
+        list.innerHTML = '<div class="col-12"><div class="card-mundial p-4 text-center"><i class="ri-error-warning-line" style="font-size:2.5rem;color:var(--accent)"></i><p class="mt-2 mb-0">' + escapeHtmlInline(t("facts.error", { msg: e.message })) + '</p></div></div>';
+        console.error("[facts-fallback] error:", e);
+        return;
+      }
+      populateCategorySelect();
+      applyFilters();
+
+      // Listeners
+      document.getElementById("fact-search")?.addEventListener("input", applyFilters);
+      document.getElementById("fact-category")?.addEventListener("change", applyFilters);
+      document.getElementById("btn-fact-random")?.addEventListener("click", showRandom);
+
+      // Asegura que el loader se oculte
+      const loader = document.getElementById("page-loader");
+      if (loader && !loader.classList.contains("loader-hide")) {
+        loader.classList.add("loader-hide");
+        setTimeout(() => loader.remove(), 600);
+      }
+    }
+
+    // Esperar un instante para dejar que app.js intente primero.
+    // Después garantizamos el render.
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => setTimeout(init, 50));
+    } else {
+      setTimeout(init, 50);
+    }
+  })();
+  </script>
+</body>
+</html>

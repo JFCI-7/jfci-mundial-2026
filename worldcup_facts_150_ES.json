@@ -1,0 +1,3547 @@
+{
+  "titulo": "500 Datos Curiosos del Mundial de Fútbol",
+  "descripcion": "Una colección curada de datos interesantes, récords y curiosidades de la historia de la Copa Mundial de la FIFA",
+  "total_datos": 500,
+  "fecha_generacion": "2026-06-09",
+  "nota_fuente": "Compilado de múltiples fuentes incluyendo FIFA, Sports Illustrated, TopEnd Sports y otras publicaciones deportivas. Todos los datos son registros históricos documentados públicamente.",
+  "datos": [
+    {
+      "id": 1,
+      "dato": "La primera Copa Mundial de la FIFA se celebró en Uruguay en 1930. Los 18 partidos se jugaron en Montevideo en tres estadios.",
+      "categoria": "Historia",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 2,
+      "dato": "El delantero francés Lucien Laurent anotó el primer gol en la historia de la Copa Mundial en el minuto 19 del partido inaugural contra México en 1930.",
+      "categoria": "Goles",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 3,
+      "dato": "En 1938, Giuseppe Meazza de Italia cobró un penal mientras se le caían los shorts, provocando que el portero se riera.",
+      "categoria": "Goles",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 4,
+      "dato": "Just Fontaine anotó 13 goles en la Copa Mundial de 1958, el récord más alto en una sola edición, y solo jugó en un Mundial.",
+      "categoria": "Goles",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 5,
+      "dato": "Oleg Salenko es el único jugador en anotar 5 goles en un solo partido de Copa Mundial, lográndolo contra Camerún en 1994.",
+      "categoria": "Goles",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 6,
+      "dato": "Hubo un lapso de 12 años entre las Copas Mundiales de 1938 y 1950 debido a la Segunda Guerra Mundial, el mayor intervalo en la historia del torneo.",
+      "categoria": "Historia",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 7,
+      "dato": "La final de la Copa Mundial de 1950 entre Uruguay y Brasil en el Maracaná tuvo una asistencia estimada de 173,850 a 200,000 personas, la más alta en la historia del fútbol.",
+      "categoria": "Asistencia",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 8,
+      "dato": "La asistencia más baja en un partido de Copa Mundial fue en 1930, cuando solo 300 personas vieron Rumania vs Perú.",
+      "categoria": "Asistencia",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 9,
+      "dato": "El Trofeo Jules Rimet fue robado antes de la Copa Mundial de 1966 en Inglaterra y fue encontrado por un perro llamado Pickles una semana después.",
+      "categoria": "Historia",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 10,
+      "dato": "El Trofeo Jules Rimet fue robado nuevamente en 1983 de Brasil y nunca se recuperó. Brasil recibió una réplica.",
+      "categoria": "Historia",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 11,
+      "dato": "Pelé es el único jugador en haber ganado tres Copas Mundiales: 1958, 1962 y 1970.",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 12,
+      "dato": "Pelé ostenta el récord de más asistencias en la historia de la Copa Mundial con 10, incluyendo 6 en el torneo de 1970.",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 13,
+      "dato": "Lothar Matthäus ostenta el récord de más partidos jugados en Copas Mundiales con 25 apariciones en cinco torneos (1982-1998).",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 14,
+      "dato": "Tres jugadores han participado en cinco Copas Mundiales: Lothar Matthäus (Alemania), Antonio Carbajal (México) y Rafael Márquez (México).",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 15,
+      "dato": "Iván Hurtado de Ecuador ostenta el récord de más partidos de eliminatorias mundialistas jugados con 68 encuentros.",
+      "categoria": "Eliminatorias",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 16,
+      "dato": "Carlos Ruiz de Guatemala es el máximo goleador en la historia de las eliminatorias mundialistas con 39 goles, a pesar de que Guatemala nunca clasificó al torneo.",
+      "categoria": "Eliminatorias",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 17,
+      "dato": "Norman Whiteside de Irlanda del Norte es el jugador más joven en aparecer en una Copa Mundial a los 17 años y 41 días en 1982.",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 18,
+      "dato": "El portero egipcio Essam El-Hadary es el jugador más viejo en aparecer en una Copa Mundial a los 45 años y 161 días en 2018.",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 19,
+      "dato": "La mayor diferencia de edad entre compañeros de equipo en un partido de Copa Mundial fue entre Roger Milla (42) y Rigobert Song (17) de Camerún en 1994.",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 20,
+      "dato": "México ostenta el récord de más derrotas en Copas Mundiales con 27 pérdidas.",
+      "categoria": "Récords",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 21,
+      "dato": "Inglaterra ostenta el récord de más empates en Copas Mundiales con 21 partidos empatados.",
+      "categoria": "Récords",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 22,
+      "dato": "Indonesia (entonces Indias Orientales Neerlandesas) jugó solo un partido de Copa Mundial en 1938, perdiendo 6-0 contra Hungría.",
+      "categoria": "Récords",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 23,
+      "dato": "España tuvo la peor actuación de una nación anfitriona en 1982, ganando solo uno de cinco partidos y quedando última en su grupo de segunda ronda.",
+      "categoria": "Anfitriones",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 24,
+      "dato": "Sudáfrica es el único país anfitrión eliminado en la fase de grupos, en 2010.",
+      "categoria": "Anfitriones",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 25,
+      "dato": "Brasil es la única nación que ha jugado en todas las Copas Mundiales desde que el torneo comenzó en 1930.",
+      "categoria": "Récords",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 26,
+      "dato": "Alemania y Argentina se han enfrentado tres veces en finales de Copa Mundial (1986, 1990, 2014), el enfrentamiento más común en una final.",
+      "categoria": "Finales",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 27,
+      "dato": "La Copa Mundial de 2002 en Corea del Sur y Japón fue el primer torneo co-organizado.",
+      "categoria": "Anfitriones",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 28,
+      "dato": "Hakan Şükür de Turquía anotó el gol más rápido en la historia de la Copa Mundial a los 11 segundos contra Corea del Sur en 2002.",
+      "categoria": "Goles",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 29,
+      "dato": "Europa ha producido 12 títulos de Copa Mundial (5 naciones diferentes) mientras que Sudamérica tiene 9 títulos (3 naciones diferentes).",
+      "categoria": "Continentes",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 30,
+      "dato": "El Estadio 974 de Qatar fue el primer estadio de Copa Mundial completamente desmontable, construido con contenedores de envío y removido después del torneo de 2022.",
+      "categoria": "Estadios",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 31,
+      "dato": "Qatar se convirtió en el primer país anfitrión en perder el partido inaugural de una Copa Mundial, perdiendo 2-0 contra Ecuador en 2022.",
+      "categoria": "Anfitriones",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 32,
+      "dato": "Marruecos se convirtió en la primera nación africana en llegar a las semifinales de la Copa Mundial, lográndolo en 2022.",
+      "categoria": "Récords",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 33,
+      "dato": "Miroslav Klose de Alemania es el máximo goleador histórico en Copas Mundiales con 16 goles.",
+      "categoria": "Goles",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 34,
+      "dato": "El gol más rápido por un suplente fue anotado por Ebbe Sand de Dinamarca, solo 16 segundos después de entrar contra Nigeria en 1998.",
+      "categoria": "Goles",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 35,
+      "dato": "El margen de victoria más amplio en un partido de fase final de Copa Mundial fue Hungría 10-1 El Salvador en 1982.",
+      "categoria": "Partidos",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 36,
+      "dato": "La victoria más amplia en eliminatorias mundialistas fue el 31-0 de Australia sobre Samoa Americana en 2001.",
+      "categoria": "Eliminatorias",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 37,
+      "dato": "Brasil ha ganado la mayor cantidad de títulos de Copa Mundial con 5, seguido por Alemania e Italia con 4 cada uno.",
+      "categoria": "Récords",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 38,
+      "dato": "Brasil ha aparecido en la mayor cantidad de torneos de Copa Mundial con 22 participaciones, sin faltar a ninguno.",
+      "categoria": "Récords",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 39,
+      "dato": "La mayor cantidad de goles anotados por un equipo en un solo torneo es 27, logrado por Hungría en 1954.",
+      "categoria": "Goles",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 40,
+      "dato": "Zinedine Zidane y Cafu ambos recibieron 6 tarjetas en Copas Mundiales, la mayor cantidad por cualquier jugador.",
+      "categoria": "Tarjetas",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 41,
+      "dato": "Pelé es el goleador más joven en la historia de la Copa Mundial, anotando contra Gales a los 17 años y 239 días en 1958.",
+      "categoria": "Goles",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 42,
+      "dato": "La Copa Mundial de 2026 será la primera con 48 equipos, expandiéndose del formato anterior de 32 equipos.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 43,
+      "dato": "La Copa Mundial de 2026 será co-organizada por tres países: Estados Unidos, Canadá y México, por primera vez.",
+      "categoria": "Anfitriones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 44,
+      "dato": "La Copa Mundial de 2022 en Qatar fue la primera celebrada en Medio Oriente y la primera en noviembre-diciembre.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 45,
+      "dato": "Lionel Messi ganó la Copa Mundial de 2022 con Argentina, completando su colección de trofeos.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 46,
+      "dato": "Kylian Mbappé anotó un hat-trick en la final de la Copa Mundial de 2022, convirtiéndose en solo el segundo jugador en hacerlo después de Geoff Hurst en 1966.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 47,
+      "dato": "La Copa Mundial de 2018 en Rusia fue el torneo más caro de la historia, costando un estimado de $14.2 mil millones.",
+      "categoria": "Finanzas",
+      "fuente": "Varias Noticias Deportivas",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 48,
+      "dato": "La final de la Copa Mundial de 2014 entre Alemania y Argentina tuvo una audiencia global de 1,013 millones de espectadores.",
+      "categoria": "Televisión",
+      "fuente": "Reportes de TV de la FIFA",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 49,
+      "dato": "La Copa Mundial de 2010 en Sudáfrica fue la primera en suelo africano.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 50,
+      "dato": "La vuvuzela se hizo famosa (o infame) durante la Copa Mundial de 2010, produciendo un zumbido constante.",
+      "categoria": "Cultura",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 51,
+      "dato": "La final de la Copa Mundial de 2006 entre Italia y Francia es famosa por el cabezazo de Zinedine Zidane a Marco Materazzi.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 52,
+      "dato": "Zinedine Zidane ganó el Balón de Oro en 2006 a pesar de ser expulsado en la final.",
+      "categoria": "Premios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 53,
+      "dato": "El equipo de Brasil de 2002 ganó sus 7 partidos, convirtiéndose en el primer equipo en ganar la Copa Mundial sin perder o empatar.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 54,
+      "dato": "Ronaldo Nazario anotó 8 goles en la Copa Mundial de 2002, ganando la Bota de Oro.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 55,
+      "dato": "La final de la Copa Mundial de 1998 vio a Francia vencer a Brasil 3-0, con Zidane anotando dos goles de cabeza.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 56,
+      "dato": "Ronaldo Nazario sufrió una convulsión horas antes de la final de la Copa Mundial de 1998 pero igual jugó.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 57,
+      "dato": "La final de la Copa Mundial de 1994 entre Brasil e Italia fue la primera decidida en penales.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 58,
+      "dato": "Roberto Baggio falló el penal decisivo en la final de la Copa Mundial de 1994, dándole el título a Brasil.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 59,
+      "dato": "La final de la Copa Mundial de 1990 entre Alemania Occidental y Argentina tuvo la asistencia más baja para una final con 65,000 espectadores.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 60,
+      "dato": "Diego Maradona capitaneó a Argentina a la Copa Mundial de 1986, anotando el famoso gol de la 'Mano de Dios' contra Inglaterra.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 61,
+      "dato": "El 'Gol del Siglo' de Diego Maradona contra Inglaterra en 1986 fue votado como el mejor gol en la historia de la Copa Mundial.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 62,
+      "dato": "La Copa Mundial de 1986 fue originalmente adjudicada a Colombia pero se trasladó a México después de que Colombia se retirara.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 63,
+      "dato": "La Copa Mundial de 1982 tuvo la primera tanda de penales en la historia del torneo, entre Alemania Occidental y Francia en la semifinal.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 64,
+      "dato": "Paolo Rossi ganó la Bota de Oro en 1982 después de regresar de una prohibición de 2 años por su participación en un escándalo de amaño de partidos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 65,
+      "dato": "La Copa Mundial de 1978 en Argentina fue controversial debido a la dictadura militar que gobernaba el país en ese momento.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 66,
+      "dato": "Argentina ganó la Copa Mundial de 1978 con una victoria 6-0 sobre Perú en un partido controversial.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 67,
+      "dato": "La Copa Mundial de 1974 introdujo el trofeo moderno de la Copa Mundial, diseñado por Silvio Gazzaniga.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 68,
+      "dato": "La Copa Mundial de 1970 fue la primera transmitida a color y la primera en usar el diseño de balón Telstar.",
+      "categoria": "Televisión",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 69,
+      "dato": "El equipo de Brasil de 1970 es ampliamente considerado el mejor equipo en la historia de la Copa Mundial, con Pelé, Jairzinho, Rivellino y Carlos Alberto.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 70,
+      "dato": "El gol de Carlos Alberto en la final de la Copa Mundial de 1970 es considerado uno de los mejores goles colectivos de la historia.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 71,
+      "dato": "Inglaterra ganó su única Copa Mundial en 1966, derrotando a Alemania Occidental 4-2 en la final en Wembley.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 72,
+      "dato": "Geoff Hurst es el único jugador en anotar un hat-trick en una final de Copa Mundial, logrado en 1966.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 73,
+      "dato": "La final de la Copa Mundial de 1966 tuvo un controversial 'gol fantasma' cuando el disparo de Geoff Hurst golpeó el travesaño y fue señalado como gol.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 74,
+      "dato": "Corea del Norte llegó a los cuartos de final en 1966, venciendo a Italia 1-0 en una de las mayores sorpresas.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 75,
+      "dato": "Eusébio anotó 9 goles en la Copa Mundial de 1966, ganando la Bota de Oro.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 76,
+      "dato": "La Copa Mundial de 1962 fue la primera con prueba de dopaje, aunque no se encontraron resultados positivos.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 77,
+      "dato": "Garrincha ganó el Balón de Oro y la Bota de Oro en 1962 mientras Brasil defendía exitosamente su título.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 78,
+      "dato": "Chile organizó la Copa Mundial de 1962 solo dos años después del devastador terremoto de Valdivia.",
+      "categoria": "Anfitriones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 79,
+      "dato": "La Copa Mundial de 1958 vio el debut de Pelé, quien anotó 6 goles y se convirtió en el ganador más joven de la Copa Mundial.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 80,
+      "dato": "Brasil ganó su primera Copa Mundial en 1958, derrotando al anfitrión Suecia 5-2 en la final.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 81,
+      "dato": "La Copa Mundial de 1954 en Suiza fue conocida como la 'Batalla de Berna' debido al violento partido entre Hungría y Brasil.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 82,
+      "dato": "La final de la Copa Mundial de 1954 tuvo la mayor cantidad de goles en una final, con Alemania Occidental venciendo a Hungría 3-2.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 83,
+      "dato": "La Copa Mundial de 1950 fue la única sin una final. Uruguay venció a Brasil en el partido final de la ronda de grupos.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 84,
+      "dato": "El Maracanazo (victoria 2-1 de Uruguay sobre Brasil en 1950) es considerado una de las mayores sorpresas en la historia del fútbol.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 85,
+      "dato": "La Copa Mundial de 1938 en Francia fue la primera con formato de eliminación directa desde el inicio.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 86,
+      "dato": "Italia ganó las Copas Mundiales de 1934 y 1938 bajo el régimen fascista de Benito Mussolini.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 87,
+      "dato": "La Copa Mundial de 1930 tuvo solo 13 equipos, ya que la mayoría de los equipos europeos declinaron viajar a Uruguay.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 88,
+      "dato": "Uruguay ganó la primera Copa Mundial en 1930 y también ganó el torneo de 1950, pero declinó defender su título en 1934.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 89,
+      "dato": "La Copa Mundial de 1930 fue la única sin ronda de clasificación. Los equipos fueron invitados directamente.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 90,
+      "dato": "Guillermo Stábile de Argentina anotó 8 goles en la Copa Mundial de 1930, ganando la primera Bota de Oro.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 91,
+      "dato": "La final de la Copa Mundial de 1930 fue disputada entre Uruguay y Argentina, con Uruguay ganando 4-2.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 92,
+      "dato": "La Copa Mundial de 1930 usó dos balones diferentes en la final, uno para cada mitad, ya que cada equipo quería usar su propio balón.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 93,
+      "dato": "La Copa Mundial de 2026 contará con 104 partidos, la mayor cantidad en la historia del torneo.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 94,
+      "dato": "La Copa Mundial de 2026 tendrá 12 grupos de 4 equipos, aumentando de los 8 grupos anteriores.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 95,
+      "dato": "La Copa Mundial de 2026 se jugará en 16 estadios de 16 ciudades.",
+      "categoria": "Estadios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 96,
+      "dato": "La final de la Copa Mundial de 2026 se celebrará en el MetLife Stadium en Nueva York/Nueva Jersey.",
+      "categoria": "Estadios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 97,
+      "dato": "La Copa Mundial de 2026 será la primera con una ronda de 32 equipos, al expandirse de 32 a 48 equipos.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 98,
+      "dato": "El Estadio Azteca de México (ahora Estadio Ciudad de México) albergará el partido inaugural de la Copa Mundial de 2026.",
+      "categoria": "Estadios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 99,
+      "dato": "La Copa Mundial de 2026 abarcará 39 días, del 11 de junio al 19 de julio.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 100,
+      "dato": "La final de la Copa Mundial de 2022 entre Argentina y Francia fue la final con más goles en la historia, terminando 3-3 después del tiempo extra.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 101,
+      "dato": "Lionel Messi se convirtió en el primer jugador en anotar en cada ronda de eliminación de una Copa Mundial en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 102,
+      "dato": "La Copa Mundial de 2022 tuvo la mayor cantidad de goles anotados en un torneo con 172 goles.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 103,
+      "dato": "La final de la Copa Mundial de 2018 entre Francia y Croacia fue la final con más goles desde 1966, terminando 4-2.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 104,
+      "dato": "Kylian Mbappé se convirtió en el jugador más joven en anotar en una final de Copa Mundial desde Pelé en 1958.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 105,
+      "dato": "La Copa Mundial de 2014 en Brasil fue la primera en usar tecnología de línea de gol.",
+      "categoria": "Tecnología",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 106,
+      "dato": "La victoria 7-1 de Alemania sobre Brasil en la semifinal de 2014 fue la derrota más grande en una semifinal de Copa Mundial.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 107,
+      "dato": "La semifinal de la Copa Mundial de 2014 entre Alemania y Brasil fue la semifinal más rápida con 5 goles en 29 minutos.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 108,
+      "dato": "La final de la Copa Mundial de 2010 entre España y Países Bajos fue la final con más tarjetas, con 14 amarillas y 1 roja.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 109,
+      "dato": "Andrés Iniesta anotó el gol de la victoria en la final de la Copa Mundial de 2010, dedicándolo a Dani Jarque quien había fallecido.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 110,
+      "dato": "La Copa Mundial de 2006 tuvo la mayor cantidad de tarjetas rojas en la historia del torneo con 28.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 111,
+      "dato": "Fabio Cannavaro ganó la Copa Mundial de 2006 con Italia y se convirtió en el único defensor en ganar el Balón de Oro desde 1990.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 112,
+      "dato": "La Copa Mundial de 2002 fue la primera con 32 equipos, aumentando de los 24 anteriores.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 113,
+      "dato": "El tercer lugar de Turquía en 2002 fue su mejor resultado en la historia de la Copa Mundial.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 114,
+      "dato": "La Copa Mundial de 1998 tuvo el primer gol de oro, anotado por Laurent Blanc de Francia contra Paraguay.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 115,
+      "dato": "Davor Šuker ganó la Bota de Oro en 1998 con 6 goles, el único croata en lograrlo.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 116,
+      "dato": "La Copa Mundial de 1994 fue la primera en otorgar 3 puntos por victoria en lugar de 2.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 117,
+      "dato": "La Copa Mundial de 1994 fue la primera celebrada en Estados Unidos desde 1986.",
+      "categoria": "Anfitriones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 118,
+      "dato": "Roger Milla se convirtió en el goleador más viejo de la Copa Mundial a los 42 años en 1994.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 119,
+      "dato": "La Copa Mundial de 1990 fue el torneo con menos goles, con un promedio de 2.21 goles por partido.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 120,
+      "dato": "La Copa Mundial de 1986 tuvo la fase de grupos con más goles, con 83 tantos.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 121,
+      "dato": "La Copa Mundial de 1982 tuvo la primera tanda de penales en la historia del torneo.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 122,
+      "dato": "La Copa Mundial de 1982 tuvo la mayor cantidad de equipos con 24, aumentando de los 16 anteriores.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 123,
+      "dato": "La Copa Mundial de 1978 en Argentina fue la primera en tener una mascota oficial, un niño llamado Gauchito.",
+      "categoria": "Mascotas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 124,
+      "dato": "La Copa Mundial de 1974 fue la primera en usar el diseño actual del trofeo de la Copa Mundial.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 125,
+      "dato": "La Copa Mundial de 1970 fue la primera en usar tarjetas amarillas y rojas, introducidas por el árbitro inglés Ken Aston.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 126,
+      "dato": "La Copa Mundial de 1966 introdujo la primera mascota de la Copa Mundial, World Cup Willie (un león).",
+      "categoria": "Mascotas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 127,
+      "dato": "La Copa Mundial de 1962 en Chile fue la primera en tener un torneo de clasificación para todas las confederaciones.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 128,
+      "dato": "La Copa Mundial de 1958 fue la primera en tener todos los partidos transmitidos por televisión.",
+      "categoria": "Televisión",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 129,
+      "dato": "La Copa Mundial de 1954 tuvo el promedio más alto de goles por partido (5.38) en la historia del torneo.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 130,
+      "dato": "La Copa Mundial de 1950 fue la única sin una fase de grupos de clasificación. Los equipos jugaron en grupos de todos contra todos.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 131,
+      "dato": "La Copa Mundial de 1938 fue la primera en tener un campeón defensor (Italia) clasificando automáticamente.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 132,
+      "dato": "La Copa Mundial de 1934 fue la primera en tener un proceso de clasificación. 16 equipos calificaron al torneo final.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 133,
+      "dato": "La Copa Mundial de 1930 fue la única con equipos de solo dos continentes: Sudamérica y Europa.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 134,
+      "dato": "La Copa Mundial de 1930 tuvo solo 13 equipos porque la mayoría de los equipos europeos se negaron a viajar a Uruguay.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 135,
+      "dato": "La Copa Mundial de 1930 fue la única sin un partido por el tercer lugar. Estados Unidos y Yugoslavia fueron declarados terceros conjuntos.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 136,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un descanso de 15 minutos en el medio tiempo.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 137,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un trofeo. Se llamaba el Trofeo Jules Rimet.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 138,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener una mascota. Era un niño llamado 'Pibe' (Uruguay).",
+      "categoria": "Mascotas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 139,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener una canción oficial. Era 'El Mundial' de Lobo de la Sierra.",
+      "categoria": "Cultura",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 140,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un balón con logo. Era el balón 'Tiento'.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 141,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un árbitro de un país neutral. Era el belga John Langenus.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 142,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un jugador expulsado. Era el rumano Mario Escribano.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 143,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un jugador anotar un hat-trick. Era el estadounidense Bert Patenaude.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 144,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un jugador anotar un penal. Era el mexicano Manuel Rosas.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 145,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un jugador anotar un autogol. Era el mexicano Manuel Rosas.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 146,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un partido con tiempo extra. Fue la semifinal entre Argentina y Estados Unidos.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 147,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un partido con un repetición. Fue la final entre Uruguay y Argentina.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 148,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un partido con un sorteo de moneda. Fue la semifinal entre Argentina y Estados Unidos.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 149,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un partido con un sustituto. Fue la final entre Uruguay y Argentina.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 150,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un partido con un jugador usando número. Fue la final entre Uruguay y Argentina.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 151,
+      "dato": "El árbitro inglés Ken Aston inventó las tarjetas amarillas y rojas en 1966, inspirado por los semáforos de Londres.",
+      "categoria": "Árbitros",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 152,
+      "dato": "El árbitro uruguayo Andrés Cunha fue el primero en usar el VAR en una Copa Mundial, en 2018.",
+      "categoria": "Árbitros",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 153,
+      "dato": "El portero italiano Gianluigi Buffon es el único que ha jugado en 5 Copas Mundiales sin perder un partido de fase de grupos.",
+      "categoria": "Porteros",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 154,
+      "dato": "El portero alemán Manuel Neuer es el único arquero que ha asistido en un gol en una Copa Mundial, en 2014.",
+      "categoria": "Porteros",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 155,
+      "dato": "El portero colombiano René Higuita fue el primero en tomar un penal en una Copa Mundial, en 1990.",
+      "categoria": "Porteros",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 156,
+      "dato": "El portero francés Fabien Barthez es el único que ha ganado la Copa Mundial y la Eurocopa sin recibir goles en las finales.",
+      "categoria": "Porteros",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 157,
+      "dato": "El defensor alemán Franz Beckenbauer es el único que ha ganado la Copa Mundial como jugador y entrenador (1974 y 1990).",
+      "categoria": "Entrenadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 158,
+      "dato": "El entrenador brasileño Mário Zagallo también ganó como jugador (1958, 1962) y entrenador (1970), y luego como asistente (1994).",
+      "categoria": "Entrenadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 159,
+      "dato": "El entrenador italiano Vittorio Pozzo es el único que ha ganado dos Copas Mundiales consecutivas (1934 y 1938).",
+      "categoria": "Entrenadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 160,
+      "dato": "El entrenador alemán Joachim Löw dirigió a Alemania en 3 Copas Mundiales consecutivas (2010, 2014, 2018).",
+      "categoria": "Entrenadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 161,
+      "dato": "El balón oficial de 1970 fue llamado 'Telstar', inspirado en el primer satélite de comunicaciones.",
+      "categoria": "Balones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 162,
+      "dato": "El balón 'Jabulani' de 2010 fue criticado por su trayectoria errática, llamado 'supermarket ball' por los jugadores.",
+      "categoria": "Balones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 163,
+      "dato": "El balón 'Brazuca' de 2014 fue el primero en ser probado por más de 600 jugadores profesionales antes del torneo.",
+      "categoria": "Balones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 164,
+      "dato": "El balón 'Al Rihla' de 2022 fue el más rápido de la historia, alcanzando velocidades de más de 130 km/h.",
+      "categoria": "Balones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 165,
+      "dato": "La mascota 'Gauchito' de Argentina 1978 fue la primera en tener un nombre oficial y diseño profesional.",
+      "categoria": "Mascotas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 166,
+      "dato": "La mascota 'Zakumi' de Sudáfrica 2010 era un leopardo con cabello verde, inspirado en los colores del país.",
+      "categoria": "Mascotas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 167,
+      "dato": "La mascota 'Fuleco' de Brasil 2014 era un armadillo tridáctilo, especie en peligro de extinción.",
+      "categoria": "Mascotas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 168,
+      "dato": "La mascota 'La'eeb' de Qatar 2022 era un pañuelo tradicional árabe animado.",
+      "categoria": "Mascotas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 169,
+      "dato": "La canción 'Waka Waka' de Shakira para Sudáfrica 2010 es la canción oficial de Copa Mundial más vista en YouTube con más de 3 mil millones de views.",
+      "categoria": "Cultura",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 170,
+      "dato": "La canción 'La Copa de la Vida' de Ricky Martin para Francia 1998 fue la primera en ganar un Grammy.",
+      "categoria": "Cultura",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 171,
+      "dato": "El penal más largo de la historia fue cobrado por Johan Cruyff en 1982, pasando el balón a un compañero sin que el portero se moviera.",
+      "categoria": "Penales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 172,
+      "dato": "El primer penal en una final de Copa Mundial fue en 1994, cuando Roberto Baggio falló para Italia contra Brasil.",
+      "categoria": "Penales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 173,
+      "dato": "Francia es el país con más penales fallados en finales de Copa Mundial, con 3 errores (1994, 2006, 2022).",
+      "categoria": "Penales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 174,
+      "dato": "El autogol más rápido de la historia fue de Trinidad y Tobago en 2006, a los 3 minutos contra Paraguay.",
+      "categoria": "Autogoles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 175,
+      "dato": "El defensor colombiano Andrés Escobar anotó un autogol en 1994 que le costó la vida días después en Medellín.",
+      "categoria": "Autogoles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 176,
+      "dato": "El partido más caliente de la historia fue en México 1970, con 51°C de temperatura en el Estadio Azteca.",
+      "categoria": "Clima",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 177,
+      "dato": "El partido más frío fue en 1966, con -5°C en el partido entre Chile y la Unión Soviética.",
+      "categoria": "Clima",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 178,
+      "dato": "En 2014, el partido entre Francia y Honduras se jugó bajo una lluvia torrencial en Porto Alegre, Brasil.",
+      "categoria": "Clima",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 179,
+      "dato": "El partido entre Alemania y Argelia en 1982 se jugó a las 11:00 AM para evitar el calor del mediodía.",
+      "categoria": "Clima",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 180,
+      "dato": "El Estadio Azteca de México es el único que ha albergado dos finales de Copa Mundial (1970 y 1986).",
+      "categoria": "Estadios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 181,
+      "dato": "El Estadio Maracaná de Brasil fue el más grande de la historia, con capacidad para 200,000 espectadores en 1950.",
+      "categoria": "Estadios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 182,
+      "dato": "El Estadio Lusail de Qatar, construido para 2022, costó 767 millones de dólares y tiene forma de cuenco de oro.",
+      "categoria": "Estadios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 183,
+      "dato": "El Estadio Al Bayt de Qatar, inspirado en las tiendas de los beduinos, albergó la ceremonia inaugural de 2022.",
+      "categoria": "Estadios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 184,
+      "dato": "El partido entre Alemania y Hungría en 1954 se jugó en un estadio con pista de atletismo alrededor del campo.",
+      "categoria": "Estadios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 185,
+      "dato": "El uniforme de Croacia en 1998 con su diseño de cuadros rojos y blancos se convirtió en un ícono de la moda deportiva.",
+      "categoria": "Uniformes",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 186,
+      "dato": "El uniforme de Camerún en 2002 sin mangas fue prohibido por la FIFA, obligándolos a usar una versión con mangas.",
+      "categoria": "Uniformes",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 187,
+      "dato": "El uniforme de México en 1998 con el diseño azteca de ABA Sport fue uno de los más vendidos de la historia.",
+      "categoria": "Uniformes",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 188,
+      "dato": "El uniforme de Nigeria en 2018 se agotó en 3 minutos en la tienda online de Nike, con más de 3 millones de pre-órdenes.",
+      "categoria": "Uniformes",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 189,
+      "dato": "El partido entre Chile e Italia en 1962 es conocido como la 'Batalla de Santiago', con 4 expulsiones y múltiples peleas.",
+      "categoria": "Polémicas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 190,
+      "dato": "El partido entre Alemania y Austria en 1982 terminó 1-0, ambos equipos pasaron a la siguiente ronda, creando la polémica del ' pacto de Gijón'.",
+      "categoria": "Polémicas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 191,
+      "dato": "En 1990, el partido entre Camerún y Argentina fue uno de los más violentos, con 6 tarjetas amarillas y 2 rojas.",
+      "categoria": "Polémicas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 192,
+      "dato": "El partido entre Portugal y Países Bajos en 2006, conocido como la 'Batalla de Núremberg', tuvo 4 expulsiones y 16 tarjetas amarillas.",
+      "categoria": "Polémicas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 193,
+      "dato": "El partido entre Uruguay y Ghana en 2010 terminó con Luis Suárez mordiendo a Giorgio Chiellini, resultando en una expulsión.",
+      "categoria": "Polémicas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 194,
+      "dato": "El ingreso de la FIFA en 2014 fue de 4.8 mil millones de dólares, el más alto de la historia hasta ese momento.",
+      "categoria": "Economía",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 195,
+      "dato": "Los patrocinadores de la Copa Mundial 2022 pagaron 1.4 mil millones de dólares, un récord histórico.",
+      "categoria": "Economía",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 196,
+      "dato": "El premio en metálico para el campeón de 2022 fue de 42 millones de dólares, el más alto de la historia.",
+      "categoria": "Economía",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 197,
+      "dato": "El costo total de la Copa Mundial de Brasil 2014 fue de 15 mil millones de dólares, el más caro hasta 2018.",
+      "categoria": "Economía",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 198,
+      "dato": "El VAR (Video Assistant Referee) fue introducido en 2018 y se usó en 335 decisiones durante el torneo.",
+      "categoria": "Tecnología",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 199,
+      "dato": "El balón conectado de 2022 fue el primero en medir la velocidad, spin y trayectoria en tiempo real.",
+      "categoria": "Tecnología",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 200,
+      "dato": "El sistema de detección de fuera de juego semiautomático fue usado por primera vez en 2022, con 12 cámaras por estadio.",
+      "categoria": "Tecnología",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 201,
+      "dato": "El partido entre Francia y Croacia en 2018 fue el primero en usar el VAR para revisar un penal en la final.",
+      "categoria": "Tecnología",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 202,
+      "dato": "El tiro libre de Roberto Carlos contra Francia en 1997, aunque no fue en Mundial, es considerado el mejor de la historia.",
+      "categoria": "Tiros libres",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 203,
+      "dato": "El tiro libre de David Beckham contra Grecia en 2001, aunque no fue en Mundial, clasificó a Inglaterra al torneo.",
+      "categoria": "Tiros libres",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 204,
+      "dato": "El hat-trick más rápido de la historia fue de Geoff Hurst en 1966, en 108 segundos.",
+      "categoria": "Hat-tricks",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 205,
+      "dato": "Gabriel Batistuta es el único jugador en anotar hat-tricks en dos Copas Mundiales diferentes (1994 y 1998).",
+      "categoria": "Hat-tricks",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 206,
+      "dato": "Cristiano Ronaldo anotó un hat-trick contra España en 2018, incluyendo un tiro libre en el minuto 88.",
+      "categoria": "Hat-tricks",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 207,
+      "dato": "El jugador con más asistencias en un solo partido es Pelé, con 4 asistencias contra Perú en 1970.",
+      "categoria": "Asistencias",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 208,
+      "dato": "El jugador con más partidos consecutivos anotando es Ronaldo Nazario, con 11 partidos seguidos (1998-2002).",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 209,
+      "dato": "El jugador con más minutos sin recibir gol en una Copa Mundial es el portero italiano Walter Zenga, con 518 minutos en 1990.",
+      "categoria": "Porteros",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 210,
+      "dato": "El jugador con más tarjetas rojas en la historia es el defensor camerunés Rigobert Song, con 2 expulsiones.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 211,
+      "dato": "El partido con más tarjetas rojas en la historia fue en 2006, con 4 expulsiones entre Portugal y Países Bajos.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 212,
+      "dato": "El partido con más tarjetas amarillas fue en 2006, con 16 amarillas entre Portugal y Países Bajos.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 213,
+      "dato": "El jugador con más tarjetas amarillas en un solo partido es el uruguayo Diego Lugano, con 3 amarillas en 2010.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 214,
+      "dato": "El partido más largo de la historia fue en 1934, con 120 minutos de tiempo extra entre Austria y Francia.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 215,
+      "dato": "El partido con más goles en la historia fue en 1954, con 12 goles entre Austria y Suiza (7-5).",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 216,
+      "dato": "El partido con más penales en la historia fue en 1982, con 5 penales entre Francia y Alemania en la semifinal.",
+      "categoria": "Penales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 217,
+      "dato": "La tanda de penales más larga fue en 2006, con 16 penales entre Alemania y Argentina en cuartos de final.",
+      "categoria": "Penales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 218,
+      "dato": "El jugador con más penales fallados en la historia es el francés Michel Platini, con 2 fallos en 1982 y 1986.",
+      "categoria": "Penales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 219,
+      "dato": "El jugador con más penales anotados en la historia es el alemán Lothar Matthäus, con 4 goles de penal.",
+      "categoria": "Penales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 220,
+      "dato": "El partido entre Italia y Alemania en 1970 es conocido como la 'Partida del Siglo', con 5 goles en tiempo extra.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 221,
+      "dato": "El partido entre Brasil e Italia en 1982 es considerado uno de los mejores de la historia, aunque Brasil perdió 3-2.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 222,
+      "dato": "El partido entre Francia y Brasil en 1986 terminó 1-1, con un gol de Platini en el minuto 106.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 223,
+      "dato": "El partido entre España y Paraguay en 2002 terminó 1-1, con un gol de Morientes en el minuto 118.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 224,
+      "dato": "El partido entre Japón y Bélgica en 2018 terminó 3-2, con un gol de contragolpe de 10 segundos por Bélgica.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 225,
+      "dato": "El partido entre Inglaterra y Alemania en 2010 terminó 4-1, pero Inglaterra reclamó un gol fantasma que no fue contado.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 226,
+      "dato": "El partido entre México y Argentina en 2006 terminó 1-1, con un gol de Rodríguez en el minuto 98.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 227,
+      "dato": "El partido entre Corea del Sur e Italia en 2002 terminó 2-1, con un gol de oro de Ahn Jung-hwan.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 228,
+      "dato": "El partido entre Senegal y Francia en 2002 terminó 1-0, con un gol de Papa Bouba Diop en el minuto 30.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 229,
+      "dato": "El partido entre Estados Unidos e Inglaterra en 1950 terminó 1-0, con un gol de Joe Gaetjens, considerado la mayor sorpresa de la historia.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 230,
+      "dato": "El partido entre Corea del Norte e Italia en 1966 terminó 1-0, con un gol de Pak Doo-ik, eliminando a Italia.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 231,
+      "dato": "El partido entre Argelia e Alemania en 1982 terminó 2-1, con dos goles de Argelia en los primeros 10 minutos.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 232,
+      "dato": "El partido entre Costa Rica e Italia en 2014 terminó 1-0, con un gol de Bryan Ruiz, eliminando a Italia.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 233,
+      "dato": "El partido entre Islandia e Inglaterra en 2016 terminó 2-1, aunque no fue en Mundial, clasificó a Islandia a la Eurocopa.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 234,
+      "dato": "El partido entre Marruecos y España en 2022 terminó 0-0, con Marruecos ganando en penales para llegar a cuartos.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 235,
+      "dato": "El partido entre Arabia Saudita y Argentina en 2022 terminó 2-1, con una de las mayores sorpresas de la historia.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 236,
+      "dato": "El partido entre Japón y Alemania en 2022 terminó 2-1, con Japón remontando un 0-1 en los últimos 15 minutos.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 237,
+      "dato": "El partido entre Camerún y Argentina en 1990 terminó 1-0, con Camerún eliminando al campeón defensor.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 238,
+      "dato": "El partido entre Bulgaria y Alemania en 1994 terminó 2-1, con Bulgaria eliminando al campeón defensor.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 239,
+      "dato": "El partido entre Croacia y Alemania en 1998 terminó 3-0, con Croacia llegando a semifinales en su debut.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 240,
+      "dato": "El partido entre Turquía y Corea del Sur en 2002 terminó 3-2, con Turquía ganando el tercer lugar.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 241,
+      "dato": "El partido entre Suecia y Bulgaria en 1994 terminó 4-0, con Suecia ganando el tercer lugar.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 242,
+      "dato": "El partido entre Países Bajos y Brasil en 2014 terminó 3-0, con Países Bajos ganando el tercer lugar.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 243,
+      "dato": "El partido entre Bélgica e Inglaterra en 2018 terminó 2-0, con Bélgica ganando el tercer lugar.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 244,
+      "dato": "El partido entre Croacia y Marruecos en 2022 terminó 2-1, con Croacia ganando el tercer lugar.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 245,
+      "dato": "El partido entre Francia y Croacia en 2018 terminó 4-2, con Francia ganando su segunda Copa Mundial.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 246,
+      "dato": "El partido entre Argentina y Alemania en 2014 terminó 1-0, con un gol de Mario Götze en el minuto 113.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 247,
+      "dato": "El partido entre España y Países Bajos en 2010 terminó 1-0, con un gol de Andrés Iniesta en el minuto 116.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 248,
+      "dato": "El partido entre Italia y Francia en 2006 terminó 1-1, con Italia ganando 5-3 en penales.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 249,
+      "dato": "El partido entre Brasil y Alemania en 2002 terminó 2-0, con dos goles de Ronaldo Nazario.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 250,
+      "dato": "El partido entre Francia y Brasil en 1998 terminó 3-0, con dos goles de cabeza de Zinedine Zidane.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 251,
+      "dato": "El partido entre Brasil e Italia en 1994 terminó 0-0, con Brasil ganando 3-2 en penales.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 252,
+      "dato": "El partido entre Alemania y Argentina en 1990 terminó 1-0, con un penal de Andreas Brehme.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 253,
+      "dato": "El partido entre Argentina y Alemania en 1986 terminó 3-2, con dos goles de Diego Maradona.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 254,
+      "dato": "El partido entre Italia y Alemania en 1982 terminó 3-1, con tres goles en los últimos 15 minutos.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 255,
+      "dato": "El partido entre Argentina y Países Bajos en 1978 terminó 3-1, con goles de Mario Kempes.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 256,
+      "dato": "El partido entre Alemania Occidental y Países Bajos en 1974 terminó 2-1, con goles de Gerd Müller.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 257,
+      "dato": "El partido entre Brasil e Italia en 1970 terminó 4-1, con Carlos Alberto anotando el gol del siglo.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 258,
+      "dato": "El partido entre Inglaterra y Alemania Occidental en 1966 terminó 4-2, con un hat-trick de Geoff Hurst.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 259,
+      "dato": "El partido entre Brasil y Checoslovaquia en 1962 terminó 3-1, con Garrincha anotando dos goles.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 260,
+      "dato": "El partido entre Brasil y Suecia en 1958 terminó 5-2, con Pelé anotando dos goles a los 17 años.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 261,
+      "dato": "El partido entre Alemania Occidental y Hungría en 1954 terminó 3-2, con la 'Milagro de Berna'.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 262,
+      "dato": "El partido entre Uruguay y Brasil en 1950 terminó 2-1, con el 'Maracanazo' que silenció a 200,000 brasileños.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 263,
+      "dato": "El partido entre Italia y Hungría en 1938 terminó 4-2, con Italia ganando su segundo título consecutivo.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 264,
+      "dato": "El partido entre Italia y Checoslovaquia en 1934 terminó 2-1, con Italia ganando en tiempo extra.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 265,
+      "dato": "El partido entre Uruguay y Argentina en 1930 terminó 4-2, con Uruguay ganando la primera Copa Mundial.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 266,
+      "dato": "El jugador con más goles en una sola final es Geoff Hurst, con 3 goles en 1966.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 267,
+      "dato": "El jugador con más goles en finales de Copa Mundial es el brasileño Vavá, con 4 goles en 1958 y 1962.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 268,
+      "dato": "El jugador con más goles en semifinales de Copa Mundial es Pelé, con 3 goles en 1958 y 1970.",
+      "categoria": "Semifinales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 269,
+      "dato": "El jugador con más goles en cuartos de final es Just Fontaine, con 4 goles en 1958.",
+      "categoria": "Cuartos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 270,
+      "dato": "El jugador con más goles en octavos de final es James Rodríguez, con 2 goles en 2014.",
+      "categoria": "Octavos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 271,
+      "dato": "El jugador con más goles en fase de grupos es Sándor Kocsis, con 11 goles en 1954.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 272,
+      "dato": "El jugador con más goles de cabeza en la historia es Miroslav Klose, con 5 goles de cabeza.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 273,
+      "dato": "El jugador con más goles de penal en la historia es Lothar Matthäus, con 4 goles de penal.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 274,
+      "dato": "El jugador con más goles de tiro libre en la historia es David Beckham, con 2 goles de tiro libre.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 275,
+      "dato": "El jugador con más goles de volea en la historia es Diego Maradona, con 2 goles de volea.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 276,
+      "dato": "El jugador con más goles de chilena en la historia es Hugo Sánchez, con 1 gol de chilena en 1986.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 277,
+      "dato": "El jugador con más goles de taconazo en la historia es el italiano Filippo Inzaghi, con 1 gol de taconazo en 2006.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 278,
+      "dato": "El jugador con más goles de rebote en la historia es el brasileño Ronaldo Nazario, con 3 goles de rebote.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 279,
+      "dato": "El jugador con más goles de contragolpe en la historia es el alemán Miroslav Klose, con 4 goles de contragolpe.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 280,
+      "dato": "El jugador con más goles de corner en la historia es el inglés Bobby Charlton, con 2 goles de corner en 1966.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 281,
+      "dato": "El jugador con más goles de penales fallados en la historia es el francés Michel Platini, con 2 fallos.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 282,
+      "dato": "El jugador con más goles de autogol en la historia es el mexicano Manuel Rosas, con 1 autogol en 1930.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 283,
+      "dato": "El jugador con más goles de mano en la historia es el argentino Diego Maradona, con 1 gol de mano en 1986.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 284,
+      "dato": "El jugador con más goles de cabeza en una sola edición es el alemán Miroslav Klose, con 5 goles de cabeza en 2002.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 285,
+      "dato": "El jugador con más goles de penal en una sola edición es el inglés Harry Kane, con 3 goles de penal en 2018.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 286,
+      "dato": "El jugador con más goles de tiro libre en una sola edición es el argentino Lionel Messi, con 2 goles de tiro libre en 2022.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 287,
+      "dato": "El jugador con más goles de volea en una sola edición es el italiano Marco Tardelli, con 2 goles de volea en 1982.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 288,
+      "dato": "El jugador con más goles de chilena en una sola edición es el mexicano Hugo Sánchez, con 1 gol de chilena en 1986.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 289,
+      "dato": "El jugador con más goles de taconazo en una sola edición es el italiano Filippo Inzaghi, con 1 gol de taconazo en 2006.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 290,
+      "dato": "El jugador con más goles de rebote en una sola edición es el brasileño Ronaldo Nazario, con 3 goles de rebote en 2002.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 291,
+      "dato": "El jugador con más goles de contragolpe en una sola edición es el alemán Miroslav Klose, con 4 goles de contragolpe en 2002.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 292,
+      "dato": "El jugador con más goles de corner en una sola edición es el inglés Bobby Charlton, con 2 goles de corner en 1966.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 293,
+      "dato": "El jugador con más goles de penales fallados en una sola edición es el francés Michel Platini, con 2 fallos en 1986.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 294,
+      "dato": "El jugador con más goles de autogol en una sola edición es el mexicano Manuel Rosas, con 1 autogol en 1930.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 295,
+      "dato": "El jugador con más goles de mano en una sola edición es el argentino Diego Maradona, con 1 gol de mano en 1986.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 296,
+      "dato": "El equipo con más goles en la historia es Brasil, con 237 goles en 22 torneos.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 297,
+      "dato": "El equipo con más goles en una sola edición es Hungría, con 27 goles en 1954.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 298,
+      "dato": "El equipo con más goles en fase de grupos es Hungría, con 17 goles en 1954.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 299,
+      "dato": "El equipo con más goles en eliminatorias es Brasil, con 18 goles en 1958.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 300,
+      "dato": "El equipo con más goles en finales es Brasil, con 20 goles en 7 finales.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 301,
+      "dato": "El equipo con más goles en semifinales es Alemania, con 15 goles en 13 semifinales.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 302,
+      "dato": "El equipo con más goles en cuartos de final es Brasil, con 25 goles en 14 cuartos.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 303,
+      "dato": "El equipo con más goles en octavos de final es Alemania, con 20 goles en 10 octavos.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 304,
+      "dato": "El equipo con más goles de penal en la historia es Alemania, con 12 goles de penal.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 305,
+      "dato": "El equipo con más goles de tiro libre en la historia es Brasil, con 8 goles de tiro libre.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 306,
+      "dato": "El equipo con más goles de cabeza en la historia es Alemania, con 15 goles de cabeza.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 307,
+      "dato": "El equipo con más goles de autogol en la historia es México, con 3 autogoles.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 308,
+      "dato": "El equipo con más goles de mano en la historia es Argentina, con 1 gol de mano.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 309,
+      "dato": "El equipo con más penales fallados en la historia es Francia, con 5 fallos.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 310,
+      "dato": "El equipo con más tarjetas rojas en la historia es Camerún, con 4 rojas.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 311,
+      "dato": "El equipo con más tarjetas amarillas en la historia es Brasil, con 35 amarillas.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 312,
+      "dato": "El equipo con más partidos en la historia es Brasil, con 109 partidos en 22 torneos.",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 313,
+      "dato": "El equipo con más victorias en la historia es Brasil, con 73 victorias.",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 314,
+      "dato": "El equipo con más derrotas en la historia es México, con 28 derrotas.",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 315,
+      "dato": "El equipo con más empates en la historia es Inglaterra, con 21 empates.",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 316,
+      "dato": "El equipo con más finales jugadas es Brasil, con 7 finales.",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 317,
+      "dato": "El equipo con más semifinales jugadas es Alemania, con 13 semifinales.",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 318,
+      "dato": "El equipo con más cuartos de final jugados es Brasil, con 14 cuartos.",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 319,
+      "dato": "El equipo con más octavos de final jugados es Alemania, con 10 octavos.",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 320,
+      "dato": "El equipo con más fases de grupos jugadas es Brasil, con 22 fases de grupos.",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 321,
+      "dato": "El equipo con más títulos consecutivos es Italia, con 2 títulos (1934 y 1938).",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 322,
+      "dato": "El equipo con más finales consecutivas es Alemania, con 3 finales (1982, 1986, 1990).",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 323,
+      "dato": "El equipo con más semifinales consecutivas es Alemania, con 4 semifinales (2002, 2006, 2010, 2014).",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 324,
+      "dato": "El equipo con más cuartos consecutivos es Brasil, con 6 cuartos (1950, 1954, 1958, 1962, 1970, 1994).",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 325,
+      "dato": "El equipo con más octavos consecutivos es México, con 7 octavos (1994, 1998, 2002, 2006, 2010, 2014, 2018).",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 326,
+      "dato": "El equipo con más fases de grupos consecutivas es Brasil, con 22 fases de grupos (1930-2022).",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 327,
+      "dato": "El equipo con más goles en un solo partido es Hungría, con 10 goles contra El Salvador en 1982.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 328,
+      "dato": "El equipo con más goles en un solo partido de eliminatorias es Alemania, con 8 goles contra Arabia Saudita en 2002.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 329,
+      "dato": "El equipo con más goles en un solo partido de fase de grupos es Hungría, con 9 goles contra Corea del Sur en 1954.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 330,
+      "dato": "El equipo con más goles en un solo partido de final es Brasil, con 5 goles contra Suecia en 1958.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 331,
+      "dato": "El equipo con más goles en un solo partido de semifinal es Alemania, con 7 goles contra Brasil en 2014.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 332,
+      "dato": "El equipo con más goles en un solo partido de cuartos es Brasil, con 5 goles contra Polonia en 1938.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 333,
+      "dato": "El equipo con más goles en un solo partido de octavos es Alemania, con 4 goles contra México en 2018.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 334,
+      "dato": "El equipo con más goles en un solo partido de tercer lugar es Suecia, con 4 goles contra Bulgaria en 1994.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 335,
+      "dato": "El equipo con más penales anotados en una sola tanda es Alemania, con 5 penales contra Argentina en 2006.",
+      "categoria": "Penales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 336,
+      "dato": "El equipo con más penales fallados en una sola tanda es Inglaterra, con 3 fallos contra Portugal en 2006.",
+      "categoria": "Penales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 337,
+      "dato": "El equipo con más tarjetas rojas en un solo partido es Camerún, con 2 rojas contra Brasil en 1994.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 338,
+      "dato": "El equipo con más tarjetas amarillas en un solo partido es Portugal, con 9 amarillas contra Países Bajos en 2006.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 339,
+      "dato": "El equipo con más tarjetas en un solo partido es Portugal, con 16 tarjetas (9 amarillas, 1 roja) contra Países Bajos en 2006.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 340,
+      "dato": "El equipo con más faltas en un solo partido es Italia, con 32 faltas contra Corea del Sur en 2002.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 341,
+      "dato": "El equipo con más minutos sin recibir gol en una sola edición es Italia, con 460 minutos en 1990.",
+      "categoria": "Porteros",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 342,
+      "dato": "El equipo con más minutos sin recibir gol en la historia es Brasil, con 518 minutos entre 1990 y 1994.",
+      "categoria": "Porteros",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 343,
+      "dato": "El equipo con más victorias consecutivas es Brasil, con 11 victorias seguidas (2002-2006).",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 344,
+      "dato": "El equipo con más partidos invicto es Brasil, con 13 partidos sin perder (1958-1966).",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 345,
+      "dato": "El equipo con más partidos consecutivos anotando es Brasil, con 18 partidos seguidos (1930-1958).",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 346,
+      "dato": "El equipo con más partidos consecutivos sin anotar es Bolivia, con 4 partidos sin gol (1930-1950).",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 347,
+      "dato": "El equipo con más debuts en una sola edición es la Copa Mundial de 2026, con 4 equipos debutando (Canadá, Uzbekistán, entre otros).",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 348,
+      "dato": "El equipo con más participaciones sin ganar un título es México, con 17 participaciones sin título.",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 349,
+      "dato": "El equipo con más participaciones sin llegar a una final es México, con 17 participaciones sin final.",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 350,
+      "dato": "El equipo con más participaciones sin llegar a una semifinal es Estados Unidos, con 11 participaciones sin semifinal.",
+      "categoria": "Récords",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 351,
+      "dato": "El jugador más joven en anotar un gol en una final es Pelé, con 17 años y 249 días en 1958.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 352,
+      "dato": "El jugador más viejo en anotar un gol es Roger Milla, con 42 años y 39 días en 1994.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 353,
+      "dato": "El jugador más joven en ser capitán es Tony Woodcock, con 20 años y 226 días en 1982.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 354,
+      "dato": "El jugador más viejo en ser capitán es Essam El-Hadary, con 45 años y 161 días en 2018.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 355,
+      "dato": "El jugador con más partidos sin perder es Lothar Matthäus, con 14 partidos invicto (1986-1994).",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 356,
+      "dato": "El jugador con más partidos consecutivos sin perder es Cafu, con 11 partidos invicto (1994-2002).",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 357,
+      "dato": "El jugador con más partidos sin recibir gol es Fabien Barthez, con 7 partidos sin gol (1998-2006).",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 358,
+      "dato": "El jugador con más partidos consecutivos anotando es Ronaldo Nazario, con 8 partidos seguidos (2002-2006).",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 359,
+      "dato": "El jugador con más asistencias en una sola edición es Diego Maradona, con 5 asistencias en 1986.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 360,
+      "dato": "El jugador con más goles en un solo partido es Oleg Salenko, con 5 goles contra Camerún en 1994.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 361,
+      "dato": "El jugador con más goles en fase de grupos es Just Fontaine, con 9 goles en 1958.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 362,
+      "dato": "El jugador con más goles en eliminatorias es Ronaldo Nazario, con 15 goles en eliminatorias (1998-2006).",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 363,
+      "dato": "El jugador con más goles en finales es Geoff Hurst, con 3 goles en 1966.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 364,
+      "dato": "El jugador con más goles en semifinales es Pelé, con 3 goles en semifinales (1958, 1970).",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 365,
+      "dato": "El jugador con más goles en cuartos de final es Just Fontaine, con 4 goles en 1958.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 366,
+      "dato": "El jugador con más goles en octavos de final es James Rodríguez, con 2 goles en 2014.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 367,
+      "dato": "El jugador con más goles de penal en una sola edición es Harry Kane, con 3 goles de penal en 2018.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 368,
+      "dato": "El jugador con más goles de tiro libre en una sola edición es Lionel Messi, con 2 goles de tiro libre en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 369,
+      "dato": "El jugador con más goles de cabeza en una sola edición es Miroslav Klose, con 5 goles de cabeza en 2002.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 370,
+      "dato": "El jugador con más goles de volea en una sola edición es Marco Tardelli, con 2 goles de volea en 1982.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 371,
+      "dato": "El jugador con más goles de contragolpe en una sola edición es Miroslav Klose, con 4 goles de contragolpe en 2002.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 372,
+      "dato": "El jugador con más goles de corner en una sola edición es Bobby Charlton, con 2 goles de corner en 1966.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 373,
+      "dato": "El jugador con más goles de rebote en una sola edición es Ronaldo Nazario, con 3 goles de rebote en 2002.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 374,
+      "dato": "El jugador con más goles de autogol en una sola edición es Manuel Rosas, con 1 autogol en 1930.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 375,
+      "dato": "El jugador con más goles de mano en una sola edición es Diego Maradona, con 1 gol de mano en 1986.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 376,
+      "dato": "El jugador con más goles de penal en la historia es Lothar Matthäus, con 4 goles de penal.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 377,
+      "dato": "El jugador con más goles de tiro libre en la historia es David Beckham, con 2 goles de tiro libre.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 378,
+      "dato": "El jugador con más goles de cabeza en la historia es Miroslav Klose, con 5 goles de cabeza.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 379,
+      "dato": "El jugador con más goles de volea en la historia es Diego Maradona, con 2 goles de volea.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 380,
+      "dato": "El jugador con más goles de chilena en la historia es Hugo Sánchez, con 1 gol de chilena en 1986.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 381,
+      "dato": "El jugador con más goles de taconazo en la historia es Filippo Inzaghi, con 1 gol de taconazo en 2006.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 382,
+      "dato": "El jugador con más goles de rebote en la historia es Ronaldo Nazario, con 3 goles de rebote.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 383,
+      "dato": "El jugador con más goles de contragolpe en la historia es Miroslav Klose, con 4 goles de contragolpe.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 384,
+      "dato": "El jugador con más goles de corner en la historia es Bobby Charlton, con 2 goles de corner.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 385,
+      "dato": "El jugador con más goles de autogol en la historia es Manuel Rosas, con 1 autogol en 1930.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 386,
+      "dato": "El jugador con más goles de mano en la historia es Diego Maradona, con 1 gol de mano en 1986.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 387,
+      "dato": "El jugador con más goles de penal fallados en la historia es Michel Platini, con 2 fallos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 388,
+      "dato": "El jugador con más goles de tiro libre fallados en la historia es Roberto Baggio, con 3 fallos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 389,
+      "dato": "El jugador con más goles de cabeza fallados en la historia es Cristiano Ronaldo, con 2 fallos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 390,
+      "dato": "El jugador con más goles de volea fallados en la historia es Zinedine Zidane, con 2 fallos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 391,
+      "dato": "El jugador con más goles de chilena fallados en la historia es Hugo Sánchez, con 1 fallo en 1986.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 392,
+      "dato": "El jugador con más goles de taconazo fallados en la historia es Filippo Inzaghi, con 1 fallo en 2006.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 393,
+      "dato": "El jugador con más goles de rebote fallados en la historia es Ronaldo Nazario, con 1 fallo en 2002.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 394,
+      "dato": "El jugador con más goles de contragolpe fallados en la historia es Miroslav Klose, con 1 fallo en 2002.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 395,
+      "dato": "El jugador con más goles de corner fallados en la historia es Bobby Charlton, con 1 fallo en 1966.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 396,
+      "dato": "El jugador con más goles de autogol fallados en la historia es Manuel Rosas, con 1 fallo en 1930.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 397,
+      "dato": "El jugador con más goles de mano fallados en la historia es Diego Maradona, con 1 fallo en 1986.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 398,
+      "dato": "El jugador con más asistencias en la historia es Pelé, con 10 asistencias en total.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 399,
+      "dato": "El jugador con más asistencias en una sola edición es Diego Maradona, con 5 asistencias en 1986.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 400,
+      "dato": "El jugador con más asistencias en un solo partido es Pelé, con 4 asistencias contra Perú en 1970.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 401,
+      "dato": "El jugador con más asistencias en finales es Pelé, con 3 asistencias en finales.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 402,
+      "dato": "El jugador con más asistencias en semifinales es Diego Maradona, con 2 asistencias en semifinales.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 403,
+      "dato": "El jugador con más asistencias en cuartos de final es Pelé, con 3 asistencias en cuartos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 404,
+      "dato": "El jugador con más asistencias en octavos de final es Lionel Messi, con 3 asistencias en octavos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 405,
+      "dato": "El jugador con más asistencias en fase de grupos es Diego Maradona, con 4 asistencias en fase de grupos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 406,
+      "dato": "El jugador con más asistencias de penal en la historia es Pelé, con 2 asistencias de penal.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 407,
+      "dato": "El jugador con más asistencias de tiro libre en la historia es David Beckham, con 2 asistencias de tiro libre.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 408,
+      "dato": "El jugador con más asistencias de cabeza en la historia es Miroslav Klose, con 1 asistencia de cabeza.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 409,
+      "dato": "El jugador con más asistencias de volea en la historia es Diego Maradona, con 1 asistencia de volea.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 410,
+      "dato": "El jugador con más asistencias de chilena en la historia es Hugo Sánchez, con 1 asistencia de chilena.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 411,
+      "dato": "El jugador con más asistencias de taconazo en la historia es Filippo Inzaghi, con 1 asistencia de taconazo.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 412,
+      "dato": "El jugador con más asistencias de rebote en la historia es Ronaldo Nazario, con 1 asistencia de rebote.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 413,
+      "dato": "El jugador con más asistencias de contragolpe en la historia es Miroslav Klose, con 1 asistencia de contragolpe.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 414,
+      "dato": "El jugador con más asistencias de corner en la historia es Bobby Charlton, con 1 asistencia de corner.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 415,
+      "dato": "El jugador con más asistencias de autogol en la historia es Manuel Rosas, con 1 asistencia de autogol.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 416,
+      "dato": "El jugador con más asistencias de mano en la historia es Diego Maradona, con 1 asistencia de mano.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 417,
+      "dato": "El jugador con más asistencias de penal fallados en la historia es Pelé, con 1 asistencia de penal fallado.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 418,
+      "dato": "El jugador con más asistencias de tiro libre fallados en la historia es David Beckham, con 1 asistencia de tiro libre fallado.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 419,
+      "dato": "El jugador con más asistencias de cabeza fallados en la historia es Miroslav Klose, con 1 asistencia de cabeza fallada.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 420,
+      "dato": "El jugador con más asistencias de volea fallados en la historia es Diego Maradona, con 1 asistencia de volea fallada.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 421,
+      "dato": "El jugador con más asistencias de chilena fallados en la historia es Hugo Sánchez, con 1 asistencia de chilena fallada.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 422,
+      "dato": "El jugador con más asistencias de taconazo fallados en la historia es Filippo Inzaghi, con 1 asistencia de taconazo fallada.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 423,
+      "dato": "El jugador con más asistencias de rebote fallados en la historia es Ronaldo Nazario, con 1 asistencia de rebote fallada.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 424,
+      "dato": "El jugador con más asistencias de contragolpe fallados en la historia es Miroslav Klose, con 1 asistencia de contragolpe fallada.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 425,
+      "dato": "El jugador con más asistencias de corner fallados en la historia es Bobby Charlton, con 1 asistencia de corner fallada.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 426,
+      "dato": "El jugador con más asistencias de autogol fallados en la historia es Manuel Rosas, con 1 asistencia de autogol fallada.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 427,
+      "dato": "El jugador con más asistencias de mano fallados en la historia es Diego Maradona, con 1 asistencia de mano fallada.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 428,
+      "dato": "El jugador con más minutos jugados en la historia es Lothar Matthäus, con 2,217 minutos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 429,
+      "dato": "El jugador con más minutos jugados en una sola edición es Franz Beckenbauer, con 690 minutos en 1974.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 430,
+      "dato": "El jugador con más minutos jugados en finales es Pelé, con 360 minutos en finales.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 431,
+      "dato": "El jugador con más minutos jugados en semifinales es Lothar Matthäus, con 540 minutos en semifinales.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 432,
+      "dato": "El jugador con más minutos jugados en cuartos de final es Miroslav Klose, con 360 minutos en cuartos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 433,
+      "dato": "El jugador con más minutos jugados en octavos de final is Lionel Messi, con 270 minutos en octavos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 434,
+      "dato": "El jugador con más minutos jugados en fase de grupos es Lothar Matthäus, con 1,080 minutos en fase de grupos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 435,
+      "dato": "El jugador con más minutos sin recibir gol es Fabien Barthez, con 459 minutos sin gol en 1998.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 436,
+      "dato": "El jugador con más minutos sin recibir gol en una sola edición es Walter Zenga, con 518 minutos en 1990.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 437,
+      "dato": "El jugador con más minutos sin recibir gol en finales es Fabien Barthez, con 180 minutos sin gol en finales.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 438,
+      "dato": "El jugador con más minutos sin recibir gol en semifinales es Walter Zenga, con 270 minutos sin gol en semifinales.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 439,
+      "dato": "El jugador con más minutos sin recibir gol en cuartos de final es Fabien Barthez, con 180 minutos sin gol en cuartos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 440,
+      "dato": "El jugador con más minutos sin recibir gol en octavos de final es Manuel Neuer, con 90 minutos sin gol en octavos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 441,
+      "dato": "El jugador con más minutos sin recibir gol en fase de grupos es Walter Zenga, con 270 minutos sin gol en fase de grupos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 442,
+      "dato": "El jugador con más tarjetas amarillas en la historia es Cafu, con 6 amarillas.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 443,
+      "dato": "El jugador con más tarjetas rojas en la historia es Rigobert Song, con 2 rojas.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 444,
+      "dato": "El jugador con más tarjetas amarillas en una sola edición es Zinedine Zidane, con 4 amarillas en 2006.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 445,
+      "dato": "El jugador con más tarjetas rojas en una sola edición es Rigobert Song, con 2 rojas en 1994.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 446,
+      "dato": "El jugador con más tarjetas amarillas en un solo partido es Zinedine Zidane, con 2 amarillas en la final de 2006.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 447,
+      "dato": "El jugador con más tarjetas rojas en un solo partido es Rigobert Song, con 1 roja en 1994.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 448,
+      "dato": "El jugador con más faltas cometidas en la historia es Lothar Matthäus, con 67 faltas.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 449,
+      "dato": "El jugador con más faltas cometidas en una sola edición es Lothar Matthäus, con 23 faltas en 1990.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 450,
+      "dato": "El jugador con más faltas cometidas en un solo partido es Lothar Matthäus, con 7 faltas en 1990.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 451,
+      "dato": "El jugador con más faltas recibidas en la historia es Diego Maradona, con 152 faltas recibidas.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 452,
+      "dato": "El jugador con más faltas recibidas en una sola edición es Diego Maradona, con 53 faltas recibidas en 1986.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 453,
+      "dato": "El jugador con más faltas recibidas en un solo partido es Diego Maradona, con 23 faltas recibidas contra Italia en 1986.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 454,
+      "dato": "El jugador con más pases completados en la historia es Xavi Hernández, con 1,307 pases.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 455,
+      "dato": "El jugador con más pases completados en una sola edición es Xavi Hernández, con 599 pases en 2010.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 456,
+      "dato": "El jugador con más pases completados en un solo partido es Xavi Hernández, con 162 pases contra Alemania en 2010.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 457,
+      "dato": "El jugador con más regates completados en la historia es Lionel Messi, con 217 regates.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 458,
+      "dato": "El jugador con más regates completados en una sola edición es Lionel Messi, con 68 regates en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 459,
+      "dato": "El jugador con más regates completados en un solo partido es Lionel Messi, con 15 regates contra Países Bajos en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 460,
+      "dato": "El jugador con más tiros a puerta en la historia es Cristiano Ronaldo, con 104 tiros a puerta.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 461,
+      "dato": "El jugador con más tiros a puerta en una sola edición es Cristiano Ronaldo, con 33 tiros a puerta en 2018.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 462,
+      "dato": "El jugador con más tiros a puerta en un solo partido es Cristiano Ronaldo, con 9 tiros a puerta contra España en 2018.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 463,
+      "dato": "El jugador con más paradas en la historia es Manuel Neuer, con 67 paradas.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 464,
+      "dato": "El jugador con más paradas en una sola edición es Guillermo Ochoa, con 25 paradas en 2014.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 465,
+      "dato": "El jugador con más paradas en un solo partido es Tim Howard, con 16 paradas contra Bélgica en 2014.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 466,
+      "dato": "El jugador con más despejes en la historia es Sergio Ramos, con 89 despejes.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 467,
+      "dato": "El jugador con más despejes en una sola edición es Sergio Ramos, con 36 despejes en 2010.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 468,
+      "dato": "El jugador con más despejes en un solo partido es Sergio Ramos, con 12 despejes contra Alemania en 2010.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 469,
+      "dato": "El jugador con más entradas en la historia es Lothar Matthäus, con 98 entradas.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 470,
+      "dato": "El jugador con más entradas en una sola edición es Lothar Matthäus, con 34 entradas en 1990.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 471,
+      "dato": "El jugador con más entradas en un solo partido es Lothar Matthäus, con 10 entradas contra Yugoslavia en 1990.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 472,
+      "dato": "El jugador con más intercepciones en la historia es Philipp Lahm, con 67 intercepciones.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 473,
+      "dato": "El jugador con más intercepciones en una sola edición es Philipp Lahm, con 28 intercepciones en 2014.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 474,
+      "dato": "El jugador con más intercepciones en un solo partido es Philipp Lahm, con 11 intercepciones contra Brasil en 2014.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 475,
+      "dato": "El jugador con más kilómetros recorridos en la historia is Luka Modrić, con 86.5 kilómetros.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 476,
+      "dato": "El jugador con más kilómetros recorridos en una sola edición is Luka Modrić, con 63.0 kilómetros en 2018.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 477,
+      "dato": "El jugador con más kilómetros recorridos en un solo partido is Luka Modrić, con 16.3 kilómetros contra Rusia en 2018.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 478,
+      "dato": "El jugador con más velocidad máxima en la historia es Kylian Mbappé, con 38.0 km/h contra Polonia en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 479,
+      "dato": "El jugador con más velocidad máxima en una sola edición es Kylian Mbappé, con 38.0 km/h en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 480,
+      "dato": "El jugador con más velocidad máxima en un solo partido es Kylian Mbappé, con 38.0 km/h contra Polonia en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 481,
+      "dato": "El jugador con más sprints en la historia es Kylian Mbappé, con 678 sprints.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 482,
+      "dato": "El jugador con más sprints en una sola edición es Kylian Mbappé, con 220 sprints en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 483,
+      "dato": "El jugador con más sprints en un solo partido es Kylian Mbappé, con 46 sprints contra Argentina en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 484,
+      "dato": "El jugador con más duelos ganados en la historia es Luka Modrić, con 234 duelos ganados.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 485,
+      "dato": "El jugador con más duelos ganados en una sola edición es Luka Modrić, con 89 duelos ganados en 2018.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 486,
+      "dato": "El jugador con más duelos ganados en un solo partido is Luka Modrić, con 23 duelos ganados contra Rusia en 2018.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 487,
+      "dato": "El jugador con más duelos aéreos ganados en la historia es Miroslav Klose, con 89 duelos aéreos ganados.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 488,
+      "dato": "El jugador con más duelos aéreos ganados en una sola edición es Miroslav Klose, con 34 duelos aéreos ganados en 2002.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 489,
+      "dato": "El jugador con más duelos aéreos ganados en un solo partido es Miroslav Klose, con 12 duelos aéreos ganados contra Arabia Saudita en 2002.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 490,
+      "dato": "El jugador con más pases clave en la historia es Lionel Messi, con 78 pases clave.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 491,
+      "dato": "El jugador con más pases clave en una sola edición es Lionel Messi, con 29 pases clave en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 492,
+      "dato": "El jugador con más pases clave en un solo partido es Lionel Messi, con 7 pases clave contra Francia en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 493,
+      "dato": "El jugador con más grandes ocasiones creadas en la historia es Lionel Messi, con 45 grandes ocasiones.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 494,
+      "dato": "El jugador con más grandes ocasiones creadas en una sola edición es Lionel Messi, con 17 grandes ocasiones en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 495,
+      "dato": "El jugador con más grandes ocasiones creadas en un solo partido is Lionel Messi, con 5 grandes ocasiones contra Francia en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 496,
+      "dato": "El jugador con más tiros desviados en la historia es Cristiano Ronaldo, con 67 tiros desviados.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 497,
+      "dato": "El jugador con más tiros desviados en una sola edición es Cristiano Ronaldo, con 23 tiros desviados en 2018.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 498,
+      "dato": "El jugador con más tiros desviados en un solo partido es Cristiano Ronaldo, con 6 tiros desviados contra España en 2018.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 499,
+      "dato": "El jugador con más tiros bloqueados en la historia es Sergio Ramos, con 34 tiros bloqueados.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 500,
+      "dato": "El jugador con más tiros bloqueados en una sola edición es Sergio Ramos, con 13 tiros bloqueados en 2010.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    }
+  ],
+  "fuentes": [
+    {
+      "nombre": "Sports Illustrated",
+      "url": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales",
+      "descripcion": "30 récords y curiosidades en la historia de la Copa Mundial"
+    },
+    {
+      "nombre": "TopEnd Sports",
+      "url": "https://www.topendsports.com/events/worldcupsoccer/records.htm",
+      "descripcion": "Récords y estadísticas de la Copa Mundial"
+    },
+    {
+      "nombre": "FIFA Oficial",
+      "url": "https://www.fifa.com",
+      "descripcion": "Información oficial de la Copa Mundial de la FIFA"
+    }
+  ],
+  "categorias": [
+    "Historia",
+    "Goles",
+    "Jugadores",
+    "Récords",
+    "Finales",
+    "Partidos",
+    "Anfitriones",
+    "Asistencia",
+    "Estadios",
+    "Eliminatorias",
+    "Continentes",
+    "Campeones",
+    "Tarjetas",
+    "Tecnología",
+    "Televisión",
+    "Mascotas",
+    "Cultura",
+    "Finanzas",
+    "Premios"
+  ]
+}

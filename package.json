@@ -1,0 +1,16 @@
+{
+  "name": "jfci-mundial-2026",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Mundial 2026 tracker (Grupos, Calendario, Eliminatorias, Quiniela, Stats)",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "flag-icons": "^7.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

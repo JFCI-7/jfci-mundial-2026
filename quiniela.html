@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Haz tu quiniela del Mundial 2026 y suma puntos." />
+  <title>Mundial 2026 · Quiniela</title>
+  <link rel="icon" type="image/png" href="img/copa_del_mundo.png" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main class="container-fluid py-4">
+    <div id="server-banner" class="server-banner" hidden>
+      <div class="server-banner-icon"><i class="ri-alert-line" aria-hidden="true"></i></div>
+      <div class="server-banner-body">
+        <strong data-i18n="banner.server.title">Servidor incorrecto.</strong>
+        <span data-i18n="banner.server.body">Estás usando</span> <code>python3 -m http.server</code> <span data-i18n="banner.server.body2">(servidor estático, sin proxy CORS). Para ver datos en vivo de la API, ejecuta:</span>
+        <code class="server-banner-cmd" id="server-banner-cmd">python3 server.py</code>
+        <button id="server-banner-copy" class="btn btn-sm btn-outline-light ms-2" aria-label="Copiar comando">
+          <i class="ri-file-copy-line" aria-hidden="true"></i> Copiar
+        </button>
+      </div>
+      <button id="server-banner-close" class="server-banner-close" aria-label="Cerrar">
+        <i class="ri-close-line" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3 small text-muted">
+      <span><i class="ri-database-2-line" aria-hidden="true"></i> <span id="data-source" data-i18n="common.loading">Cargando…</span></span>
+      <span><i class="ri-refresh-line" aria-hidden="true"></i> <span id="last-refresh">—</span></span>
+    </div>
+
+    <section class="view active">
+      <h2 class="bebas section-title"><i class="ri-rocket-2-line" aria-hidden="true"></i> <span data-i18n="pred.title">Tu Quiniela</span></h2>
+      <p class="text-muted">Predice el marcador de cada partido. Se guarda localmente en tu navegador.</p>
+
+      <div class="row g-2 mb-3 align-items-center">
+        <div class="col-12 col-md-8">
+          <div class="btn-group btn-group-sm w-100" role="group" aria-label="Tipo de partidos">
+            <input type="radio" class="btn-check" name="pred-tab" id="pred-tab-group" value="group" autocomplete="off" checked>
+            <label class="btn btn-outline-light" for="pred-tab-group">
+              <i class="ri-group-line" aria-hidden="true"></i> Fase de grupos
+            </label>
+            <input type="radio" class="btn-check" name="pred-tab" id="pred-tab-r32" value="r32" autocomplete="off">
+            <label class="btn btn-outline-light" for="pred-tab-r32">
+              <i class="ri-flow-chart" aria-hidden="true"></i> 32avos
+            </label>
+            <input type="radio" class="btn-check" name="pred-tab" id="pred-tab-r16" value="r16" autocomplete="off">
+            <label class="btn btn-outline-light" for="pred-tab-r16">
+              <i class="ri-flow-chart" aria-hidden="true"></i> Octavos
+            </label>
+            <input type="radio" class="btn-check" name="pred-tab" id="pred-tab-qf" value="qf" autocomplete="off">
+            <label class="btn btn-outline-light" for="pred-tab-qf">
+              <i class="ri-flow-chart" aria-hidden="true"></i> Cuartos
+            </label>
+            <input type="radio" class="btn-check" name="pred-tab" id="pred-tab-sf" value="sf" autocomplete="off">
+            <label class="btn btn-outline-light" for="pred-tab-sf">
+              <i class="ri-flow-chart" aria-hidden="true"></i> Semifinal
+            </label>
+            <input type="radio" class="btn-check" name="pred-tab" id="pred-tab-final" value="final" autocomplete="off">
+            <label class="btn btn-outline-light" for="pred-tab-final">
+              <i class="ri-trophy-line" aria-hidden="true"></i> Final
+            </label>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 text-md-end">
+          <span class="d-inline-flex align-items-center gap-2 flex-wrap justify-content-end">
+            <select id="pred-group" class="form-select form-select-sm" style="max-width: 180px"><option value="">Todos los grupos</option></select>
+            <span id="pred-points" class="badge bg-success bebas fs-6">0 pts</span>
+          </span>
+        </div>
+      </div>
+      <div class="small text-muted mb-2" id="pred-meta"></div>
+      <div id="predictions-list" class="d-flex flex-column gap-2"></div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="db.js"></script>
+  <script src="seed.js"></script>
+  <script src="api.js"></script>
+  <script src="i18n.js"></script>
+  <script src="components.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

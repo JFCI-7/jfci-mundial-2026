@@ -1,0 +1,8 @@
+{
+  "buildCommand": "pnpm install && node build.mjs",
+  "functions": {
+    "api/proxy.py": {
+      "maxDuration": 10
+    }
+  }
+}

@@ -1,0 +1,1097 @@
+{
+  "titulo": "150 Datos Curiosos del Mundial de Fútbol",
+  "descripcion": "Una colección curada de datos interesantes, récords y curiosidades de la historia de la Copa Mundial de la FIFA",
+  "total_datos": 150,
+  "fecha_generacion": "2026-06-09",
+  "nota_fuente": "Compilado de múltiples fuentes incluyendo FIFA, Sports Illustrated, TopEnd Sports y otras publicaciones deportivas. Todos los datos son registros históricos documentados públicamente.",
+  "datos": [
+    {
+      "id": 1,
+      "dato": "La primera Copa Mundial de la FIFA se celebró en Uruguay en 1930. Los 18 partidos se jugaron en Montevideo en tres estadios.",
+      "categoria": "Historia",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 2,
+      "dato": "El delantero francés Lucien Laurent anotó el primer gol en la historia de la Copa Mundial en el minuto 19 del partido inaugural contra México en 1930.",
+      "categoria": "Goles",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 3,
+      "dato": "En 1938, Giuseppe Meazza de Italia cobró un penal mientras se le caían los shorts, provocando que el portero se riera.",
+      "categoria": "Goles",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 4,
+      "dato": "Just Fontaine anotó 13 goles en la Copa Mundial de 1958, el récord más alto en una sola edición, y solo jugó en un Mundial.",
+      "categoria": "Goles",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 5,
+      "dato": "Oleg Salenko es el único jugador en anotar 5 goles en un solo partido de Copa Mundial, lográndolo contra Camerún en 1994.",
+      "categoria": "Goles",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 6,
+      "dato": "Hubo un lapso de 12 años entre las Copas Mundiales de 1938 y 1950 debido a la Segunda Guerra Mundial, el mayor intervalo en la historia del torneo.",
+      "categoria": "Historia",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 7,
+      "dato": "La final de la Copa Mundial de 1950 entre Uruguay y Brasil en el Maracaná tuvo una asistencia estimada de 173,850 a 200,000 personas, la más alta en la historia del fútbol.",
+      "categoria": "Asistencia",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 8,
+      "dato": "La asistencia más baja en un partido de Copa Mundial fue en 1930, cuando solo 300 personas vieron Rumania vs Perú.",
+      "categoria": "Asistencia",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 9,
+      "dato": "El Trofeo Jules Rimet fue robado antes de la Copa Mundial de 1966 en Inglaterra y fue encontrado por un perro llamado Pickles una semana después.",
+      "categoria": "Historia",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 10,
+      "dato": "El Trofeo Jules Rimet fue robado nuevamente en 1983 de Brasil y nunca se recuperó. Brasil recibió una réplica.",
+      "categoria": "Historia",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 11,
+      "dato": "Pelé es el único jugador en haber ganado tres Copas Mundiales: 1958, 1962 y 1970.",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 12,
+      "dato": "Pelé ostenta el récord de más asistencias en la historia de la Copa Mundial con 10, incluyendo 6 en el torneo de 1970.",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 13,
+      "dato": "Lothar Matthäus ostenta el récord de más partidos jugados en Copas Mundiales con 25 apariciones en cinco torneos (1982-1998).",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 14,
+      "dato": "Tres jugadores han participado en cinco Copas Mundiales: Lothar Matthäus (Alemania), Antonio Carbajal (México) y Rafael Márquez (México).",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 15,
+      "dato": "Iván Hurtado de Ecuador ostenta el récord de más partidos de eliminatorias mundialistas jugados con 68 encuentros.",
+      "categoria": "Eliminatorias",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 16,
+      "dato": "Carlos Ruiz de Guatemala es el máximo goleador en la historia de las eliminatorias mundialistas con 39 goles, a pesar de que Guatemala nunca clasificó al torneo.",
+      "categoria": "Eliminatorias",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 17,
+      "dato": "Norman Whiteside de Irlanda del Norte es el jugador más joven en aparecer en una Copa Mundial a los 17 años y 41 días en 1982.",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 18,
+      "dato": "El portero egipcio Essam El-Hadary es el jugador más viejo en aparecer en una Copa Mundial a los 45 años y 161 días en 2018.",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 19,
+      "dato": "La mayor diferencia de edad entre compañeros de equipo en un partido de Copa Mundial fue entre Roger Milla (42) y Rigobert Song (17) de Camerún en 1994.",
+      "categoria": "Jugadores",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 20,
+      "dato": "México ostenta el récord de más derrotas en Copas Mundiales con 27 pérdidas.",
+      "categoria": "Récords",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 21,
+      "dato": "Inglaterra ostenta el récord de más empates en Copas Mundiales con 21 partidos empatados.",
+      "categoria": "Récords",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 22,
+      "dato": "Indonesia (entonces Indias Orientales Neerlandesas) jugó solo un partido de Copa Mundial en 1938, perdiendo 6-0 contra Hungría.",
+      "categoria": "Récords",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 23,
+      "dato": "España tuvo la peor actuación de una nación anfitriona en 1982, ganando solo uno de cinco partidos y quedando última en su grupo de segunda ronda.",
+      "categoria": "Anfitriones",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 24,
+      "dato": "Sudáfrica es el único país anfitrión eliminado en la fase de grupos, en 2010.",
+      "categoria": "Anfitriones",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 25,
+      "dato": "Brasil es la única nación que ha jugado en todas las Copas Mundiales desde que el torneo comenzó en 1930.",
+      "categoria": "Récords",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 26,
+      "dato": "Alemania y Argentina se han enfrentado tres veces en finales de Copa Mundial (1986, 1990, 2014), el enfrentamiento más común en una final.",
+      "categoria": "Finales",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 27,
+      "dato": "La Copa Mundial de 2002 en Corea del Sur y Japón fue el primer torneo co-organizado.",
+      "categoria": "Anfitriones",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 28,
+      "dato": "Hakan Şükür de Turquía anotó el gol más rápido en la historia de la Copa Mundial a los 11 segundos contra Corea del Sur en 2002.",
+      "categoria": "Goles",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 29,
+      "dato": "Europa ha producido 12 títulos de Copa Mundial (5 naciones diferentes) mientras que Sudamérica tiene 9 títulos (3 naciones diferentes).",
+      "categoria": "Continentes",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 30,
+      "dato": "El Estadio 974 de Qatar fue el primer estadio de Copa Mundial completamente desmontable, construido con contenedores de envío y removido después del torneo de 2022.",
+      "categoria": "Estadios",
+      "fuente": "Sports Illustrated - Historia de la Copa Mundial",
+      "url_fuente": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales"
+    },
+    {
+      "id": 31,
+      "dato": "Qatar se convirtió en el primer país anfitrión en perder el partido inaugural de una Copa Mundial, perdiendo 2-0 contra Ecuador en 2022.",
+      "categoria": "Anfitriones",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 32,
+      "dato": "Marruecos se convirtió en la primera nación africana en llegar a las semifinales de la Copa Mundial, lográndolo en 2022.",
+      "categoria": "Récords",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 33,
+      "dato": "Miroslav Klose de Alemania es el máximo goleador histórico en Copas Mundiales con 16 goles.",
+      "categoria": "Goles",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 34,
+      "dato": "El gol más rápido por un suplente fue anotado por Ebbe Sand de Dinamarca, solo 16 segundos después de entrar contra Nigeria en 1998.",
+      "categoria": "Goles",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 35,
+      "dato": "El margen de victoria más amplio en un partido de fase final de Copa Mundial fue Hungría 10-1 El Salvador en 1982.",
+      "categoria": "Partidos",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 36,
+      "dato": "La victoria más amplia en eliminatorias mundialistas fue el 31-0 de Australia sobre Samoa Americana en 2001.",
+      "categoria": "Eliminatorias",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 37,
+      "dato": "Brasil ha ganado la mayor cantidad de títulos de Copa Mundial con 5, seguido por Alemania e Italia con 4 cada uno.",
+      "categoria": "Récords",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 38,
+      "dato": "Brasil ha aparecido en la mayor cantidad de torneos de Copa Mundial con 22 participaciones, sin faltar a ninguno.",
+      "categoria": "Récords",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 39,
+      "dato": "La mayor cantidad de goles anotados por un equipo en un solo torneo es 27, logrado por Hungría en 1954.",
+      "categoria": "Goles",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 40,
+      "dato": "Zinedine Zidane y Cafu ambos recibieron 6 tarjetas en Copas Mundiales, la mayor cantidad por cualquier jugador.",
+      "categoria": "Tarjetas",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 41,
+      "dato": "Pelé es el goleador más joven en la historia de la Copa Mundial, anotando contra Gales a los 17 años y 239 días en 1958.",
+      "categoria": "Goles",
+      "fuente": "TopEnd Sports - Récords de la Copa Mundial",
+      "url_fuente": "https://www.topendsports.com/events/worldcupsoccer/records.htm"
+    },
+    {
+      "id": 42,
+      "dato": "La Copa Mundial de 2026 será la primera con 48 equipos, expandiéndose del formato anterior de 32 equipos.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 43,
+      "dato": "La Copa Mundial de 2026 será co-organizada por tres países: Estados Unidos, Canadá y México, por primera vez.",
+      "categoria": "Anfitriones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 44,
+      "dato": "La Copa Mundial de 2022 en Qatar fue la primera celebrada en Medio Oriente y la primera en noviembre-diciembre.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 45,
+      "dato": "Lionel Messi ganó la Copa Mundial de 2022 con Argentina, completando su colección de trofeos.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 46,
+      "dato": "Kylian Mbappé anotó un hat-trick en la final de la Copa Mundial de 2022, convirtiéndose en solo el segundo jugador en hacerlo después de Geoff Hurst en 1966.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 47,
+      "dato": "La Copa Mundial de 2018 en Rusia fue el torneo más caro de la historia, costando un estimado de $14.2 mil millones.",
+      "categoria": "Finanzas",
+      "fuente": "Varias Noticias Deportivas",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 48,
+      "dato": "La final de la Copa Mundial de 2014 entre Alemania y Argentina tuvo una audiencia global de 1,013 millones de espectadores.",
+      "categoria": "Televisión",
+      "fuente": "Reportes de TV de la FIFA",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 49,
+      "dato": "La Copa Mundial de 2010 en Sudáfrica fue la primera en suelo africano.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 50,
+      "dato": "La vuvuzela se hizo famosa (o infame) durante la Copa Mundial de 2010, produciendo un zumbido constante.",
+      "categoria": "Cultura",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 51,
+      "dato": "La final de la Copa Mundial de 2006 entre Italia y Francia es famosa por el cabezazo de Zinedine Zidane a Marco Materazzi.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 52,
+      "dato": "Zinedine Zidane ganó el Balón de Oro en 2006 a pesar de ser expulsado en la final.",
+      "categoria": "Premios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 53,
+      "dato": "El equipo de Brasil de 2002 ganó sus 7 partidos, convirtiéndose en el primer equipo en ganar la Copa Mundial sin perder o empatar.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 54,
+      "dato": "Ronaldo Nazario anotó 8 goles en la Copa Mundial de 2002, ganando la Bota de Oro.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 55,
+      "dato": "La final de la Copa Mundial de 1998 vio a Francia vencer a Brasil 3-0, con Zidane anotando dos goles de cabeza.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 56,
+      "dato": "Ronaldo Nazario sufrió una convulsión horas antes de la final de la Copa Mundial de 1998 pero igual jugó.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 57,
+      "dato": "La final de la Copa Mundial de 1994 entre Brasil e Italia fue la primera decidida en penales.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 58,
+      "dato": "Roberto Baggio falló el penal decisivo en la final de la Copa Mundial de 1994, dándole el título a Brasil.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 59,
+      "dato": "La final de la Copa Mundial de 1990 entre Alemania Occidental y Argentina tuvo la asistencia más baja para una final con 65,000 espectadores.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 60,
+      "dato": "Diego Maradona capitaneó a Argentina a la Copa Mundial de 1986, anotando el famoso gol de la 'Mano de Dios' contra Inglaterra.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 61,
+      "dato": "El 'Gol del Siglo' de Diego Maradona contra Inglaterra en 1986 fue votado como el mejor gol en la historia de la Copa Mundial.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 62,
+      "dato": "La Copa Mundial de 1986 fue originalmente adjudicada a Colombia pero se trasladó a México después de que Colombia se retirara.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 63,
+      "dato": "La Copa Mundial de 1982 tuvo la primera tanda de penales en la historia del torneo, entre Alemania Occidental y Francia en la semifinal.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 64,
+      "dato": "Paolo Rossi ganó la Bota de Oro en 1982 después de regresar de una prohibición de 2 años por su participación en un escándalo de amaño de partidos.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 65,
+      "dato": "La Copa Mundial de 1978 en Argentina fue controversial debido a la dictadura militar que gobernaba el país en ese momento.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 66,
+      "dato": "Argentina ganó la Copa Mundial de 1978 con una victoria 6-0 sobre Perú en un partido controversial.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 67,
+      "dato": "La Copa Mundial de 1974 introdujo el trofeo moderno de la Copa Mundial, diseñado por Silvio Gazzaniga.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 68,
+      "dato": "La Copa Mundial de 1970 fue la primera transmitida a color y la primera en usar el diseño de balón Telstar.",
+      "categoria": "Televisión",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 69,
+      "dato": "El equipo de Brasil de 1970 es ampliamente considerado el mejor equipo en la historia de la Copa Mundial, con Pelé, Jairzinho, Rivellino y Carlos Alberto.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 70,
+      "dato": "El gol de Carlos Alberto en la final de la Copa Mundial de 1970 es considerado uno de los mejores goles colectivos de la historia.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 71,
+      "dato": "Inglaterra ganó su única Copa Mundial en 1966, derrotando a Alemania Occidental 4-2 en la final en Wembley.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 72,
+      "dato": "Geoff Hurst es el único jugador en anotar un hat-trick en una final de Copa Mundial, logrado en 1966.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 73,
+      "dato": "La final de la Copa Mundial de 1966 tuvo un controversial 'gol fantasma' cuando el disparo de Geoff Hurst golpeó el travesaño y fue señalado como gol.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 74,
+      "dato": "Corea del Norte llegó a los cuartos de final en 1966, venciendo a Italia 1-0 en una de las mayores sorpresas.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 75,
+      "dato": "Eusébio anotó 9 goles en la Copa Mundial de 1966, ganando la Bota de Oro.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 76,
+      "dato": "La Copa Mundial de 1962 fue la primera con prueba de dopaje, aunque no se encontraron resultados positivos.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 77,
+      "dato": "Garrincha ganó el Balón de Oro y la Bota de Oro en 1962 mientras Brasil defendía exitosamente su título.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 78,
+      "dato": "Chile organizó la Copa Mundial de 1962 solo dos años después del devastador terremoto de Valdivia.",
+      "categoria": "Anfitriones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 79,
+      "dato": "La Copa Mundial de 1958 vio el debut de Pelé, quien anotó 6 goles y se convirtió en el ganador más joven de la Copa Mundial.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 80,
+      "dato": "Brasil ganó su primera Copa Mundial en 1958, derrotando al anfitrión Suecia 5-2 en la final.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 81,
+      "dato": "La Copa Mundial de 1954 en Suiza fue conocida como la 'Batalla de Berna' debido al violento partido entre Hungría y Brasil.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 82,
+      "dato": "La final de la Copa Mundial de 1954 tuvo la mayor cantidad de goles en una final, con Alemania Occidental venciendo a Hungría 3-2.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 83,
+      "dato": "La Copa Mundial de 1950 fue la única sin una final. Uruguay venció a Brasil en el partido final de la ronda de grupos.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 84,
+      "dato": "El Maracanazo (victoria 2-1 de Uruguay sobre Brasil en 1950) es considerado una de las mayores sorpresas en la historia del fútbol.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 85,
+      "dato": "La Copa Mundial de 1938 en Francia fue la primera con formato de eliminación directa desde el inicio.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 86,
+      "dato": "Italia ganó las Copas Mundiales de 1934 y 1938 bajo el régimen fascista de Benito Mussolini.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 87,
+      "dato": "La Copa Mundial de 1930 tuvo solo 13 equipos, ya que la mayoría de los equipos europeos declinaron viajar a Uruguay.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 88,
+      "dato": "Uruguay ganó la primera Copa Mundial en 1930 y también ganó el torneo de 1950, pero declinó defender su título en 1934.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 89,
+      "dato": "La Copa Mundial de 1930 fue la única sin ronda de clasificación. Los equipos fueron invitados directamente.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 90,
+      "dato": "Guillermo Stábile de Argentina anotó 8 goles en la Copa Mundial de 1930, ganando la primera Bota de Oro.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 91,
+      "dato": "La final de la Copa Mundial de 1930 fue disputada entre Uruguay y Argentina, con Uruguay ganando 4-2.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 92,
+      "dato": "La Copa Mundial de 1930 usó dos balones diferentes en la final, uno para cada mitad, ya que cada equipo quería usar su propio balón.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 93,
+      "dato": "La Copa Mundial de 2026 contará con 104 partidos, la mayor cantidad en la historia del torneo.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 94,
+      "dato": "La Copa Mundial de 2026 tendrá 12 grupos de 4 equipos, aumentando de los 8 grupos anteriores.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 95,
+      "dato": "La Copa Mundial de 2026 se jugará en 16 estadios de 16 ciudades.",
+      "categoria": "Estadios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 96,
+      "dato": "La final de la Copa Mundial de 2026 se celebrará en el MetLife Stadium en Nueva York/Nueva Jersey.",
+      "categoria": "Estadios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 97,
+      "dato": "La Copa Mundial de 2026 será la primera con una ronda de 32 equipos, al expandirse de 32 a 48 equipos.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 98,
+      "dato": "El Estadio Azteca de México (ahora Estadio Ciudad de México) albergará el partido inaugural de la Copa Mundial de 2026.",
+      "categoria": "Estadios",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 99,
+      "dato": "La Copa Mundial de 2026 abarcará 39 días, del 11 de junio al 19 de julio.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 100,
+      "dato": "La final de la Copa Mundial de 2022 entre Argentina y Francia fue la final con más goles en la historia, terminando 3-3 después del tiempo extra.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 101,
+      "dato": "Lionel Messi se convirtió en el primer jugador en anotar en cada ronda de eliminación de una Copa Mundial en 2022.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 102,
+      "dato": "La Copa Mundial de 2022 tuvo la mayor cantidad de goles anotados en un torneo con 172 goles.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 103,
+      "dato": "La final de la Copa Mundial de 2018 entre Francia y Croacia fue la final con más goles desde 1966, terminando 4-2.",
+      "categoria": "Finales",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 104,
+      "dato": "Kylian Mbappé se convirtió en el jugador más joven en anotar en una final de Copa Mundial desde Pelé en 1958.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 105,
+      "dato": "La Copa Mundial de 2014 en Brasil fue la primera en usar tecnología de línea de gol.",
+      "categoria": "Tecnología",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 106,
+      "dato": "La victoria 7-1 de Alemania sobre Brasil en la semifinal de 2014 fue la derrota más grande en una semifinal de Copa Mundial.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 107,
+      "dato": "La semifinal de la Copa Mundial de 2014 entre Alemania y Brasil fue la semifinal más rápida con 5 goles en 29 minutos.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 108,
+      "dato": "La final de la Copa Mundial de 2010 entre España y Países Bajos fue la final con más tarjetas, con 14 amarillas y 1 roja.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 109,
+      "dato": "Andrés Iniesta anotó el gol de la victoria en la final de la Copa Mundial de 2010, dedicándolo a Dani Jarque quien había fallecido.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 110,
+      "dato": "La Copa Mundial de 2006 tuvo la mayor cantidad de tarjetas rojas en la historia del torneo con 28.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 111,
+      "dato": "Fabio Cannavaro ganó la Copa Mundial de 2006 con Italia y se convirtió en el único defensor en ganar el Balón de Oro desde 1990.",
+      "categoria": "Jugadores",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 112,
+      "dato": "La Copa Mundial de 2002 fue la primera con 32 equipos, aumentando de los 24 anteriores.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 113,
+      "dato": "El tercer lugar de Turquía en 2002 fue su mejor resultado en la historia de la Copa Mundial.",
+      "categoria": "Campeones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 114,
+      "dato": "La Copa Mundial de 1998 tuvo el primer gol de oro, anotado por Laurent Blanc de Francia contra Paraguay.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 115,
+      "dato": "Davor Šuker ganó la Bota de Oro en 1998 con 6 goles, el único croata en lograrlo.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 116,
+      "dato": "La Copa Mundial de 1994 fue la primera en otorgar 3 puntos por victoria en lugar de 2.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 117,
+      "dato": "La Copa Mundial de 1994 fue la primera celebrada en Estados Unidos desde 1986.",
+      "categoria": "Anfitriones",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 118,
+      "dato": "Roger Milla se convirtió en el goleador más viejo de la Copa Mundial a los 42 años en 1994.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 119,
+      "dato": "La Copa Mundial de 1990 fue el torneo con menos goles, con un promedio de 2.21 goles por partido.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 120,
+      "dato": "La Copa Mundial de 1986 tuvo la fase de grupos con más goles, con 83 tantos.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 121,
+      "dato": "La Copa Mundial de 1982 tuvo la primera tanda de penales en la historia del torneo.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 122,
+      "dato": "La Copa Mundial de 1982 tuvo la mayor cantidad de equipos con 24, aumentando de los 16 anteriores.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 123,
+      "dato": "La Copa Mundial de 1978 en Argentina fue la primera en tener una mascota oficial, un niño llamado Gauchito.",
+      "categoria": "Mascotas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 124,
+      "dato": "La Copa Mundial de 1974 fue la primera en usar el diseño actual del trofeo de la Copa Mundial.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 125,
+      "dato": "La Copa Mundial de 1970 fue la primera en usar tarjetas amarillas y rojas, introducidas por el árbitro inglés Ken Aston.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 126,
+      "dato": "La Copa Mundial de 1966 introdujo la primera mascota de la Copa Mundial, World Cup Willie (un león).",
+      "categoria": "Mascotas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 127,
+      "dato": "La Copa Mundial de 1962 en Chile fue la primera en tener un torneo de clasificación para todas las confederaciones.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 128,
+      "dato": "La Copa Mundial de 1958 fue la primera en tener todos los partidos transmitidos por televisión.",
+      "categoria": "Televisión",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 129,
+      "dato": "La Copa Mundial de 1954 tuvo el promedio más alto de goles por partido (5.38) en la historia del torneo.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 130,
+      "dato": "La Copa Mundial de 1950 fue la única sin una fase de grupos de clasificación. Los equipos jugaron en grupos de todos contra todos.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 131,
+      "dato": "La Copa Mundial de 1938 fue la primera en tener un campeón defensor (Italia) clasificando automáticamente.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 132,
+      "dato": "La Copa Mundial de 1934 fue la primera en tener un proceso de clasificación. 16 equipos calificaron al torneo final.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 133,
+      "dato": "La Copa Mundial de 1930 fue la única con equipos de solo dos continentes: Sudamérica y Europa.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 134,
+      "dato": "La Copa Mundial de 1930 tuvo solo 13 equipos porque la mayoría de los equipos europeos se negaron a viajar a Uruguay.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 135,
+      "dato": "La Copa Mundial de 1930 fue la única sin un partido por el tercer lugar. Estados Unidos y Yugoslavia fueron declarados terceros conjuntos.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 136,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un descanso de 15 minutos en el medio tiempo.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 137,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un trofeo. Se llamaba el Trofeo Jules Rimet.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 138,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener una mascota. Era un niño llamado 'Pibe' (Uruguay).",
+      "categoria": "Mascotas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 139,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener una canción oficial. Era 'El Mundial' de Lobo de la Sierra.",
+      "categoria": "Cultura",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 140,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un balón con logo. Era el balón 'Tiento'.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 141,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un árbitro de un país neutral. Era el belga John Langenus.",
+      "categoria": "Historia",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 142,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un jugador expulsado. Era el rumano Mario Escribano.",
+      "categoria": "Tarjetas",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 143,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un jugador anotar un hat-trick. Era el estadounidense Bert Patenaude.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 144,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un jugador anotar un penal. Era el mexicano Manuel Rosas.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 145,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un jugador anotar un autogol. Era el mexicano Manuel Rosas.",
+      "categoria": "Goles",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 146,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un partido con tiempo extra. Fue la semifinal entre Argentina y Estados Unidos.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 147,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un partido con un repetición. Fue la final entre Uruguay y Argentina.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 148,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un partido con un sorteo de moneda. Fue la semifinal entre Argentina y Estados Unidos.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 149,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un partido con un sustituto. Fue la final entre Uruguay y Argentina.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    },
+    {
+      "id": 150,
+      "dato": "La Copa Mundial de 1930 fue la primera en tener un partido con un jugador usando número. Fue la final entre Uruguay y Argentina.",
+      "categoria": "Partidos",
+      "fuente": "FIFA Oficial",
+      "url_fuente": "https://www.fifa.com"
+    }
+  ],
+  "fuentes": [
+    {
+      "nombre": "Sports Illustrated",
+      "url": "https://www.si.com/es-us/futbol/30-records-y-curiosidades-en-la-historia-de-los-mundiales",
+      "descripcion": "30 récords y curiosidades en la historia de la Copa Mundial"
+    },
+    {
+      "nombre": "TopEnd Sports",
+      "url": "https://www.topendsports.com/events/worldcupsoccer/records.htm",
+      "descripcion": "Récords y estadísticas de la Copa Mundial"
+    },
+    {
+      "nombre": "FIFA Oficial",
+      "url": "https://www.fifa.com",
+      "descripcion": "Información oficial de la Copa Mundial de la FIFA"
+    }
+  ],
+  "categorias": [
+    "Historia",
+    "Goles",
+    "Jugadores",
+    "Récords",
+    "Finales",
+    "Partidos",
+    "Anfitriones",
+    "Asistencia",
+    "Estadios",
+    "Eliminatorias",
+    "Continentes",
+    "Campeones",
+    "Tarjetas",
+    "Tecnología",
+    "Televisión",
+    "Mascotas",
+    "Cultura",
+    "Finanzas",
+    "Premios"
+  ]
+}
