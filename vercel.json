@@ -2,8 +2,11 @@
   "buildCommand": "pnpm install && node build.mjs",
   "outputDirectory": ".",
   "functions": {
-    "api/proxy.py": {
+    "api/proxy.js": {
       "maxDuration": 10
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/api/proxy/(.*)", "destination": "/api/proxy" }
+  ]
 }
