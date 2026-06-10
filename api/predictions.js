@@ -153,9 +153,14 @@ export default async function handler(request) {
       } catch {
         return jsonResponse(400, { error: "invalid_json" });
       }
-      const validationError = validatePayload(body);
-      if (validationError) {
-        return jsonResponse(400, { error: validationError });
+      // Solo validar schema completo en keys de datos (u:). Las keys de
+      // metadata (m:) aceptan cualquier body pequeño.
+      const isMetadata = key.startsWith("m:");
+      if (!isMetadata) {
+        const validationError = validatePayload(body);
+        if (validationError) {
+          return jsonResponse(400, { error: validationError });
+        }
       }
       const record = {
         data: body,
