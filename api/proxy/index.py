@@ -1,6 +1,9 @@
-# ============== api/proxy.py — Vercel Python function ==============
+# ============== api/proxy/index.py — Vercel Python function ==============
 # Proxy CORS para worldcup26.ir.
-# Vercel detecta automáticamente este archivo en /api y lo expone en /api/proxy.
+# Vercel detecta automáticamente este archivo en /api/proxy/index.py y lo
+# expone en /api/proxy (rutas como /api/proxy/get/teams se reescriben a
+# /api/proxy con el subpath en request.path).
+#
 # Rutas: /api/proxy/get/teams, /api/proxy/get/games, /api/proxy/get/groups, etc.
 
 from urllib.request import urlopen, Request, HTTPError, URLError
