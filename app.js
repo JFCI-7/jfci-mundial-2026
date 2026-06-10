@@ -110,6 +110,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   setupFilters();
   setupPredictionTabs();
+  if (CURRENT_PAGE === "quiniela.html") setupAuth();
 
   // Render según la página actual
   renderForPage();
@@ -406,6 +407,169 @@ function setupServerBanner() {
 function showServerBanner() {
   const b = document.getElementById("server-banner");
   if (b) b.hidden = false;
+}
+
+// ============== AUTH (Quiniela persistente) ==============
+// Solo se activa en quiniela.html. En otras páginas los botones están ocultos
+// (d-none) y no se monta nada.
+function setupAuth() {
+  const signinBtn = document.getElementById("btn-signin");
+  const signoutBtn = document.getElementById("btn-signout");
+  const syncBtn = document.getElementById("btn-sync");
+  const modal = document.getElementById("auth-modal");
+  if (!signinBtn || !signoutBtn || !syncBtn || !modal) return; // solo en quiniela.html
+
+  const form = document.getElementById("auth-form");
+  const emailInp = document.getElementById("auth-email");
+  const pinInp = document.getElementById("auth-pin");
+  const emailErr = document.getElementById("auth-email-err");
+  const pinErr = document.getElementById("auth-pin-err");
+  const skipBtn = document.getElementById("auth-skip");
+  const errBox = document.getElementById("auth-error");
+
+  // Abrir modal
+  const openModal = () => {
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    errBox.classList.add("d-none");
+    errBox.textContent = "";
+    emailErr.classList.add("d-none");
+    pinErr.classList.add("d-none");
+    emailInp.value = "";
+    pinInp.value = "";
+    setTimeout(() => emailInp.focus(), 100);
+  };
+  const closeModal = () => {
+    modal.hidden = true;
+    document.body.style.overflow = "";
+  };
+
+  signinBtn.addEventListener("click", openModal);
+  modal.querySelectorAll("[data-close]").forEach(el => el.addEventListener("click", closeModal));
+  skipBtn.addEventListener("click", closeModal);
+
+  // Submit
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    emailErr.classList.add("d-none");
+    pinErr.classList.add("d-none");
+    errBox.classList.add("d-none");
+
+    const email = emailInp.value.trim();
+    const pin = pinInp.value.trim();
+
+    if (!DB.validateEmail(email)) { emailErr.classList.remove("d-none"); emailInp.focus(); return; }
+    if (pin && !DB.validatePin(pin)) { pinErr.classList.remove("d-none"); pinInp.focus(); return; }
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const origLabel = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = t("auth.syncing");
+
+    try {
+      await DB.setUserCredentials(email, pin);
+      const result = await DB.pullFromServer();
+      if (result.status === "kv_unavailable") {
+        errBox.textContent = t("auth.serverUnavailable");
+        errBox.classList.remove("d-none");
+        DB.clearUserCredentials();
+        return;
+      }
+      if (result.status === "error" || result.status === "network_error") {
+        errBox.textContent = t("auth.networkError");
+        errBox.classList.remove("d-none");
+        DB.clearUserCredentials();
+        return;
+      }
+      // Éxito: cerrar modal, actualizar UI, re-render
+      closeModal();
+      updateSyncUI();
+      renderPredictions();
+      showToast(t("auth.syncSuccess"), "success", 3000);
+    } catch (err) {
+      errBox.textContent = err.message || t("auth.networkError");
+      errBox.classList.remove("d-none");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = origLabel;
+    }
+  });
+
+  // Sincronizar manualmente
+  syncBtn.addEventListener("click", async () => {
+    if (!DB.getUserId()) return;
+    syncBtn.disabled = true;
+    syncBtn.querySelector("i")?.classList.add("ri-loader-4-line");
+    syncBtn.querySelector("i")?.classList.add("spin");
+    try {
+      const result = await DB.pullFromServer();
+      if (result.status === "kv_unavailable") {
+        showToast(t("auth.serverUnavailable"), "warning", 5000);
+      } else if (result.status === "network_error") {
+        showToast(t("auth.networkError"), "error");
+      } else if (result.status === "pulled" || result.status === "uploaded_local") {
+        updateSyncUI();
+        renderPredictions();
+        showToast(t("auth.syncSuccess"), "success", 2500);
+      }
+    } finally {
+      syncBtn.disabled = false;
+      syncBtn.querySelector("i")?.classList.remove("ri-loader-4-line");
+      syncBtn.querySelector("i")?.classList.remove("spin");
+    }
+  });
+
+  // Cerrar sesión
+  signoutBtn.addEventListener("click", () => {
+    if (!confirm(t("auth.signOutConfirm"))) return;
+    DB.clearUserCredentials();
+    updateSyncUI();
+    showToast(t("auth.signOut"), "info", 2500);
+  });
+
+  // Si ya hay user, intentar pull silencioso al cargar
+  if (DB.getUserId()) {
+    DB.pullFromServer().then(result => {
+      if (result.status === "pulled" || result.status === "uploaded_local") {
+        updateSyncUI();
+        renderPredictions();
+      } else {
+        updateSyncUI();
+      }
+    });
+  } else {
+    updateSyncUI();
+  }
+}
+
+function updateSyncUI() {
+  const signinBtn = document.getElementById("btn-signin");
+  const signoutBtn = document.getElementById("btn-signout");
+  const syncBtn = document.getElementById("btn-sync");
+  const statusEl = document.getElementById("sync-status");
+  if (!signinBtn || !signoutBtn || !syncBtn || !statusEl) return;
+
+  const userId = DB.getUserId();
+  const last = DB.getLastSync();
+
+  if (userId) {
+    signinBtn.classList.add("d-none");
+    signoutBtn.classList.remove("d-none");
+    syncBtn.classList.remove("d-none");
+    if (last) {
+      const when = new Date(last);
+      const locale = window.I18N && I18N.lang === "en" ? "en-US" : "es-MX";
+      const formatted = when.toLocaleString(locale, { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
+      statusEl.innerHTML = `<i class="ri-check-line text-success" aria-hidden="true"></i> <span>${t("auth.syncedAt", { date: formatted })}</span>`;
+    } else {
+      statusEl.innerHTML = `<i class="ri-cloud-line" aria-hidden="true"></i> <span>${t("auth.notSynced")}</span>`;
+    }
+  } else {
+    signinBtn.classList.remove("d-none");
+    signoutBtn.classList.add("d-none");
+    syncBtn.classList.add("d-none");
+    statusEl.innerHTML = `<i class="ri-cloud-off-line" aria-hidden="true"></i> <span>${t("auth.localOnlyChip")}</span>`;
+  }
 }
 
 // ============== THEME TOGGLE ==============
@@ -1142,6 +1306,7 @@ function renderPredictions() {
   setupPredCardListeners(list, tab);
   const pp = document.getElementById("pred-points");
   if (pp) pp.textContent = `${points} ${t("pred.summary.points")} · ${correct} ${t("pred.summary.correct")}`;
+  updateSyncUI();
 }
 
 function buildPredCard(m, preds, tab, tally) {

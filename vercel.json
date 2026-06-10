@@ -4,6 +4,9 @@
   "functions": {
     "api/proxy.js": {
       "maxDuration": 10
+    },
+    "api/predictions.js": {
+      "maxDuration": 10
     }
   },
   "rewrites": [

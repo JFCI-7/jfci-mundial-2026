@@ -34,9 +34,27 @@
       </button>
     </div>
 
-    <div class="d-flex justify-content-between align-items-center mb-3 small text-muted">
+    <div class="d-flex justify-content-between align-items-center mb-3 small text-muted flex-wrap gap-2">
       <span><i class="ri-database-2-line" aria-hidden="true"></i> <span id="data-source" data-i18n="common.loading">Cargando…</span></span>
-      <span><i class="ri-refresh-line" aria-hidden="true"></i> <span id="last-refresh">—</span></span>
+      <span class="d-inline-flex align-items-center gap-2 flex-wrap">
+        <span id="sync-status" class="d-inline-flex align-items-center gap-1">
+          <i class="ri-cloud-off-line" aria-hidden="true"></i>
+          <span data-i18n="auth.localOnlyChip">Solo local</span>
+        </span>
+        <button id="btn-sync" class="btn btn-sm btn-outline-light d-none" aria-label="Sync">
+          <i class="ri-refresh-line" aria-hidden="true"></i>
+          <span data-i18n="auth.syncNow" class="d-none d-md-inline ms-1">Sincronizar</span>
+        </button>
+        <button id="btn-signin" class="btn btn-sm btn-outline-light" aria-label="Sign in">
+          <i class="ri-user-add-line" aria-hidden="true"></i>
+          <span data-i18n="auth.signInBtn" class="d-none d-md-inline ms-1">Iniciar sesión</span>
+        </button>
+        <button id="btn-signout" class="btn btn-sm btn-outline-secondary d-none" aria-label="Sign out">
+          <i class="ri-logout-box-r-line" aria-hidden="true"></i>
+          <span data-i18n="auth.signOut" class="d-none d-md-inline ms-1">Cerrar sesión</span>
+        </button>
+        <span><i class="ri-refresh-line" aria-hidden="true"></i> <span id="last-refresh">—</span></span>
+      </span>
     </div>
 
     <section class="view active">
@@ -88,6 +106,38 @@
 
   <canvas id="confetti-canvas" aria-hidden="true"></canvas>
   <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <div id="auth-modal" class="modal-mundial" hidden>
+    <div class="modal-overlay" data-close></div>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-mundial-content">
+        <button type="button" class="modal-close-btn" data-close aria-label="Cerrar">
+          <i class="ri-close-line" aria-hidden="true"></i>
+        </button>
+        <div class="text-center mb-3">
+          <i class="ri-shield-keyhole-line auth-icon" aria-hidden="true"></i>
+        </div>
+        <h3 class="bebas text-center mb-1" data-i18n="auth.title">Bienvenido al Mundial 2026</h3>
+        <p class="text-muted text-center small mb-3" data-i18n="auth.subtitle">Ingresa tu email para sincronizar tu quiniela entre dispositivos.</p>
+        <form id="auth-form" novalidate>
+          <div class="mb-3">
+            <label for="auth-email" class="form-label small text-uppercase fw-bold" data-i18n="auth.email">Email</label>
+            <input type="email" id="auth-email" class="form-control" required autocomplete="email" placeholder="tu@email.com" data-i18n-placeholder="auth.emailPh" />
+            <div class="form-text text-danger d-none" id="auth-email-err" data-i18n="auth.emailInvalid">Email inválido</div>
+          </div>
+          <div class="mb-3">
+            <label for="auth-pin" class="form-label small text-uppercase fw-bold" data-i18n="auth.pin">PIN (opcional, 4 dígitos)</label>
+            <input type="password" id="auth-pin" class="form-control" inputmode="numeric" maxlength="4" pattern="\d{4}" autocomplete="off" placeholder="••••" data-i18n-placeholder="auth.pinPh" />
+            <div class="form-text text-muted" data-i18n="auth.pinHelp">Si estableces un PIN, lo necesitarás para acceder desde otro dispositivo.</div>
+            <div class="form-text text-danger d-none" id="auth-pin-err" data-i18n="auth.pinInvalid">El PIN debe ser 4 dígitos</div>
+          </div>
+          <div id="auth-error" class="alert alert-danger d-none small" role="alert"></div>
+          <button type="submit" class="btn btn-primary w-100 fw-bold" data-i18n="auth.submit">Entrar</button>
+          <button type="button" class="btn btn-link w-100 mt-2" id="auth-skip" data-i18n="auth.localOnly">Solo local</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script src="db.js"></script>
   <script src="seed.js"></script>

@@ -15,6 +15,7 @@ Aplicación web estática para seguir el **Mundial de la FIFA 2026** (México ·
 - **Marcadores en vivo** auto-actualizados cada 60 s.
 - **Eliminatorias**: 32avos → 16avos → cuartos → semis → 3° lugar → final.
 - **Quiniela**: predice el marcador de cada partido y suma puntos (3 exacto, 1 resultado).
+- **Quiniela persistente** *(opcional)*: sincroniza tu quiniela a la nube con tu email + PIN. Cámbiate de dispositivo sin perder tus predicciones.
 - **Estadísticas**: goles, partidos finalizados, top goleadores.
 - **Datos Curiosos**: 150 récords y curiosidades históricas del Mundial, con búsqueda y filtro por categoría.
 - **Modo offline**: si la API no responde, usa el JSON local bundled.
@@ -81,6 +82,18 @@ Vercel detecta automáticamente `api/proxy.js` como serverless function y la exp
 URL típica: `https://tu-proyecto.vercel.app`
 
 > Plan hobby de Vercel: 100k invocaciones/mes y 100 GB de bandwidth. Suficiente para uso personal.
+
+### Quiniela persistente (Vercel KV, opcional)
+
+Si quieres que tu quiniela se sincronice entre dispositivos:
+
+1. **Vercel dashboard** → tu proyecto `jfci-mundial-2026` → **Storage** → **Create KV** → nombre `mundial-2026-kv` → región `iad1`.
+2. **Connect** al proyecto. Las variables `KV_REST_API_URL` y `KV_REST_API_TOKEN` se inyectan automáticamente.
+3. Redeploy: `vercel --prod`.
+4. Abre `quiniela.html` → click en **Iniciar sesión** → ingresa tu email + PIN (opcional).
+5. Tu quiniela se guarda automáticamente en la nube. Para acceder desde otro dispositivo, inicia sesión con el mismo email + PIN.
+
+Si no configuras Vercel KV, la app funciona 100% en local — solo verás "Sincronización no disponible" en la quiniela. La identidad usa **pass-the-hash** (SHA-256 en el cliente), así que tu email **nunca** se envía al servidor.
 
 ## Solución de problemas
 

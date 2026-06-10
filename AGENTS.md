@@ -96,3 +96,26 @@ python3 server.py
 - Tema dinámico: `getEchartsTheme()` lee `--primary`, `--secondary`, `--accent`, `--text` etc. desde `getComputedStyle(:root)`, así los charts se adaptan al cambiar de tema.
 - Re-render al cambiar tema: `setupThemeToggle` re-llama `renderStats()` si estamos en `estadisticas.html`, lo que dispose los charts viejos y los vuelve a pintar con los nuevos colores.
 
+## Quiniela persistente (sync a Vercel KV)
+- Vista: `quiniela.html`. Botones en header: **Iniciar sesión** (sign-in), **Sincronizar** (icono refresh), **Cerrar sesión** (logout). Modal con email + PIN opcional.
+- Identidad: **pass-the-hash**. El email (lowercase) se concatena con un PIN opcional y se hashea con SHA-256 en el cliente vía Web Crypto API. El hash se guarda en `localStorage` con clave `mundial2026_userid`. El email **nunca** se envía al servidor.
+- API REST en `api/predictions.js` (serverless Node.js, edge runtime):
+  - `GET  /api/predictions?u=<hash64>` → `{ data, updated_at }` (200) o `404 not_found` o `503 kv_unavailable` (si KV no está conectado al proyecto).
+  - `PUT  /api/predictions?u=<hash64>` con body `{ predictions, user_scores, notes, preferences }` → `{ ok, updated_at }` (200) o `400 invalid_*` o `413 too_large` (body > 100KB).
+  - `DELETE /api/predictions?u=<hash64>` → `{ ok }` (200).
+  - Headers CORS: `Access-Control-Allow-Origin: *` y métodos `GET, PUT, DELETE, OPTIONS`.
+- Storage: **Vercel KV** (Redis). Key: `u:<hash64>`, value: `{ data, updated_at, version: 1 }`. La Lambda habla con KV vía REST API (`process.env.KV_REST_API_URL` + `KV_REST_API_TOKEN`), sin importar la librería `@vercel/kv`.
+- Flujo de sync en `db.js`:
+  - `setUserCredentials(email, pin?)` hashea con `crypto.subtle.digest("SHA-256", "mundial2026|" + email + "|" + pin)`.
+  - `pullFromServer()` → GET → si 200, importa (last-write-wins: reemplaza local); si 404 y local no vacío, hace `pushToServerNow()` (migración automática); si 503, marca `syncState.enabled = false`.
+  - `schedulePush(delay=1500ms)` → debounce. Llamado por `setPrediction`, `setUserScore`, `setNote`, `setPref`.
+  - `pushToServerNow()` → PUT con export de las 4 tablas.
+- `updateSyncUI()` actualiza el chip de status (`Sincronizado: 10 jun, 14:30` / `Solo local`), muestra/oculta los botones.
+- Si el proyecto de Vercel no tiene Vercel KV conectado, la Lambda responde `503`. El cliente muestra "Sincronización no disponible" y la app funciona 100% en local.
+- Setup: Vercel dashboard → Storage → Create KV → conectar al proyecto. Las variables `KV_REST_API_*` se inyectan automáticamente.
+- Costo: $0/mes (Vercel KV free: 256MB → ~2.5M usuarios).
+- Limitaciones aceptadas:
+  - Sin password real (pass-the-hash).
+  - Last-write-wins en conflictos (no hay merge).
+  - Si olvidas el email o PIN, no hay recovery.
+

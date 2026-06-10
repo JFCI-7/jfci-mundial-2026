@@ -593,6 +593,61 @@ a, button, .match-card, .group-card, .ko-match, .pred-card, [role="button"] { cu
 .modal-actions .btn { min-width: 100px; }
 
 /* ===================================================
+   AUTH MODAL (Quiniela persistente)
+   =================================================== */
+.auth-icon {
+  font-size: 2.5rem;
+  color: var(--primary);
+  display: inline-block;
+  line-height: 1;
+}
+.modal-mundial-content .form-label {
+  letter-spacing: .5px;
+  color: var(--text-muted);
+}
+.modal-mundial-content .form-text {
+  font-size: .75rem;
+  margin-top: .25rem;
+}
+.modal-mundial-content .btn-link {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.modal-mundial-content .btn-link:hover {
+  color: var(--accent-2);
+}
+.modal-close-btn {
+  position: absolute; top: .75rem; right: .75rem;
+  background: transparent; border: none;
+  color: var(--text-muted); font-size: 1.25rem;
+  cursor: pointer; line-height: 1;
+  padding: .25rem .5rem; border-radius: .25rem;
+}
+.modal-close-btn:hover {
+  color: var(--accent); background: rgba(255,255,255,.05);
+}
+
+/* Sync status chip + buttons in header */
+#sync-status {
+  font-size: .8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+#sync-status i { font-size: 1rem; }
+
+.btn-sync-spin {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-sync-spin { animation: none; }
+}
+
+/* ===================================================
    KNOCKOUT BRACKET
    =================================================== */
 .koround h4 {

@@ -5,11 +5,32 @@
 //   predictions  → quiniela
 //   notes        → notas libres por partido
 //   preferences  → preferencias UI (filtros, vista activa, último refresh)
+//
+// Sync a Vercel KV (opcional):
+//   El user puede iniciar sesión con email + PIN opcional. La identidad se
+//   hashea con SHA-256 (en cliente, vía Web Crypto) y se guarda en
+//   localStorage. Pull/PUT contra /api/predictions (serverless).
 
 const DB = (() => {
   let SQL = null;
   let db = null;
   const STORAGE_KEY = "mundial2026_userdb_v2";
+  const USERID_KEY = "mundial2026_userid";
+  const LAST_SYNC_KEY = "mundial2026_last_sync";
+  const SYNC_ENDPOINT = "/api/predictions";
+
+  // Estado de sync
+  let syncState = {
+    enabled: false,        // server responde 503 si no hay KV configurado
+    lastSync: null,        // ISO string
+    inFlight: null,        // Promise actual (debounce)
+    pendingPush: false,    // hay cambios sin subir
+  };
+
+  // Listeners para notificar a la UI cuando cambia el estado de sync
+  const syncListeners = new Set();
+  const onSyncChange = (fn) => { syncListeners.add(fn); return () => syncListeners.delete(fn); };
+  const emitSync = () => syncListeners.forEach(fn => { try { fn(syncState); } catch (_) {} });
 
   const init = async () => {
     SQL = await initSqlJs({
@@ -31,6 +52,8 @@ const DB = (() => {
       createSchema();
       save();
     }
+    // Hidratar lastSync desde localStorage
+    syncState.lastSync = localStorage.getItem(LAST_SYNC_KEY) || null;
   };
 
   const createSchema = () => {
@@ -115,6 +138,7 @@ const DB = (() => {
          updated_at=excluded.updated_at`,
       [String(matchId), home, away, status, new Date().toISOString()]
     );
+    schedulePush();
   };
 
   const getUserScore = (matchId) => {
@@ -127,10 +151,12 @@ const DB = (() => {
 
   const clearUserScore = (matchId) => {
     run("DELETE FROM user_scores WHERE match_id = ?", [String(matchId)]);
+    schedulePush();
   };
 
   const clearAllUserScores = () => {
     run("DELETE FROM user_scores");
+    schedulePush();
   };
 
   // ===== PREDICTIONS =====
@@ -147,6 +173,7 @@ const DB = (() => {
          updated_at=excluded.updated_at`,
       [String(matchId), home, away, winner, new Date().toISOString()]
     );
+    schedulePush();
   };
 
   const getAllPredictions = () => exec("SELECT * FROM predictions");
@@ -163,6 +190,7 @@ const DB = (() => {
          updated_at=excluded.updated_at`,
       [String(matchId), text, new Date().toISOString()]
     );
+    schedulePush();
   };
 
   const getNote = (matchId) => {
@@ -176,6 +204,7 @@ const DB = (() => {
        ON CONFLICT(key) DO UPDATE SET value=excluded.value`,
       [key, String(value)]
     );
+    schedulePush();
   };
 
   const getPref = (key, def = null) => {
@@ -183,9 +212,242 @@ const DB = (() => {
     return r ? r.value : def;
   };
 
+  // ===== AUTH (Pass-the-hash) =====
+  const sha256Hex = async (text) => {
+    const buf = new TextEncoder().encode(text);
+    const hash = await crypto.subtle.digest("SHA-256", buf);
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, "0")).join("");
+  };
+
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
+  };
+
+  const validatePin = (pin) => {
+    return /^\d{4}$/.test(String(pin || "").trim());
+  };
+
+  // setUserCredentials(email, pin?): hashea email+pin y guarda en localStorage.
+  // El email NUNCA se guarda en disco (solo en la función, mientras se procesa).
+  const setUserCredentials = async (email, pin) => {
+    const cleanEmail = String(email || "").trim().toLowerCase();
+    if (!validateEmail(cleanEmail)) throw new Error("invalid_email");
+    if (pin !== undefined && pin !== null && pin !== "" && !validatePin(pin)) {
+      throw new Error("invalid_pin");
+    }
+    const pinPart = pin ? String(pin).trim() : "";
+    const hash = await sha256Hex(`mundial2026|${cleanEmail}|${pinPart}`);
+    localStorage.setItem(USERID_KEY, hash);
+    return hash;
+  };
+
+  const getUserId = () => {
+    return localStorage.getItem(USERID_KEY) || null;
+  };
+
+  const clearUserCredentials = () => {
+    localStorage.removeItem(USERID_KEY);
+    localStorage.removeItem(LAST_SYNC_KEY);
+    syncState.lastSync = null;
+    syncState.enabled = false;
+    emitSync();
+  };
+
+  // ===== SYNC =====
+  const exportData = () => {
+    return {
+      predictions: getAllPredictions(),
+      user_scores: getAllUserScores(),
+      notes: exec("SELECT * FROM notes"),
+      preferences: exec("SELECT * FROM preferences"),
+    };
+  };
+
+  const importData = (data) => {
+    if (!data || typeof data !== "object") return false;
+    // Reemplazar predicciones (last-write-wins por match_id)
+    if (Array.isArray(data.predictions)) {
+      // Limpiar y re-insertar
+      run("DELETE FROM predictions");
+      for (const p of data.predictions) {
+        if (!p || !p.match_id) continue;
+        const winner = p.winner || null;
+        run(
+          `INSERT INTO predictions (match_id, home_pred, away_pred, winner, updated_at)
+           VALUES (?, ?, ?, ?, ?)
+           ON CONFLICT(match_id) DO UPDATE SET
+             home_pred=excluded.home_pred,
+             away_pred=excluded.away_pred,
+             winner=excluded.winner,
+             updated_at=excluded.updated_at`,
+          [String(p.match_id), p.home_pred ?? 0, p.away_pred ?? 0, winner, p.updated_at || new Date().toISOString()]
+        );
+      }
+    }
+    if (Array.isArray(data.user_scores)) {
+      run("DELETE FROM user_scores");
+      for (const s of data.user_scores) {
+        if (!s || !s.match_id) continue;
+        run(
+          `INSERT INTO user_scores (match_id, home_score, away_score, status, updated_at)
+           VALUES (?, ?, ?, ?, ?)
+           ON CONFLICT(match_id) DO UPDATE SET
+             home_score=excluded.home_score,
+             away_score=excluded.away_score,
+             status=excluded.status,
+             updated_at=excluded.updated_at`,
+          [String(s.match_id), s.home_score ?? 0, s.away_score ?? 0, s.status || "finished", s.updated_at || new Date().toISOString()]
+        );
+      }
+    }
+    if (Array.isArray(data.notes)) {
+      run("DELETE FROM notes");
+      for (const n of data.notes) {
+        if (!n || !n.match_id) continue;
+        run(
+          `INSERT INTO notes (match_id, text, updated_at)
+           VALUES (?, ?, ?)
+           ON CONFLICT(match_id) DO UPDATE SET
+             text=excluded.text,
+             updated_at=excluded.updated_at`,
+          [String(n.match_id), n.text || "", n.updated_at || new Date().toISOString()]
+        );
+      }
+    }
+    if (Array.isArray(data.preferences)) {
+      run("DELETE FROM preferences");
+      for (const p of data.preferences) {
+        if (!p || !p.key) continue;
+        run(
+          `INSERT INTO preferences (key, value) VALUES (?, ?)
+           ON CONFLICT(key) DO UPDATE SET value=excluded.value`,
+          [p.key, String(p.value || "")]
+        );
+      }
+    }
+    return true;
+  };
+
+  const isLocalEmpty = () => {
+    return getAllPredictions().length === 0
+      && getAllUserScores().length === 0
+      && exec("SELECT * FROM notes").length === 0;
+  };
+
+  // pullFromServer: trae los datos del server y los importa (last-write-wins
+  // por diseño: reemplaza local con server). Retorna { status, ... }.
+  const pullFromServer = async () => {
+    const userId = getUserId();
+    if (!userId) return { status: "no_user" };
+    syncState.inFlight = (async () => {
+      try {
+        const r = await fetch(`${SYNC_ENDPOINT}?u=${userId}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          signal: AbortSignal.timeout(8000),
+        });
+        if (r.status === 404) {
+          // Usuario nuevo en server. Si local no está vacío, lo subimos.
+          if (!isLocalEmpty()) {
+            await pushToServerNow();
+            syncState.lastSync = new Date().toISOString();
+            localStorage.setItem(LAST_SYNC_KEY, syncState.lastSync);
+            syncState.enabled = true;
+            syncState.pendingPush = false;
+            emitSync();
+            return { status: "uploaded_local", hadChanges: true };
+          }
+          syncState.enabled = true;
+          emitSync();
+          return { status: "empty" };
+        }
+        if (r.status === 503) {
+          syncState.enabled = false;
+          emitSync();
+          return { status: "kv_unavailable" };
+        }
+        if (!r.ok) {
+          return { status: "error", code: r.status };
+        }
+        const remote = await r.json();
+        // El server devuelve { data: {...}, updated_at: "..." }
+        if (!remote || !remote.data) {
+          return { status: "invalid_response" };
+        }
+        // Importar siempre (last-write-wins)
+        const localWasEmpty = isLocalEmpty();
+        importData(remote.data);
+        syncState.lastSync = remote.updated_at || new Date().toISOString();
+        localStorage.setItem(LAST_SYNC_KEY, syncState.lastSync);
+        syncState.enabled = true;
+        syncState.pendingPush = false;
+        emitSync();
+        return { status: "pulled", hadChanges: !localWasEmpty, updated_at: syncState.lastSync };
+      } catch (err) {
+        return { status: "network_error", message: err && err.message };
+      } finally {
+        syncState.inFlight = null;
+      }
+    })();
+    return syncState.inFlight;
+  };
+
+  const pushToServerNow = async () => {
+    const userId = getUserId();
+    if (!userId) return { status: "no_user" };
+    syncState.inFlight = (async () => {
+      try {
+        const payload = exportData();
+        const r = await fetch(`${SYNC_ENDPOINT}?u=${userId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          signal: AbortSignal.timeout(8000),
+        });
+        if (r.status === 503) {
+          syncState.enabled = false;
+          emitSync();
+          return { status: "kv_unavailable" };
+        }
+        if (!r.ok) {
+          return { status: "error", code: r.status };
+        }
+        const body = await r.json();
+        syncState.lastSync = body.updated_at || new Date().toISOString();
+        localStorage.setItem(LAST_SYNC_KEY, syncState.lastSync);
+        syncState.enabled = true;
+        syncState.pendingPush = false;
+        emitSync();
+        return { status: "pushed", updated_at: syncState.lastSync };
+      } catch (err) {
+        return { status: "network_error", message: err && err.message };
+      } finally {
+        syncState.inFlight = null;
+      }
+    })();
+    return syncState.inFlight;
+  };
+
+  // schedulePush: encola un PUT debounced (1.5s). Llamado por set/setPrediction/etc.
+  const schedulePush = (delay = 1500) => {
+    if (!getUserId()) return;
+    syncState.pendingPush = true;
+    emitSync();
+    if (syncState._pushTimer) clearTimeout(syncState._pushTimer);
+    syncState._pushTimer = setTimeout(() => {
+      pushToServerNow().catch(() => {});
+    }, delay);
+  };
+
+  const getSyncState = () => ({ ...syncState });
+
+  const getLastSync = () => syncState.lastSync;
+
   // ===== RESET =====
   const resetAll = () => {
     localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(USERID_KEY);
+    localStorage.removeItem(LAST_SYNC_KEY);
     location.reload();
   };
 
@@ -195,6 +457,11 @@ const DB = (() => {
     setPrediction, getAllPredictions, clearAllPredictions,
     setNote, getNote,
     setPref, getPref,
+    // Auth + sync
+    setUserCredentials, getUserId, clearUserCredentials,
+    pullFromServer, pushToServerNow, schedulePush,
+    getSyncState, getLastSync, onSyncChange,
+    validateEmail, validatePin,
     resetAll,
   };
 })();

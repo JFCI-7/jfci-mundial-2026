@@ -151,6 +151,10 @@ function applyI18n(root) {
       }
     }
   });
+  // 1b. Reemplaza placeholders (data-i18n-placeholder="key") en inputs.
+  scope.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    el.setAttribute("placeholder", I18N.t(el.getAttribute("data-i18n-placeholder")));
+  });
   // 2. Actualiza el atributo lang y data-lang del <html>.
   document.documentElement.setAttribute("lang", I18N.lang);
   document.documentElement.setAttribute("data-lang", I18N.lang);
