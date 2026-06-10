@@ -17,7 +17,8 @@
 // API REST de Upstash:
 //   GET    {base}/get/{key}                 → { result: "<stringified-json>" } | 404
 //   POST   {base}/set/{key}/{value}?EX=N    → { result: "OK" }
-//   DELETE {base}/del/{key}                 → { result: 1 }
+//   POST   {base}/del/{key}                 → { result: 1 }
+// (Upstash solo acepta GET/POST en REST. DELETE no es soportado por el gateway.)
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -89,12 +90,16 @@ async function kvSet(key, value, ttlSeconds = DEFAULT_TTL_SECONDS) {
 
 async function kvDel(key) {
   const r = await fetch(`${kvBase()}/del/${encodeURIComponent(key)}`, {
-    method: "DELETE",
+    method: "POST",
     headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
     signal: AbortSignal.timeout(8000),
   });
   if (r.status === 404) return null;
-  if (!r.ok) throw new Error(`kv_del_${r.status}`);
+  if (!r.ok) {
+    let body = "";
+    try { body = await r.text(); } catch {}
+    throw new Error(`kv_del_${r.status}: ${body.slice(0, 200)}`);
+  }
   return r.json();
 }
 
