@@ -1,6 +1,6 @@
 # ============== server.py — desarrollo local ==============
 # Sirve los archivos estáticos del proyecto + proxy CORS a worldcup26.ir.
-# En producción (Vercel) la misma lógica vive en api/proxy.py.
+# En producción (Vercel) la misma lógica vive en api/proxy.js.
 #
 # Uso:
 #   python3 server.py

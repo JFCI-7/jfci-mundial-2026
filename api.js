@@ -17,7 +17,7 @@
 const API = (() => {
   // Apunta al proxy serverless (/api/proxy/*) que redirige a worldcup26.ir.
   // En local: server.py sirve este mismo path.
-  // En Vercel: api/proxy.py lo maneja como serverless function.
+  // En Vercel: api/proxy.js lo maneja como serverless function.
   const BASE = "/api/proxy";
   const STAGE_MAP = {
     group: "group",

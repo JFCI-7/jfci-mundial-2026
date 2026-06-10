@@ -49,7 +49,7 @@ python3 server.py
 # abrir http://localhost:8000
 ```
 
-`server.py` redirige cualquier request a `/api/proxy/*` hacia `https://worldcup26.ir/<rest>` con header `Access-Control-Allow-Origin: *`. En Vercel, la misma lógica vive en `api/proxy.py` como serverless function.
+`server.py` redirige cualquier request a `/api/proxy/*` hacia `https://worldcup26.ir/<rest>` con header `Access-Control-Allow-Origin: *`. En Vercel, la misma lógica vive en `api/proxy.js` como serverless function.
 
 **Errores comunes**:
 - Si abriste con doble click (protocolo `file://`): la app muestra un overlay fatal con instrucciones.

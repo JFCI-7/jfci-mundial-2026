@@ -76,7 +76,7 @@ vercel
 vercel --prod
 ```
 
-Vercel detecta automáticamente `api/proxy.py` como serverless function y la expone en `/api/proxy`. El frontend se sirve como sitio estático. HTTPS gratis, deploys automáticos al hacer push a `main`.
+Vercel detecta automáticamente `api/proxy.js` como serverless function y la expone en `/api/proxy`. El frontend se sirve como sitio estático. HTTPS gratis, deploys automáticos al hacer push a `main`.
 
 URL típica: `https://tu-proyecto.vercel.app`
 
@@ -116,7 +116,7 @@ Si la API `worldcup26.ir` no responde (CORS, caída, sin internet), la app entra
 - Marcadores en vivo y standings actualizados de la API **no** estarán disponibles.
 - Puedes editar marcadores manualmente con el botón "Editar" en cada partido (se guardan en tu navegador).
 
-Si la app está en `https://` (Vercel) y la API sigue dando CORS, asegúrate de que `api.js` apunta a `/api/proxy` y que `api/proxy.py` está desplegado.
+Si la app está en `https://` (Vercel) y la API sigue dando CORS, asegúrate de que `api.js` apunta a `/api/proxy` y que `api/proxy.js` está desplegado.
 
 ### 🏳️ Banderas no aparecen
 Las banderas se cargan desde `flagcdn.com`. Si ves el código ISO sin imagen, tu red bloquea ese dominio. El seed (`seed.js:ISO_BY_NAME`) ya tiene los 48 países mapeados, así que las URLs se generan correctamente.
