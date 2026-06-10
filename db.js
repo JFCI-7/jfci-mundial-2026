@@ -15,7 +15,8 @@ const DB = (() => {
   let SQL = null;
   let db = null;
   const STORAGE_KEY = "mundial2026_userdb_v2";
-  const USERID_KEY = "mundial2026_userid";
+  const USERID_KEY = "mundial2026_userid";     // u:hash → datos del usuario
+  const EMAILID_KEY = "mundial2026_emailid";   // m:hash → metadata (has_pin)
   const LAST_SYNC_KEY = "mundial2026_last_sync";
   const SYNC_ENDPOINT = "/api/predictions";
 
@@ -236,21 +237,122 @@ const DB = (() => {
       throw new Error("invalid_pin");
     }
     const pinPart = pin ? String(pin).trim() : "";
-    const hash = await sha256Hex(`mundial2026|${cleanEmail}|${pinPart}`);
-    localStorage.setItem(USERID_KEY, hash);
-    return hash;
+    const fullHash = await sha256Hex(`mundial2026|${cleanEmail}|${pinPart}`);
+    const emailHash = await sha256Hex(`mundial2026|${cleanEmail}|`);
+    localStorage.setItem(USERID_KEY, fullHash);
+    localStorage.setItem(EMAILID_KEY, emailHash);
+    return { fullHash, emailHash };
   };
 
   const getUserId = () => {
     return localStorage.getItem(USERID_KEY) || null;
   };
 
+  const getEmailId = () => {
+    return localStorage.getItem(EMAILID_KEY) || null;
+  };
+
   const clearUserCredentials = () => {
     localStorage.removeItem(USERID_KEY);
+    localStorage.removeItem(EMAILID_KEY);
     localStorage.removeItem(LAST_SYNC_KEY);
     syncState.lastSync = null;
     syncState.enabled = false;
     emitSync();
+  };
+
+  // validateCredentials(email, pin): chequea el server ANTES de guardar.
+  // Retorna { status } con uno de:
+  //   "ok"            — credenciales válidas (o email nuevo)
+  //   "wrong_pin"     — el email existe con PIN, pero el PIN es incorrecto
+  //   "pin_required"  — el email existe con PIN, el usuario no lo ingresó
+  //   "pin_unexpected"— el email existe SIN PIN, el usuario ingresó uno
+  //   "network_error" — no se pudo contactar al server
+  //   "kv_unavailable"— server sin KV configurado (cliente debe caer a local)
+  const validateCredentials = async (email, pin) => {
+    const cleanEmail = String(email || "").trim().toLowerCase();
+    if (!validateEmail(cleanEmail)) return { status: "ok" };
+    const pinPart = pin ? String(pin).trim() : "";
+    const fullHash = await sha256Hex(`mundial2026|${cleanEmail}|${pinPart}`);
+    const emailHash = await sha256Hex(`mundial2026|${cleanEmail}|`);
+    const enteredPin = pinPart.length > 0;
+
+    try {
+      // 1) Si el server no tiene KV, dejamos pasar (modo local).
+      if (!process.env_placeholder) {
+        // No tenemos cómo chequear server-side availability desde el cliente;
+        // simplemente intentamos la metadata y manejamos errores.
+      }
+      const meta = await getMetadata(emailHash);
+      // meta puede ser null (no existe metadata) o { has_pin: true } o null
+      const serverHasPin = !!(meta && meta.data && meta.data.has_pin);
+
+      if (serverHasPin) {
+        if (!enteredPin) {
+          return { status: "pin_required" };
+        }
+        // Usuario ingresó PIN, verificar que el full_hash exista
+        const data = await fetchData(`u:${fullHash}`);
+        if (!data) return { status: "wrong_pin" };
+        return { status: "ok" };
+      } else {
+        if (enteredPin) {
+          return { status: "pin_unexpected" };
+        }
+        // No PIN en server, no PIN ingresado: signup normal
+        return { status: "ok" };
+      }
+    } catch (err) {
+      return { status: "network_error", message: err && err.message };
+    }
+  };
+
+  // getMetadata(emailHash): lee m:<emailHash> del server.
+  const getMetadata = async (emailHash) => {
+    try {
+      const r = await fetch(`${SYNC_ENDPOINT}?u=m:${emailHash}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        signal: AbortSignal.timeout(8000),
+      });
+      if (r.status === 404) return null;
+      if (r.status === 503) {
+        syncState.enabled = false;
+        emitSync();
+        return null;
+      }
+      if (!r.ok) return null;
+      return await r.json();
+    } catch (_) {
+      return null;
+    }
+  };
+
+  // pushMetadata(emailHash, meta): escribe m:<emailHash> al server.
+  const pushMetadata = async (emailHash, meta) => {
+    try {
+      await fetch(`${SYNC_ENDPOINT}?u=m:${emailHash}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(meta),
+        signal: AbortSignal.timeout(8000),
+      });
+    } catch (_) { /* best-effort */ }
+  };
+
+  const fetchData = async (fullKey) => {
+    try {
+      const r = await fetch(`${SYNC_ENDPOINT}?u=${fullKey}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        signal: AbortSignal.timeout(8000),
+      });
+      if (r.status === 404) return null;
+      if (!r.ok) return null;
+      return await r.json();
+    } catch (_) {
+      return null;
+    }
   };
 
   // wipeLocalData: borra las 4 tablas del usuario pero NO toca userid/last_sync
@@ -349,15 +451,31 @@ const DB = (() => {
   // por diseño: reemplaza local con server). Retorna { status, ... }.
   const pullFromServer = async () => {
     const userId = getUserId();
+    const emailId = getEmailId();
     if (!userId) return { status: "no_user" };
     syncState.inFlight = (async () => {
       try {
-        const r = await fetch(`${SYNC_ENDPOINT}?u=${userId}`, {
+        const r = await fetch(`${SYNC_ENDPOINT}?u=u:${userId}`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
           signal: AbortSignal.timeout(8000),
         });
         if (r.status === 404) {
+          // Verificar si el email existe con metadata (PIN incorrecto o falta PIN).
+          if (emailId && userId !== emailId) {
+            // El usuario actual tiene PIN (userId != emailId). Chequear metadata.
+            const meta = await getMetadata(emailId);
+            if (meta && meta.data && meta.data.has_pin) {
+              // Email existe con PIN, pero los datos no están en este userId → PIN incorrecto.
+              return { status: "wrong_pin" };
+            }
+          } else if (emailId && userId === emailId) {
+            // El usuario actual NO tiene PIN. Chequear si email requiere PIN.
+            const meta = await getMetadata(emailId);
+            if (meta && meta.data && meta.data.has_pin) {
+              return { status: "pin_required" };
+            }
+          }
           // Usuario nuevo en server. Si local no está vacío, lo subimos.
           if (!isLocalEmpty()) {
             await pushToServerNow();
@@ -405,11 +523,12 @@ const DB = (() => {
 
   const pushToServerNow = async () => {
     const userId = getUserId();
+    const emailId = getEmailId();
     if (!userId) return { status: "no_user" };
     syncState.inFlight = (async () => {
       try {
         const payload = exportData();
-        const r = await fetch(`${SYNC_ENDPOINT}?u=${userId}`, {
+        const r = await fetch(`${SYNC_ENDPOINT}?u=u:${userId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -429,6 +548,10 @@ const DB = (() => {
         syncState.enabled = true;
         syncState.pendingPush = false;
         emitSync();
+        // Si el usuario tiene PIN, también escribir metadata m:<emailId>.
+        if (emailId && userId !== emailId) {
+          await pushMetadata(emailId, { has_pin: true, updated_at: syncState.lastSync });
+        }
         return { status: "pushed", updated_at: syncState.lastSync };
       } catch (err) {
         return { status: "network_error", message: err && err.message };
@@ -469,7 +592,8 @@ const DB = (() => {
     setNote, getNote,
     setPref, getPref,
     // Auth + sync
-    setUserCredentials, getUserId, clearUserCredentials, wipeLocalData,
+    setUserCredentials, getUserId, getEmailId, clearUserCredentials, wipeLocalData,
+    validateCredentials,
     pullFromServer, pushToServerNow, schedulePush,
     getSyncState, getLastSync, onSyncChange,
     validateEmail, validatePin,

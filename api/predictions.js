@@ -28,8 +28,8 @@ const CORS_HEADERS = {
 };
 
 const MAX_BODY_BYTES = 100 * 1024;
-const HASH_REGEX = /^[a-f0-9]{64}$/;
-const KV_KEY_PREFIX = "u:";
+// Acepta keys con prefix: "u:<hash64>" (user data) o "m:<hash64>" (metadata marker).
+const KEY_REGEX = /^([um]):[a-f0-9]{64}$/;
 const DEFAULT_TTL_SECONDS = 60 * 60 * 24 * 365; // 1 año
 
 function jsonResponse(status, payload) {
@@ -39,10 +39,10 @@ function jsonResponse(status, payload) {
   });
 }
 
-function getHashFromUrl(request) {
+function getKeyFromUrl(request) {
   const url = new URL(request.url);
-  const hash = url.searchParams.get("u") || "";
-  return hash.toLowerCase().trim();
+  const raw = url.searchParams.get("u") || "";
+  return raw.toLowerCase().trim();
 }
 
 function kvBase() {
@@ -126,12 +126,10 @@ export default async function handler(request) {
     return jsonResponse(503, { error: "kv_unavailable", message: "Sync not configured" });
   }
 
-  const hash = getHashFromUrl(request);
-  if (!HASH_REGEX.test(hash)) {
-    return jsonResponse(400, { error: "invalid_hash" });
+  const key = getKeyFromUrl(request);
+  if (!KEY_REGEX.test(key)) {
+    return jsonResponse(400, { error: "invalid_key" });
   }
-
-  const key = `${KV_KEY_PREFIX}${hash}`;
 
   try {
     if (request.method === "GET") {

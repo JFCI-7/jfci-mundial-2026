@@ -98,19 +98,33 @@ python3 server.py
 
 ## Quiniela persistente (sync a Vercel KV)
 - Vista: `quiniela.html`. Botones en header: **Iniciar sesión** (sign-in), **Sincronizar** (icono refresh), **Cerrar sesión** (logout). Modal con email + PIN opcional.
-- Identidad: **pass-the-hash**. El email (lowercase) se concatena con un PIN opcional y se hashea con SHA-256 en el cliente vía Web Crypto API. El hash se guarda en `localStorage` con clave `mundial2026_userid`. El email **nunca** se envía al servidor.
+- Identidad: **pass-the-hash**. El email (lowercase) se concatena con un PIN opcional y se hashea con SHA-256 en el cliente vía Web Crypto API. Se guardan **dos** hashes en `localStorage`:
+  - `mundial2026_userid` → `SHA-256("mundial2026|" + email + "|" + pin)` — para operaciones de datos.
+  - `mundial2026_emailid` → `SHA-256("mundial2026|" + email + "|")` — para chequear metadata. El email **nunca** se envía al servidor.
 - API REST en `api/predictions.js` (serverless Node.js, edge runtime):
-  - `GET  /api/predictions?u=<hash64>` → `{ data, updated_at }` (200) o `404 not_found` o `503 kv_unavailable` (si KV no está conectado al proyecto).
-  - `PUT  /api/predictions?u=<hash64>` con body `{ predictions, user_scores, notes, preferences }` → `{ ok, updated_at }` (200) o `400 invalid_*` o `413 too_large` (body > 100KB).
-  - `DELETE /api/predictions?u=<hash64>` → `{ ok }` (200).
-  - Headers CORS: `Access-Control-Allow-Origin: *` y métodos `GET, PUT, DELETE, OPTIONS`.
-- Storage: **Vercel KV** (Redis). Key: `u:<hash64>`, value: `{ data, updated_at, version: 1 }`. La Lambda habla con KV vía REST API (`process.env.KV_REST_API_URL` + `KV_REST_API_TOKEN`), sin importar la librería `@vercel/kv`.
+  - `GET    /api/predictions?u=u:<hash64>` → 200/404/503
+  - `GET    /api/predictions?u=m:<hash64>` → 200/404 (metadata)
+  - `PUT    /api/predictions?u=u:<hash64>` → 200/400/413
+  - `PUT    /api/predictions?u=m:<hash64>` → 200 (escribe `{ has_pin: true }`)
+  - `DELETE /api/predictions?u=u:<hash64>` → 200
+  - Validación: `?u=` debe matchear `^([um]):[a-f0-9]{64}$`. Prefijo `u:` para datos, `m:` para metadata.
+  - Headers CORS: `Access-Control-Allow-Origin: *`.
+- Storage: **Vercel KV** (Redis). 2 keys por usuario:
+  - `u:<full_hash>` → `{ data, updated_at, version: 1 }` (predicciones, scores, notas, prefs)
+  - `m:<email_hash>` → `{ has_pin: true, updated_at, version: 1 }` (marcador de PIN, solo si el usuario se registró con PIN)
+- Detección de PIN incorrecto (mecanismo 2 keys):
+  - El server **no puede** saber si un PIN es correcto por sí solo (pass-the-hash).
+  - Para detectar: el cliente hace GET `m:<email_hash>` antes del pull. Si el server tiene `has_pin: true` y los datos NO están en `u:<full_hash>`, el PIN es incorrecto.
+  - Login con email sin PIN cuando el server tiene PIN → error "Este email requiere PIN".
+  - Login con email+PIN cuando el server no tiene PIN → error "Este email no usa PIN".
+  - Login con PIN incorrecto → error "PIN incorrecto". En ningún caso se sobreescriben los datos existentes.
 - Flujo de sync en `db.js`:
-  - `setUserCredentials(email, pin?)` hashea con `crypto.subtle.digest("SHA-256", "mundial2026|" + email + "|" + pin)`.
-  - `pullFromServer()` → GET → si 200, importa (last-write-wins: reemplaza local); si 404 y local no vacío, hace `pushToServerNow()` (migración automática); si 503, marca `syncState.enabled = false`.
+  - `setUserCredentials(email, pin?)` hashea ambos y guarda ambos.
+  - `validateCredentials(email, pin?)` consulta el server antes de guardar (read-only). Retorna `ok` / `wrong_pin` / `pin_required` / `pin_unexpected` / `network_error`.
+  - `pullFromServer()` → GET `u:<userid>` → si 200 importa; si 404 y hay metadata con `has_pin`, retorna `wrong_pin` o `pin_required`; si 404 sin metadata y local no vacío, hace auto-push (migración); si 503, modo local.
+  - `pushToServerNow()` → PUT `u:<userid>` y, si el usuario tiene PIN, también PUT `m:<emailid>` con `{ has_pin: true }`.
   - `schedulePush(delay=1500ms)` → debounce. Llamado por `setPrediction`, `setUserScore`, `setNote`, `setPref`.
-  - `pushToServerNow()` → PUT con export de las 4 tablas.
-- `updateSyncUI()` actualiza el chip de status (`Sincronizado: 10 jun, 14:30` / `Solo local`), muestra/oculta los botones.
+- `updateSyncUI()` actualiza el chip de status (`Sincronizado: 10 jun, 14:30` / `Solo local`), muestra/oculta los botones, y re-habilita tabs/filtros.
 - Si el proyecto de Vercel no tiene Vercel KV conectado, la Lambda responde `503`. El cliente muestra "Sincronización no disponible" y la app funciona 100% en local.
 - Setup: Vercel dashboard → Storage → Create KV → conectar al proyecto. Las variables `KV_REST_API_*` se inyectan automáticamente.
 - Costo: $0/mes (Vercel KV free: 256MB → ~2.5M usuarios).
@@ -118,6 +132,9 @@ python3 server.py
   - Sin password real (pass-the-hash).
   - Last-write-wins en conflictos (no hay merge).
   - Si olvidas el email o PIN, no hay recovery.
-- Sign out: `clearUserCredentials()` borra `userid` y `last_sync` (las predicciones locales quedan). Si el usuario también quiere borrar las predicciones locales, hay un segundo botón en el modal de sign out (`#signout-confirm-modal`) que llama a `wipeLocalData()` antes de `clearUserCredentials()`. El server mantiene los datos, así que re-login siempre restaura.
+  - Una vez configurado, no se puede cambiar el PIN.
+  - El email determina un solo PIN a la vez (no se pueden tener múltiples cuentas con el mismo email y distintos PINs).
+- Sign out: `clearUserCredentials()` borra `userid`, `emailid` y `last_sync` (las predicciones locales quedan). Si el usuario también quiere borrar las predicciones locales, hay un segundo botón en el modal de sign out (`#signout-confirm-modal`) que llama a `wipeLocalData()` antes de `clearUserCredentials()`. El server mantiene los datos, así que re-login siempre restaura.
 - Mobile navbar: el botón hamburguesa no usa Bootstrap JS (no se carga). El handler nativo vive en `components.js#setupNavbarToggle()` y toggle la clase `.show` en `#mainNav` con `aria-expanded` correcto. Cierra con click fuera, click en link, o Escape.
+
 

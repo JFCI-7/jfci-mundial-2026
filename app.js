@@ -467,11 +467,49 @@ function setupAuth() {
     submitBtn.textContent = t("auth.syncing");
 
     try {
+      // Validar credenciales contra el server ANTES de guardar nada.
+      const validation = await DB.validateCredentials(email, pin);
+      if (validation.status === "wrong_pin") {
+        errBox.textContent = t("auth.wrongPin");
+        errBox.classList.remove("d-none");
+        pinInp.value = "";
+        pinInp.focus();
+        return;
+      }
+      if (validation.status === "pin_required") {
+        errBox.textContent = t("auth.pinRequired");
+        errBox.classList.remove("d-none");
+        pinInp.value = "";
+        pinInp.focus();
+        return;
+      }
+      if (validation.status === "pin_unexpected") {
+        errBox.textContent = t("auth.pinUnexpected");
+        errBox.classList.remove("d-none");
+        pinInp.value = "";
+        pinInp.focus();
+        return;
+      }
+      if (validation.status === "network_error") {
+        errBox.textContent = t("auth.networkError");
+        errBox.classList.remove("d-none");
+        return;
+      }
+      // "ok" o "kv_unavailable" → proceder (kv_unavailable cae a local).
       await DB.setUserCredentials(email, pin);
       const result = await DB.pullFromServer();
       if (result.status === "kv_unavailable") {
         errBox.textContent = t("auth.serverUnavailable");
         errBox.classList.remove("d-none");
+        DB.clearUserCredentials();
+        return;
+      }
+      if (result.status === "wrong_pin" || result.status === "pin_required") {
+        // Doble check (en caso de race condition con metadata).
+        errBox.textContent = result.status === "wrong_pin" ? t("auth.wrongPin") : t("auth.pinRequired");
+        errBox.classList.remove("d-none");
+        pinInp.value = "";
+        pinInp.focus();
         DB.clearUserCredentials();
         return;
       }
@@ -525,7 +563,13 @@ function setupAuth() {
   // Si ya hay user, intentar pull silencioso al cargar
   if (DB.getUserId()) {
     DB.pullFromServer().then(result => {
-      if (result.status === "pulled" || result.status === "uploaded_local") {
+      if (result.status === "wrong_pin" || result.status === "pin_required") {
+        // El hash guardado en localStorage no es válido → forzar signout.
+        DB.clearUserCredentials();
+        updateSyncUI();
+        renderPredictions();
+        showToast(t(result.status === "wrong_pin" ? "auth.wrongPin" : "auth.pinRequired"), "error", 4000);
+      } else if (result.status === "pulled" || result.status === "uploaded_local") {
         updateSyncUI();
         renderPredictions();
       } else {

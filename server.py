@@ -81,12 +81,18 @@ class Handler(SimpleHTTPRequestHandler):
     def _handle_predictions(self, method):
         """Mock de /api/predictions para desarrollo local. En Vercel, api/predictions.js."""
         qs = parse_qs(urlparse(self.path).query)
-        user_hash = (qs.get("u") or [""])[0].lower().strip()
-        if not user_hash or len(user_hash) != 64 or not all(c in "0123456789abcdef" for c in user_hash):
-            self._json(400, {"error": "invalid_hash"})
+        # Acepta "u:<hash64>" (data) o "m:<hash64>" (metadata).
+        raw = (qs.get("u") or [""])[0].lower().strip()
+        if not raw or len(raw) < 66 or raw[1] != ":" or len(raw) != 66:
+            self._json(400, {"error": "invalid_key"})
+            return
+        prefix = raw[0]
+        user_hash = raw[2:]
+        if prefix not in ("u", "m") or not all(c in "0123456789abcdef" for c in user_hash):
+            self._json(400, {"error": "invalid_key"})
             return
         if method == "GET":
-            record = _PRED_STORE.get(user_hash)
+            record = _PRED_STORE.get(raw)
             if not record:
                 self._json(404, {"error": "not_found"})
                 return
@@ -96,9 +102,9 @@ class Handler(SimpleHTTPRequestHandler):
             if length > 100 * 1024:
                 self._json(413, {"error": "payload_too_large"})
                 return
-            raw = self.rfile.read(length) if length else b""
+            raw_body = self.rfile.read(length) if length else b""
             try:
-                body = json.loads(raw or b"{}")
+                body = json.loads(raw_body or b"{}")
             except Exception:
                 self._json(400, {"error": "invalid_json"})
                 return
@@ -111,10 +117,10 @@ class Handler(SimpleHTTPRequestHandler):
                 "updated_at": datetime.datetime.utcnow().isoformat() + "Z",
                 "version": 1,
             }
-            _PRED_STORE[user_hash] = record
+            _PRED_STORE[raw] = record
             self._json(200, {"ok": True, "updated_at": record["updated_at"]})
         elif method == "DELETE":
-            _PRED_STORE.pop(user_hash, None)
+            _PRED_STORE.pop(raw, None)
             self._json(200, {"ok": True})
         else:
             self._json(405, {"error": "method_not_allowed"})
