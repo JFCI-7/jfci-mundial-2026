@@ -4,3 +4,15 @@ vendor/
 *.log
 .idea/
 .vscode/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Editor / OS
+Thumbs.db
+
+# Local artifacts
+*.bak
