@@ -278,13 +278,10 @@ const DB = (() => {
     const enteredPin = pinPart.length > 0;
 
     try {
-      // 1) Si el server no tiene KV, dejamos pasar (modo local).
-      if (!process.env_placeholder) {
-        // No tenemos cómo chequear server-side availability desde el cliente;
-        // simplemente intentamos la metadata y manejamos errores.
-      }
+      // Si el server no tiene KV configurado (status 503), getMetadata retorna
+      // null y caemos al flujo de "ok" (signup local sin sync).
       const meta = await getMetadata(emailHash);
-      // meta puede ser null (no existe metadata) o { has_pin: true } o null
+      // meta puede ser null (no existe metadata) o { data: { has_pin: true } }.
       const serverHasPin = !!(meta && meta.data && meta.data.has_pin);
 
       if (serverHasPin) {
