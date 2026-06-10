@@ -595,6 +595,16 @@ function updateSyncUI() {
     signinBtn.classList.add("d-none");
     signoutBtn.classList.remove("d-none");
     syncBtn.classList.remove("d-none");
+    // Habilita tabs y filtros (por si estaban deshabilitados del estado locked).
+    document.querySelectorAll('input[name="pred-tab"]').forEach(r => {
+      r.disabled = false;
+      r.closest("label")?.classList.remove("pred-disabled");
+    });
+    const grpSel = document.getElementById("pred-group");
+    if (grpSel) {
+      grpSel.disabled = false;
+      grpSel.classList.remove("pred-disabled");
+    }
     if (last) {
       const when = new Date(last);
       const locale = window.I18N && I18N.lang === "en" ? "en-US" : "es-MX";
@@ -1308,6 +1318,13 @@ function renderPredictions() {
   const list = document.getElementById("predictions-list");
   if (!list) return;
   list.innerHTML = "";
+
+  // Gate: si no hay user autenticado, mostrar placeholder y deshabilitar tabs/filtros.
+  if (!DB.getUserId()) {
+    renderPredictionsLocked();
+    return;
+  }
+
   const tab = PRED_STATE.tab;
   const cfg = PRED_TABS[tab] || PRED_TABS.group;
   const grp = document.getElementById("pred-group")?.value;
@@ -1348,6 +1365,47 @@ function renderPredictions() {
   updateSyncUI();
 }
 
+// Estado bloqueado: usuario no autenticado. Muestra placeholder + deshabilita tabs/filtros.
+function renderPredictionsLocked() {
+  const list = document.getElementById("predictions-list");
+  if (!list) return;
+  list.innerHTML = `
+    <div class="pred-locked card-mundial p-4 text-center">
+      <i class="ri-lock-2-line pred-locked-icon" aria-hidden="true"></i>
+      <h3 class="bebas mt-3 mb-2" data-i18n="pred.locked.title">Inicia sesión para hacer tu quiniela</h3>
+      <p class="text-muted small mb-3" data-i18n="pred.locked.body">Necesitas una cuenta para guardar tus predicciones en este dispositivo y sincronizarlas con la nube.</p>
+      <button id="btn-pred-locked-signin" type="button" class="btn btn-primary fw-bold" data-i18n="pred.locked.cta">Iniciar sesión</button>
+    </div>
+  `;
+  // Aplica i18n a los data-i18n del placeholder recién inyectado.
+  list.querySelectorAll("[data-i18n]").forEach(el => {
+    el.textContent = t(el.getAttribute("data-i18n"));
+  });
+  // El botón del placeholder abre el modal de auth existente.
+  document.getElementById("btn-pred-locked-signin")?.addEventListener("click", () => {
+    const modal = document.getElementById("auth-modal");
+    if (modal) {
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+    }
+  });
+  // Limpia meta info y puntos; deshabilita tabs y filtros.
+  const meta = document.getElementById("pred-meta");
+  if (meta) meta.textContent = "";
+  const pp = document.getElementById("pred-points");
+  if (pp) pp.textContent = "";
+  // Tabs de fase + filtro de grupo: visualmente deshabilitados.
+  document.querySelectorAll('input[name="pred-tab"]').forEach(r => {
+    r.disabled = true;
+    r.closest("label")?.classList.add("pred-disabled");
+  });
+  const grpSel = document.getElementById("pred-group");
+  if (grpSel) {
+    grpSel.disabled = true;
+    grpSel.classList.add("pred-disabled");
+  }
+}
+
 function buildPredCard(m, preds, tab, tally) {
   const card = document.createElement("div");
   card.className = "pred-card";
@@ -1372,24 +1430,41 @@ function buildPredGroupCard(card, m, pred, eff, tally) {
     else cls = "wrong";
   }
   if (cls) card.classList.add(cls);
+  card.classList.add("pred-group-card");
   tally({ added });
 
+  const realLabel = t("pred.realLabel");
+  const realScoreHtml = eff.home !== null
+    ? `<span class="pred-real small text-muted">${realLabel} <strong>${eff.home}-${eff.away}</strong></span>`
+    : `<span class="pred-real small text-muted">—</span>`;
+
   card.innerHTML = `
-    <div class="small text-muted">${escapeHtml(m.group || "")}·J${m.matchday || ""}</div>
-    <div class="teams">
-      <span class="d-flex align-items-center gap-1">
+    <div class="pred-row pred-row-top">
+      <span class="small text-muted">${escapeHtml(m.group || "")}·J${m.matchday || ""}</span>
+    </div>
+    <div class="pred-row pred-row-teams">
+      <span class="team team-home">
+        <span class="team-name">${escapeHtml(m.home?.name || "TBD")}</span>
         ${m.home?.iso2 ? `<span class="fi fi-${m.home.iso2} flag-24" title="${escapeHtml(m.home.name)}"></span>` : ""}
-        ${escapeHtml(m.home?.name || "TBD")}
       </span>
       <span class="vs-small">vs</span>
-      <span class="d-flex align-items-center gap-1">
-        ${escapeHtml(m.away?.name || "TBD")}
+      <span class="team team-away">
         ${m.away?.iso2 ? `<span class="fi fi-${m.away.iso2} flag-24" title="${escapeHtml(m.away.name)}"></span>` : ""}
+        <span class="team-name">${escapeHtml(m.away?.name || "TBD")}</span>
       </span>
     </div>
-    <input type="number" min="0" class="form-control form-control-sm" value="${pred?.home_pred ?? 0}" data-match="${m.id}" data-side="home">
-    <input type="number" min="0" class="form-control form-control-sm" value="${pred?.away_pred ?? 0}" data-match="${m.id}" data-side="away">
-    ${eff.home !== null ? `<div class="small text-muted">Real: <strong>${eff.home}-${eff.away}</strong></div>` : '<div class="small text-muted">—</div>'}
+    <div class="pred-row pred-row-bottom">
+      <div class="pred-inputs">
+        <input type="number" min="0" class="form-control form-control-sm" 
+               value="${pred?.home_pred ?? 0}" data-match="${m.id}" data-side="home" 
+               aria-label="${escapeHtml(m.home?.name || "")}">
+        <span class="pred-dash" aria-hidden="true">-</span>
+        <input type="number" min="0" class="form-control form-control-sm" 
+               value="${pred?.away_pred ?? 0}" data-match="${m.id}" data-side="away" 
+               aria-label="${escapeHtml(m.away?.name || "")}">
+      </div>
+      ${realScoreHtml}
+    </div>
   `;
   return card;
 }

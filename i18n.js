@@ -15,7 +15,7 @@
       "nav.quiniela": "Quiniela",
       "nav.timeline": "Timeline",
       "nav.sedes": "Sedes",
-      "nav.stats": "Stats",
+      "nav.stats": "Estadísticas",
       "nav.curiosidades": "Curiosidades",
       "nav.menu": "Menú",
       "nav.theme": "Cambiar tema claro/oscuro",
@@ -239,6 +239,10 @@
       "pred.winnerDraw": "Empate",
       "pred.edit": "Editar",
       "pred.pick": "Elegir",
+      "pred.realLabel": "Real:",
+      "pred.locked.title": "Inicia sesión para hacer tu quiniela",
+      "pred.locked.body": "Necesitas una cuenta para guardar tus predicciones en este dispositivo y sincronizarlas con la nube.",
+      "pred.locked.cta": "Iniciar sesión",
 
       // ── Auth (Quiniela persistente) ──
       "auth.title": "Bienvenido al Mundial 2026",
@@ -459,7 +463,7 @@
       "page.title.quiniela": "World Cup 2026 · Predictions",
       "page.title.timeline": "World Cup 2026 · Timeline",
       "page.title.sedes": "World Cup 2026 · Venues",
-      "page.title.estadisticas": "World Cup 2026 · Stats",
+      "page.title.estadisticas": "World Cup 2026 · Statistics",
       "page.title.curiosidades": "World Cup 2026 · Fun Facts",
       "page.title.404": "World Cup 2026 · Offside",
       "page.desc.grupos": "Follow the 8 groups of World Cup 2026 live: standings, matches and upcoming games.",
@@ -648,6 +652,10 @@
       "pred.winnerDraw": "Draw",
       "pred.edit": "Edit",
       "pred.pick": "Pick",
+      "pred.realLabel": "Real:",
+      "pred.locked.title": "Sign in to make your predictions",
+      "pred.locked.body": "You need an account to save your predictions on this device and sync them with the cloud.",
+      "pred.locked.cta": "Sign in",
 
       // ── Auth (Persistent predictions) ──
       "auth.title": "Welcome to World Cup 2026",

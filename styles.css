@@ -1293,6 +1293,85 @@ a, button, .match-card, .group-card, .ko-match, .pred-card, [role="button"] { cu
 .pred-card .vs-small { color: var(--text-muted); font-weight: 700; padding: 0 .5rem; }
 .pred-card input { width: 60px; text-align: center; font-weight: 700; }
 
+/* Pred-card para fase de GRUPOS: layout vertical (3 filas).
+   Fila 1: meta (A·J1). Fila 2: equipos. Fila 3: inputs + Real. */
+.pred-card.pred-group-card {
+  flex-direction: column;
+  align-items: stretch;
+  gap: .5rem;
+  padding: 1rem 1.25rem;
+}
+.pred-group-card .pred-row { display: flex; align-items: center; }
+.pred-group-card .pred-row-top { justify-content: flex-start; }
+.pred-group-card .pred-row-teams {
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.pred-group-card .pred-row-bottom {
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: .5rem;
+  border-top: 1px solid var(--border);
+}
+.pred-group-card .team {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-weight: 500;
+  min-width: 0;
+  flex: 1;
+}
+.pred-group-card .team-name {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  min-width: 0;
+}
+.pred-group-card .team-home { justify-content: flex-end; text-align: right; }
+.pred-group-card .team-away { justify-content: flex-start; }
+.pred-group-card .pred-inputs {
+  display: flex; align-items: center; gap: .5rem;
+}
+.pred-group-card .pred-inputs input {
+  width: 70px; text-align: center; font-weight: 700;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  padding: .25rem .5rem;
+}
+.pred-group-card .pred-dash {
+  font-weight: 700; color: var(--text-muted);
+  font-size: 1.25rem;
+}
+.pred-group-card .pred-real {
+  text-align: right;
+  flex-shrink: 0;
+}
+@media (max-width: 480px) {
+  .pred-group-card .pred-row-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .5rem;
+  }
+  .pred-group-card .pred-real { text-align: left; }
+  .pred-group-card .pred-inputs input { width: 60px; }
+}
+
+/* Estado "locked" (sin auth): placeholder + tabs/filtros deshabilitados. */
+.pred-locked {
+  border-style: dashed;
+  border-width: 2px;
+  background: transparent;
+}
+.pred-locked-icon {
+  font-size: 3rem;
+  color: var(--accent);
+  display: inline-block;
+  line-height: 1;
+}
+.pred-disabled {
+  opacity: .45;
+  pointer-events: none;
+  filter: grayscale(.4);
+}
+
 /* Pred-card para eliminatorias: usa radios para elegir ganador */
 .pred-card.pred-ko {
   flex-wrap: wrap;
