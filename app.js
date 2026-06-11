@@ -1251,21 +1251,21 @@ function createMatchCard(m) {
       </div>
       <div class="col-12 col-md-3 text-center">
         ${statusBadge}
-        <button class="btn btn-edit-score mt-2" aria-label="Editar marcador" title="Sobrescribir marcador manualmente (override sobre la API)">
+        <!-- BOTÓN EDITAR OCULTO TEMPORALMENTE: <button class="btn btn-edit-score mt-2" aria-label="Editar marcador" title="Sobrescribir marcador manualmente (override sobre la API)">
           <i class="ri-edit-2-line" aria-hidden="true"></i>
-        </button>
+        </button> -->
       </div>
     </div>
   `;
-  card.addEventListener("click", e => {
-    if (e.target.closest("button")) return;
-    openScoreModal(m.id);
-  });
-  const btn = card.querySelector("button");
-  btn.addEventListener("click", e => {
-    e.stopPropagation();
-    openScoreModal(m.id);
-  });
+  // TEMPORALMENTE DESHABILITADO: card.addEventListener("click", e => {
+  //   if (e.target.closest("button")) return;
+  //   openScoreModal(m.id);
+  // });
+  // const btn = card.querySelector("button");
+  // btn.addEventListener("click", e => {
+  //   e.stopPropagation();
+  //   openScoreModal(m.id);
+  // });
   return card;
 }
 
