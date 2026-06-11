@@ -1141,6 +1141,12 @@ function computeStandings(letter) {
   });
   STATE.matches.filter(m => m.group === letter && m.stage === "group").forEach(m => {
     const s = effectiveScore(m);
+    // Solo contar partidos FINALIZADOS. Los pendientes tienen home_score=0/0
+    // en el API (no null) y se contarían como empates fantasma. Los live aún
+    // no están decididos (estándar de standings oficiales). Excepción: si el
+    // usuario hizo override manual del score (s.source==="user"), contamos ese.
+    const isUserOverride = s.source === "user";
+    if (!isUserOverride && m.status !== "finished") return;
     if (s.home === null || s.away === null) return;
     // Usar name (estable entre API y seed) en vez de code (que la API pone null).
     const h = table.get(m.home?.name);
