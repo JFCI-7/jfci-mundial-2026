@@ -293,10 +293,15 @@ const DB = (() => {
         if (!data) return { status: "wrong_pin" };
         return { status: "ok" };
       } else {
-        if (enteredPin) {
-          return { status: "pin_unexpected" };
+        // No hay metadata. Distinguir entre "email nuevo" (permitir signup
+        // con o sin PIN) y "email existente sin PIN" (bloquear PIN para no
+        // perder los datos en u:<emailHash>).
+        const existingNoPinData = await fetchData(`u:${emailHash}`);
+        if (existingNoPinData) {
+          if (enteredPin) return { status: "pin_unexpected" };
+          return { status: "ok" };
         }
-        // No PIN en server, no PIN ingresado: signup normal
+        // Email nuevo: signup normal (con o sin PIN).
         return { status: "ok" };
       }
     } catch (err) {

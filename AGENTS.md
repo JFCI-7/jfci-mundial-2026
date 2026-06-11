@@ -120,7 +120,7 @@ python3 server.py
   - Login con PIN incorrecto → error "PIN incorrecto". En ningún caso se sobreescriben los datos existentes.
 - Flujo de sync en `db.js`:
   - `setUserCredentials(email, pin?)` hashea ambos y guarda ambos.
-  - `validateCredentials(email, pin?)` consulta el server antes de guardar (read-only). Retorna `ok` / `wrong_pin` / `pin_required` / `pin_unexpected` / `network_error`.
+  - `validateCredentials(email, pin?)` consulta el server antes de guardar (read-only). Retorna `ok` / `wrong_pin` / `pin_required` / `pin_unexpected` / `network_error`. Distingue entre **email nuevo** (sin metadata + sin datos en `u:<emailHash>` → permite signup con o sin PIN) y **email existente sin PIN** (sin metadata + datos en `u:<emailHash>` → bloquea PIN para no perder los datos).
   - `pullFromServer()` → GET `u:<userid>` → si 200 importa; si 404 y hay metadata con `has_pin`, retorna `wrong_pin` o `pin_required`; si 404 sin metadata y local no vacío, hace auto-push (migración); si 503, modo local.
   - `pushToServerNow()` → PUT `u:<userid>` y, si el usuario tiene PIN, también PUT `m:<emailid>` con `{ has_pin: true }`.
   - `schedulePush(delay=1500ms)` → debounce. Llamado por `setPrediction`, `setUserScore`, `setNote`, `setPref`.
