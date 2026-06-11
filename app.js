@@ -1127,34 +1127,24 @@ function createGroupCard(letter) {
 }
 
 function computeStandings(letter) {
-  const apiSt = STATE.standings.get(letter);
-  if (apiSt && apiSt.length > 0) {
-    const teamMap = new Map();
-    STATE.teams.forEach(t => { if (t.id) teamMap.set(String(t.id), t); });
-    return apiSt
-      .map(s => {
-        const team = teamMap.get(String(s.team_id));
-        return {
-          name: team?.name || `Team ${s.team_id}`,
-          iso2: team?.iso2,
-          pts: s.pts, pj: s.mp, w: s.w, d: s.d, l: s.l, gf: s.gf, ga: s.ga,
-        };
-      })
-      .sort((a, b) => b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga) || b.gf - a.gf);
-  }
+  // Calcular SIEMPRE localmente desde los partidos. El endpoint /get/groups
+  // de worldcup26.ir devuelve standings incorrectos (asigna puntos al equipo
+  // equivocado), así que no lo usamos. El cálculo local siempre es correcto:
+  // lee los scores de cada partido finalizado del grupo y suma puntos/GF/GA.
   const teams = Array.from(STATE.teams.values()).filter(t => t.group === letter);
-  const table = {};
+  const table = new Map();
   teams.forEach(t => {
-    table[t.code || t.name] = {
+    table.set(t.name, {
       name: t.name, iso2: t.iso2,
       pj: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, pts: 0,
-    };
+    });
   });
   STATE.matches.filter(m => m.group === letter && m.stage === "group").forEach(m => {
     const s = effectiveScore(m);
     if (s.home === null || s.away === null) return;
-    const h = table[m.home?.code || m.home?.name];
-    const a = table[m.away?.code || m.away?.name];
+    // Usar name (estable entre API y seed) en vez de code (que la API pone null).
+    const h = table.get(m.home?.name);
+    const a = table.get(m.away?.name);
     if (!h || !a) return;
     h.pj++; a.pj++;
     h.gf += s.home; h.ga += s.away;
@@ -1163,7 +1153,9 @@ function computeStandings(letter) {
     else if (s.home < s.away) { a.w++; a.pts += 3; h.l++; }
     else { h.d++; a.d++; h.pts++; a.pts++; }
   });
-  return Object.values(table).sort((x, y) => y.pts - x.pts || (y.gf - y.ga) - (x.gf - x.ga) || y.gf - x.gf);
+  return Array.from(table.values()).sort((x, y) =>
+    y.pts - x.pts || (y.gf - y.ga) - (x.gf - x.ga) || y.gf - x.gf
+  );
 }
 
 // ============== RENDER: MATCHES ==============
