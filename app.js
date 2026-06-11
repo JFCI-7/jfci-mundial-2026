@@ -984,7 +984,7 @@ function renderLiveBanner() {
   if (live.length > 0) {
     console.log(`[live-banner] ${live.length} partido(s) en vivo`);
     const liveNow = t("groups.liveBanner.title");
-    const liveCount = live.length + " " + (live.length === 1 ? t("groups.summary.live").toLowerCase() : t("groups.summary.live").toLowerCase());
+    const liveCount = t("groups.summary.live").toLowerCase();
     const viewAll = t("groups.liveBanner.viewAll");
     container.innerHTML = `
       <div class="live-banner live-banner-active" role="status" aria-live="polite">
