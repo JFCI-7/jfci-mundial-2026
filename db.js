@@ -342,6 +342,19 @@ const DB = (() => {
     } catch (_) { /* best-effort */ }
   };
 
+  // pushMetadataNow: para usuarios con PIN, escribe metadata
+  // m:<emailHash>={has_pin:true} al server de forma inmediata (best-effort).
+  // Se llama después de setUserCredentials y/o al detectar un nuevo user con
+  // PIN, para que validateCredentials pueda detectar wrong_pin en logins
+  // futuros incluso si el usuario no ha hecho predicciones todavía.
+  const pushMetadataNow = async () => {
+    const userId = getUserId();
+    const emailId = getEmailId();
+    if (!userId || !emailId) return;
+    if (userId === emailId) return; // solo aplica a usuarios con PIN
+    await pushMetadata(emailId, { has_pin: true, updated_at: new Date().toISOString() });
+  };
+
   const fetchData = async (fullKey) => {
     try {
       const r = await fetch(`${SYNC_ENDPOINT}?u=${fullKey}`, {
@@ -471,6 +484,10 @@ const DB = (() => {
               // Email existe con PIN, pero los datos no están en este userId → PIN incorrecto.
               return { status: "wrong_pin" };
             }
+            // Metadata NO existe todavía (usuario nuevo con PIN o metadata perdida).
+            // Escribirla AHORA para que logins futuros puedan detectar wrong_pin
+            // incluso si el usuario no hace predicciones todavía.
+            await pushMetadata(emailId, { has_pin: true, updated_at: new Date().toISOString() });
           } else if (emailId && userId === emailId) {
             // El usuario actual NO tiene PIN. Chequear si email requiere PIN.
             const meta = await getMetadata(emailId);
@@ -595,7 +612,7 @@ const DB = (() => {
     setPref, getPref,
     // Auth + sync
     setUserCredentials, getUserId, getEmailId, clearUserCredentials, wipeLocalData,
-    validateCredentials,
+    validateCredentials, pushMetadataNow,
     pullFromServer, pushToServerNow, schedulePush,
     getSyncState, getLastSync, onSyncChange,
     validateEmail, validatePin,

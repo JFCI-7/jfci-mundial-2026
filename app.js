@@ -497,6 +497,9 @@ function setupAuth() {
       }
       // "ok" o "kv_unavailable" → proceder (kv_unavailable cae a local).
       await DB.setUserCredentials(email, pin);
+      // Si el usuario tiene PIN, escribir metadata inmediatamente para que
+      // logins futuros puedan detectar wrong_pin incluso sin predicciones.
+      await DB.pushMetadataNow();
       const result = await DB.pullFromServer();
       if (result.status === "kv_unavailable") {
         errBox.textContent = t("auth.serverUnavailable");
