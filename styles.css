@@ -930,6 +930,92 @@ a, button, .match-card, .group-card, .ko-match, .pred-card, [role="button"] { cu
   color: var(--text-muted);
 }
 
+/* Resumen del timeline: 4 cards con borde lateral de color según su tipo. */
+.tl-summary-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: .75rem;
+  padding: 1rem 1.25rem;
+  display: flex; align-items: center; gap: .85rem;
+  position: relative; overflow: hidden;
+  min-height: 90px;
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+.tl-summary-card::before {
+  content: "";
+  position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: var(--secondary);
+}
+.tl-summary-card.tl-summary-live::before     { background: var(--danger, #E61D25); }
+.tl-summary-card.tl-summary-upcoming::before { background: var(--primary, #04BF45); }
+.tl-summary-card.tl-summary-total::before    { background: var(--secondary, #6805F2); }
+.tl-summary-card.tl-summary-days::before     { background: var(--accent-2, #BFF207); }
+.tl-summary-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
+.tl-summary-icon {
+  width: 48px; height: 48px;
+  border-radius: .65rem;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.tl-summary-body { flex: 1; min-width: 0; }
+.tl-summary-label {
+  font-size: .65rem; text-transform: uppercase;
+  letter-spacing: .5px; color: var(--text-muted);
+  margin-bottom: .15rem;
+}
+.tl-summary-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.7rem; line-height: 1;
+  color: var(--text);
+}
+.tl-summary-sub { font-size: .7rem; color: var(--text-muted); margin-top: .2rem; }
+
+/* Mobile: card vertical stack para el timeline. */
+@media (max-width: 768px) {
+  .tl-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: .65rem;
+    padding: .85rem;
+  }
+  .tl-card-head {
+    display: flex; align-items: baseline; gap: .75rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: .5rem;
+  }
+  .tl-time { min-width: 0; text-align: left; font-size: 1.3rem; }
+  .tl-time .sub { display: inline; margin-left: 0; }
+  .tl-stage { font-size: .7rem; color: var(--text-muted); margin-left: auto; }
+  .tl-card-body {
+    display: flex; flex-direction: column; gap: .35rem;
+  }
+  .tl-team {
+    justify-content: flex-start !important;
+    text-align: left !important;
+    width: 100%;
+  }
+  .tl-team.tl-team-away { flex-direction: row-reverse; }
+  .tl-score {
+    order: -1; align-self: center;
+    font-size: 1.2rem;
+  }
+  .tl-card-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border);
+    padding-top: .5rem;
+  }
+  .tl-track { padding-left: .75rem; }
+  .tl-track::before { left: -.75rem; }
+  .tl-card::before { left: -1rem; }
+}
+
 /* ===================================================
    STADIUMS (página Sedes)
    =================================================== */
@@ -1504,36 +1590,49 @@ a, button, .match-card, .group-card, .ko-match, .pred-card, [role="button"] { cu
   line-height: 1.1;
 }
 
-/* Goleadores: lista compacta bajo el nombre de cada equipo en una match-card.
+/* Goleadores: pills prominentes bajo el nombre de cada equipo en una match-card.
    Solo se renderiza para partidos en vivo o finalizados. */
 .scorers {
   display: flex;
-  flex-direction: column;
-  gap: .15rem;
-  margin-top: .25rem;
-  font-size: .72rem;
-  line-height: 1.2;
-  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin-top: .4rem;
+  align-items: center;
 }
 .scorer {
   display: inline-flex;
   align-items: center;
-  gap: .3rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  gap: .4rem;
+  padding: .25rem .6rem;
+  background: rgba(4, 191, 69, .12);
+  border: 1px solid rgba(4, 191, 69, .3);
+  border-radius: 999px;
+  font-size: .8rem;
+  line-height: 1.2;
+  color: var(--text);
   max-width: 100%;
+  min-width: 0;
 }
 .scorer i {
   color: var(--primary, #04BF45);
-  font-size: .7rem;
+  font-size: .9rem;
   flex-shrink: 0;
+}
+.scorer-name {
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 .scorer-min {
   font-weight: 700;
-  color: var(--text);
-  font-size: .7rem;
-  margin-left: .1rem;
+  font-family: 'Bebas Neue', sans-serif;
+  color: var(--primary, #04BF45);
+  font-size: .95rem;
+  letter-spacing: .5px;
+  flex-shrink: 0;
 }
 
 

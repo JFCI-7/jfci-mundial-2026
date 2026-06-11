@@ -2224,49 +2224,61 @@ function renderTimeline() {
 
   // Summary
   if (summary) {
-    const days = new Set(all.map(m => m.date?.slice(0, 10)).filter(Boolean)).size;
+    const liveCount = all.filter(m => m.status === "live").length;
     const groups = all.filter(m => m.stage === "group").length;
     const kos = all.length - groups;
     const firstDay = all.map(m => m.date).filter(Boolean).sort()[0];
     const lastDay = all.map(m => m.date).filter(Boolean).sort().pop();
+    const now = Date.now();
+    const next = all
+      .filter(m => m.status === "pending" && m.date && new Date(m.date).getTime() > now)
+      .sort((a, b) => (a.date || "").localeCompare(b.date || ""))[0];
+    const nextName = next ? `${next.home?.name || "TBD"} vs ${next.away?.name || "TBD"}` : t("tl.summary.none");
+    const nextDate = next ? new Date(next.date).toLocaleDateString("es-MX", { day: "2-digit", month: "short" }) : "—";
+    const nextTime = next ? new Date(next.date).toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit" }) : "—";
+    const daysSet = new Set(all.map(m => m.date?.slice(0, 10)).filter(Boolean));
+    const daysCount = daysSet.size;
+    const daysDur = firstDay && lastDay
+      ? Math.round((new Date(lastDay).getTime() - new Date(firstDay).getTime()) / 86400000) + 1
+      : 0;
     summary.innerHTML = `
       <div class="col-12 col-md-6 col-lg-3">
-        <div class="stadium-summary-card">
-          <div class="stadium-summary-icon"><i class="ri-calendar-event-line"></i></div>
-          <div>
-            <div class="label">Días de torneo</div>
-            <div class="value bebas">${days}</div>
-            <div class="sub">${firstDay ? new Date(firstDay).toLocaleDateString("es-MX", { day: "2-digit", month: "short" }) : "—"} → ${lastDay ? new Date(lastDay).toLocaleDateString("es-MX", { day: "2-digit", month: "short" }) : "—"}</div>
+        <div class="tl-summary-card tl-summary-live">
+          <div class="tl-summary-icon"><i class="ri-live-line"></i></div>
+          <div class="tl-summary-body">
+            <div class="tl-summary-label" data-i18n="tl.summary.liveLabel">En vivo</div>
+            <div class="tl-summary-value">${liveCount}</div>
+            <div class="tl-summary-sub">${liveCount === 1 ? t("tl.summary.liveNow") : t("tl.summary.liveNowPlural")}</div>
           </div>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-3">
-        <div class="stadium-summary-card">
-          <div class="stadium-summary-icon"><i class="ri-football-line"></i></div>
-          <div>
-            <div class="label">Partidos</div>
-            <div class="value bebas">${all.length}</div>
-            <div class="sub">${groups} grupos + ${kos} eliminatorias</div>
+        <div class="tl-summary-card tl-summary-upcoming">
+          <div class="tl-summary-icon"><i class="ri-time-line"></i></div>
+          <div class="tl-summary-body">
+            <div class="tl-summary-label" data-i18n="tl.summary.nextLabel">Próximo partido</div>
+            <div class="tl-summary-value" style="font-size:1.05rem">${escapeHtml(nextName)}</div>
+            <div class="tl-summary-sub">${escapeHtml(nextDate)} · ${escapeHtml(nextTime)}</div>
           </div>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-3">
-        <div class="stadium-summary-card">
-          <div class="stadium-summary-icon"><i class="ri-live-line"></i></div>
-          <div>
-            <div class="label">Estado actual</div>
-            <div class="value bebas">${all.filter(m => m.status === "live").length}</div>
-            <div class="sub">en vivo ahora</div>
+        <div class="tl-summary-card tl-summary-total">
+          <div class="tl-summary-icon"><i class="ri-football-line"></i></div>
+          <div class="tl-summary-body">
+            <div class="tl-summary-label" data-i18n="tl.summary.totalLabel">Total partidos</div>
+            <div class="tl-summary-value">${all.length}</div>
+            <div class="tl-summary-sub">${groups} grupos + ${kos} eliminatorias</div>
           </div>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-3">
-        <div class="stadium-summary-card">
-          <div class="stadium-summary-icon"><i class="ri-flag-line"></i></div>
-          <div>
-            <div class="label">Fase actual</div>
-            <div class="value bebas" style="font-size:1.1rem">${currentStageLabel(all)}</div>
-            <div class="sub">${new Date().toLocaleDateString("es-MX", { day: "2-digit", month: "short" })}</div>
+        <div class="tl-summary-card tl-summary-days">
+          <div class="tl-summary-icon"><i class="ri-calendar-event-line"></i></div>
+          <div class="tl-summary-body">
+            <div class="tl-summary-label" data-i18n="tl.summary.daysLabel">Duración</div>
+            <div class="tl-summary-value">${daysDur} <span style="font-size:0.9rem;color:var(--text-muted)">días</span></div>
+            <div class="tl-summary-sub">${firstDay ? new Date(firstDay).toLocaleDateString("es-MX", { day: "2-digit", month: "short" }) : "—"} → ${lastDay ? new Date(lastDay).toLocaleDateString("es-MX", { day: "2-digit", month: "short" }) : "—"}</div>
           </div>
         </div>
       </div>
@@ -2414,11 +2426,15 @@ function renderTimelineCard(m) {
   const s = effectiveScore(m);
   const d = new Date(m.date);
   const time = d.toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit" });
-  const minute = m.status === "live" ? `${m.time_elapsed}'` : "";
   const hWins = s.home !== null && s.away !== null && s.home > s.away;
   const aWins = s.home !== null && s.away !== null && s.away > s.home;
   const stageText = (TIMELINE_STAGE_LABEL[m.stage] && TIMELINE_STAGE_LABEL[m.stage]()) || m.stage;
   const venue = m.venue || "";
+
+  const timeDisplay = m.status === "live" && m.time_elapsed && m.time_elapsed !== "live" && m.time_elapsed !== "notstarted"
+    ? `${escapeHtml(String(m.time_elapsed))}'`
+    : escapeHtml(time);
+  const stageDisplay = `${escapeHtml(stageText)}${m.group ? " · G" + escapeHtml(m.group) : ""}`;
 
   const statusBadge = m.status === "live"
     ? `<span class="tl-status-badge tl-status-live"><span class="nav-spinner-dot" style="width:6px;height:6px;margin:0"></span> EN VIVO</span>`
@@ -2426,26 +2442,38 @@ function renderTimelineCard(m) {
     ? `<span class="tl-status-badge tl-status-finished"><i class="ri-checkbox-circle-fill" aria-hidden="true"></i> FINAL</span>`
     : `<span class="tl-status-badge tl-status-pending"><i class="ri-time-line" aria-hidden="true"></i> ${escapeHtml(time)}</span>`;
 
+  const showScorers = m.status === "live" || m.status === "finished";
+  const homeScorers = showScorers ? renderScorersList(m.home?.scorers) : "";
+  const awayScorers = showScorers ? renderScorersList(m.away?.scorers) : "";
+
   return `
     <a href="calendario.html" class="tl-card tl-card-${m.status}" data-match="${m.id}">
-      <div class="tl-time">
-        ${m.status === "live" ? `${escapeHtml(String(m.time_elapsed))}'` : escapeHtml(time)}
-        <span class="sub">${escapeHtml(stageText)}${m.group ? " · G" + escapeHtml(m.group) : ""}</span>
-      </div>
-      <div class="tl-match-teams">
-        <div class="tl-team ${hWins ? "tl-team-winner" : ""}">
-          <span class="fi fi-${m.home.iso2} flag-24" title="${escapeHtml(m.home.name)}"></span>
-          <span class="tl-team-name">${escapeHtml(m.home.name)}</span>
-        </div>
-        <div class="tl-score">${s.home !== null ? s.home : "0"}<span class="tl-vs"> - </span>${s.away !== null ? s.away : "0"}</div>
-        <div class="tl-team tl-team-away ${aWins ? "tl-team-winner" : ""}">
-          <span class="tl-team-name">${escapeHtml(m.away.name)}</span>
-          <span class="fi fi-${m.away.iso2} flag-24" title="${escapeHtml(m.away.name)}"></span>
+      <div class="tl-card-head">
+        <div class="tl-time">
+          ${timeDisplay}
+          <span class="sub">${stageDisplay}</span>
         </div>
       </div>
-      <div class="tl-meta">
-        ${statusBadge}
-        ${venue ? `<span><i class="ri-building-line"></i> ${escapeHtml(venue)}</span>` : ""}
+      <div class="tl-card-body">
+        <div class="tl-match-teams">
+          <div class="tl-team ${hWins ? "tl-team-winner" : ""}">
+            <span class="fi fi-${m.home.iso2} flag-24" title="${escapeHtml(m.home.name)}"></span>
+            <span class="tl-team-name">${escapeHtml(m.home.name)}</span>
+            ${homeScorers}
+          </div>
+          <div class="tl-score">${s.home !== null ? s.home : "0"}<span class="tl-vs"> - </span>${s.away !== null ? s.away : "0"}</div>
+          <div class="tl-team tl-team-away ${aWins ? "tl-team-winner" : ""}">
+            <span class="tl-team-name">${escapeHtml(m.away.name)}</span>
+            ${awayScorers}
+            <span class="fi fi-${m.away.iso2} flag-24" title="${escapeHtml(m.away.name)}"></span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-card-foot">
+        <div class="tl-meta">
+          ${statusBadge}
+          ${venue ? `<span class="venue"><i class="ri-building-line"></i> ${escapeHtml(venue)}</span>` : ""}
+        </div>
       </div>
     </a>
   `;
