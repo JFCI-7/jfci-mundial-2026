@@ -1489,6 +1489,53 @@ a, button, .match-card, .group-card, .ko-match, .pred-card, [role="button"] { cu
   outline-offset: 2px;
 }
 
+/* Minuto en vivo: badge rojo compacto que aparece junto al status cuando el
+   partido está en disputa y la API provee time_elapsed numérico. */
+.match-minute {
+  display: inline-block;
+  margin-top: .35rem;
+  padding: .15rem .55rem;
+  background: var(--danger, #E61D25);
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .95rem;
+  letter-spacing: .5px;
+  border-radius: .35rem;
+  line-height: 1.1;
+}
+
+/* Goleadores: lista compacta bajo el nombre de cada equipo en una match-card.
+   Solo se renderiza para partidos en vivo o finalizados. */
+.scorers {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  margin-top: .25rem;
+  font-size: .72rem;
+  line-height: 1.2;
+  color: var(--text-muted);
+}
+.scorer {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.scorer i {
+  color: var(--primary, #04BF45);
+  font-size: .7rem;
+  flex-shrink: 0;
+}
+.scorer-min {
+  font-weight: 700;
+  color: var(--text);
+  font-size: .7rem;
+  margin-left: .1rem;
+}
+
 
 /* ===================================================
    FATAL OVERLAY (CORS / file:// / seed load fail)

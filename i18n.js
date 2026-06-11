@@ -118,6 +118,10 @@
       "status.suspended": "SUSPENDIDO",
       "status.cancelled": "CANCELADO",
 
+      // ── Match details ──
+      "match.scorers": "Goleadores",
+      "match.minute": "Minuto",
+
       // ── Stage names ──
       "stage.group": "Fase de grupos",
       "stage.groups": "Fase de grupos",
@@ -533,6 +537,10 @@
       "status.postponed": "POSTPONED",
       "status.suspended": "SUSPENDED",
       "status.cancelled": "CANCELLED",
+
+      // ── Match details ──
+      "match.scorers": "Scorers",
+      "match.minute": "Minute",
 
       // ── Stage names ──
       "stage.group": "Group stage",

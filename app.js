@@ -1198,6 +1198,17 @@ function renderMatches() {
   });
 }
 
+function renderScorersList(scorers) {
+  if (!scorers || scorers.length === 0) return "";
+  const items = scorers.map(s => {
+    const minute = s.minute !== null && s.minute !== undefined
+      ? ` <span class="scorer-min">${escapeHtml(String(s.minute))}'</span>`
+      : "";
+    return `<span class="scorer"><i class="ri-football-fill" aria-hidden="true"></i> ${escapeHtml(s.player)}${minute}</span>`;
+  }).join("");
+  return `<div class="scorers">${items}</div>`;
+}
+
 function createMatchCard(m) {
   const card = document.createElement("div");
   card.className = "match-card";
@@ -1225,6 +1236,16 @@ function createMatchCard(m) {
 
   const overrideMark = s.source === "user" ? ' <i class="ri-user-star-fill" style="color: var(--accent-2)" title="Marcador personalizado"></i>' : "";
 
+  // Minuto en vivo (solo cuando el partido está en vivo y time_elapsed es numérico).
+  const liveMinute = (m.status === "live" && m.time_elapsed && m.time_elapsed !== "live" && m.time_elapsed !== "notstarted")
+    ? `<span class="match-minute">${escapeHtml(m.time_elapsed)}'</span>`
+    : "";
+
+  // Goleadores (solo para partidos en vivo o finalizados).
+  const showScorers = m.status === "live" || m.status === "finished";
+  const homeScorers = showScorers ? renderScorersList(m.home?.scorers) : "";
+  const awayScorers = showScorers ? renderScorersList(m.away?.scorers) : "";
+
   card.innerHTML = `
     <div class="row align-items-center g-2">
       <div class="col-12 col-md-9">
@@ -1232,10 +1253,12 @@ function createMatchCard(m) {
           <div class="team-col">
             ${homeFlag}
             <span class="name">${homeName}</span>
+            ${homeScorers}
           </div>
           <div class="score ${m.status}">${scoreText}${overrideMark}</div>
           <div class="team-col away">
             <span class="name">${awayName}</span>
+            ${awayScorers}
             ${awayFlag}
           </div>
         </div>
@@ -1251,6 +1274,7 @@ function createMatchCard(m) {
       </div>
       <div class="col-12 col-md-3 text-center">
         ${statusBadge}
+        ${liveMinute}
         <!-- BOTÓN EDITAR OCULTO TEMPORALMENTE: <button class="btn btn-edit-score mt-2" aria-label="Editar marcador" title="Sobrescribir marcador manualmente (override sobre la API)">
           <i class="ri-edit-2-line" aria-hidden="true"></i>
         </button> -->

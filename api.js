@@ -134,6 +134,29 @@ const API = (() => {
     };
   }
 
+  // Parsea el string de goleadores del API. Formato: `{"Player 9', Player B 45'"}`
+  // con llaves externas y comillas tipográficas persas. Retorna [] si no hay goles
+  // o el string es "null".
+  function parseScorers(raw) {
+    if (!raw || raw === "null") return [];
+    const cleaned = String(raw)
+      .replace(/^[\s{]+|[\s}]+$/g, "")
+      .replace(/[\u201C\u201D]/g, "")
+      .replace(/"/g, "")
+      .trim();
+    if (!cleaned) return [];
+    return cleaned
+      .split(/\s*,\s*/)
+      .map(entry => {
+        const trimmed = entry.trim();
+        if (!trimmed) return null;
+        const m = trimmed.match(/^(.+?)\s+(\d+)\s*'?\s*$/);
+        if (m) return { player: m[1].trim(), minute: parseInt(m[2], 10) };
+        return { player: trimmed, minute: null };
+      })
+      .filter(Boolean);
+  }
+
   function normalizeGame(g) {
     const homeScore = g.home_score === "null" || g.home_score == null ? null : Number(g.home_score);
     const awayScore = g.away_score === "null" || g.away_score == null ? null : Number(g.away_score);
@@ -174,6 +197,7 @@ const API = (() => {
         iso2: homeIso,
         flag: homeIso ? `./vendor/flags/4x3/${homeIso}.svg` : null,
         label: g.home_team_label || null,
+        scorers: parseScorers(g.home_scorers),
       },
       away: {
         code: g.away_team_id === "0" ? null : null,
@@ -182,6 +206,7 @@ const API = (() => {
         iso2: awayIso,
         flag: awayIso ? `./vendor/flags/4x3/${awayIso}.svg` : null,
         label: g.away_team_label || null,
+        scorers: parseScorers(g.away_scorers),
       },
       stadium_id: g.stadium_id,
       date:       isoDate,
