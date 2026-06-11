@@ -1032,7 +1032,9 @@ function renderLiveBanner() {
 
 function renderLiveCard(m) {
   const s = effectiveScore(m);
-  const minute = m.time_elapsed || "—";
+  const rawMin = m.time_elapsed;
+  const hasNumericMinute = rawMin && rawMin !== "live" && rawMin !== "notstarted" && !isNaN(Number(rawMin));
+  const minuteHtml = hasNumericMinute ? `<div class="live-minute">${escapeHtml(String(rawMin))}'</div>` : "";
   return `
     <a href="calendario.html" class="live-card live-card-live" aria-label="Partido en vivo">
       <div class="live-team">
@@ -1045,7 +1047,7 @@ function renderLiveCard(m) {
         <span class="live-team-name">${escapeHtml(m.away.name)}</span>
         <span class="bebas live-score">${s.away !== null ? s.away : "0"}</span>
       </div>
-      <div class="live-minute">${escapeHtml(String(minute))}'</div>
+      ${minuteHtml}
     </a>
   `;
 }
