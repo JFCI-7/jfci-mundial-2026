@@ -137,5 +137,6 @@ python3 server.py
   - El email determina un solo PIN a la vez (no se pueden tener múltiples cuentas con el mismo email y distintos PINs).
 - Sign out: `clearUserCredentials()` borra `userid`, `emailid` y `last_sync` (las predicciones locales quedan). Si el usuario también quiere borrar las predicciones locales, hay un segundo botón en el modal de sign out (`#signout-confirm-modal`) que llama a `wipeLocalData()` antes de `clearUserCredentials()`. El server mantiene los datos, así que re-login siempre restaura.
 - Mobile navbar: el botón hamburguesa no usa Bootstrap JS (no se carga). El handler nativo vive en `components.js#setupNavbarToggle()` y toggle la clase `.show` en `#mainNav` con `aria-expanded` correcto. Cierra con click fuera, click en link, o Escape.
+- Sticky footer: el `<body>` es `display: flex; flex-direction: column; min-height: 100vh` y `<main>` tiene `flex: 1 0 auto`. El footer se empuja al final de la pantalla cuando el contenido es corto, o al final del contenido cuando es largo. Los modales y el canvas de confetti son `position: fixed` y no participan en el flex.
 
 

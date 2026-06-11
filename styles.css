@@ -67,10 +67,21 @@ body {
     radial-gradient(circle at 80% 90%, rgba(104,5,242,.10), transparent 50%);
   background-attachment: fixed;
   min-height: 100vh;
+  /* Flexbox column: el <main> crece con flex:1 para empujar el footer al
+     final de la pantalla cuando el contenido es corto. */
+  display: flex;
+  flex-direction: column;
   color: var(--text);
   /* Cursor balón Telstar global — SVG inline, sin request externo. Variante según tema. */
   cursor: var(--cursor-ball);
   transition: background-color .3s, color .3s;
+}
+
+/* Sticky footer: el main crece para llenar el espacio disponible. El footer
+   (position:relative dentro de un flex column) se empuja al fondo de la
+   pantalla si el contenido es corto, o al final del contenido si es largo. */
+main {
+  flex: 1 0 auto;
 }
 
 /* Cursor de texto en inputs y textareas */
