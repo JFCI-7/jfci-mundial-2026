@@ -16,7 +16,7 @@ const NAVBAR_HTML = `
           <li class="nav-item"><a class="nav-link" href="index.html" data-i18n="nav.grupos"><i class="ri-group-line" aria-hidden="true"></i> Grupos</a></li>
           <li class="nav-item"><a class="nav-link" href="calendario.html" data-i18n="nav.calendario"><i class="ri-calendar-event-line" aria-hidden="true"></i> Calendario</a></li>
           <li class="nav-item"><a class="nav-link" href="eliminatorias.html" data-i18n="nav.eliminatorias"><i class="ri-flow-chart" aria-hidden="true"></i> Eliminatorias</a></li>
-          <li class="nav-item"><a class="nav-link" href="quiniela.html" data-i18n="nav.quiniela"><i class="ri-rocket-2-line" aria-hidden="true"></i> Quiniela</a></li>
+          <!-- QUINIELA temporalmente oculta: <li class="nav-item"><a class="nav-link" href="quiniela.html" data-i18n="nav.quiniela"><i class="ri-rocket-2-line" aria-hidden="true"></i> Quiniela</a></li> -->
           <li class="nav-item"><a class="nav-link" href="timeline.html" data-i18n="nav.timeline"><i class="ri-time-line" aria-hidden="true"></i> Timeline</a></li>
           <li class="nav-item"><a class="nav-link" href="estadios.html" data-i18n="nav.sedes"><i class="ri-building-2-line" aria-hidden="true"></i> Sedes</a></li>
           <li class="nav-item"><a class="nav-link" href="estadisticas.html" data-i18n="nav.stats"><i class="ri-bar-chart-box-line" aria-hidden="true"></i> Stats</a></li>
@@ -70,7 +70,7 @@ const FOOTER_HTML = `
             <li><a href="index.html" data-i18n="nav.grupos"><i class="ri-group-line" aria-hidden="true"></i> Grupos</a></li>
             <li><a href="calendario.html" data-i18n="nav.calendario"><i class="ri-calendar-event-line" aria-hidden="true"></i> Calendario</a></li>
             <li><a href="eliminatorias.html" data-i18n="nav.eliminatorias"><i class="ri-flow-chart" aria-hidden="true"></i> Eliminatorias</a></li>
-            <li><a href="quiniela.html" data-i18n="nav.quiniela"><i class="ri-rocket-2-line" aria-hidden="true"></i> Quiniela</a></li>
+            <!-- QUINIELA temporalmente oculta: <li><a href="quiniela.html" data-i18n="nav.quiniela"><i class="ri-rocket-2-line" aria-hidden="true"></i> Quiniela</a></li> -->
             <li><a href="timeline.html" data-i18n="nav.timeline"><i class="ri-time-line" aria-hidden="true"></i> Timeline</a></li>
             <li><a href="estadios.html" data-i18n="nav.sedes"><i class="ri-building-2-line" aria-hidden="true"></i> Sedes</a></li>
             <li><a href="estadisticas.html" data-i18n="nav.stats"><i class="ri-bar-chart-box-line" aria-hidden="true"></i> Stats</a></li>
