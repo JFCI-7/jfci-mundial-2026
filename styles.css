@@ -1590,28 +1590,32 @@ a, button, .match-card, .group-card, .ko-match, .pred-card, [role="button"] { cu
   line-height: 1.1;
 }
 
-/* Goleadores: pills prominentes bajo el nombre de cada equipo en una match-card.
-   Solo se renderiza para partidos en vivo o finalizados. */
+/* Goleadores: pills apilados verticalmente bajo el nombre de cada equipo
+   en una match-card. Solo se renderiza para partidos en vivo o finalizados.
+   Layout en columna para que un equipo con muchos goles no desborde el card. */
 .scorers {
   display: flex;
-  flex-wrap: wrap;
-  gap: .35rem;
+  flex-direction: column;
+  gap: .25rem;
   margin-top: .4rem;
-  align-items: center;
+  align-items: stretch;
 }
 .scorer {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: .4rem;
-  padding: .25rem .6rem;
+  padding: .3rem .6rem;
   background: rgba(4, 191, 69, .12);
   border: 1px solid rgba(4, 191, 69, .3);
   border-radius: 999px;
   font-size: .8rem;
   line-height: 1.2;
   color: var(--text);
+  width: 100%;
   max-width: 100%;
   min-width: 0;
+  box-sizing: border-box;
 }
 .scorer i {
   color: var(--primary, #04BF45);
