@@ -69,6 +69,8 @@
       "meta.dataSource.facts": "150 datos · Catálogo local",
       "meta.dataSource.liveMatches": "Partidos en vivo",
       "meta.dataSource.upcoming": "Próximos partidos",
+      "meta.fallbackBadge": "Datos del {time}",
+      "meta.fallbackBadgeTitle": "La API no responde. Mostrando la última respuesta guardada.",
 
       // ── Server banner ──
       "banner.server.title": "Servidor incorrecto.",
@@ -496,6 +498,8 @@
       "meta.dataSource.facts": "150 facts · Local catalog",
       "meta.dataSource.liveMatches": "Live matches",
       "meta.dataSource.upcoming": "Upcoming matches",
+      "meta.fallbackBadge": "Data from {time}",
+      "meta.fallbackBadgeTitle": "API is down. Showing the last saved response.",
 
       // ── Server banner ──
       "banner.server.title": "Wrong server.",

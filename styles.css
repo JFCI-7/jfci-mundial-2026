@@ -816,8 +816,7 @@ a, button, .match-card, .group-card, .ko-match, .pred-card, [role="button"] { cu
   border-radius: .5rem;
   padding: .85rem 1rem;
   margin-bottom: .65rem;
-  display: flex; align-items: center; gap: 1rem;
-  flex-wrap: wrap;
+  display: flex; flex-direction: column; gap: .5rem;
   transition: transform .2s, border-color .2s, box-shadow .2s;
 }
 .tl-card::before {
@@ -850,59 +849,90 @@ a, button, .match-card, .group-card, .ko-match, .pred-card, [role="button"] { cu
 }
 .theme-light .tl-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.10); }
 
-.tl-time {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.15rem;
-  letter-spacing: 1px;
-  color: var(--accent-2);
-  min-width: 60px;
+/* Stage label (e.g. "Grupo A · Fase de grupos") — small, centered, top of card */
+.tl-card-head {
   text-align: center;
-}
-.tl-time .sub {
-  display: block;
-  font-family: 'Inter', sans-serif;
-  font-size: .65rem;
+  font-size: .68rem;
+  font-weight: 600;
   color: var(--text-muted);
-  font-weight: 400;
-  letter-spacing: 0;
+  text-transform: uppercase;
+  letter-spacing: .5px;
 }
-.tl-card.tl-card-live .tl-time { color: var(--primary); }
-.tl-card.tl-card-finished .tl-time { color: var(--text-muted); }
+.tl-stage-label { display: inline-block; }
 
+/* Body: grid de 3 columnas (home | score | away), full width */
 .tl-match-teams {
-  flex: 1;
-  display: flex; align-items: center; gap: .5rem;
-  min-width: 220px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
 }
 .tl-team {
-  display: flex; align-items: center; gap: .5rem;
-  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
+  align-items: flex-start;
+  gap: .25rem;
+  min-width: 0;
 }
-.tl-team.tl-team-away { justify-content: flex-end; text-align: right; }
+.tl-team.tl-team-away {
+  align-items: flex-end;
+  text-align: right;
+}
+.tl-team-line {
+  display: flex; align-items: center; gap: .5rem;
+  min-width: 0;
+  max-width: 100%;
+}
 .tl-team-name {
   font-weight: 500;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   font-size: .92rem;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  min-width: 0;
 }
-.tl-team.tl-team-winner { font-weight: 700; color: var(--primary); }
+.tl-team.tl-team-winner .tl-team-name { font-weight: 700; color: var(--primary); }
+
+/* Goleadores: la .scorers ya viene como flex column. La anclamos al lado del
+   equipo y la alineamos según sea home (izq) o away (der). */
+.tl-team .scorers {
+  align-items: flex-start;
+  margin-top: 0;
+}
+.tl-team.tl-team-away .scorers { align-items: flex-end; }
 
 .tl-score {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.4rem;
   letter-spacing: 1px;
   color: var(--text);
-  min-width: 50px; text-align: center;
+  text-align: center;
+  white-space: nowrap;
 }
 .tl-card.tl-card-live .tl-score { color: var(--primary); }
 .tl-card.tl-card-finished .tl-score .tl-vs { color: var(--text-muted); }
 
-.tl-meta {
-  font-size: .7rem;
-  color: var(--text-muted);
-  display: flex; align-items: center; gap: .25rem;
+/* Foot: hora + sede + status badge, todo centrado */
+.tl-card-foot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .65rem .85rem;
   flex-wrap: wrap;
-  min-width: 160px;
+  font-size: .72rem;
+  color: var(--text-muted);
+  padding-top: .4rem;
+  margin-top: .15rem;
+  border-top: 1px dashed var(--border);
 }
+.tl-foot-time, .tl-foot-venue {
+  display: inline-flex; align-items: center; gap: .3rem;
+  white-space: nowrap;
+}
+.tl-foot-time i, .tl-foot-venue i {
+  font-size: .9rem;
+  color: var(--text-muted);
+}
+.tl-card.tl-card-live .tl-foot-time i { color: var(--primary); }
+.tl-card.tl-card-live .tl-foot-time { color: var(--primary); font-weight: 600; }
 
 .tl-status-badge {
   display: inline-flex; align-items: center; gap: .3rem;
@@ -922,6 +952,31 @@ a, button, .match-card, .group-card, .ko-match, .pred-card, [role="button"] { cu
   background: var(--bg);
   border: 1px solid var(--border);
   color: var(--text-muted);
+}
+
+/* ===================================================
+   TIMELINE — Mobile (stack vertical)
+   En <576px, el grid del body se vuelve 1 columna: home | score | away.
+   El score se centra y agranda; los equipos se centran también.
+   =================================================== */
+@media (max-width: 575.98px) {
+  .tl-card { padding: .75rem .85rem; }
+  .tl-match-teams {
+    grid-template-columns: 1fr;
+    gap: .35rem;
+    text-align: center;
+  }
+  .tl-team, .tl-team.tl-team-away {
+    align-items: center;
+    text-align: center;
+  }
+  .tl-team-line { justify-content: center; }
+  .tl-team .scorers, .tl-team.tl-team-away .scorers {
+    align-items: center;
+  }
+  .tl-score { font-size: 1.7rem; }
+  .tl-card-foot { font-size: .68rem; gap: .4rem .65rem; }
+  .tl-card-foot .tl-foot-venue { display: none; }
 }
 
 .tl-empty {
@@ -2069,4 +2124,43 @@ a, button, .match-card, .group-card, .ko-match, .pred-card, [role="button"] { cu
 }
 @media (prefers-reduced-motion: reduce) {
   .nav-spinner-dot { animation: none; border-top-color: rgba(255,255,255,.5); }
+}
+
+/* ===================================================
+   KV FALLBACK BADGE (navbar — datos vienen del cache)
+   =================================================== */
+/* Pequeño chip en la navbar que aparece solo cuando el proxy devuelve
+   `X-Source: kv-fallback`, indicando que los marcadores podrían estar
+   desactualizados respecto a la API. */
+.kv-fallback-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .25rem .55rem;
+  border-radius: 999px;
+  background: rgba(217, 4, 22, .18);
+  border: 1px solid rgba(217, 4, 22, .55);
+  color: var(--text);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  cursor: help;
+  user-select: none;
+  flex-shrink: 0;
+}
+.kv-fallback-badge[hidden] { display: none !important; }
+.kv-fallback-badge i {
+  color: var(--accent);
+  font-size: .9rem;
+  line-height: 1;
+}
+.kv-fallback-badge-text {
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 575.98px) {
+  .kv-fallback-badge { font-size: .65rem; padding: .2rem .45rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kv-fallback-badge { transition: none; }
 }

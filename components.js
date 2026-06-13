@@ -23,6 +23,10 @@ const NAVBAR_HTML = `
           <li class="nav-item"><a class="nav-link" href="datos-curiosos.html" data-i18n="nav.curiosidades"><i class="ri-sparkling-2-line" aria-hidden="true"></i> Curiosidades</a></li>
         </ul>
         <div class="d-flex align-items-center ms-md-2 mt-2 mt-md-0 gap-1">
+          <div id="kv-fallback-badge" class="kv-fallback-badge" hidden role="status" aria-live="polite">
+            <i class="ri-database-2-line" aria-hidden="true"></i>
+            <span class="kv-fallback-badge-text" data-i18n="meta.fallbackBadge">Datos del {time}</span>
+          </div>
           <div class="lang-switcher" id="lang-switcher">
             <button id="lang-toggle" class="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Idioma">
               <span class="lang-flag-current" data-flag="es">🇲🇽</span>

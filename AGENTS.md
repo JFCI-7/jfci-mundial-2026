@@ -40,6 +40,18 @@ score_final = DB.user_scores[matchId]  ??  api.home/away_score  ??  null
 ```
 Datos oficiales **nunca** viven en SQLite. La BD solo guarda overrides del usuario.
 
+## Capa de resiliencia (proxy + cache "last good response")
+- El proxy (`api/proxy.js` en Vercel, `_proxy()` en `server.py` local) añade una capa transparente:
+  1. Intenta `worldcup26.ir` (timeout 8s).
+  2. Si responde OK → **write-through a Vercel KV** (`wc26:teams|games|groups|stadiums`, TTL 30d) en local persiste en `./.kv_cache.json`.
+  3. Si falla (red / 5xx / timeout) → lee el último snapshot de KV y lo devuelve con header `X-Source: kv-fallback` + `X-Cached-At: <ISO>`.
+  4. Si tampoco hay snapshot → 502 `{ error: "no_data" }`.
+- El cliente (`api.js:_get`) captura `X-Source` y `X-Cached-At` y los expone con `API.getSource()` y `API.getCachedAt()`.
+- `app.js:renderFallbackBadge()` muestra un chip en la navbar (`#kv-fallback-badge`) con la hora del snapshot cuando `source === "kv-fallback"`. Tooltip explica que la API no responde. Aparece y desaparece solo según el estado de la API.
+- Tamaño del snapshot: ~60-120KB total. Free tier de Vercel KV (256MB) = miles de snapshots. Costo $0/mes.
+- Las variables `KV_REST_API_URL` y `KV_REST_API_TOKEN` ya existen (compartidas con `api/predictions.js`). Si no están configuradas, el cliente sigue funcionando con `X-Source: upstream` y la app cae a `mixed`/`seed` ante fallos upstream.
+- **Limitación aceptada**: si la API muere a mitad de un partido, los goles posteriores al último snapshot exitoso no se ven hasta que la API vuelva.
+
 ## Cómo ejecutar
 `sql.js` falla con `file://` por CORS/WASM. Usar `server.py` (sirve estáticos + proxy CORS a la API):
 ```

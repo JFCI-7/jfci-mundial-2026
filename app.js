@@ -269,12 +269,43 @@ async function refreshFromAPI(force = false) {
     setStatus(STATE.matchesById.size > 0 ? "api" : "seed", api.loadedAt);
     DB.setPref("lastRefresh", api.loadedAt);
     STATE.apiError = null;
+    renderFallbackBadge();
     return true;
   } catch (e) {
     console.warn("API no disponible:", e.message);
     STATE.apiError = e.message || String(e);
     if (STATE.matches.length > 0) setStatus("mixed", STATE.loadedAt);
+    renderFallbackBadge();
     return false;
+  }
+}
+
+// ============== KV FALLBACK BADGE ==============
+// Muestra/oculta el chip en la navbar según la fuente de la última respuesta
+// del proxy. Solo aparece cuando API.getSource() === "kv-fallback".
+function renderFallbackBadge() {
+  const badge = document.getElementById("kv-fallback-badge");
+  if (!badge || typeof API === "undefined") return;
+  const source = API.getSource();
+  const cachedAt = API.getCachedAt();
+
+  if (source === "kv-fallback" && cachedAt) {
+    const locale = (window.I18N && I18N.lang === "en") ? "en-US" : "es-MX";
+    let label;
+    try {
+      label = new Date(cachedAt).toLocaleString(locale, {
+        day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit",
+      });
+    } catch {
+      label = cachedAt;
+    }
+    const text = t("meta.fallbackBadge", { time: label });
+    const span = badge.querySelector(".kv-fallback-badge-text");
+    if (span) span.textContent = text;
+    badge.title = t("meta.fallbackBadgeTitle");
+    badge.hidden = false;
+  } else {
+    badge.hidden = true;
   }
 }
 
@@ -2438,7 +2469,7 @@ function renderTimelineCard(m) {
     ? `<span class="tl-status-badge tl-status-live"><span class="nav-spinner-dot" style="width:6px;height:6px;margin:0"></span> EN VIVO</span>`
     : m.status === "finished"
     ? `<span class="tl-status-badge tl-status-finished"><i class="ri-checkbox-circle-fill" aria-hidden="true"></i> FINAL</span>`
-    : `<span class="tl-status-badge tl-status-pending"><i class="ri-time-line" aria-hidden="true"></i> ${escapeHtml(time)}</span>`;
+    : "";
 
   const showScorers = m.status === "live" || m.status === "finished";
   const homeScorers = showScorers ? renderScorersList(m.home?.scorers) : "";
@@ -2447,31 +2478,31 @@ function renderTimelineCard(m) {
   return `
     <a href="calendario.html" class="tl-card tl-card-${m.status}" data-match="${m.id}">
       <div class="tl-card-head">
-        <div class="tl-time">
-          ${timeDisplay}
-          <span class="sub">${stageDisplay}</span>
-        </div>
+        <span class="tl-stage-label">${stageDisplay}</span>
       </div>
       <div class="tl-card-body">
         <div class="tl-match-teams">
           <div class="tl-team ${hWins ? "tl-team-winner" : ""}">
-            <span class="fi fi-${m.home.iso2} flag-24" title="${escapeHtml(m.home.name)}"></span>
-            <span class="tl-team-name">${escapeHtml(m.home.name)}</span>
+            <div class="tl-team-line">
+              <span class="fi fi-${m.home.iso2} flag-24" title="${escapeHtml(m.home.name)}"></span>
+              <span class="tl-team-name">${escapeHtml(m.home.name)}</span>
+            </div>
             ${homeScorers}
           </div>
           <div class="tl-score">${s.home !== null ? s.home : "0"}<span class="tl-vs"> - </span>${s.away !== null ? s.away : "0"}</div>
           <div class="tl-team tl-team-away ${aWins ? "tl-team-winner" : ""}">
-            <span class="tl-team-name">${escapeHtml(m.away.name)}</span>
+            <div class="tl-team-line">
+              <span class="tl-team-name">${escapeHtml(m.away.name)}</span>
+              <span class="fi fi-${m.away.iso2} flag-24" title="${escapeHtml(m.away.name)}"></span>
+            </div>
             ${awayScorers}
-            <span class="fi fi-${m.away.iso2} flag-24" title="${escapeHtml(m.away.name)}"></span>
           </div>
         </div>
       </div>
       <div class="tl-card-foot">
-        <div class="tl-meta">
-          ${statusBadge}
-          ${venue ? `<span class="venue"><i class="ri-building-line"></i> ${escapeHtml(venue)}</span>` : ""}
-        </div>
+        <span class="tl-foot-time"><i class="ri-time-line" aria-hidden="true"></i> ${timeDisplay}</span>
+        ${venue ? `<span class="tl-foot-venue"><i class="ri-building-line" aria-hidden="true"></i> ${escapeHtml(venue)}</span>` : ""}
+        ${statusBadge}
       </div>
     </a>
   `;

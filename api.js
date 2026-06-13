@@ -41,6 +41,13 @@ const API = (() => {
   const TTL_MS = 60_000; // 1 minuto
   const LS_PREFIX = "mundial2026_api_cache_";
 
+  // Metadata de la última respuesta del proxy. El proxy añade:
+  //   X-Source:    "upstream" | "kv-fallback" | "none"
+  //   X-Cached-At: ISO timestamp del snapshot KV (solo si source = kv-fallback)
+  // Se actualiza en cada _get() y se consulta con getSource() / getCachedAt().
+  let _lastSource = null;
+  let _lastCachedAt = null;
+
   async function _get(path) {
     // 1. caché en memoria (intra-página, más rápido)
     // 2. caché en localStorage (persiste entre navegaciones, evita fetch)
@@ -49,6 +56,8 @@ const API = (() => {
     const lsKey = LS_PREFIX + path;
 
     if (_mem[memKey] && Date.now() - _mem[memKey].ts < TTL_MS) {
+      // Hit de memoria: no actualizamos source/cachedAt aquí porque refleja
+      // un fetch previo que ya quedó registrado.
       return _mem[memKey].data;
     }
 
@@ -64,14 +73,22 @@ const API = (() => {
     } catch (_) { /* localStorage corrupto, ignorar */ }
 
     const r = await fetch(BASE + path, { cache: "no-store" });
+    // Capturamos los headers del proxy antes de leer el body.
+    const source = r.headers.get("X-Source") || "upstream";
+    const cachedAt = r.headers.get("X-Cached-At") || null;
+    _lastSource = source;
+    _lastCachedAt = cachedAt;
+
     if (!r.ok) {
       // 404 = el server local no es server.py (sirve estáticos, no proxy)
-      // 502 = server.py correcto pero la API upstream falló
+      // 502 = server.py correcto pero la API upstream falló y no hay snapshot
       const hint = r.status === 404
         ? " (¿estás usando python3 -m http.server? Usa python3 server.py)"
         : "";
       const err = new Error(`API ${path} HTTP ${r.status}${hint}`);
       err.status = r.status;
+      err.source = source;
+      err.cachedAt = cachedAt;
       throw err;
     }
     const data = await r.json();
@@ -252,5 +269,20 @@ const API = (() => {
     return `./vendor/flags/4x3/${ISO_OVERRIDES[lower] || lower}.svg`;
   }
 
-  return { refreshAll, flagUrl, _cache: () => _cache };
+  // Expone la fuente de la última respuesta del proxy.
+  //   "upstream"    → vino de worldcup26.ir directo (camino feliz)
+  //   "kv-fallback" → vino del snapshot en Vercel KV / cache local
+  //   "none"        → upstream Y KV fallaron (no hay datos)
+  //   null          → aún no se ha hecho ninguna request
+  function getSource() {
+    return _lastSource;
+  }
+
+  // Timestamp ISO del snapshot KV cuando getSource() === "kv-fallback".
+  // Null en cualquier otro caso.
+  function getCachedAt() {
+    return _lastCachedAt;
+  }
+
+  return { refreshAll, flagUrl, getSource, getCachedAt, _cache: () => _cache };
 })();
