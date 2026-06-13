@@ -474,14 +474,24 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   justify-content: space-between;
 }
 .team-col {
-  display: flex; align-items: center; gap: .5rem;
+  display: flex; flex-direction: column;
+  align-items: flex-start;
+  gap: .25rem;
   flex: 1; min-width: 0;
 }
-.team-col.away { justify-content: flex-end; text-align: right; }
+.team-col.away { align-items: flex-end; text-align: right; }
+.team-line {
+  display: flex; align-items: center; gap: .5rem;
+  min-width: 0; max-width: 100%;
+}
 .team-col .name {
   font-weight: 500; color: var(--text);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
+/* El .scorers ya viene como flex column con pills apilados. Anulamos el
+   margin-top heredado de otros contextos y alineamos según el lado. */
+.team-col .scorers { margin-top: 0; align-items: flex-start; }
+.team-col.away .scorers { align-items: flex-end; }
 .score {
   background: var(--bg);
   padding: .4rem .9rem; border-radius: 6px;

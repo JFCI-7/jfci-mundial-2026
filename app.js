@@ -1282,15 +1282,19 @@ function createMatchCard(m) {
       <div class="col-12 col-md-9">
         <div class="match-teams">
           <div class="team-col">
-            ${homeFlag}
-            <span class="name">${homeName}</span>
+            <div class="team-line">
+              ${homeFlag}
+              <span class="name">${homeName}</span>
+            </div>
             ${homeScorers}
           </div>
           <div class="score ${m.status}">${scoreText}${overrideMark}</div>
           <div class="team-col away">
-            <span class="name">${awayName}</span>
+            <div class="team-line">
+              <span class="name">${awayName}</span>
+              ${awayFlag}
+            </div>
             ${awayScorers}
-            ${awayFlag}
           </div>
         </div>
         <div class="match-meta-center text-center mt-2">
