@@ -1798,14 +1798,33 @@ function renderStats() {
     if (s.home !== null && s.away !== null) totalGoals += s.home + s.away;
   });
   const goalsByTeam = new Map();
+  const displayName = new Map();   // normKey → nombre original (para mostrar en top 8)
+  const teamsWithGoals = new Set(); // set de nombres de equipos que anotaron >0 goles
+  // Normalización mínima: lowercase + sin diacríticos + sin espacios.
+  // Suficiente para colapsar "Mexico" / "México" / "MEX" sin alterar
+  // "United States" → "USA" como sí hace normalizeName() del matchKey.
+  const normKey = (s) => (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
   STATE.matches.forEach(m => {
     const s = effectiveScore(m);
-    if (s.home === null) return;
+    if (s.home === null || s.away === null) return;
     const h = m.home?.name; const a = m.away?.name;
-    if (h) goalsByTeam.set(h, (goalsByTeam.get(h) || 0) + s.home);
-    if (a) goalsByTeam.set(a, (goalsByTeam.get(a) || 0) + s.away);
+    if (h) {
+      const hk = normKey(h);
+      goalsByTeam.set(hk, (goalsByTeam.get(hk) || 0) + s.home);
+      if (!displayName.has(hk)) displayName.set(hk, h);
+      if (s.home > 0) teamsWithGoals.add(h);
+    }
+    if (a) {
+      const ak = normKey(a);
+      goalsByTeam.set(ak, (goalsByTeam.get(ak) || 0) + s.away);
+      if (!displayName.has(ak)) displayName.set(ak, a);
+      if (s.away > 0) teamsWithGoals.add(a);
+    }
   });
-  const top = Array.from(goalsByTeam.entries()).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  const top = Array.from(goalsByTeam.entries())
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 8)
+    .map(([k, g]) => [displayName.get(k) || k, g]);
 
   // Datos por jornada (goles acumulados)
   const goalsByMatchday = new Map();
@@ -1849,7 +1868,7 @@ function renderStats() {
         <h3><i class="ri-football-line" aria-hidden="true"></i> ${t("stats.summary.goals")}</h3>
         <div class="stat-row"><span>Total anotados</span><span class="v bebas fs-5">${totalGoals}</span></div>
         <div class="stat-row"><span>${t("stats.summary.avgGoals")}/partido</span><span class="v">${finished > 0 ? (totalGoals / finished).toFixed(2) : "0.00"}</span></div>
-        <div class="stat-row"><span>Equipos con goles</span><span class="v">${goalsByTeam.size}</span></div>
+        <div class="stat-row"><span>Equipos con goles</span><span class="v">${teamsWithGoals.size}</span></div>
       </div>
     </div>
     <div class="col-12 col-lg-6">
