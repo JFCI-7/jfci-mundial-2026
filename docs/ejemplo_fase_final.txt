@@ -1,0 +1,33 @@
+Octavos de Final       Cuartos de Final         Semifinales              Final              Campeón
+ 
+ [ Alemania  ] --+
+                 |-- [ Alemania  ] --+
+ [ Croacia   ] --+                   |
+                                     |-- [ Alemania  ] --+
+ [ Argentina ] --+                   |                   |
+                 |-- [ Argentina ] --+                   |
+ [ Países B. ] --+                                       |
+                                                         |-- [ Alemania  ] --+
+ [ España    ] --+                                       |                   |
+                 |-- [ España    ] --+                   |                   |
+ [ Marruecos ] --+                   |                   |                   |
+                                     |-- [ España    ] --+                   |
+ [ Portugal  ] --+                   |                                       |
+                 |-- [ Portugal  ] --+                                       |
+ [ Suiza     ] --+                                                           |
+                                                                             |== [ ¡ALEMANIA! ]
+ [ Brasil    ] --+                                                           |
+                 |-- [ Brasil    ] --+                                       |
+ [ Japón     ] --+                   |                                       |
+                                     |-- [ Brasil    ] --+                   |
+ [ Francia   ] --+                   |                   |                   |
+                 |-- [ Francia   ] --+                   |                   |
+ [ Polonia   ] --+                                       |                   |
+                                                         |-- [ Inglaterra] --+
+ [ Inglaterra] --+                                       |
+                 |-- [ Inglaterra] --+                   |
+ [ Senegal   ] --+                   |                   |
+                                     |-- [ Inglaterra] --+
+ [ Italia    ] --+                   |
+                 |-- [ Italia    ] --+
+ [ EE. UU.   ] --+
