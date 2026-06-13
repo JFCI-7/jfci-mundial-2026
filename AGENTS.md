@@ -96,6 +96,10 @@ python3 server.py
 - Filtros: búsqueda libre por texto + dropdown de categoría + botón "Sorpréndeme" que hace scroll y pulse a un fact aleatorio.
 - Estilos: `.fact-card` con borde lateral de color de categoría, badge de categoría con icono Remix Icon.
 
+## Documentación y ejemplos de diseño
+- `docs/` — Referencias visuales y prototipos.
+  - `ejemplo_fase_final.txt` — Layout ASCII del bracket de eliminatorias, usado como referencia para el diseño de la vista Eliminatorias.
+
 ## Gráficas
 - Librería: [Apache ECharts](https://github.com/apache/echarts) v5.5.1.
 - Vendorizado local en `vendor/echarts/echarts.min.js` (~1MB).

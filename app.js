@@ -1329,70 +1329,183 @@ function renderBracket() {
   const container = document.getElementById("knockout-container");
   if (!container) return;
   container.innerHTML = "";
-  const stages = [
+
+  // Columnas: 6 rondas de match + Campeón. El 3° lugar se renderiza como un
+  // card extra dentro de la columna "Final" en desktop (apilado abajo) o en
+  // su propia fila en mobile.
+  const roundColumns = [
     { key: "r32",   label: t("bracket.r32") },
     { key: "r16",   label: t("bracket.r16") },
     { key: "qf",    label: t("bracket.qf") },
     { key: "sf",    label: t("bracket.sf") },
-    { key: "third", label: t("bracket.third") },
     { key: "final", label: t("bracket.final") },
   ];
-  let any = false;
-  stages.forEach(stage => {
-    const matches = STATE.matches.filter(m => m.stage === stage.key);
-    if (matches.length === 0) return;
-    any = true;
-    const section = document.createElement("div");
-    section.className = "koround";
-    section.innerHTML = `<h4><i class="ri-trophy-line" aria-hidden="true"></i> ${stage.label}</h4>`;
-    const grid = document.createElement("div");
-    grid.className = "ko-grid";
-    matches.forEach(m => grid.appendChild(createKoCard(m)));
-    section.appendChild(grid);
-    container.appendChild(section);
+
+  // Reunir matches por ronda (sólo las que tienen datos).
+  const matchesByRound = {};
+  let totalMatches = 0;
+  roundColumns.forEach(col => {
+    const list = STATE.matches.filter(m => m.stage === col.key);
+    matchesByRound[col.key] = list;
+    totalMatches += list.length;
   });
-  if (!any) {
-    container.innerHTML = '<p class="text-muted">Los cruces se mostrarán cuando se publiquen. Refresca con el botón superior.</p>';
+  // 3° lugar vive aparte; la columna Campeón se renderiza siempre.
+  const thirdMatch = STATE.matches.find(m => m.stage === "third") || null;
+  if (thirdMatch) totalMatches += 1;
+
+  if (totalMatches === 0) {
+    container.innerHTML = `<p class="text-muted">${escapeHtml(t("bracket.empty"))}</p>`;
+    return;
   }
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "bracket-wrapper";
+
+  const grid = document.createElement("div");
+  grid.className = "bracket-grid";
+
+  // Fila 1: headers de columna (uno por ronda + Campeón).
+  roundColumns.forEach((col, i) => {
+    const h = document.createElement("div");
+    h.className = "bracket-col-header";
+    h.style.gridColumn = `${i + 1}`;
+    h.style.gridRow = "1";
+    h.textContent = col.label;
+    grid.appendChild(h);
+  });
+  // Header de la columna Campeón (al final).
+  const champHeader = document.createElement("div");
+  champHeader.className = "bracket-col-header bracket-col-champion";
+  champHeader.style.gridColumn = `${roundColumns.length + 1}`;
+  champHeader.style.gridRow = "1";
+  champHeader.innerHTML = `<i class="ri-trophy-fill" aria-hidden="true"></i> ${escapeHtml(t("bracket.final"))}`;
+  grid.appendChild(champHeader);
+
+  // Calcular el row span de cada ronda (en unidades de 1 row = 1 r32 match).
+  // r32: 1 row; r16: 2 rows; qf: 4 rows; sf: 8 rows; final: 16 rows.
+  const rowSpan = { r32: 1, r16: 2, qf: 4, sf: 8, final: 16 };
+
+  // Posición de cada match. El grid tiene:
+  //   - row 1: header (auto)
+  //   - rows 2-17: 16 filas de 50px (1 por r32 match)
+  //   - row 18: 3° label (auto)
+  //   - row 19: 3° match (auto)
+  // Patrón (row 1 reservado para headers):
+  //   r32[i] en row i+2; r16[i] en row 2*i+2 (spans 2);
+  //   qf[i]  en row 4*i+2 (spans 4); sf[i] en row 8*i+2 (spans 8);
+  //   final en row 2 (spans 16).
+  const startRow = { r32: i => i + 2, r16: i => 2 * i + 2, qf: i => 4 * i + 2, sf: i => 8 * i + 2, final: () => 2 };
+  const colIndex = { r32: 1, r16: 2, qf: 3, sf: 4, final: 5 };
+  const champCol = 6;
+
+  // Renderizar matches de cada ronda (excepto final y third, que se manejan distinto).
+  roundColumns.forEach(col => {
+    const list = matchesByRound[col.key] || [];
+    list.forEach((m, i) => {
+      const card = createBracketMatch(m, { compact: true });
+      card.style.gridColumn = `${colIndex[col.key]}`;
+      card.style.gridRow = col.key === "r32"
+        ? `${startRow[col.key](i)}`
+        : `${startRow[col.key](i)} / span ${rowSpan[col.key]}`;
+      card.style.alignSelf = "center";
+      grid.appendChild(card);
+    });
+  });
+
+  // 3° lugar: lo metemos en la columna "final" como una fila extra, debajo del final.
+  // Etiqueta en row 18, match en row 19, sólo en la columna "final".
+  if (thirdMatch) {
+    const thirdLabel = document.createElement("div");
+    thirdLabel.className = "bracket-third-label";
+    thirdLabel.style.gridColumn = `${colIndex.final}`;
+    thirdLabel.style.gridRow = "18";
+    thirdLabel.style.alignSelf = "end";
+    thirdLabel.style.justifySelf = "center";
+    thirdLabel.textContent = t("bracket.third");
+    grid.appendChild(thirdLabel);
+    const third = createBracketMatch(thirdMatch, { compact: true });
+    third.style.gridColumn = `${colIndex.final}`;
+    third.style.gridRow = "19";
+    third.style.alignSelf = "center";
+    third.classList.add("bracket-third-wrap");
+    grid.appendChild(third);
+  }
+
+  // Campeón: celda grande en la última columna, ocupa toda la altura del bracket
+  // (rows 2-17, debajo del header). Centrada verticalmente.
+  const champion = buildChampionCell();
+  champion.style.gridColumn = `${champCol}`;
+  champion.style.gridRow = "2 / span 16";
+  champion.style.alignSelf = "center";
+  grid.appendChild(champion);
+
+  wrapper.appendChild(grid);
+  container.appendChild(wrapper);
 }
 
-function createKoCard(m) {
+function buildChampionCell() {
+  // El campeón es el ganador de la Final. Si la Final no está terminada,
+  // mostrar placeholder.
+  const finalMatch = STATE.matches.find(m => m.stage === "final");
+  let championTeam = null;
+  if (finalMatch && finalMatch.status === "finished") {
+    const s = effectiveScore(finalMatch);
+    if (s.home !== null && s.away !== null) {
+      championTeam = s.home > s.away ? finalMatch.home : (s.away > s.home ? finalMatch.away : null);
+    }
+  }
+
   const div = document.createElement("div");
-  div.className = "ko-match";
+  div.className = "bracket-champion";
+
+  if (championTeam && championTeam.iso2) {
+    div.classList.add("has-winner");
+    div.innerHTML = `
+      <div class="bracket-champion-trophy"><i class="ri-trophy-fill" aria-hidden="true"></i></div>
+      <div class="bracket-champion-label">CAMPEÓN</div>
+      <span class="fi fi-${championTeam.iso2} flag-48" title="${escapeHtml(championTeam.name)}"></span>
+      <div class="bracket-champion-name bebas">${escapeHtml(championTeam.name || "")}</div>
+    `;
+  } else {
+    div.classList.add("is-pending");
+    div.innerHTML = `
+      <div class="bracket-champion-trophy muted"><i class="ri-question-line" aria-hidden="true"></i></div>
+      <div class="bracket-champion-label muted">CAMPEÓN</div>
+      <div class="bracket-champion-name bebas muted">${escapeHtml(t("bracket.tbd"))}</div>
+    `;
+  }
+  return div;
+}
+
+function createBracketMatch(m, opts = {}) {
+  const compact = opts.compact !== false;
+  const div = document.createElement("div");
+  div.className = `bracket-match bracket-match-${m.stage}`;
+  div.dataset.round = m.stage;
   const s = effectiveScore(m);
   const hWins = s.home !== null && s.away !== null && s.home > s.away;
   const aWins = s.home !== null && s.away !== null && s.away > s.home;
-
-  // Determinar si el equipo ya está definido.
-  // "Pendiente" = sigue siendo TBD: tiene label genérico ("Winner Group A") y
-  //               no tiene nombre real.
-  // "Definido" = la API ya publicó al equipo real (tras finalizar la fase de grupos).
   const homeIsPending = !m.home?.name_en && !!m.home?.label;
   const awayIsPending = !m.away?.name_en && !!m.away?.label;
   const homeName = m.home?.name || m.home?.label || "TBD";
   const awayName = m.away?.name || m.away?.label || "TBD";
   const homeFlag = !homeIsPending && m.home?.iso2
-    ? `<span class="fi fi-${m.home.iso2} flag-24" title="${escapeHtml(homeName)}"></span>`
-    : "";
+    ? `<span class="fi fi-${m.home.iso2} flag-20" title="${escapeHtml(homeName)}"></span>`
+    : `<span class="bracket-match-flag placeholder" aria-hidden="true"></span>`;
   const awayFlag = !awayIsPending && m.away?.iso2
-    ? `<span class="fi fi-${m.away.iso2} flag-24" title="${escapeHtml(awayName)}"></span>`
-    : "";
+    ? `<span class="fi fi-${m.away.iso2} flag-20" title="${escapeHtml(awayName)}"></span>`
+    : `<span class="bracket-match-flag placeholder" aria-hidden="true"></span>`;
 
-  const dateStr = m.date ? new Date(m.date).toLocaleDateString("es-MX", { day: "2-digit", month: "short" }) : "TBD";
   div.innerHTML = `
-    <div class="ko-team ${hWins ? "adv" : ""} ${homeIsPending ? "pending" : ""}">
+    <div class="bracket-team ${hWins ? "adv" : ""} ${homeIsPending ? "pending" : ""}">
       ${homeFlag}
-      <span class="ko-team-name">${homeName}</span>
-      <span class="bebas">${s.home !== null ? s.home : "—"}</span>
+      <span class="bracket-team-name">${escapeHtml(homeName)}</span>
+      <span class="bracket-team-score bebas">${s.home !== null ? s.home : "—"}</span>
     </div>
-    <div class="ko-team ${aWins ? "adv" : ""} ${awayIsPending ? "pending" : ""}">
+    <div class="bracket-team ${aWins ? "adv" : ""} ${awayIsPending ? "pending" : ""}">
       ${awayFlag}
-      <span class="ko-team-name">${awayName}</span>
-      <span class="bebas">${s.away !== null ? s.away : "—"}</span>
-    </div>
-    <div class="ko-label">
-      <i class="ri-calendar-line" aria-hidden="true"></i> ${dateStr}
-      ${m.venue ? ` · <i class="ri-building-line" aria-hidden="true"></i> ${m.venue}` : ""}
+      <span class="bracket-team-name">${escapeHtml(awayName)}</span>
+      <span class="bracket-team-score bebas">${s.away !== null ? s.away : "—"}</span>
     </div>
   `;
   div.addEventListener("click", () => openScoreModal(m.id));
