@@ -19,8 +19,8 @@ Thumbs.db
 .vercel
 .kv_cache.json
 
-.DESIGN.md
-.AGENTS.md
+DESIGN.md
+AGENTS.md
 docs
 docs/ejemplo_fase_final.txt
 
