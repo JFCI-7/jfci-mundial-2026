@@ -205,6 +205,13 @@ function ingestAPI(api) {
       }
     }
     if (existing) {
+      // Guard: si el seed ya marca el partido como finished con scores,
+      // no permitir que la API (o su snapshot KV desactualizado) lo
+      // degrade a pending. Caso típico: K/L j1, A/B j2 — el seed los
+      // trae finalizados pero el KV aún no los tiene.
+      if (existing.status === "finished" && m.status === "pending") {
+        return;
+      }
       if (m.home_score !== null) existing.home_score = m.home_score;
       if (m.away_score !== null) existing.away_score = m.away_score;
       existing.status = m.status;
