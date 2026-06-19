@@ -1,6 +1,10 @@
 {
   "tournament": "FIFA World Cup 2026",
-  "hosts": ["Mexico", "United States", "Canada"],
+  "hosts": [
+    "Mexico",
+    "United States",
+    "Canada"
+  ],
   "dates": "2026-06-11 to 2026-07-19",
   "teams": 48,
   "matches": {
@@ -25,7 +29,22 @@
         "city": "Mexico City",
         "country": "Mexico",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 2,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Julián Quiñones",
+            "minute": "9"
+          },
+          {
+            "player": "Raúl Jiménez",
+            "minute": "67"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 2,
@@ -47,7 +66,27 @@
         "city": "Guadalajara",
         "country": "Mexico",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 2,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Hwang In-beom",
+            "minute": "67"
+          },
+          {
+            "player": "Oh Hyeon-gyu",
+            "minute": "80"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Ladislav Krejčí",
+            "minute": "59"
+          }
+        ]
       },
       {
         "match_number": 3,
@@ -69,7 +108,23 @@
         "city": "Toronto",
         "country": "Canada",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 1,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Cyle Larin",
+            "minute": "78"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Jovo Lukić",
+            "minute": "21"
+          }
+        ]
       },
       {
         "match_number": 4,
@@ -91,7 +146,35 @@
         "city": "Los Angeles",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 4,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Damián Bobadilla",
+            "minute": "7"
+          },
+          {
+            "player": "Folarin Balogun",
+            "minute": "31"
+          },
+          {
+            "player": "Folarin Balogun",
+            "minute": "45+5"
+          },
+          {
+            "player": "Giovanni Reyna",
+            "minute": "90+8"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Maurício Magalhães Prado",
+            "minute": "73"
+          }
+        ]
       },
       {
         "match_number": 5,
@@ -113,7 +196,23 @@
         "city": "San Francisco",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 1,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Miro Muheim",
+            "minute": "90+4"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Breel Embolo",
+            "minute": "17"
+          }
+        ]
       },
       {
         "match_number": 6,
@@ -135,7 +234,23 @@
         "city": "New York",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 1,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Vinícius Júnior",
+            "minute": "32"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Ismael Saibari",
+            "minute": "21"
+          }
+        ]
       },
       {
         "match_number": 7,
@@ -157,11 +272,22 @@
         "city": "Boston",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 0,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [],
+        "away_scorers": [
+          {
+            "player": "John McGinn",
+            "minute": "28"
+          }
+        ]
       },
       {
         "match_number": 8,
-        "date": "2026-06-13",
+        "date": "2026-06-14",
         "time": "22:00",
         "timezone": "CST",
         "group": "D",
@@ -179,7 +305,22 @@
         "city": "Vancouver",
         "country": "Canada",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 2,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Nestory Irankunda",
+            "minute": "27"
+          },
+          {
+            "player": "Connor Metcalfe",
+            "minute": "75"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 9,
@@ -193,7 +334,7 @@
           "code": "GER"
         },
         "away_team": {
-          "name": "Curacao",
+          "name": "Curaçao",
           "flag": "🇨🇼",
           "code": "CUW"
         },
@@ -201,7 +342,47 @@
         "city": "Houston",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 7,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Felix Nmecha",
+            "minute": "6"
+          },
+          {
+            "player": "Nico Schlotterbeck",
+            "minute": "38"
+          },
+          {
+            "player": "Kai Havertz",
+            "minute": "45+5"
+          },
+          {
+            "player": "Jamal Musiala",
+            "minute": "47"
+          },
+          {
+            "player": "Nathaniel Brown",
+            "minute": "68"
+          },
+          {
+            "player": "Deniz Undav",
+            "minute": "78"
+          },
+          {
+            "player": "Kai Havertz",
+            "minute": "88"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Livano Comenencia",
+            "minute": "21"
+          }
+        ]
       },
       {
         "match_number": 10,
@@ -223,7 +404,31 @@
         "city": "Dallas",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 2,
+        "away_score": 2,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Virgil van Dijk",
+            "minute": "51"
+          },
+          {
+            "player": "Crysencio Summerville",
+            "minute": "64"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Keito Nakamura",
+            "minute": "57"
+          },
+          {
+            "player": "Daichi Kamada",
+            "minute": "89"
+          }
+        ]
       },
       {
         "match_number": 11,
@@ -245,7 +450,18 @@
         "city": "Philadelphia",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 1,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Amad Diallo",
+            "minute": "90"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 12,
@@ -267,7 +483,39 @@
         "city": "Monterrey",
         "country": "Mexico",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 5,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Yasin Ayari",
+            "minute": "7"
+          },
+          {
+            "player": "Alexander Isak",
+            "minute": "30"
+          },
+          {
+            "player": "Viktor Gyökeres",
+            "minute": "59"
+          },
+          {
+            "player": "Mattias Svanberg",
+            "minute": "84"
+          },
+          {
+            "player": "Yasin Ayari",
+            "minute": "90+6"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Omar Rekik",
+            "minute": "43"
+          }
+        ]
       },
       {
         "match_number": 13,
@@ -289,7 +537,13 @@
         "city": "Atlanta",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 0,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [],
+        "away_scorers": []
       },
       {
         "match_number": 14,
@@ -311,7 +565,23 @@
         "city": "Seattle",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 1,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Mohamed Hany",
+            "minute": "66"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Emam Ashour",
+            "minute": "19"
+          }
+        ]
       },
       {
         "match_number": 15,
@@ -333,7 +603,23 @@
         "city": "Miami",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 1,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Abdulelah Al Amri",
+            "minute": "41"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Maxi Araújo",
+            "minute": "80"
+          }
+        ]
       },
       {
         "match_number": 16,
@@ -355,7 +641,31 @@
         "city": "Los Angeles",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 2,
+        "away_score": 2,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Ramin Rezaeian",
+            "minute": "32"
+          },
+          {
+            "player": "Mohammad Mohebbi",
+            "minute": "64"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Elijah Just",
+            "minute": "7"
+          },
+          {
+            "player": "Elijah Just",
+            "minute": "54"
+          }
+        ]
       },
       {
         "match_number": 17,
@@ -377,7 +687,31 @@
         "city": "New York",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 3,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Kylian Mbappé",
+            "minute": "66"
+          },
+          {
+            "player": "Bradley Barcola",
+            "minute": "82"
+          },
+          {
+            "player": "Kylian Mbappé",
+            "minute": "90+6"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Ibrahim Mbaye",
+            "minute": "90+5"
+          }
+        ]
       },
       {
         "match_number": 18,
@@ -399,7 +733,35 @@
         "city": "Boston",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 1,
+        "away_score": 4,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Aymen Hussein",
+            "minute": "39"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Erling Haaland",
+            "minute": "29"
+          },
+          {
+            "player": "Erling Haaland",
+            "minute": "43"
+          },
+          {
+            "player": "Leo Østigård",
+            "minute": "76"
+          },
+          {
+            "player": "Aymen Hussein",
+            "minute": "90+6"
+          }
+        ]
       },
       {
         "match_number": 19,
@@ -421,11 +783,30 @@
         "city": "Kansas City",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 3,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Lionel Messi",
+            "minute": "17"
+          },
+          {
+            "player": "Lionel Messi",
+            "minute": "60"
+          },
+          {
+            "player": "Lionel Messi",
+            "minute": "76"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 20,
-        "date": "2026-06-16",
+        "date": "2026-06-17",
         "time": "22:00",
         "timezone": "CST",
         "group": "J",
@@ -443,7 +824,31 @@
         "city": "San Francisco",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 3,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Romano Schmid",
+            "minute": "21"
+          },
+          {
+            "player": "Yazan Al Arab",
+            "minute": "76"
+          },
+          {
+            "player": "Marko Arnautović",
+            "minute": "90+12"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Ali Olwan",
+            "minute": "50"
+          }
+        ]
       },
       {
         "match_number": 21,
@@ -457,7 +862,7 @@
           "code": "POR"
         },
         "away_team": {
-          "name": "DR Congo",
+          "name": "Democratic Republic of the Congo",
           "flag": "🇨🇩",
           "code": "COD"
         },
@@ -465,7 +870,23 @@
         "city": "Houston",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 1,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "João Neves",
+            "minute": "6"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Yoane Wissa",
+            "minute": "45+5"
+          }
+        ]
       },
       {
         "match_number": 22,
@@ -487,7 +908,39 @@
         "city": "Dallas",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 4,
+        "away_score": 2,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Harry Kane",
+            "minute": "12"
+          },
+          {
+            "player": "Harry Kane",
+            "minute": "42"
+          },
+          {
+            "player": "Jude Bellingham",
+            "minute": "47"
+          },
+          {
+            "player": "Marcus Rashford",
+            "minute": "85"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Martin Baturina",
+            "minute": "36"
+          },
+          {
+            "player": "Petar Musa",
+            "minute": "45+5"
+          }
+        ]
       },
       {
         "match_number": 23,
@@ -509,7 +962,18 @@
         "city": "Toronto",
         "country": "Canada",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 1,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Caleb Yirenkyi",
+            "minute": "90+5"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 24,
@@ -531,7 +995,31 @@
         "city": "Mexico City",
         "country": "Mexico",
         "stage": "Group Stage",
-        "matchday": 1
+        "matchday": 1,
+        "home_score": 1,
+        "away_score": 3,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Abbosbek Fayzullaev",
+            "minute": "60"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Daniel Muñoz",
+            "minute": "40"
+          },
+          {
+            "player": "Luis Díaz",
+            "minute": "65"
+          },
+          {
+            "player": "Jaminton Campaz",
+            "minute": "90+9"
+          }
+        ]
       },
       {
         "match_number": 25,
@@ -553,7 +1041,23 @@
         "city": "Atlanta",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 1,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Michal Sadílek",
+            "minute": "6"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Teboho Mokoena",
+            "minute": "83"
+          }
+        ]
       },
       {
         "match_number": 26,
@@ -575,7 +1079,35 @@
         "city": "Los Angeles",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 4,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Johan Manzambi",
+            "minute": "74"
+          },
+          {
+            "player": "Rubén Vargas",
+            "minute": "84"
+          },
+          {
+            "player": "Johan Manzambi",
+            "minute": "90"
+          },
+          {
+            "player": "Granit Xhaka",
+            "minute": "90+7"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Ermin Mahmić",
+            "minute": "90+3"
+          }
+        ]
       },
       {
         "match_number": 27,
@@ -597,7 +1129,38 @@
         "city": "Vancouver",
         "country": "Canada",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 6,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Cyle Larin",
+            "minute": "16"
+          },
+          {
+            "player": "Jonathan David",
+            "minute": "29"
+          },
+          {
+            "player": "Jonathan David",
+            "minute": "45+3"
+          },
+          {
+            "player": "Nathan Saliba",
+            "minute": "64"
+          },
+          {
+            "player": "Mohammad Al Manai",
+            "minute": "75"
+          },
+          {
+            "player": "Jonathan David",
+            "minute": "90+2"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 28,
@@ -619,7 +1182,18 @@
         "city": "Guadalajara",
         "country": "Mexico",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 1,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Luis Romo",
+            "minute": "50"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 29,
@@ -765,7 +1339,7 @@
           "code": "ECU"
         },
         "away_team": {
-          "name": "Curacao",
+          "name": "Curaçao",
           "flag": "🇨🇼",
           "code": "CUW"
         },
@@ -1051,7 +1625,7 @@
           "code": "COL"
         },
         "away_team": {
-          "name": "DR Congo",
+          "name": "Democratic Republic of the Congo",
           "flag": "🇨🇩",
           "code": "COD"
         },
@@ -1200,7 +1774,7 @@
         "timezone": "CST",
         "group": "E",
         "home_team": {
-          "name": "Curacao",
+          "name": "Curaçao",
           "flag": "🇨🇼",
           "code": "CUW"
         },
@@ -1530,7 +2104,7 @@
         "timezone": "CST",
         "group": "K",
         "home_team": {
-          "name": "DR Congo",
+          "name": "Democratic Republic of the Congo",
           "flag": "🇨🇩",
           "code": "COD"
         },
@@ -2245,18 +2819,78 @@
   },
   "timezone": "America/Mexico_City (CST)",
   "groups": {
-    "A": ["Mexico", "South Africa", "South Korea", "Czech Republic"],
-    "B": ["Canada", "Bosnia and Herzegovina", "Qatar", "Switzerland"],
-    "C": ["Brazil", "Morocco", "Haiti", "Scotland"],
-    "D": ["United States", "Paraguay", "Australia", "Turkey"],
-    "E": ["Germany", "Curacao", "Ivory Coast", "Ecuador"],
-    "F": ["Netherlands", "Japan", "Sweden", "Tunisia"],
-    "G": ["Belgium", "Egypt", "Iran", "New Zealand"],
-    "H": ["Spain", "Cape Verde", "Saudi Arabia", "Uruguay"],
-    "I": ["France", "Senegal", "Iraq", "Norway"],
-    "J": ["Argentina", "Algeria", "Austria", "Jordan"],
-    "K": ["Portugal", "DR Congo", "Uzbekistan", "Colombia"],
-    "L": ["England", "Croatia", "Ghana", "Panama"]
+    "A": [
+      "Mexico",
+      "South Africa",
+      "South Korea",
+      "Czech Republic"
+    ],
+    "B": [
+      "Canada",
+      "Bosnia and Herzegovina",
+      "Qatar",
+      "Switzerland"
+    ],
+    "C": [
+      "Brazil",
+      "Morocco",
+      "Haiti",
+      "Scotland"
+    ],
+    "D": [
+      "United States",
+      "Paraguay",
+      "Australia",
+      "Turkey"
+    ],
+    "E": [
+      "Germany",
+      "Curaçao",
+      "Ivory Coast",
+      "Ecuador"
+    ],
+    "F": [
+      "Netherlands",
+      "Japan",
+      "Sweden",
+      "Tunisia"
+    ],
+    "G": [
+      "Belgium",
+      "Egypt",
+      "Iran",
+      "New Zealand"
+    ],
+    "H": [
+      "Spain",
+      "Cape Verde",
+      "Saudi Arabia",
+      "Uruguay"
+    ],
+    "I": [
+      "France",
+      "Senegal",
+      "Iraq",
+      "Norway"
+    ],
+    "J": [
+      "Argentina",
+      "Algeria",
+      "Austria",
+      "Jordan"
+    ],
+    "K": [
+      "Portugal",
+      "Democratic Republic of the Congo",
+      "Uzbekistan",
+      "Colombia"
+    ],
+    "L": [
+      "England",
+      "Croatia",
+      "Ghana",
+      "Panama"
+    ]
   },
   "venues": [
     {
@@ -2362,21 +2996,35 @@
         "name": "World Cup 2026 API (GitHub)",
         "url": "https://github.com/rezarahiminia/worldcup2026",
         "description": "Open-source REST API, no API key required for read access",
-        "features": ["fixtures", "teams", "groups", "live scores"],
+        "features": [
+          "fixtures",
+          "teams",
+          "groups",
+          "live scores"
+        ],
         "cost": "Free"
       },
       {
         "name": "WC2026 API",
         "url": "https://www.wc2026api.com/",
         "description": "Real-time scores, fixtures, group standings, stadium data",
-        "features": ["live scores", "fixtures", "standings", "stadiums"],
+        "features": [
+          "live scores",
+          "fixtures",
+          "standings",
+          "stadiums"
+        ],
         "cost": "Free tier available"
       },
       {
         "name": "World Cup API",
         "url": "https://worldcupapi.com/",
         "description": "Comprehensive real-time data API",
-        "features": ["live scores", "match statistics", "team lineups"],
+        "features": [
+          "live scores",
+          "match statistics",
+          "team lineups"
+        ],
         "cost": "Free tier available"
       }
     ],
@@ -2385,21 +3033,34 @@
         "name": "API-Football",
         "url": "https://www.api-football.com/",
         "description": "Complete football data including World Cup 2026",
-        "features": ["fixtures", "live scores", "statistics", "player data"],
+        "features": [
+          "fixtures",
+          "live scores",
+          "statistics",
+          "player data"
+        ],
         "cost": "Paid plans"
       },
       {
         "name": "Sportmonks",
         "url": "https://sportmonks.com/",
         "description": "Football data API with World Cup coverage",
-        "features": ["fixtures", "live scores", "predictions"],
+        "features": [
+          "fixtures",
+          "live scores",
+          "predictions"
+        ],
         "cost": "Paid plans"
       },
       {
         "name": "TheStatsAPI",
         "url": "https://www.thestatsapi.com/",
         "description": "Comprehensive sports statistics",
-        "features": ["fixtures", "live scores", "statistics"],
+        "features": [
+          "fixtures",
+          "live scores",
+          "statistics"
+        ],
         "cost": "Paid plans"
       }
     ]

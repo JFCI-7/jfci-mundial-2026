@@ -36,7 +36,7 @@ const Seed = (() => {
     "Australia": "au",
     "Turkey": "tr",
     "Germany": "de",
-    "Curacao": "cw",
+    "Curaçao": "cw",
     "Ivory Coast": "ci",
     "Ecuador": "ec",
     "Netherlands": "nl",
@@ -60,7 +60,7 @@ const Seed = (() => {
     "Austria": "at",
     "Jordan": "jo",
     "Portugal": "pt",
-    "DR Congo": "cd",
+    "Democratic Republic of the Congo": "cd",
     "Uzbekistan": "uz",
     "Colombia": "co",
     "England": "gb-eng",
@@ -71,8 +71,10 @@ const Seed = (() => {
 
   // Bump de versión cuando cambia la forma del payload normalizado.
   // v2: agrega iso2 a home/away de cada match (lipis flag-icons).
-  const CACHE_KEY = "mundial2026_seed_cache_v2";
-  const LEGACY_CACHE_KEYS = ["mundial2026_seed_cache"];
+  // v3: agrega home_score/away_score/status/home_scorers/away_scorers al match
+  //     para soportar partidos ya jugados sin depender de la API.
+  const CACHE_KEY = "mundial2026_seed_cache_v3";
+  const LEGACY_CACHE_KEYS = ["mundial2026_seed_cache", "mundial2026_seed_cache_v2"];
 
   async function load() {
     // Migración silenciosa: si hay caché legacy, eliminarlo. La nueva
@@ -135,6 +137,9 @@ const Seed = (() => {
         list.forEach(m => {
           const homeIso = ISO_BY_NAME[m.home_team.name] || null;
           const awayIso = ISO_BY_NAME[m.away_team.name] || null;
+          // Si el JSON trae score+status (partidos ya jugados), los respetamos.
+          // Si no, dejamos null/pending para que la API los rellene luego.
+          const hasScore = typeof m.home_score === "number" && typeof m.away_score === "number";
           matches.push({
             id: `seed-m${m.match_number}`,
             source: "seed",
@@ -145,20 +150,22 @@ const Seed = (() => {
               ...m.home_team,
               iso2: homeIso,
               flag: homeIso ? `./vendor/flags/4x3/${homeIso}.svg` : null,
+              scorers: Array.isArray(m.home_scorers) ? m.home_scorers : [],
             },
             away: {
               ...m.away_team,
               iso2: awayIso,
               flag: awayIso ? `./vendor/flags/4x3/${awayIso}.svg` : null,
+              scorers: Array.isArray(m.away_scorers) ? m.away_scorers : [],
             },
             date: parseDate(m.date, m.time),
             venue: m.venue || "",
             city: m.city || "",
             country: m.country || "",
-            home_score: null,
-            away_score: null,
-            status: "pending",
-            time_elapsed: "notstarted",
+            home_score: hasScore ? m.home_score : null,
+            away_score: hasScore ? m.away_score : null,
+            status: hasScore ? (m.status || "finished") : "pending",
+            time_elapsed: hasScore ? (m.time_elapsed || "90") : "notstarted",
           });
         });
       }
