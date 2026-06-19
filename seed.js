@@ -73,8 +73,13 @@ const Seed = (() => {
   // v2: agrega iso2 a home/away de cada match (lipis flag-icons).
   // v3: agrega home_score/away_score/status/home_scorers/away_scorers al match
   //     para soportar partidos ya jugados sin depender de la API.
+  // v4: hardening — embed _seedVersion dentro del payload cacheado. Si la
+  //     versión interna no coincide (e.g. browser sirve seed.js viejo que
+  //     escribió CACHE_KEY v3 con datos sin scores), se refetchea en vez de
+  //     devolver datos obsoletos.
   const CACHE_KEY = "mundial2026_seed_cache_v3";
   const LEGACY_CACHE_KEYS = ["mundial2026_seed_cache", "mundial2026_seed_cache_v2"];
+  const SEED_PAYLOAD_VERSION = 4;
 
   async function load() {
     // Migración silenciosa: si hay caché legacy, eliminarlo. La nueva
@@ -83,29 +88,40 @@ const Seed = (() => {
       for (const k of LEGACY_CACHE_KEYS) localStorage.removeItem(k);
     } catch (_) {}
 
-    // Stale-while-revalidate: si hay cache, devuélvelo ya y refresca en background.
+    // Stale-while-revalidate: si hay cache con la versión correcta, devuélvelo
+    // ya y refresca en background. Si la versión interna no coincide O si el
+    // cache tiene datos vacíos/stale (data sanity check), ignora el cache y
+    // refetchea. Degradación segura aunque el browser sirva seed.js viejo.
     try {
       const cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
         const data = JSON.parse(cached);
-        // Refrescar en background (no bloquea el primer paint)
-        fetch(URL, { cache: "no-store" })
-          .then(r => r.ok ? r.json() : null)
-          .then(raw => {
-            if (raw) {
-              try { localStorage.setItem(CACHE_KEY, JSON.stringify(normalize(raw))); } catch (_) {}
-            }
-          })
-          .catch(() => { /* network error, mantener cache */ });
-        return data;
+        const versionOk = data && data._seedVersion === SEED_PAYLOAD_VERSION;
+        // Sanity check: si el cache tiene < 28 matches con score y la fecha
+        // actual es >= 2026-06-18 (jornada 8 ya jugada), está claramente stale.
+        const playedCount = (data?.matches || []).filter(m => m.home_score !== null && m.home_score !== undefined).length;
+        const looksStale = playedCount < 20; // hemos inyectado 28 jugados
+        if (data && versionOk && !looksStale) {
+          fetch(URL, { cache: "no-store" })
+            .then(r => r.ok ? r.json() : null)
+            .then(raw => {
+              if (raw) {
+                try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ...normalize(raw), _seedVersion: SEED_PAYLOAD_VERSION })); } catch (_) {}
+              }
+            })
+            .catch(() => { /* network error, mantener cache */ });
+          return data;
+        }
+        // Versión obsoleta o datos vacíos. Borrar y refetchar.
+        try { localStorage.removeItem(CACHE_KEY); } catch (_) {}
       }
     } catch (_) { /* cache corrupto, ignorar */ }
 
-    // Sin cache: bloqueamos hasta fetch
+    // Sin cache o versión obsoleta: bloqueamos hasta fetch
     const res = await fetch(URL, { cache: "no-store" });
     if (!res.ok) throw new Error(`Seed HTTP ${res.status}`);
     const raw = await res.json();
-    const data = normalize(raw);
+    const data = { ...normalize(raw), _seedVersion: SEED_PAYLOAD_VERSION };
     try { localStorage.setItem(CACHE_KEY, JSON.stringify(data)); } catch (_) { /* quota */ }
     return data;
   }
