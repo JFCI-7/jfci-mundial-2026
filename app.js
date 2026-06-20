@@ -1859,8 +1859,8 @@ function renderStats() {
   STATE.matches.forEach(m => {
     if (m.status !== "finished") return;
     const allScorers = [
-      ...(m.home_scorers || []).map(s => ({ ...s, team: m.home?.name, iso2: m.home?.iso2 })),
-      ...(m.away_scorers || []).map(s => ({ ...s, team: m.away?.name, iso2: m.away?.iso2 })),
+      ...(m.home?.scorers || m.home_scorers || []).map(s => ({ ...s, team: m.home?.name, iso2: m.home?.iso2 })),
+      ...(m.away?.scorers || m.away_scorers || []).map(s => ({ ...s, team: m.away?.name, iso2: m.away?.iso2 })),
     ];
     allScorers.forEach(s => {
       if (s.note === "OG") return;
