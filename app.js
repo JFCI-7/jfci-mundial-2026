@@ -204,6 +204,15 @@ function ingestAPI(api) {
         if (matchKey(cand) === key) { existing = cand; break; }
       }
     }
+    // Fallback: matchear por stage + match_number para partidos de KO
+    // donde la API no provee match_number consistente con el seed.
+    if (!existing && m.match_number) {
+      for (const cand of STATE.matchesById.values()) {
+        if (cand.stage === m.stage && cand.match_number === m.match_number) {
+          existing = cand; break;
+        }
+      }
+    }
     if (existing) {
       // Guard: si el seed ya marca el partido como finished con scores,
       // no permitir que la API (o su snapshot KV desactualizado) lo

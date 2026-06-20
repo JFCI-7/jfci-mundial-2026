@@ -109,9 +109,29 @@ const API = (() => {
       _get("/get/stadiums"),
     ]);
 
+    const rawMatches = (gamesRes.games || []).map(normalizeGame);
+    // Asignar match_number a partidos de fase eliminatoria, que la API no provee.
+    // El orden del seed es: R32 (73-88), R16 (89-96), QF (97-100), SF (101-102), 3° (103), Final (104).
+    // Asumimos que la API devuelve los KO en el mismo orden de stage.
+    const KO_OFFSETS = { r32: 73, r16: 89, qf: 97, sf: 101, third: 103, final: 104 };
+    const koCounters = { r32: 0, r16: 0, qf: 0, sf: 0, third: 0, final: 0 };
+    for (const m of rawMatches) {
+      if (m.stage === "group") {
+        // Matchday 1 = 1-24, Matchday 2 = 25-48, Matchday 3 = 49-72
+        // (3 fechas × 8 partidos/día × 3 grupos/día = 72, pero el orden exacto depende de la API)
+        // No asignamos match_number para group stage — la API probablemente ya los tiene vía matchday.
+        continue;
+      }
+      const offset = KO_OFFSETS[m.stage];
+      if (offset != null) {
+        koCounters[m.stage] = (koCounters[m.stage] || 0) + 1;
+        m.match_number = offset + koCounters[m.stage] - 1;
+      }
+    }
+
     const data = {
       teams:    (teamsRes.teams    || []).map(normalizeTeam),
-      matches:  (gamesRes.games    || []).map(normalizeGame),
+      matches:  rawMatches,
       standings:(groupsRes.groups  || []).map(normalizeStanding),
       stadiums: (stadiumsRes.stadiums || []).map(normalizeStadium),
       source: "api",

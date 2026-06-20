@@ -161,6 +161,7 @@ const Seed = (() => {
           matches.push({
             id: `seed-m${m.match_number}`,
             source: "seed",
+            match_number: m.match_number,
             stage: STAGE_MAP[m.stage] || section,
             matchday: m.matchday || 0,
             group: m.group || null,
