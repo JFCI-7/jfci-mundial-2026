@@ -1905,39 +1905,19 @@ function renderStats() {
         <div class="stat-row"><span>Equipos con goles</span><span class="v">${teamsWithGoals.size}</span></div>
       </div>
     </div>
-    <div class="col-12 col-lg-6">
+
+    <div class="col-12">
       <div class="stat-card">
-        <h3><i class="ri-trophy-line" aria-hidden="true"></i> ${t("stats.summary.topScorer")}</h3>
-        ${top.length === 0 ? '<p class="text-muted small">' + escapeHtml(t("common.empty")) + '</p>' :
-          top.map(([name, g]) => `<div class="stat-row"><span>${name}</span><span class="v">${g} goles</span></div>`).join("")}
+        <h3><i class="ri-medal-line" aria-hidden="true"></i> ${t("stats.summary.topScorer")}</h3>
+        ${topScorers.length === 0 ? '<p class="text-muted small">' + escapeHtml(t("common.empty")) + '</p>' :
+          topScorers.map(s => `<div class="stat-row"><span>${s.iso2 ? `<span class="fi fi-${s.iso2} flag-24" title="${escapeHtml(s.team)}"></span> ` : ""}${escapeHtml(s.name)}</span><span class="v">${s.goals} goles</span></div>`).join("")}
       </div>
     </div>
 
     <div class="col-12">
       <div class="stat-card">
-        <h3><i class="ri-medal-line" aria-hidden="true"></i> Tabla de goleo individual</h3>
-        ${topScorers.length === 0 ? '<p class="text-muted small">Sin datos de goleadores aún.</p>' : `
-        <div class="table-responsive">
-          <table class="table table-sm table-borderless mb-0">
-            <thead>
-              <tr class="text-muted small">
-                <th style="width:36px">#</th>
-                <th>Jugador</th>
-                <th>Equipo</th>
-                <th class="text-end" style="width:70px">Goles</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${topScorers.map((s, i) => `
-              <tr>
-                <td class="text-muted">${i + 1}</td>
-                <td><strong>${escapeHtml(s.name)}</strong></td>
-                <td>${s.iso2 ? `<span class="fi fi-${s.iso2} flag-24" title="${escapeHtml(s.team)}"></span>` : ""} ${escapeHtml(s.team || "")}</td>
-                <td class="text-end"><span class="bebas fs-5">${s.goals}</span></td>
-              </tr>`).join("")}
-            </tbody>
-          </table>
-        </div>`}
+        <h3><i class="ri-trophy-line" aria-hidden="true"></i> Goles por selección (top ${Math.min(top.length, 10)})</h3>
+        <div id="chart-top" class="echart echart-tall"></div>
       </div>
     </div>
 
@@ -1958,13 +1938,6 @@ function renderStats() {
       <div class="stat-card">
         <h3><i class="ri-line-chart-line" aria-hidden="true"></i> Goles acumulados por jornada</h3>
         <div id="chart-accum" class="echart echart-tall"></div>
-      </div>
-    </div>
-
-    <div class="col-12">
-      <div class="stat-card">
-        <h3><i class="ri-trophy-line" aria-hidden="true"></i> Goles por selección (top ${Math.min(top.length, 12)})</h3>
-        <div id="chart-top" class="echart echart-tall"></div>
       </div>
     </div>
   `;
@@ -2105,7 +2078,7 @@ function renderEchartsCharts({ finished, live, pending, stageCounts, top, matchd
 
   // 4. Top goleadores (horizontal bar)
   if (top.length > 0) {
-    const topN = top.slice(0, 12);
+    const topN = top.slice(0, 10);
     const chartTop = echarts.init(document.getElementById("chart-top"), null, { renderer: "canvas" });
     chartTop.setOption({
       backgroundColor: "transparent",
