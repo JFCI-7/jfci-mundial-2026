@@ -1215,7 +1215,23 @@
         "city": "Seattle",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 2,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Burgess",
+            "minute": "11",
+            "note": "OG"
+          },
+          {
+            "player": "Freeman",
+            "minute": "43"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 30,
@@ -1237,7 +1253,18 @@
         "city": "Boston",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 0,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [],
+        "away_scorers": [
+          {
+            "player": "Ismael Saibari",
+            "minute": "2"
+          }
+        ]
       },
       {
         "match_number": 31,
@@ -1259,7 +1286,26 @@
         "city": "Philadelphia",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 3,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [
+          {
+            "player": "Matheus Cunha",
+            "minute": "23"
+          },
+          {
+            "player": "Matheus Cunha",
+            "minute": "36"
+          },
+          {
+            "player": "Vinícius Júnior",
+            "minute": "45+3"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 32,
@@ -1281,7 +1327,18 @@
         "city": "San Francisco",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 0,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [],
+        "away_scorers": [
+          {
+            "player": "M. Galarza",
+            "minute": "2"
+          }
+        ]
       },
       {
         "match_number": 33,
@@ -1303,7 +1360,13 @@
         "city": "Houston",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 5,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_scorers": [],
+        "away_scorers": []
       },
       {
         "match_number": 34,
@@ -1325,7 +1388,8 @@
         "city": "Toronto",
         "country": "Canada",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "status": "live"
       },
       {
         "match_number": 35,
@@ -1347,7 +1411,8 @@
         "city": "Kansas City",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "status": "scheduled"
       },
       {
         "match_number": 36,
@@ -1369,7 +1434,8 @@
         "city": "Monterrey",
         "country": "Mexico",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "status": "scheduled"
       },
       {
         "match_number": 37,
