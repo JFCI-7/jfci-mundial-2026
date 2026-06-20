@@ -1365,8 +1365,34 @@
         "away_score": 1,
         "status": "finished",
         "time_elapsed": "90",
-        "home_scorers": [],
-        "away_scorers": []
+        "home_scorers": [
+          {
+            "player": "Brian Brobbey",
+            "minute": "5"
+          },
+          {
+            "player": "Brian Brobbey",
+            "minute": "17"
+          },
+          {
+            "player": "Cody Gakpo",
+            "minute": "47"
+          },
+          {
+            "player": "Cody Gakpo",
+            "minute": "54"
+          },
+          {
+            "player": "Crysencio Summerville",
+            "minute": "89"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Anthony Elanga",
+            "minute": "59"
+          }
+        ]
       },
       {
         "match_number": 34,
