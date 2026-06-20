@@ -77,9 +77,11 @@ const Seed = (() => {
   //     versión interna no coincide (e.g. browser sirve seed.js viejo que
   //     escribió CACHE_KEY v3 con datos sin scores), se refetchea en vez de
   //     devolver datos obsoletos.
-  const CACHE_KEY = "mundial2026_seed_cache_v3";
-  const LEGACY_CACHE_KEYS = ["mundial2026_seed_cache", "mundial2026_seed_cache_v2"];
-  const SEED_PAYLOAD_VERSION = 4;
+  // v5: bump CACHE_KEY para invalidar cachés de browsers que tienen una versión
+  //     incompleta del seed (36 matches en vez de 104).
+  const CACHE_KEY = "mundial2026_seed_cache_v5";
+  const LEGACY_CACHE_KEYS = ["mundial2026_seed_cache", "mundial2026_seed_cache_v2", "mundial2026_seed_cache_v3"];
+  const SEED_PAYLOAD_VERSION = 5;
 
   async function load() {
     // Migración silenciosa: si hay caché legacy, eliminarlo. La nueva
