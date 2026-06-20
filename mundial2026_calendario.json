@@ -1361,10 +1361,12 @@
         "country": "United States",
         "stage": "Group Stage",
         "matchday": 2,
+        "status": "finished",
         "home_score": 5,
         "away_score": 1,
-        "status": "finished",
         "time_elapsed": "90",
+        "home_ht": 2,
+        "away_ht": 0,
         "home_scorers": [
           {
             "player": "Brian Brobbey",

@@ -1,0 +1,34 @@
+name: Sync Results from OpenFootball
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/sync-results.mjs
+      - name: Commit and push if changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            git config user.name "World Cup Sync Bot"
+            git config user.email "bot@jfci-mundial-2026"
+            git add mundial2026_calendario.json
+            git commit -m "sync: resultados automáticos vía openfootball"
+            git push
+          else
+            echo "No changes to commit."
+          fi
+      - name: Deploy to Vercel
+        if: ${{ success() }}
+        run: |
+          if [[ -n $(git status --porcelain) ]] || [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            curl -s -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}" -H "Content-Type: application/json" -d '{}' || true
+          fi
