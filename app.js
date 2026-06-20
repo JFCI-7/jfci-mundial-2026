@@ -1854,6 +1854,29 @@ function renderStats() {
     goalsAcc.push(acc);
   }
 
+  // Goleadores individuales (excluye autogoles)
+  const scorerMap = new Map();
+  STATE.matches.forEach(m => {
+    if (m.status !== "finished") return;
+    const allScorers = [
+      ...(m.home_scorers || []).map(s => ({ ...s, team: m.home?.name, iso2: m.home?.iso2 })),
+      ...(m.away_scorers || []).map(s => ({ ...s, team: m.away?.name, iso2: m.away?.iso2 })),
+    ];
+    allScorers.forEach(s => {
+      if (s.note === "OG") return;
+      const key = s.player;
+      const existing = scorerMap.get(key) || { team: s.team, iso2: s.iso2, goals: 0, lastMinute: 0 };
+      existing.goals++;
+      const min = parseInt(String(s.minute), 10) || 0;
+      if (min > existing.lastMinute) existing.lastMinute = min;
+      scorerMap.set(key, existing);
+    });
+  });
+  const topScorers = Array.from(scorerMap.entries())
+    .map(([name, d]) => ({ name, ...d }))
+    .sort((a, b) => b.goals - a.goals || a.lastMinute - b.lastMinute)
+    .slice(0, 15);
+
   // Distribución por fase
   const stageMap = { group: t("stage.group_short"), r32: t("stage.r32_short"), r16: t("stage.r16_short"), qf: t("stage.qf_short"), sf: t("stage.sf_short"), third: t("stage.tp_short"), final: t("stage.f_short") };
   const stageCounts = {};
@@ -1887,6 +1910,34 @@ function renderStats() {
         <h3><i class="ri-trophy-line" aria-hidden="true"></i> ${t("stats.summary.topScorer")}</h3>
         ${top.length === 0 ? '<p class="text-muted small">' + escapeHtml(t("common.empty")) + '</p>' :
           top.map(([name, g]) => `<div class="stat-row"><span>${name}</span><span class="v">${g} goles</span></div>`).join("")}
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="stat-card">
+        <h3><i class="ri-medal-line" aria-hidden="true"></i> Tabla de goleo individual</h3>
+        ${topScorers.length === 0 ? '<p class="text-muted small">Sin datos de goleadores aún.</p>' : `
+        <div class="table-responsive">
+          <table class="table table-sm table-borderless mb-0">
+            <thead>
+              <tr class="text-muted small">
+                <th style="width:36px">#</th>
+                <th>Jugador</th>
+                <th>Equipo</th>
+                <th class="text-end" style="width:70px">Goles</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${topScorers.map((s, i) => `
+              <tr>
+                <td class="text-muted">${i + 1}</td>
+                <td><strong>${escapeHtml(s.name)}</strong></td>
+                <td>${s.iso2 ? `<span class="fi fi-${s.iso2} flag-24" title="${escapeHtml(s.team)}"></span>` : ""} ${escapeHtml(s.team || "")}</td>
+                <td class="text-end"><span class="bebas fs-5">${s.goals}</span></td>
+              </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>`}
       </div>
     </div>
 
