@@ -1417,7 +1417,28 @@
         "country": "Canada",
         "stage": "Group Stage",
         "matchday": 2,
-        "status": "live"
+        "status": "finished",
+        "home_score": 2,
+        "away_score": 1,
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 1,
+        "home_scorers": [
+          {
+            "player": "Deniz Undav",
+            "minute": "68"
+          },
+          {
+            "player": "Deniz Undav",
+            "minute": "90+4"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Franck Kessié",
+            "minute": "30"
+          }
+        ]
       },
       {
         "match_number": 35,

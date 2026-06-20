@@ -26,9 +26,4 @@ jobs:
           else
             echo "No changes to commit."
           fi
-      - name: Deploy to Vercel
-        if: ${{ success() }}
-        run: |
-          if [[ -n $(git status --porcelain) ]] || [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            curl -s -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}" -H "Content-Type: application/json" -d '{}' || true
-          fi
+
