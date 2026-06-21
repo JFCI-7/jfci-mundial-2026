@@ -234,6 +234,7 @@ function ingestAPI(api) {
         if (!newHome.flag && seedHome.flag) newHome.flag = seedHome.flag;
         // Preservar scorers del seed si la API no los tiene (scorers vacío).
         if ((!newHome.scorers || newHome.scorers.length === 0) && seedHome.scorers && seedHome.scorers.length > 0) {
+          console.log(`[ingestAPI] Preservando home.scorers de seed para ${existing.home?.name} (API los vació). Seed tenía ${seedHome.scorers.length} goleadores.`);
           newHome.scorers = seedHome.scorers;
         }
         existing.home = newHome;
@@ -245,6 +246,7 @@ function ingestAPI(api) {
         if (!newAway.flag && seedAway.flag) newAway.flag = seedAway.flag;
         // Preservar scorers del seed si la API no los tiene (scorers vacío).
         if ((!newAway.scorers || newAway.scorers.length === 0) && seedAway.scorers && seedAway.scorers.length > 0) {
+          console.log(`[ingestAPI] Preservando away.scorers de seed para ${existing.away?.name} (API los vació). Seed tenía ${seedAway.scorers.length} goleadores.`);
           newAway.scorers = seedAway.scorers;
         }
         existing.away = newAway;
@@ -1933,6 +1935,7 @@ function renderStats() {
       else if (cnt === 2) dobletes.push({ player, goals: cnt, match: `${m.home?.name} ${m.home_score}-${m.away_score} ${m.away?.name}` });
     });
   });
+  console.log(`[renderStats] Hat-tricks: ${hatTricks.length}, Dobletes: ${dobletes.length}, Finalizados: ${STATE.matches.filter(m => m.status === 'finished').length}`);
 
   // 4. Goles en descuentos (stoppage time)
   let stoppageGoals = 0;
@@ -1967,6 +1970,7 @@ function renderStats() {
     });
   });
   const minuteLabels = ["0-15", "16-30", "31-45", "45+", "46-60", "61-75", "76-90", "90+"];
+  console.log(`[renderStats] Stoppage: ${stoppageGoals}, Bins: [${minuteBuckets.join(', ')}]`);
 
   // 5. Goles por estadio
   const goalsByVenue = new Map();
