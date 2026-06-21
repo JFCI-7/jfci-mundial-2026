@@ -351,6 +351,8 @@
       "stats.summary.goals": "Goles",
       "stats.summary.avgGoals": "Promedio",
       "stats.summary.topScorer": "Goleador",
+      "stats.summary.filterPlaceholder": "Buscar jugador, goles o país…",
+      "stats.summary.scrollHint": "↓ scroll para más",
 
       // ── Facts view ──
       "facts.title": "Datos Curiosos de los Mundiales",
@@ -780,6 +782,8 @@
       "stats.summary.goals": "Goals",
       "stats.summary.avgGoals": "Average",
       "stats.summary.topScorer": "Top scorer",
+      "stats.summary.filterPlaceholder": "Search player, goals or country…",
+      "stats.summary.scrollHint": "↓ scroll for more",
 
       // ── Facts view ──
       "facts.title": "World Cup Fun Facts",

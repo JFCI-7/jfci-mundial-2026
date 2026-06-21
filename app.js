@@ -1993,11 +1993,18 @@ function renderStats() {
 
     <div class="col-12">
       <div class="stat-card">
-        <h3><i class="ri-medal-line" aria-hidden="true"></i> ${t("stats.summary.topScorer")} <span class="text-muted small">(${topScorers.length})</span></h3>
+        <div class="d-flex justify-content-between align-items-center gap-2 mb-2 flex-wrap">
+          <h3 class="mb-0"><i class="ri-medal-line" aria-hidden="true"></i> ${t("stats.summary.topScorer")} <span id="scorers-count" class="text-muted small">(${topScorers.length})</span></h3>
+          <div class="stat-scorers-filter">
+            <i class="ri-search-line" aria-hidden="true"></i>
+            <input type="search" id="scorers-filter" placeholder="${escapeHtml(t("stats.summary.filterPlaceholder"))}" aria-label="${escapeHtml(t("stats.summary.filterPlaceholder"))}">
+          </div>
+        </div>
         ${topScorers.length === 0 ? '<p class="text-muted small">' + escapeHtml(t("common.empty")) + '</p>' :
-          `<div class="stat-scorers-scroll">${
+          `<div class="stat-scorers-scroll" id="scorers-list">${
             topScorers.map(s => `<div class="stat-row"><span>${s.iso2 ? `<span class="fi fi-${s.iso2} flag-24" title="${escapeHtml(s.team)}"></span> ` : ""}${escapeHtml(s.name)}</span><span class="v">${s.goals} goles</span></div>`).join("")
-          }</div>`}
+          }</div>
+          <div class="stat-scorers-hint" id="scorers-hint">${escapeHtml(t("stats.summary.scrollHint"))}</div>`}
       </div>
     </div>
 
@@ -2104,6 +2111,50 @@ function renderStats() {
       </div>
     </div>
   `;
+
+  // Filtro de goleadores: busca por nombre, goles o país/equipo.
+  // Case-insensitive y acento-insensitive (usa la misma normKey del top de equipos).
+  const filterInput = document.getElementById("scorers-filter");
+  const listEl = document.getElementById("scorers-list");
+  const countEl = document.getElementById("scorers-count");
+  const hintEl = document.getElementById("scorers-hint");
+  const normForFilter = (s) => (s || "").toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const updateScorersOverflow = () => {
+    if (!listEl) return;
+    const hasOverflow = listEl.scrollHeight > listEl.clientHeight + 1;
+    listEl.classList.toggle("has-overflow", hasOverflow);
+    if (hintEl) hintEl.classList.toggle("visible", hasOverflow);
+  };
+  if (filterInput && listEl) {
+    const renderRows = (rows) => {
+      if (rows.length === 0) {
+        listEl.innerHTML = `<p class="text-muted small px-2 py-3">Sin resultados.</p>`;
+      } else {
+        listEl.innerHTML = rows.map(s =>
+          `<div class="stat-row"><span>${s.iso2 ? `<span class="fi fi-${s.iso2} flag-24" title="${escapeHtml(s.team)}"></span> ` : ""}${escapeHtml(s.name)}</span><span class="v">${s.goals} goles</span></div>`
+        ).join("");
+      }
+      listEl.scrollTop = 0;
+      requestAnimationFrame(updateScorersOverflow);
+    };
+    filterInput.addEventListener("input", (e) => {
+      const q = normForFilter(e.target.value.trim());
+      if (!q) {
+        renderRows(topScorers);
+        if (countEl) countEl.textContent = `(${topScorers.length})`;
+        return;
+      }
+      const filtered = topScorers.filter(s =>
+        normForFilter(s.name).includes(q) ||
+        String(s.goals).includes(q) ||
+        normForFilter(s.team).includes(q)
+      );
+      renderRows(filtered);
+      if (countEl) countEl.textContent = `(${filtered.length})`;
+    });
+    requestAnimationFrame(updateScorersOverflow);
+    window.addEventListener("resize", updateScorersOverflow, { passive: true });
+  }
 
   // Render de las gráficas (después de inyectar el HTML, en el siguiente tick)
   setTimeout(() => renderEchartsCharts({ finished, live, pending, stageCounts, top, matchdays, goalsAcc }), 0);
