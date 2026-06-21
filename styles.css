@@ -978,6 +978,20 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
 }
 .stat-row:last-child { border-bottom: none; }
 .stat-row .v { font-weight: 700; color: var(--accent-2); }
+.stat-scorers-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+.stat-scorers-scroll::-webkit-scrollbar { width: 6px; }
+.stat-scorers-scroll::-webkit-scrollbar-track { background: transparent; }
+.stat-scorers-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+.stat-scorers-scroll::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 /* ===================================================
    ECHARTS (gráficas en Estadísticas)

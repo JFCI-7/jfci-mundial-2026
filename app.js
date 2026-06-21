@@ -1883,8 +1883,7 @@ function renderStats() {
   });
   const topScorers = Array.from(scorerMap.entries())
     .map(([name, d]) => ({ name, ...d }))
-    .sort((a, b) => b.goals - a.goals || a.lastMinute - b.lastMinute)
-    .slice(0, 15);
+    .sort((a, b) => b.goals - a.goals || a.lastMinute - b.lastMinute);
 
   // Distribución por fase
   const stageMap = { group: t("stage.group_short"), r32: t("stage.r32_short"), r16: t("stage.r16_short"), qf: t("stage.qf_short"), sf: t("stage.sf_short"), third: t("stage.tp_short"), final: t("stage.f_short") };
@@ -1917,9 +1916,11 @@ function renderStats() {
 
     <div class="col-12">
       <div class="stat-card">
-        <h3><i class="ri-medal-line" aria-hidden="true"></i> ${t("stats.summary.topScorer")}</h3>
+        <h3><i class="ri-medal-line" aria-hidden="true"></i> ${t("stats.summary.topScorer")} <span class="text-muted small">(${topScorers.length})</span></h3>
         ${topScorers.length === 0 ? '<p class="text-muted small">' + escapeHtml(t("common.empty")) + '</p>' :
-          topScorers.map(s => `<div class="stat-row"><span>${s.iso2 ? `<span class="fi fi-${s.iso2} flag-24" title="${escapeHtml(s.team)}"></span> ` : ""}${escapeHtml(s.name)}</span><span class="v">${s.goals} goles</span></div>`).join("")}
+          `<div class="stat-scorers-scroll">${
+            topScorers.map(s => `<div class="stat-row"><span>${s.iso2 ? `<span class="fi fi-${s.iso2} flag-24" title="${escapeHtml(s.team)}"></span> ` : ""}${escapeHtml(s.name)}</span><span class="v">${s.goals} goles</span></div>`).join("")
+          }</div>`}
       </div>
     </div>
 
