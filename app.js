@@ -232,6 +232,10 @@ function ingestAPI(api) {
         const newHome = { ...seedHome, ...m.home };
         if (!newHome.iso2 && seedHome.iso2) newHome.iso2 = seedHome.iso2;
         if (!newHome.flag && seedHome.flag) newHome.flag = seedHome.flag;
+        // Preservar scorers del seed si la API no los tiene (scorers vacío).
+        if ((!newHome.scorers || newHome.scorers.length === 0) && seedHome.scorers && seedHome.scorers.length > 0) {
+          newHome.scorers = seedHome.scorers;
+        }
         existing.home = newHome;
       }
       if (m.away.name_en && m.away.name_en !== "TBD") {
@@ -239,6 +243,10 @@ function ingestAPI(api) {
         const newAway = { ...seedAway, ...m.away };
         if (!newAway.iso2 && seedAway.iso2) newAway.iso2 = seedAway.iso2;
         if (!newAway.flag && seedAway.flag) newAway.flag = seedAway.flag;
+        // Preservar scorers del seed si la API no los tiene (scorers vacío).
+        if ((!newAway.scorers || newAway.scorers.length === 0) && seedAway.scorers && seedAway.scorers.length > 0) {
+          newAway.scorers = seedAway.scorers;
+        }
         existing.away = newAway;
       }
       updated++;
