@@ -1461,7 +1461,14 @@
         "country": "United States",
         "stage": "Group Stage",
         "matchday": 2,
-        "status": "scheduled"
+        "status": "finished",
+        "home_score": 0,
+        "away_score": 0,
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 0,
+        "home_scorers": [],
+        "away_scorers": []
       },
       {
         "match_number": 36,
@@ -1484,7 +1491,31 @@
         "country": "Mexico",
         "stage": "Group Stage",
         "matchday": 2,
-        "status": "scheduled"
+        "status": "finished",
+        "home_score": 0,
+        "away_score": 4,
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 2,
+        "home_scorers": [],
+        "away_scorers": [
+          {
+            "player": "Daichi Kamada",
+            "minute": "4"
+          },
+          {
+            "player": "Ayase Ueda",
+            "minute": "31"
+          },
+          {
+            "player": "Junya Ito",
+            "minute": "69"
+          },
+          {
+            "player": "Ayase Ueda",
+            "minute": "83"
+          }
+        ]
       },
       {
         "match_number": 37,
