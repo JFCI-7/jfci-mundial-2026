@@ -1537,7 +1537,28 @@
         "city": "Atlanta",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 4,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 3,
+        "away_ht": 0,
+        "home_scorers": [
+          {
+            "player": "Lamine Yamal",
+            "minute": "10"
+          },
+          {
+            "player": "Mikel Oyarzabal",
+            "minute": "21"
+          },
+          {
+            "player": "Mikel Oyarzabal",
+            "minute": "24"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 38,
