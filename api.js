@@ -187,12 +187,23 @@ const API = (() => {
       .map(entry => {
         const trimmed = entry.trim();
         if (!trimmed) return null;
-        const m = trimmed.match(/^(.+?)\s+(\d+(?:\+\d+)?)\s*'?\s*(?:\((\w+)\))?\s*$/);
+        // Regex con dos alternativas: stoppage time (45'+5', 45+3') o regular (17', 7')
+        const re = /^(.+?)\s+(\d+)'?\+(\d+)'?\s*(?:\((\w+)\))?\s*$|^(.+?)\s+(\d+)'?\s*(?:\((\w+)\))?\s*$/;
+        const m = trimmed.match(re);
         if (m) {
-          const goal = { player: m[1].trim(), minute: m[2] };
-          if (m[3] === "OG") goal.note = "OG";
-          if (m[3] === "p") goal.note = "penalty";
-          return goal;
+          if (m[2]) {
+            // Stoppage time: "Player 45'+5'" o "Player 45+3'"
+            const goal = { player: m[1].trim(), minute: m[2] + "+" + m[3] };
+            if (m[4] === "OG") goal.note = "OG";
+            if (m[4] === "p") goal.note = "penalty";
+            return goal;
+          } else {
+            // Regular: "Player 17'" o "Player 7'(OG)"
+            const goal = { player: m[5].trim(), minute: m[6] };
+            if (m[7] === "OG") goal.note = "OG";
+            if (m[7] === "p") goal.note = "penalty";
+            return goal;
+          }
         }
         return { player: trimmed, minute: null };
       })
