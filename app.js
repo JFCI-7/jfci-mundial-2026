@@ -2044,7 +2044,7 @@ function renderStats() {
                 <td>
                   ${dobletes.length === 0
                     ? '<span class="text-muted small">Ninguno aún</span>'
-                    : `<span class="bebas fs-5 me-2">${dobletes.length}</span>${dobletes.slice(0, 6).map(d => `<span class="badge bg-secondary me-1 mb-1">${escapeHtml(d.player)}</span>`).join("")}${dobletes.length > 6 ? `<span class="small text-muted">+${dobletes.length - 6} más</span>` : ""}`}
+                    : `<div class="d-flex flex-wrap gap-1 align-items-center" style="max-height:120px;overflow-y:auto"><span class="bebas fs-5 me-2">${dobletes.length}</span>${dobletes.map(d => `<span class="badge bg-secondary">${escapeHtml(d.player)}</span>`).join("")}</div>`}
                 </td>
               </tr>
               <tr>
