@@ -992,6 +992,15 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   border-radius: 3px;
 }
 .stat-scorers-scroll::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+.stats-highlights {
+  color: var(--text);
+}
+.stats-highlights td {
+  padding: .65rem .5rem;
+  vertical-align: top;
+  border-bottom: 1px dashed var(--border);
+}
+.stats-highlights tr:last-child td { border-bottom: none; }
 
 /* ===================================================
    ECHARTS (gráficas en Estadísticas)

@@ -1893,6 +1893,83 @@ function renderStats() {
     stageCounts[k] = (stageCounts[k] || 0) + 1;
   });
 
+  // === HIGHLIGHTS / RANKINGS ===
+  // 1. Goleada del torneo (partido con más goles en total)
+  let biggestWin = null;
+  STATE.matches.forEach(m => {
+    const s = effectiveScore(m);
+    if (s.home === null || s.away === null) return;
+    const total = s.home + s.away;
+    const margin = Math.abs(s.home - s.away);
+    if (!biggestWin || total > biggestWin.total || (total === biggestWin.total && margin > biggestWin.margin)) {
+      biggestWin = { m, home: s.home, away: s.away, total, margin };
+    }
+  });
+
+  // 2-3. Hat-tricks y Dobletes (por partido)
+  const hatTricks = [];
+  const dobletes = [];
+  STATE.matches.forEach(m => {
+    if (m.status !== "finished") return;
+    const allScorers = [
+      ...(m.home?.scorers || m.home_scorers || []).map(s => ({ ...s, team: m.home?.name, iso2: m.home?.iso2 })),
+      ...(m.away?.scorers || m.away_scorers || []).map(s => ({ ...s, team: m.away?.name, iso2: m.away?.iso2 })),
+    ];
+    const playerCount = new Map();
+    allScorers.forEach(s => {
+      if (s.note === "OG") return;
+      playerCount.set(s.player, (playerCount.get(s.player) || 0) + 1);
+    });
+    playerCount.forEach((cnt, player) => {
+      if (cnt >= 3) hatTricks.push({ player, goals: cnt, match: `${m.home?.name} ${m.home_score}-${m.away_score} ${m.away?.name}` });
+      else if (cnt === 2) dobletes.push({ player, goals: cnt, match: `${m.home?.name} ${m.home_score}-${m.away_score} ${m.away?.name}` });
+    });
+  });
+
+  // 4. Goles en descuentos (stoppage time)
+  let stoppageGoals = 0;
+  let firstHalfGoals = 0;
+  let secondHalfGoals = 0;
+  const minuteBuckets = new Array(7).fill(0); // 0-15, 16-30, 31-45, 46-60, 61-75, 76-90, 90+
+  STATE.matches.forEach(m => {
+    if (m.status !== "finished") return;
+    const allScorers = [
+      ...(m.home?.scorers || m.home_scorers || []),
+      ...(m.away?.scorers || m.away_scorers || []),
+    ];
+    allScorers.forEach(s => {
+      if (s.note === "OG") return;
+      const minStr = String(s.minute || "0");
+      const isStoppage = minStr.includes("+");
+      if (isStoppage) stoppageGoals++;
+      const base = parseInt(minStr.split("+")[0], 10) || 0;
+      if (base <= 45) firstHalfGoals++;
+      else secondHalfGoals++;
+      let bucket;
+      if (base <= 15) bucket = 0;
+      else if (base <= 30) bucket = 1;
+      else if (base <= 45) bucket = 2;
+      else if (base <= 60) bucket = 3;
+      else if (base <= 75) bucket = 4;
+      else if (base <= 90) bucket = 5;
+      else bucket = 6;
+      minuteBuckets[bucket]++;
+    });
+  });
+  const minuteLabels = ["0-15", "16-30", "31-45", "46-60", "61-75", "76-90", "90+"];
+
+  // 5. Goles por estadio
+  const goalsByVenue = new Map();
+  STATE.matches.forEach(m => {
+    const s = effectiveScore(m);
+    if (s.home === null || s.away === null) return;
+    const venue = m.venue || m.city || "—";
+    goalsByVenue.set(venue, (goalsByVenue.get(venue) || 0) + s.home + s.away);
+  });
+  const topVenues = Array.from(goalsByVenue.entries())
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5);
+
   container.innerHTML = `
     <div class="col-12 col-md-6 col-lg-3">
       <div class="stat-card">
@@ -1928,6 +2005,82 @@ function renderStats() {
       <div class="stat-card">
         <h3><i class="ri-trophy-line" aria-hidden="true"></i> Goles por selección (top ${Math.min(top.length, 10)})</h3>
         <div id="chart-top" class="echart echart-tall"></div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="stat-card">
+        <h3><i class="ri-sparkling-2-line" aria-hidden="true"></i> Highlights del torneo</h3>
+        <div class="table-responsive">
+          <table class="table table-sm stats-highlights mb-0">
+            <tbody>
+              <tr>
+                <td class="text-muted" style="width:40%">Goleada del torneo</td>
+                <td>
+                  ${biggestWin
+                    ? `<strong class="bebas fs-5">${biggestWin.home}-${biggestWin.away}</strong> <span class="text-muted small">(${biggestWin.total} goles, margen ${biggestWin.margin})</span><br><span class="small">${escapeHtml(biggestWin.m.home?.name || "")} vs ${escapeHtml(biggestWin.m.away?.name || "")}</span>`
+                    : '<span class="text-muted small">—</span>'}
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">Hat-tricks</td>
+                <td>
+                  ${hatTricks.length === 0
+                    ? '<span class="text-muted small">Ninguno aún</span>'
+                    : hatTricks.map(h => `<span class="badge bg-warning text-dark me-1 mb-1"><strong>${escapeHtml(h.player)}</strong> ×${h.goals}</span> <span class="small text-muted">${escapeHtml(h.match)}</span>`).join("<br>")}
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">Dobletes</td>
+                <td>
+                  ${dobletes.length === 0
+                    ? '<span class="text-muted small">Ninguno aún</span>'
+                    : `<span class="bebas fs-5 me-2">${dobletes.length}</span>${dobletes.slice(0, 6).map(d => `<span class="badge bg-secondary me-1 mb-1">${escapeHtml(d.player)}</span>`).join("")}${dobletes.length > 6 ? `<span class="small text-muted">+${dobletes.length - 6} más</span>` : ""}`}
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">Goles en descuentos (45+/90+)</td>
+                <td>
+                  <span class="bebas fs-5">${stoppageGoals}</span>
+                  <span class="small text-muted">de ${totalGoals} (${totalGoals > 0 ? ((stoppageGoals / totalGoals) * 100).toFixed(1) : 0}%)</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">Distribución por parte</td>
+                <td>
+                  <span class="small">1ª parte: <strong>${firstHalfGoals}</strong></span>
+                  <span class="small ms-2">2ª parte: <strong>${secondHalfGoals}</strong></span>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">Goles por minuto</td>
+                <td>
+                  <div class="d-flex align-items-end gap-1" style="height:48px">
+                    ${minuteBuckets.map((c, i) => {
+                      const max = Math.max(...minuteBuckets, 1);
+                      const h = Math.max(2, (c / max) * 44);
+                      return `<div class="d-flex flex-column align-items-center" title="${minuteLabels[i]}: ${c} goles" style="flex:1">
+                        <div style="width:100%;height:${h}px;background:var(--accent-2);border-radius:2px 2px 0 0;min-height:2px"></div>
+                        <span class="small text-muted" style="font-size:.65rem;margin-top:2px">${c}</span>
+                      </div>`;
+                    }).join("")}
+                  </div>
+                  <div class="d-flex gap-1 mt-1">
+                    ${minuteLabels.map(l => `<span class="small text-muted" style="flex:1;text-align:center;font-size:.6rem">${l}</span>`).join("")}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-muted">Estadios más goleadores</td>
+                <td>
+                  ${topVenues.length === 0
+                    ? '<span class="text-muted small">—</span>'
+                    : topVenues.map(([v, g], i) => `<div class="d-flex justify-content-between border-bottom" style="border-color:var(--border)!important"><span class="small">${i + 1}. ${escapeHtml(v)}</span><span class="small fw-bold">${g}</span></div>`).join("")}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
