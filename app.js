@@ -2040,11 +2040,11 @@ function renderStats() {
                 </td>
               </tr>
               <tr>
-                <td class="text-muted">Dobletes</td>
+                <td class="text-muted">Dobletes <span class="bebas fs-5" style="color:var(--accent-2)">${dobletes.length}</span></td>
                 <td>
                   ${dobletes.length === 0
                     ? '<span class="text-muted small">Ninguno aún</span>'
-                    : `<div class="d-flex flex-wrap gap-1 align-items-center" style="max-height:120px;overflow-y:auto"><span class="bebas fs-5 me-2">${dobletes.length}</span>${dobletes.map(d => `<span class="badge bg-secondary">${escapeHtml(d.player)}</span>`).join("")}</div>`}
+                    : `<div class="d-flex flex-wrap gap-1" style="max-height:120px;overflow-y:auto">${dobletes.map(d => `<span class="badge bg-secondary">${escapeHtml(d.player)}</span>`).join("")}</div>`}
                 </td>
               </tr>
               <tr>
