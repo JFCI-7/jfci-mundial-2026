@@ -187,8 +187,13 @@ const API = (() => {
       .map(entry => {
         const trimmed = entry.trim();
         if (!trimmed) return null;
-        const m = trimmed.match(/^(.+?)\s+(\d+)\s*'?\s*$/);
-        if (m) return { player: m[1].trim(), minute: parseInt(m[2], 10) };
+        const m = trimmed.match(/^(.+?)\s+(\d+(?:\+\d+)?)\s*'?\s*(?:\((\w+)\))?\s*$/);
+        if (m) {
+          const goal = { player: m[1].trim(), minute: m[2] };
+          if (m[3] === "OG") goal.note = "OG";
+          if (m[3] === "p") goal.note = "penalty";
+          return goal;
+        }
         return { player: trimmed, minute: null };
       })
       .filter(Boolean);

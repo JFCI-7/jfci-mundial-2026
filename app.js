@@ -234,7 +234,6 @@ function ingestAPI(api) {
         if (!newHome.flag && seedHome.flag) newHome.flag = seedHome.flag;
         // Preservar scorers del seed si la API no los tiene (scorers vacío).
         if ((!newHome.scorers || newHome.scorers.length === 0) && seedHome.scorers && seedHome.scorers.length > 0) {
-          console.log(`[ingestAPI] Preservando home.scorers de seed para ${existing.home?.name} (API los vació). Seed tenía ${seedHome.scorers.length} goleadores.`);
           newHome.scorers = seedHome.scorers;
         }
         existing.home = newHome;
@@ -246,7 +245,6 @@ function ingestAPI(api) {
         if (!newAway.flag && seedAway.flag) newAway.flag = seedAway.flag;
         // Preservar scorers del seed si la API no los tiene (scorers vacío).
         if ((!newAway.scorers || newAway.scorers.length === 0) && seedAway.scorers && seedAway.scorers.length > 0) {
-          console.log(`[ingestAPI] Preservando away.scorers de seed para ${existing.away?.name} (API los vació). Seed tenía ${seedAway.scorers.length} goleadores.`);
           newAway.scorers = seedAway.scorers;
         }
         existing.away = newAway;
@@ -1936,7 +1934,6 @@ function renderStats() {
     });
   });
   console.log(`[renderStats] Hat-tricks: ${hatTricks.length}, Dobletes: ${dobletes.length}, Finalizados: ${STATE.matches.filter(m => m.status === 'finished').length}`);
-
   // 4. Goles en descuentos (stoppage time)
   let stoppageGoals = 0;
   let firstHalfGoals = 0;
