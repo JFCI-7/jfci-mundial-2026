@@ -1040,14 +1040,35 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-2) 20%, transparent);
 }
 .stats-highlights {
+  width: 100%;
+  color: var(--text);
+  border-collapse: collapse;
+  background: transparent;
+  margin-bottom: 0;
+}
+.stats-highlights > :not(caption) > * > * { background: transparent; }
+.stats-highlights tr { border: none; }
+.stats-highlights td {
+  padding: .35rem 0;
+  border-bottom: 1px dashed var(--border);
+  vertical-align: top;
   color: var(--text);
 }
-.stats-highlights td {
-  padding: .65rem .5rem;
-  vertical-align: top;
-  border-bottom: 1px dashed var(--border);
-}
 .stats-highlights tr:last-child td { border-bottom: none; }
+.stats-highlights td:first-child {
+  color: var(--text);
+  font-weight: 400;
+  width: 40%;
+  padding-right: 1rem;
+}
+.stats-highlights td:last-child {
+  text-align: right;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+.stats-highlights td:last-child .badge { font-weight: 400; }
+.stats-highlights td:last-child small,
+.stats-highlights td:last-child .small { font-weight: 400; color: var(--text-muted); }
 
 /* ===================================================
    ECHARTS (gráficas en Estadísticas)
