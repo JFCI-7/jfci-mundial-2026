@@ -1930,7 +1930,7 @@ function renderStats() {
   let stoppageGoals = 0;
   let firstHalfGoals = 0;
   let secondHalfGoals = 0;
-  const minuteBuckets = new Array(7).fill(0); // 0-15, 16-30, 31-45, 46-60, 61-75, 76-90, 90+
+  const minuteBuckets = new Array(8).fill(0); // 0-15, 16-30, 31-45, 45+, 46-60, 61-75, 76-90, 90+
   STATE.matches.forEach(m => {
     if (m.status !== "finished") return;
     const allScorers = [
@@ -1946,17 +1946,19 @@ function renderStats() {
       if (base <= 45) firstHalfGoals++;
       else secondHalfGoals++;
       let bucket;
-      if (base <= 15) bucket = 0;
+      if (isStoppage && base <= 45) bucket = 3; // 45+ (stoppage 1er tiempo)
+      else if (isStoppage) bucket = 7; // 90+ (stoppage 2do tiempo)
+      else if (base <= 15) bucket = 0;
       else if (base <= 30) bucket = 1;
       else if (base <= 45) bucket = 2;
-      else if (base <= 60) bucket = 3;
-      else if (base <= 75) bucket = 4;
-      else if (base <= 90) bucket = 5;
-      else bucket = 6;
+      else if (base <= 60) bucket = 4;
+      else if (base <= 75) bucket = 5;
+      else if (base <= 90) bucket = 6;
+      else bucket = 7;
       minuteBuckets[bucket]++;
     });
   });
-  const minuteLabels = ["0-15", "16-30", "31-45", "46-60", "61-75", "76-90", "90+"];
+  const minuteLabels = ["0-15", "16-30", "31-45", "45+", "46-60", "61-75", "76-90", "90+"];
 
   // 5. Goles por estadio
   const goalsByVenue = new Map();
