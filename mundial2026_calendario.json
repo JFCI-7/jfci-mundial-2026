@@ -1610,7 +1610,33 @@
         "city": "Miami",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 2,
+        "away_score": 2,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 2,
+        "away_ht": 1,
+        "home_scorers": [
+          {
+            "player": "Maxi Araújo",
+            "minute": "44"
+          },
+          {
+            "player": "Agustín Cano",
+            "minute": "45+6"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Kevin Pina",
+            "minute": "21"
+          },
+          {
+            "player": "Hélio Varela",
+            "minute": "61"
+          }
+        ]
       },
       {
         "match_number": 40,
@@ -1632,7 +1658,33 @@
         "city": "Vancouver",
         "country": "Canada",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 1,
+        "away_score": 3,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 1,
+        "away_ht": 0,
+        "home_scorers": [
+          {
+            "player": "Finn Surman",
+            "minute": "15"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Mostafa Zico",
+            "minute": "58"
+          },
+          {
+            "player": "Mohamed Salah",
+            "minute": "67"
+          },
+          {
+            "player": "Trézéguet",
+            "minute": "82"
+          }
+        ]
       },
       {
         "match_number": 41,
