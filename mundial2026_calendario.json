@@ -1706,7 +1706,24 @@
         "city": "Dallas",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 2,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 1,
+        "away_ht": 0,
+        "home_scorers": [
+          {
+            "player": "Lionel Messi",
+            "minute": "38"
+          },
+          {
+            "player": "Lionel Messi",
+            "minute": "90+5"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 42,
