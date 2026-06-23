@@ -1745,7 +1745,28 @@
         "city": "Philadelphia",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 3,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 1,
+        "away_ht": 0,
+        "home_scorers": [
+          {
+            "player": "Kylian Mbappé",
+            "minute": "14"
+          },
+          {
+            "player": "Kylian Mbappé",
+            "minute": "54"
+          },
+          {
+            "player": "Ousmane Dembélé",
+            "minute": "66"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 43,
@@ -1767,7 +1788,37 @@
         "city": "New York",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 3,
+        "away_score": 2,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 1,
+        "away_ht": 0,
+        "home_scorers": [
+          {
+            "player": "Marcus Holmgren Pedersen",
+            "minute": "43"
+          },
+          {
+            "player": "Erling Haaland",
+            "minute": "48"
+          },
+          {
+            "player": "Erling Haaland",
+            "minute": "58"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Ismaïla Sarr",
+            "minute": "53"
+          },
+          {
+            "player": "Ismaïla Sarr",
+            "minute": "90+3"
+          }
+        ]
       },
       {
         "match_number": 44,
