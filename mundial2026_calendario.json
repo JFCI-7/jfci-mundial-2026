@@ -1884,7 +1884,32 @@
         "city": "Houston",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 5,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 3,
+        "away_ht": 0,
+        "home_scorers": [
+          {
+            "player": "Cristiano Ronaldo",
+            "minute": "6"
+          },
+          {
+            "player": "Nuno Mendes",
+            "minute": "17"
+          },
+          {
+            "player": "Cristiano Ronaldo",
+            "minute": "39"
+          },
+          {
+            "player": "Rafael Leão",
+            "minute": "87"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 46,
