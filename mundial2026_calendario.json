@@ -1840,7 +1840,29 @@
         "city": "San Francisco",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 1,
+        "away_score": 2,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 1,
+        "away_ht": 0,
+        "home_scorers": [
+          {
+            "player": "Nizar Al-Rashdan",
+            "minute": "36"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Nadhir Benbouali",
+            "minute": "69"
+          },
+          {
+            "player": "Amine Gouiri",
+            "minute": "82"
+          }
+        ]
       },
       {
         "match_number": 45,
