@@ -2018,7 +2018,29 @@
         "city": "Vancouver",
         "country": "Canada",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 2,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 0,
+        "home_scorers": [
+          {
+            "player": "Rubén Vargas",
+            "minute": "46"
+          },
+          {
+            "player": "Johan Manzambi",
+            "minute": "57"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Promise David",
+            "minute": "76"
+          }
+        ]
       },
       {
         "match_number": 50,
@@ -2040,7 +2062,29 @@
         "city": "Seattle",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 3,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 2,
+        "away_ht": 1,
+        "home_scorers": [
+          {
+            "player": "Kerim Alajbegovic",
+            "minute": "29"
+          },
+          {
+            "player": "Ermin Mahmic",
+            "minute": "80"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Hassan Al-Haydos",
+            "minute": "42"
+          }
+        ]
       },
       {
         "match_number": 51,
