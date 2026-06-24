@@ -1961,7 +1961,20 @@
         "city": "Toronto",
         "country": "Canada",
         "stage": "Group Stage",
-        "matchday": 2
+        "matchday": 2,
+        "home_score": 0,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 0,
+        "home_scorers": [],
+        "away_scorers": [
+          {
+            "player": "Ante Budimir",
+            "minute": "54"
+          }
+        ]
       },
       {
         "match_number": 48,
