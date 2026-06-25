@@ -1019,7 +1019,7 @@ function effectiveScore(m) {
 function stageLabel(s) {
   return {
     group: "Fase de grupos",
-    r32: "32avos", r16: "Octavos", qf: "Cuartos", sf: "Semifinal",
+    r32: "16avos", r16: "Octavos", qf: "Cuartos", sf: "Semifinal",
     third: "Tercer lugar", final: "Final",
   }[s] || s;
 }
@@ -2792,7 +2792,7 @@ function currentStageLabel(matches) {
   if (todays.length === 0) return "Pre-torneo";
   const stages = todays.map(m => m.stage);
   if (stages.includes("group")) return "Grupos";
-  if (stages.includes("r32")) return "32avos";
+  if (stages.includes("r32")) return "16avos";
   if (stages.includes("r16")) return "Octavos";
   if (stages.includes("qf")) return "Cuartos";
   if (stages.includes("sf")) return "Semis";

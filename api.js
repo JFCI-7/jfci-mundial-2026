@@ -110,24 +110,10 @@ const API = (() => {
     ]);
 
     const rawMatches = (gamesRes.games || []).map(normalizeGame);
-    // Asignar match_number a partidos de fase eliminatoria, que la API no provee.
-    // El orden del seed es: R32 (73-88), R16 (89-96), QF (97-100), SF (101-102), 3° (103), Final (104).
-    // Asumimos que la API devuelve los KO en el mismo orden de stage.
-    const KO_OFFSETS = { r32: 73, r16: 89, qf: 97, sf: 101, third: 103, final: 104 };
-    const koCounters = { r32: 0, r16: 0, qf: 0, sf: 0, third: 0, final: 0 };
-    for (const m of rawMatches) {
-      if (m.stage === "group") {
-        // Matchday 1 = 1-24, Matchday 2 = 25-48, Matchday 3 = 49-72
-        // (3 fechas × 8 partidos/día × 3 grupos/día = 72, pero el orden exacto depende de la API)
-        // No asignamos match_number para group stage — la API probablemente ya los tiene vía matchday.
-        continue;
-      }
-      const offset = KO_OFFSETS[m.stage];
-      if (offset != null) {
-        koCounters[m.stage] = (koCounters[m.stage] || 0) + 1;
-        m.match_number = offset + koCounters[m.stage] - 1;
-      }
-    }
+    // Para partidos de fase eliminatoria, match_number ya viene en g.id desde
+    // la API (P73-P104). Para group stage, la API provee matchday pero no
+    // un match_number secuencial confiable; lo dejamos en null.
+    // Ver normalizeGame() donde se asigna match_number para KO.
 
     const data = {
       teams:    (teamsRes.teams    || []).map(normalizeTeam),
@@ -241,12 +227,17 @@ const API = (() => {
       apiId:     String(g.id),
       source:    "api",
       stage:     STAGE_MAP[g.type] || g.type,
+      // g.id ya es el match_number para partidos de fase eliminatoria
+      // (P73-P88, P89-P96, P97-P100, P101-P102, P103, P104). Para group
+      // stage lo asignamos en refreshAll(). Ver comentario en refreshAll.
+      match_number: g.type && STAGE_MAP[g.type] && g.type !== "group" ? Number(g.id) : null,
       matchday:  Number(g.matchday) || 0,
       group:     (g.group && g.group.length === 1) ? g.group : null,
       home: {
         code: g.home_team_id === "0" ? null : null,
         name: homeName || "TBD",
         name_en: g.home_team_name_en,
+        apiTeamId: g.home_team_id && g.home_team_id !== "0" ? String(g.home_team_id) : null,
         iso2: homeIso,
         flag: homeIso ? `./vendor/flags/4x3/${homeIso}.svg` : null,
         label: g.home_team_label || null,
@@ -256,6 +247,7 @@ const API = (() => {
         code: g.away_team_id === "0" ? null : null,
         name: awayName || "TBD",
         name_en: g.away_team_name_en,
+        apiTeamId: g.away_team_id && g.away_team_id !== "0" ? String(g.away_team_id) : null,
         iso2: awayIso,
         flag: awayIso ? `./vendor/flags/4x3/${awayIso}.svg` : null,
         label: g.away_team_label || null,
