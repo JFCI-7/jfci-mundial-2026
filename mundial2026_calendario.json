@@ -2279,7 +2279,24 @@
         "city": "Philadelphia",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 0,
+        "away_score": 2,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 1,
+        "home_scorers": [],
+        "away_scorers": [
+          {
+            "player": "Nicolas Pépé",
+            "minute": "7"
+          },
+          {
+            "player": "Nicolas Pépé",
+            "minute": "64"
+          }
+        ]
       },
       {
         "match_number": 56,
@@ -2301,7 +2318,29 @@
         "city": "New York",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 2,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 1,
+        "away_ht": 1,
+        "home_scorers": [
+          {
+            "player": "Nilson Angulo",
+            "minute": "9"
+          },
+          {
+            "player": "Gonzalo Plata",
+            "minute": "77"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Leroy Sané",
+            "minute": "2"
+          }
+        ]
       },
       {
         "match_number": 57,
