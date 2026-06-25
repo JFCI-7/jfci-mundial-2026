@@ -2201,7 +2201,28 @@
         "city": "Mexico City",
         "country": "Mexico",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 0,
+        "away_score": 3,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 0,
+        "home_scorers": [],
+        "away_scorers": [
+          {
+            "player": "Mateo Chávez",
+            "minute": "55"
+          },
+          {
+            "player": "Julián Quiñones",
+            "minute": "61"
+          },
+          {
+            "player": "Álvaro Fidalgo",
+            "minute": "90+4"
+          }
+        ]
       },
       {
         "match_number": 54,
@@ -2223,7 +2244,20 @@
         "city": "Monterrey",
         "country": "Mexico",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 1,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 0,
+        "home_scorers": [
+          {
+            "player": "Thapelo Maseko",
+            "minute": "63"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 55,
