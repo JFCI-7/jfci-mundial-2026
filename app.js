@@ -1947,6 +1947,14 @@ function renderStats() {
   }
 
   // Goleadores individuales (excluye autogoles)
+  // La API devuelve nombres inconsistentes para el mismo jugador (ej.
+  // "Kylian Mbappé" vs "K. Mbappé"). Usamos el apellido en minúsculas como
+  // key de agrupación y guardamos el nombre más largo como display name.
+  function scorerKey(name) {
+    if (!name) return "";
+    const parts = String(name).trim().split(/\s+/);
+    return parts[parts.length - 1].toLowerCase();
+  }
   const scorerMap = new Map();
   STATE.matches.forEach(m => {
     if (m.status !== "finished") return;
@@ -1956,8 +1964,13 @@ function renderStats() {
     ];
     allScorers.forEach(s => {
       if (s.note === "OG") return;
-      const key = s.player;
-      const existing = scorerMap.get(key) || { team: s.team, iso2: s.iso2, goals: 0, lastMinute: 0 };
+      const key = scorerKey(s.player);
+      if (!key) return;
+      const existing = scorerMap.get(key) || { name: s.player, team: s.team, iso2: s.iso2, goals: 0, lastMinute: 0 };
+      // Preferir el nombre más descriptivo (más largo) para mostrar
+      if (s.player && s.player.length > (existing.name || "").length) {
+        existing.name = s.player;
+      }
       existing.goals++;
       const min = parseInt(String(s.minute), 10) || 0;
       if (min > existing.lastMinute) existing.lastMinute = min;
@@ -1965,7 +1978,7 @@ function renderStats() {
     });
   });
   const topScorers = Array.from(scorerMap.entries())
-    .map(([name, d]) => ({ name, ...d }))
+    .map(([_, d]) => d)
     .sort((a, b) => b.goals - a.goals || a.lastMinute - b.lastMinute);
 
   // Distribución por fase
@@ -2080,7 +2093,7 @@ function renderStats() {
     <div class="col-12">
       <div class="stat-card">
         <div class="d-flex justify-content-between align-items-center gap-2 mb-2 flex-wrap">
-          <h3 class="mb-0"><i class="ri-medal-line" aria-hidden="true"></i> ${t("stats.summary.topScorer")} <span id="scorers-count" class="text-muted small">(${topScorers.length})</span></h3>
+          <h3 class="mb-0"><i class="ri-medal-line" aria-hidden="true"></i> ${t("stats.summary.topScorer")} <span id="scorers-count" class="text-muted small">(Top ${Math.min(topScorers.length, 10)} de ${topScorers.length})</span></h3>
           <div class="stat-scorers-filter">
             <i class="ri-search-line" aria-hidden="true"></i>
             <input type="search" id="scorers-filter" placeholder="${escapeHtml(t("stats.summary.filterPlaceholder"))}" aria-label="${escapeHtml(t("stats.summary.filterPlaceholder"))}">
@@ -2088,9 +2101,9 @@ function renderStats() {
         </div>
         ${topScorers.length === 0 ? '<p class="text-muted small">' + escapeHtml(t("common.empty")) + '</p>' :
           `<div class="stat-scorers-scroll" id="scorers-list">${
-            topScorers.map(s => `<div class="stat-row"><span>${s.iso2 ? `<span class="fi fi-${s.iso2} flag-24" title="${escapeHtml(s.team)}"></span> ` : ""}${escapeHtml(s.name)}</span><span class="v">${s.goals} goles</span></div>`).join("")
+            topScorers.slice(0, 10).map(s => `<div class="stat-row"><span>${s.iso2 ? `<span class="fi fi-${s.iso2} flag-24" title="${escapeHtml(s.team)}"></span> ` : ""}${escapeHtml(s.name)}</span><span class="v">${s.goals} goles</span></div>`).join("")
           }</div>
-          <div class="stat-scorers-hint" id="scorers-hint">${escapeHtml(t("stats.summary.scrollHint"))}</div>`}
+          ${topScorers.length > 10 ? `<div class="text-muted small mt-1 text-center">Mostrando top 10 de ${topScorers.length} goleadores</div>` : ""}`}
       </div>
     </div>
 
@@ -2203,14 +2216,7 @@ function renderStats() {
   const filterInput = document.getElementById("scorers-filter");
   const listEl = document.getElementById("scorers-list");
   const countEl = document.getElementById("scorers-count");
-  const hintEl = document.getElementById("scorers-hint");
   const normForFilter = (s) => (s || "").toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  const updateScorersOverflow = () => {
-    if (!listEl) return;
-    const hasOverflow = listEl.scrollHeight > listEl.clientHeight + 1;
-    listEl.classList.toggle("has-overflow", hasOverflow);
-    if (hintEl) hintEl.classList.toggle("visible", hasOverflow);
-  };
   if (filterInput && listEl) {
     const renderRows = (rows) => {
       if (rows.length === 0) {
@@ -2221,13 +2227,12 @@ function renderStats() {
         ).join("");
       }
       listEl.scrollTop = 0;
-      requestAnimationFrame(updateScorersOverflow);
     };
     filterInput.addEventListener("input", (e) => {
       const q = normForFilter(e.target.value.trim());
       if (!q) {
         renderRows(topScorers);
-        if (countEl) countEl.textContent = `(${topScorers.length})`;
+        if (countEl) countEl.textContent = `Top ${Math.min(topScorers.length, 10)} de ${topScorers.length}`;
         return;
       }
       const filtered = topScorers.filter(s =>
@@ -2236,10 +2241,8 @@ function renderStats() {
         normForFilter(s.team).includes(q)
       );
       renderRows(filtered);
-      if (countEl) countEl.textContent = `(${filtered.length})`;
+      if (countEl) countEl.textContent = `${filtered.length} resultado${filtered.length === 1 ? "" : "s"}`;
     });
-    requestAnimationFrame(updateScorersOverflow);
-    window.addEventListener("resize", updateScorersOverflow, { passive: true });
   }
 
   // Render de las gráficas (después de inyectar el HTML, en el siguiente tick)
