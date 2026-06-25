@@ -2106,7 +2106,28 @@
         "city": "Miami",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 0,
+        "away_score": 3,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 2,
+        "home_scorers": [],
+        "away_scorers": [
+          {
+            "player": "Vinícius Júnior",
+            "minute": "7"
+          },
+          {
+            "player": "Vinícius Júnior",
+            "minute": "45+3"
+          },
+          {
+            "player": "Matheus Cunha",
+            "minute": "60"
+          }
+        ]
       },
       {
         "match_number": 52,
@@ -2128,7 +2149,37 @@
         "city": "Atlanta",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 4,
+        "away_score": 2,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 2,
+        "away_ht": 2,
+        "home_scorers": [
+          {
+            "player": "Achraf Hakimi",
+            "minute": "39"
+          },
+          {
+            "player": "Ismael Saibari",
+            "minute": "45+1"
+          },
+          {
+            "player": "Soufiane Rahimi",
+            "minute": "78"
+          },
+          {
+            "player": "Gessime Yassine",
+            "minute": "89"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Wilson Isidor",
+            "minute": "43"
+          }
+        ]
       },
       {
         "match_number": 53,
