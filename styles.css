@@ -751,7 +751,8 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   justify-content: center;
   gap: .05rem;
   min-width: 0;
-  cursor: pointer;
+  /* Edición deshabilitada — el bracket es solo lectura */
+  cursor: default;
   transition: border-color .2s, transform .2s, box-shadow .2s;
   position: relative;
   z-index: 2;

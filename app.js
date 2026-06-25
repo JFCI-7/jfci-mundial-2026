@@ -1451,14 +1451,48 @@ function renderBracket() {
   };
 
   // === Renderizar matches por mitad ===
-  // Para cada ronda, partimos la lista en dos mitades: índices [0..n/2) van a
-  // la izquierda, [n/2..n) a la derecha. La API ya entrega los cruces en el
-  // orden del bracket oficial, así que respetamos ese ordenamiento.
+  // El orden NO es lineal: el bracket oficial de la FIFA intercala los matches
+  // de cada mitad según las parejas definidas en el Annex C. Por ejemplo, R16
+  // 93 y 94 (que están en la mitad IZQUIERDA) están en la 2ª mitad de la lista
+  // de R16 (después de 91/92). Usamos BRACKET_ORDER para mapear match_number
+  // → posición correcta en el grid.
+  // Fuente: Wikipedia "2026 FIFA World Cup knockout stage" + Annex C de la FIFA.
+  const BRACKET_ORDER = {
+    r32: {
+      left:  [73, 75, 74, 77, 83, 84, 81, 82],
+      right: [76, 78, 79, 80, 86, 88, 85, 87],
+    },
+    r16: {
+      left:  [89, 90, 93, 94],
+      right: [91, 92, 95, 96],
+    },
+    qf: {
+      left:  [97, 98],
+      right: [99, 100],
+    },
+    sf: {
+      left:  [101],
+      right: [102],
+    },
+  };
+
   ["r32", "r16", "qf", "sf"].forEach(key => {
     const list = matchesByRound[key] || [];
-    const half = Math.ceil(list.length / 2);
-    const left  = list.slice(0, half);
-    const right = list.slice(half);
+    const order = BRACKET_ORDER[key];
+    // Mapa match_number → match para lookup O(1).
+    const byMatchNum = new Map();
+    list.forEach(m => {
+      if (m.match_number != null) byMatchNum.set(m.match_number, m);
+    });
+    // Resolver cada posición del bracket oficial.
+    const left  = order.left.map(n  => byMatchNum.get(n)).filter(Boolean);
+    const right = order.right.map(n => byMatchNum.get(n)).filter(Boolean);
+    // Fallback: si la API devolvió matches sin match_number, los que no se
+    // pudieron mapear se agregan al final del lado izquierdo para no perderlos.
+    const placedNums = new Set([...order.left, ...order.right]);
+    list.forEach(m => {
+      if (m.match_number == null || !placedNums.has(m.match_number)) left.push(m);
+    });
     left.forEach((m, i)  => placeMatch(m, leftColumns.find(c => c.key === key).col,  "left",  i));
     right.forEach((m, i) => placeMatch(m, rightColumns.find(c => c.key === key).col, "right", i));
   });
@@ -1573,7 +1607,11 @@ function createBracketMatch(m, opts = {}) {
       <span class="bracket-team-score bebas">${s.away !== null ? s.away : "—"}</span>
     </div>
   `;
-  div.addEventListener("click", () => openScoreModal(m.id));
+  // EDICIÓN DESHABILITADA — el bracket es solo lectura. Se comenta el handler
+  // para que el click no abra el modal. El modal en sí sigue disponible para
+  // otras vistas (calendario, grupos, quiniela). Para reactivar la edición,
+  // descomentar la siguiente línea.
+  // div.addEventListener("click", () => openScoreModal(m.id));
   return div;
 }
 
