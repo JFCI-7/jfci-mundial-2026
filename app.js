@@ -1459,7 +1459,7 @@ function renderBracket() {
   // Fuente: Wikipedia "2026 FIFA World Cup knockout stage" + Annex C de la FIFA.
   const BRACKET_ORDER = {
     r32: {
-      left:  [73, 75, 74, 77, 83, 84, 81, 82],
+      left:  [74, 77, 73, 75, 83, 84, 81, 82],
       right: [76, 78, 79, 80, 86, 88, 85, 87],
     },
     r16: {
