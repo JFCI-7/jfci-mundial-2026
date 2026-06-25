@@ -1358,26 +1358,32 @@ function renderBracket() {
   if (!container) return;
   container.innerHTML = "";
 
-  // Columnas: 6 rondas de match + Campeón. El 3° lugar se renderiza como un
-  // card extra dentro de la columna "Final" en desktop (apilado abajo) o en
-  // su propia fila en mobile.
-  const roundColumns = [
-    { key: "r32",   label: t("bracket.r32") },
-    { key: "r16",   label: t("bracket.r16") },
-    { key: "qf",    label: t("bracket.qf") },
-    { key: "sf",    label: t("bracket.sf") },
-    { key: "final", label: t("bracket.final") },
+  // Layout simétrico centrado en el FINAL (estilo FIFA).
+  // 9 columnas: [R32-L][R16-L][QF-L][SF-L][FINAL][SF-R][QF-R][R16-R][R32-R]
+  // Cada mitad tiene la mitad de los partidos: 8 R32, 4 R16, 2 QF, 1 SF.
+  // El CAMPEÓN y el 3° LUGAR se apilan debajo del FINAL (misma columna 5).
+  const leftColumns = [
+    { key: "r32", col: 1, side: "left"  },
+    { key: "r16", col: 2, side: "left"  },
+    { key: "qf",  col: 3, side: "left"  },
+    { key: "sf",  col: 4, side: "left"  },
   ];
+  const rightColumns = [
+    { key: "sf",  col: 6, side: "right" },
+    { key: "qf",  col: 7, side: "right" },
+    { key: "r16", col: 8, side: "right" },
+    { key: "r32", col: 9, side: "right" },
+  ];
+  const finalCol = 5;
 
-  // Reunir matches por ronda (sólo las que tienen datos).
+  // Reunir matches por ronda.
   const matchesByRound = {};
   let totalMatches = 0;
-  roundColumns.forEach(col => {
-    const list = STATE.matches.filter(m => m.stage === col.key);
-    matchesByRound[col.key] = list;
+  ["r32", "r16", "qf", "sf", "final"].forEach(key => {
+    const list = STATE.matches.filter(m => m.stage === key);
+    matchesByRound[key] = list;
     totalMatches += list.length;
   });
-  // 3° lugar vive aparte; la columna Campeón se renderiza siempre.
   const thirdMatch = STATE.matches.find(m => m.stage === "third") || null;
   if (thirdMatch) totalMatches += 1;
 
@@ -1392,80 +1398,104 @@ function renderBracket() {
   const grid = document.createElement("div");
   grid.className = "bracket-grid";
 
-  // Fila 1: headers de columna (uno por ronda + Campeón).
-  roundColumns.forEach((col, i) => {
+  // === Headers de columna (fila 1) ===
+  // Mitad izquierda: r32, r16, qf, sf
+  leftColumns.forEach(c => {
     const h = document.createElement("div");
     h.className = "bracket-col-header";
-    h.style.gridColumn = `${i + 1}`;
+    h.style.gridColumn = `${c.col}`;
     h.style.gridRow = "1";
-    h.textContent = col.label;
+    h.textContent = t(`bracket.${c.key}`);
     grid.appendChild(h);
   });
-  // Header de la columna Campeón (al final).
-  const champHeader = document.createElement("div");
-  champHeader.className = "bracket-col-header bracket-col-champion";
-  champHeader.style.gridColumn = `${roundColumns.length + 1}`;
-  champHeader.style.gridRow = "1";
-  champHeader.innerHTML = `<i class="ri-trophy-fill" aria-hidden="true"></i> ${escapeHtml(t("bracket.final"))}`;
-  grid.appendChild(champHeader);
-
-  // Calcular el row span de cada ronda (en unidades de 1 row = 1 r32 match).
-  // r32: 1 row; r16: 2 rows; qf: 4 rows; sf: 8 rows; final: 16 rows.
-  const rowSpan = { r32: 1, r16: 2, qf: 4, sf: 8, final: 16 };
-
-  // Posición de cada match. El grid tiene:
-  //   - row 1: header (auto)
-  //   - rows 2-17: 16 filas de 50px (1 por r32 match)
-  //   - row 18: 3° label (auto)
-  //   - row 19: 3° match (auto)
-  // Patrón (row 1 reservado para headers):
-  //   r32[i] en row i+2; r16[i] en row 2*i+2 (spans 2);
-  //   qf[i]  en row 4*i+2 (spans 4); sf[i] en row 8*i+2 (spans 8);
-  //   final en row 2 (spans 16).
-  const startRow = { r32: i => i + 2, r16: i => 2 * i + 2, qf: i => 4 * i + 2, sf: i => 8 * i + 2, final: () => 2 };
-  const colIndex = { r32: 1, r16: 2, qf: 3, sf: 4, final: 5 };
-  const champCol = 6;
-
-  // Renderizar matches de cada ronda (excepto final y third, que se manejan distinto).
-  roundColumns.forEach(col => {
-    const list = matchesByRound[col.key] || [];
-    list.forEach((m, i) => {
-      const card = createBracketMatch(m, { compact: true });
-      card.style.gridColumn = `${colIndex[col.key]}`;
-      card.style.gridRow = col.key === "r32"
-        ? `${startRow[col.key](i)}`
-        : `${startRow[col.key](i)} / span ${rowSpan[col.key]}`;
-      card.style.alignSelf = "center";
-      grid.appendChild(card);
-    });
+  // Centro: FINAL
+  const finalHeader = document.createElement("div");
+  finalHeader.className = "bracket-col-header bracket-col-final";
+  finalHeader.style.gridColumn = `${finalCol}`;
+  finalHeader.style.gridRow = "1";
+  finalHeader.innerHTML = `<i class="ri-trophy-fill" aria-hidden="true"></i> ${escapeHtml(t("bracket.final"))}`;
+  grid.appendChild(finalHeader);
+  // Mitad derecha: sf, qf, r16, r32
+  rightColumns.forEach(c => {
+    const h = document.createElement("div");
+    h.className = "bracket-col-header";
+    h.style.gridColumn = `${c.col}`;
+    h.style.gridRow = "1";
+    h.textContent = t(`bracket.${c.key}`);
+    grid.appendChild(h);
   });
 
-  // 3° lugar: lo metemos en la columna "final" como una fila extra, debajo del final.
-  // Etiqueta en row 18, match en row 19, sólo en la columna "final".
+  // === Posiciones y spans ===
+  // Cada mitad usa 8 filas "virtuales" (8 R32 por mitad). El span determina
+  // el row span en cada round: r32=1, r16=2, qf=4, sf=8, final=16.
+  const rowSpan = { r32: 1, r16: 2, qf: 4, sf: 8, final: 16 };
+  // startRow: row inicial (1-based, +1 por el header). i ∈ [0..n-1] dentro de cada mitad.
+  const startRow = {
+    r32: i => i + 2,
+    r16: i => 2 * i + 2,
+    qf:  i => 4 * i + 2,
+    sf:  () => 2,
+    final: () => 2,
+  };
+
+  // Función helper: posiciona un match en el grid.
+  const placeMatch = (m, col, side, i) => {
+    const card = createBracketMatch(m, { compact: true });
+    card.dataset.side = side;
+    card.style.gridColumn = `${col}`;
+    card.style.gridRow = m.stage === "r32"
+      ? `${startRow[m.stage](i)}`
+      : `${startRow[m.stage](i)} / span ${rowSpan[m.stage]}`;
+    card.style.alignSelf = "center";
+    grid.appendChild(card);
+  };
+
+  // === Renderizar matches por mitad ===
+  // Para cada ronda, partimos la lista en dos mitades: índices [0..n/2) van a
+  // la izquierda, [n/2..n) a la derecha. La API ya entrega los cruces en el
+  // orden del bracket oficial, así que respetamos ese ordenamiento.
+  ["r32", "r16", "qf", "sf"].forEach(key => {
+    const list = matchesByRound[key] || [];
+    const half = Math.ceil(list.length / 2);
+    const left  = list.slice(0, half);
+    const right = list.slice(half);
+    left.forEach((m, i)  => placeMatch(m, leftColumns.find(c => c.key === key).col,  "left",  i));
+    right.forEach((m, i) => placeMatch(m, rightColumns.find(c => c.key === key).col, "right", i));
+  });
+
+  // === FINAL (columna central, fila 2, span 16) ===
+  const finalMatch = matchesByRound.final[0];
+  if (finalMatch) {
+    placeMatch(finalMatch, finalCol, "center", 0);
+  }
+
+  // === CAMPEÓN y 3° LUGAR debajo del FINAL ===
+  // El grid tiene: row 1 (header auto) + rows 2-9 (8 R32 de 50px) +
+  // rows 10-13 (4 filas auto). El FINAL ocupa rows 2-9 con span 8.
+  // Colocamos el CAMPEÓN en row 10 (span 2) y el 3° LUGAR en rows 12-13.
+  const champion = buildChampionCell();
+  champion.style.gridColumn = `${finalCol}`;
+  champion.style.gridRow = "10 / span 2";
+  champion.style.alignSelf = "stretch";
+  grid.appendChild(champion);
+
   if (thirdMatch) {
+    // Etiqueta "3° LUGAR" arriba del match
     const thirdLabel = document.createElement("div");
     thirdLabel.className = "bracket-third-label";
-    thirdLabel.style.gridColumn = `${colIndex.final}`;
-    thirdLabel.style.gridRow = "18";
+    thirdLabel.style.gridColumn = `${finalCol}`;
+    thirdLabel.style.gridRow = "12";
     thirdLabel.style.alignSelf = "end";
     thirdLabel.style.justifySelf = "center";
     thirdLabel.textContent = t("bracket.third");
     grid.appendChild(thirdLabel);
     const third = createBracketMatch(thirdMatch, { compact: true });
-    third.style.gridColumn = `${colIndex.final}`;
-    third.style.gridRow = "19";
-    third.style.alignSelf = "center";
+    third.style.gridColumn = `${finalCol}`;
+    third.style.gridRow = "13";
+    third.style.alignSelf = "start";
     third.classList.add("bracket-third-wrap");
     grid.appendChild(third);
   }
-
-  // Campeón: celda grande en la última columna, ocupa toda la altura del bracket
-  // (rows 2-17, debajo del header). Centrada verticalmente.
-  const champion = buildChampionCell();
-  champion.style.gridColumn = `${champCol}`;
-  champion.style.gridRow = "2 / span 16";
-  champion.style.alignSelf = "center";
-  grid.appendChild(champion);
 
   wrapper.appendChild(grid);
   container.appendChild(wrapper);
@@ -1523,8 +1553,15 @@ function createBracketMatch(m, opts = {}) {
   const awayFlag = !awayIsPending && m.away?.iso2
     ? `<span class="fi fi-${m.away.iso2} flag-20" title="${escapeHtml(awayName)}"></span>`
     : `<span class="bracket-match-flag placeholder" aria-hidden="true"></span>`;
+  // Badge de número de partido (Match 73, 74…) si está disponible. Solo
+  // se muestra en partidos de fase eliminatoria (la API los asigna en
+  // api.js:113). No se muestra en TBD muy tempranos.
+  const matchNum = m.match_number != null
+    ? `<span class="bracket-match-num">Match ${m.match_number}</span>`
+    : "";
 
   div.innerHTML = `
+    ${matchNum}
     <div class="bracket-team ${hWins ? "adv" : ""} ${homeIsPending ? "pending" : ""}">
       ${homeFlag}
       <span class="bracket-team-name">${escapeHtml(homeName)}</span>

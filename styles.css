@@ -669,10 +669,12 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
 }
 
 /* ===================================================
-   BRACKET (Eliminatorias) — true horizontal layout
-   6 columnas de match + columna Campeón.
-   16 filas (1 por r32 match). Cada match se centra con
-   align-self: center y span de rows según su round.
+   BRACKET (Eliminatorias) — symmetric centered layout
+   9 columnas: [R32-L][R16-L][QF-L][SF-L][FINAL][SF-R][QF-R][R16-R][R32-R]
+   El FINAL está en la columna central (5). El CAMPEÓN y el
+   3° LUGAR se apilan debajo del FINAL en la misma columna.
+   8 filas virtuales por mitad (1 por R32 match por mitad).
+   Cada match se centra con align-self: center y span de rows.
    =================================================== */
 .bracket-wrapper {
   width: 100%;
@@ -680,35 +682,60 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   overflow-y: visible;
   padding: .25rem 0 1rem;
   -webkit-overflow-scrolling: touch;
+  position: relative;
 }
 .bracket-grid {
   display: grid;
-  /* 6 columnas: 5 rondas de match + Campeón. minmax chico permite scroll
-     horizontal si la pantalla no entra las 6 columnas. */
-  grid-template-columns: repeat(6, minmax(150px, 1fr));
-  /* 16 filas (1 por r32 match) + 2 filas extra para el 3° lugar */
-  grid-template-rows: auto repeat(16, 50px) auto auto;
-  column-gap: 2.25rem;     /* espacio entre columnas = lugar para conectores */
-  row-gap: 0;              /* las filas de 50px incluyen un mini-gap visual */
-  min-width: 900px;        /* fuerza scroll horizontal en pantallas chicas */
+  /* 9 columnas: 4 rondas izq + FINAL + 4 rondas der. minmax chico permite
+     scroll horizontal si la pantalla no entra las 9 columnas. */
+  grid-template-columns: repeat(9, minmax(110px, 1fr));
+  /* 8 filas (1 por R32 match por mitad, alto 50px) + 4 filas extra para
+     CAMPEÓN y 3° LUGAR. */
+  grid-template-rows: auto repeat(8, 50px) auto auto auto auto;
+  column-gap: 2rem;        /* espacio entre columnas = lugar para conectores */
+  row-gap: 0;
+  min-width: 1100px;       /* fuerza scroll horizontal en pantallas chicas */
   padding: .25rem .5rem 0;
+  position: relative;
+}
+
+/* ==== Línea vertical central ====
+   Un divisor visual sutil entre las dos mitades del bracket, desde el
+   header hasta la última fila. Posicionado absolutamente en el wrapper. */
+.bracket-wrapper::before {
+  content: "";
+  position: absolute;
+  /* Línea centrada en la columna 5. 1/9 + 4/9 = 5/9 desde la izquierda.
+     El 1px de la línea se centra en ese punto. */
+  left: calc((100% - 1rem) * 5 / 9 + 0.5rem);
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background: var(--border);
+  opacity: .35;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ==== Headers de columna (fila 1) ==== */
 .bracket-col-header {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1rem;
+  font-size: .9rem;
   letter-spacing: 1.2px;
   color: var(--text);
   text-align: center;
   padding: .25rem .5rem .65rem;
   border-bottom: 2px solid var(--secondary);
   text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
 }
-.bracket-col-header.bracket-col-champion {
+.bracket-col-header.bracket-col-final {
   border-bottom-color: var(--primary);
+  color: var(--primary);
 }
-.bracket-col-header.bracket-col-champion i {
+.bracket-col-header.bracket-col-final i {
   color: var(--primary);
   margin-right: .25rem;
 }
@@ -734,12 +761,40 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(0,0,0,.25);
 }
-.bracket-match.bracket-match-r32   { font-size: .72rem; }
+.bracket-match.bracket-match-r32   { font-size: .7rem; }
 .bracket-match.bracket-match-r16,
 .bracket-match.bracket-match-qf,
 .bracket-match.bracket-match-sf,
 .bracket-match.bracket-match-final,
-.bracket-match.bracket-match-third { font-size: .75rem; }
+.bracket-match.bracket-match-third { font-size: .72rem; }
+
+/* ==== Match del FINAL: borde dorado destacado ==== */
+.bracket-match.bracket-match-final {
+  border: 2px solid var(--primary);
+  border-left: 3px solid var(--primary);
+  background: linear-gradient(135deg, rgba(4,191,69,.10), rgba(255,200,0,.10));
+  box-shadow: 0 0 12px rgba(4,191,69,.25);
+  padding: .4rem .55rem;
+}
+.bracket-match.bracket-match-final:hover {
+  box-shadow: 0 0 16px rgba(4,191,69,.45);
+}
+
+/* ==== Match number badge (estilo FIFA) ==== */
+.bracket-match-num {
+  position: absolute;
+  top: -7px; right: 4px;
+  background: var(--bg);
+  color: var(--text-muted);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .62rem;
+  letter-spacing: .8px;
+  padding: 0 .35rem;
+  border-radius: 3px;
+  line-height: 1.1;
+  pointer-events: none;
+  z-index: 3;
+}
 
 .bracket-team {
   display: flex; align-items: center; gap: .35rem;
@@ -781,47 +836,82 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
 .bracket-team.adv.pending { color: var(--text-muted); }  /* si TBD gana, no resaltar */
 
 /* ==== Conectores entre rondas ====
-   ::after en cada match no-final = línea horizontal hacia el siguiente match
-   ::before en cada destino (r16/qf/sf/final) = línea vertical que une a los 2 padres
-   Alturas de la línea vertical son valores fijos (en px) que aproximan
-   row_height * span + gaps. Con 50px por row y row-gap 0, son:
-     r16: 2 rows  = 100px
-     qf:  4 rows  = 200px
-     sf:  8 rows  = 400px
-     final: 16 rows = 800px
-*/
-.bracket-match[data-round]::after {
+   Mitad izquierda: ::after en cada match no-final = línea horizontal
+   hacia la derecha. ::before en cada destino = línea vertical que une
+   a los 2 padres. Mitad derecha: espejado.
+   Alturas: r16=2 rows=100px, qf=4=200px, sf=8=400px, final=16 (no usado). */
+.bracket-match[data-side="left"][data-round]::after {
   content: "";
   position: absolute;
-  right: -1.15rem; top: 50%;
-  width: 1.15rem; height: 2px;
+  right: -1rem; top: 50%;
+  width: 1rem; height: 2px;
   background: var(--border);
   transform: translateY(-50%);
   z-index: 1;
 }
-/* Ocultar la línea horizontal del último match de la derecha (final) */
-.bracket-match.bracket-match-final::after { display: none; }
-/* El 3° lugar no recibe conector horizontal */
-.bracket-match.bracket-match-third::after { display: none; }
-
-.bracket-match[data-round="r16"]::before,
-.bracket-match[data-round="qf"]::before,
-.bracket-match[data-round="sf"]::before,
-.bracket-match[data-round="final"]::before {
+.bracket-match[data-side="right"][data-round]::before {
   content: "";
   position: absolute;
-  left: -1.15rem; top: 50%;
+  left: -1rem; top: 50%;
+  width: 1rem; height: 2px;
+  background: var(--border);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+/* El FINAL: recibe del SF izquierdo y conecta al SF derecho. No tiene
+   líneas verticales (es el centro, no tiene "padres" como tal). */
+.bracket-match.bracket-match-final::before {
+  content: "";
+  position: absolute;
+  left: -1rem; top: 50%;
+  width: 1rem; height: 2px;
+  background: var(--border);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.bracket-match.bracket-match-final::after {
+  content: "";
+  position: absolute;
+  right: -1rem; top: 50%;
+  width: 1rem; height: 2px;
+  background: var(--border);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+/* El 3° lugar no recibe conector horizontal */
+.bracket-match.bracket-match-third::after,
+.bracket-match.bracket-match-third::before { display: none; }
+
+.bracket-match[data-side="left"][data-round="r16"]::before,
+.bracket-match[data-side="left"][data-round="qf"]::before,
+.bracket-match[data-side="left"][data-round="sf"]::before {
+  content: "";
+  position: absolute;
+  left: -1rem; top: 50%;
   width: 2px;
   background: var(--border);
   transform: translateY(-50%);
   z-index: 1;
 }
-.bracket-match[data-round="r16"]::before   { height: 100px; }
-.bracket-match[data-round="qf"]::before    { height: 200px; }
-.bracket-match[data-round="sf"]::before    { height: 400px; }
-.bracket-match[data-round="final"]::before { height: 800px; }
+.bracket-match[data-side="right"][data-round="r16"]::after,
+.bracket-match[data-side="right"][data-round="qf"]::after,
+.bracket-match[data-side="right"][data-round="sf"]::after {
+  content: "";
+  position: absolute;
+  right: -1rem; top: 50%;
+  width: 2px;
+  background: var(--border);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.bracket-match[data-side="left"][data-round="r16"]::before   { height: 100px; }
+.bracket-match[data-side="left"][data-round="qf"]::before    { height: 200px; }
+.bracket-match[data-side="left"][data-round="sf"]::before    { height: 400px; }
+.bracket-match[data-side="right"][data-round="r16"]::after   { height: 100px; }
+.bracket-match[data-side="right"][data-round="qf"]::after    { height: 200px; }
+.bracket-match[data-side="right"][data-round="sf"]::after    { height: 400px; }
 
-/* ==== 3° lugar: aparece debajo del final en desktop, ocupa las filas 17-18 ==== */
+/* ==== 3° lugar: aparece debajo del campeón ==== */
 .bracket-third-wrap {
   border-left-color: var(--accent);
 }
@@ -831,23 +921,24 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   color: var(--accent);
   letter-spacing: 1px;
   text-transform: uppercase;
-  margin-top: .25rem;
   text-align: center;
+  padding: .25rem 0;
 }
 
-/* ==== Campeón (celda grande a la derecha) ==== */
+/* ==== Campeón (celda grande debajo del FINAL) ==== */
 .bracket-champion {
-  background: linear-gradient(135deg, rgba(4,191,69,.10), rgba(104,5,242,.10));
+  background: linear-gradient(135deg, rgba(4,191,69,.10), rgba(255,200,0,.15));
   border: 2px solid var(--primary);
   border-radius: .85rem;
-  padding: 1rem .5rem;
+  padding: .85rem .5rem;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   text-align: center;
-  gap: .35rem;
+  gap: .3rem;
   position: relative;
   z-index: 2;
   box-shadow: 0 0 0 4px rgba(4,191,69,.10);
+  min-height: 100px;
 }
 .bracket-champion.is-pending {
   border-style: dashed;
@@ -876,7 +967,7 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   box-shadow: 0 0 0 2px rgba(255,255,255,.10);
 }
 .bracket-champion-name {
-  font-size: 1.05rem;
+  font-size: 1rem;
   letter-spacing: 1.2px;
   color: var(--text);
   line-height: 1.1;
@@ -888,46 +979,32 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
 /* ===================================================
    BRACKET — Mobile (single column, grouped by round)
    En <992px el grid se colapsa a 1 columna. Cada match ocupa
-   su propia fila. Los headers se quedan arriba. Sin conectores.
-   El Campeón aparece al final.
+   su propia fila. Orden: R32 → R16 → QF → SF → FINAL →
+   CAMPEÓN → 3° LUGAR. Sin conectores.
    =================================================== */
 @media (max-width: 991.98px) {
   .bracket-wrapper { overflow-x: hidden; }
+  .bracket-wrapper::before { display: none; }
   .bracket-grid {
     display: flex; flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
     min-width: 0;
     padding: 0;
   }
-  /* Reordenamos con order: el orden de DOM ya viene correcto
-     (r32, r16, qf, sf, final, third, champion). Forzamos order explícito
-     para que el Campeón quede al final. */
-  .bracket-col-header { order: 1; }
-  /* matches r32, r16, qf, sf, final: cada uno dentro de su grupo. */
-  .bracket-col-header:nth-of-type(1) { order: 1; }  /* r32 header */
-  .bracket-col-header:nth-of-type(2) { order: 3; }
-  .bracket-col-header:nth-of-type(3) { order: 5; }
-  .bracket-col-header:nth-of-type(4) { order: 7; }
-  .bracket-col-header:nth-of-type(5) { order: 9; }
-  .bracket-col-header:nth-of-type(6) { order: 11; } /* Campeón header */
-  /* En mobile, los headers de ronda (no el de Campeón) reciben un separador
-     arriba y un poco de padding para que cada grupo se distinga. */
-  .bracket-col-header:not(.bracket-col-champion) {
+  .bracket-col-header {
+    order: 1;
     text-align: left;
     border-bottom: 1px solid var(--secondary);
     padding: .25rem .25rem .5rem;
     margin-top: .5rem;
     color: var(--secondary);
   }
-  .bracket-col-header.bracket-col-champion {
-    text-align: center;
+  .bracket-col-header.bracket-col-final {
     border-bottom-color: var(--primary);
     color: var(--primary);
-    margin-top: 1.5rem;
+    text-align: left;
   }
-  /* Los matches: cada uno con su propio row. grid-row/grid-column inline
-     styles se ignoran en flex layout, así que solo necesitamos que se vean
-     como cards de ancho completo. */
+  /* Los matches: cards de ancho completo. */
   .bracket-match {
     width: 100%;
     font-size: .9rem !important;
@@ -937,23 +1014,37 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   .bracket-team-score { font-size: 1.2rem; }
   /* Conectores: ocultos en mobile. */
   .bracket-match::before, .bracket-match::after { display: none !important; }
-  /* 3° lugar: aparece en la última posición entre final y campeón. */
+  /* 3° lugar: aparece en la última posición. */
   .bracket-third-label { text-align: left; margin-top: .25rem; }
   .bracket-third-wrap { border-left-color: var(--accent); }
-  /* Campeón: celda grande centrada, no necesita ser enorme. */
+  /* Campeón: celda grande centrada. */
   .bracket-champion { padding: 1rem; gap: .5rem; }
   .bracket-champion .flag-48 { width: 64px; height: 48px; }
   .bracket-champion-name { font-size: 1.2rem; }
-  /* group matches: ponemos los matches seguidos de su header usando order */
-  .bracket-col-header:nth-of-type(1) ~ .bracket-match[data-round="r32"] { order: 2; }
-  .bracket-col-header:nth-of-type(2) ~ .bracket-match[data-round="r16"] { order: 4; }
-  .bracket-col-header:nth-of-type(3) ~ .bracket-match[data-round="qf"] { order: 6; }
-  .bracket-col-header:nth-of-type(4) ~ .bracket-match[data-round="sf"] { order: 8; }
-  .bracket-col-header:nth-of-type(5) ~ .bracket-match[data-round="final"] { order: 10; }
-  .bracket-third-wrap { order: 11; }
-  .bracket-third-label { order: 10; } /* aparece justo encima del match 3° */
-  .bracket-col-header.bracket-col-champion { order: 12; }
-  .bracket-champion { order: 13; }
+
+  /* ==== Orden cronológico natural ====
+     En mobile ocultamos los headers de la mitad derecha (r32-r, r16-r,
+     qf-r, sf-r) ya que serían redundantes — los partidos ya están
+     agrupados por ronda. Solo se muestran los 4 headers de la mitad
+     izquierda + FINAL + los resultados (CAMPEÓN, 3° LUGAR). */
+  .bracket-col-header:nth-of-type(1)  { order: 1; }   /* r32 header */
+  .bracket-col-header:nth-of-type(2)  { order: 3; }   /* r16 header */
+  .bracket-col-header:nth-of-type(3)  { order: 5; }   /* qf header */
+  .bracket-col-header:nth-of-type(4)  { order: 7; }   /* sf header */
+  .bracket-col-header.bracket-col-final { order: 9; } /* final header */
+  .bracket-col-header:nth-of-type(n+6) { display: none; } /* oculta headers de la mitad derecha */
+
+  /* Los matches: como en desktop, grid-row/grid-column inline se ignoran
+     en flex layout, así que el orden lo controlamos con data-round. */
+  .bracket-match[data-round="r32"]   { order: 2;  }
+  .bracket-match[data-round="r16"]   { order: 4;  }
+  .bracket-match[data-round="qf"]    { order: 6;  }
+  .bracket-match[data-round="sf"]    { order: 8;  }
+  .bracket-match[data-round="final"] { order: 10; }
+
+  .bracket-champion     { order: 12; }
+  .bracket-third-label  { order: 13; }
+  .bracket-third-wrap   { order: 14; }
 }
 
 /* ===================================================
