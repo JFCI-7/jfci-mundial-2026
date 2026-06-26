@@ -2498,7 +2498,37 @@
         "city": "Boston",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 1,
+        "away_score": 4,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 1,
+        "away_ht": 3,
+        "home_scorers": [
+          {
+            "player": "Thelo Aasgaard",
+            "minute": "21"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Ousmane Dembélé",
+            "minute": "7"
+          },
+          {
+            "player": "Ousmane Dembélé",
+            "minute": "20"
+          },
+          {
+            "player": "Ousmane Dembélé",
+            "minute": "32"
+          },
+          {
+            "player": "Désiré Doué",
+            "minute": "90+4"
+          }
+        ]
       },
       {
         "match_number": 62,
@@ -2520,7 +2550,36 @@
         "city": "Toronto",
         "country": "Canada",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 5,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 1,
+        "away_ht": 0,
+        "home_scorers": [
+          {
+            "player": "Habib Diarra",
+            "minute": "4"
+          },
+          {
+            "player": "Ismaïla Sarr",
+            "minute": "56"
+          },
+          {
+            "player": "Pape Gueye",
+            "minute": "59"
+          },
+          {
+            "player": "Pape Gueye",
+            "minute": "71"
+          },
+          {
+            "player": "Iliman Ndiaye",
+            "minute": "82"
+          }
+        ],
+        "away_scorers": []
       },
       {
         "match_number": 63,
