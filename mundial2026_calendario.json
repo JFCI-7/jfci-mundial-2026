@@ -2362,7 +2362,25 @@
         "city": "Dallas",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 1,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 0,
+        "home_scorers": [
+          {
+            "player": "Daizen Maeda",
+            "minute": "56"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Anthony Elanga",
+            "minute": "62"
+          }
+        ]
       },
       {
         "match_number": 58,
@@ -2384,7 +2402,29 @@
         "city": "Kansas City",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 1,
+        "away_score": 3,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 2,
+        "home_scorers": [
+          {
+            "player": "Hazem Mastouri",
+            "minute": "54"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Brian Brobbey",
+            "minute": "7"
+          },
+          {
+            "player": "Jan Paul van Hecke",
+            "minute": "62"
+          }
+        ]
       },
       {
         "match_number": 59,
@@ -2428,7 +2468,15 @@
         "city": "San Francisco",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 0,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 0,
+        "home_scorers": [],
+        "away_scorers": []
       },
       {
         "match_number": 61,
