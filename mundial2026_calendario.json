@@ -2666,7 +2666,25 @@
         "city": "Seattle",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 1,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 1,
+        "away_ht": 1,
+        "home_scorers": [
+          {
+            "player": "Mahmoud Saber",
+            "minute": "5"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Ramin Rezaeian",
+            "minute": "14"
+          }
+        ]
       },
       {
         "match_number": 66,
@@ -2688,7 +2706,41 @@
         "city": "Vancouver",
         "country": "Canada",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 1,
+        "away_score": 5,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 1,
+        "home_scorers": [
+          {
+            "player": "Elijah Just",
+            "minute": "84"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Leandro Trossard",
+            "minute": "28"
+          },
+          {
+            "player": "Leandro Trossard",
+            "minute": "50"
+          },
+          {
+            "player": "Kevin De Bruyne",
+            "minute": "66"
+          },
+          {
+            "player": "Romelu Lukaku",
+            "minute": "86"
+          },
+          {
+            "player": "Alexis Saelemaekers",
+            "minute": "90+4"
+          }
+        ]
       },
       {
         "match_number": 67,
