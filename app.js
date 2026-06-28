@@ -1569,6 +1569,32 @@ function buildChampionCell() {
   return div;
 }
 
+// Resuelve labels "Winner N" / "Loser N" al equipo real cuando el partido
+// referenciado ya terminó. Retorna el team object (name, name_en, iso2, flag,
+// label) o el team original si no se puede resolver.
+function resolveBracketLabel(team, role) {
+  if (!team) return team || {};
+  const name = team.name || team.label || "";
+  // Parsear "Winner 73", "Loser 101", "Winner Match 73", etc.
+  const m = name.match(/^(Winner|Loser)\s+(?:Match\s+)?(\d+)$/i);
+  if (!m) return team;  // no es un label, devolver tal cual
+  const isWinner = m[1].toLowerCase() === "winner";
+  const refNum = Number(m[2]);
+  // Buscar el partido referenciado por match_number
+  const ref = STATE.matches.find(x => x.match_number === refNum);
+  if (!ref) return team;
+  // Verificar que el partido referenciado terminó
+  if (ref.status !== "finished") return team;
+  const sc = effectiveScore(ref);
+  if (sc.home === null || sc.away === null) return team;
+  // Determinar ganador / perdedor
+  if (isWinner) {
+    return sc.home > sc.away ? ref.home : ref.away;
+  } else {
+    return sc.home < sc.away ? ref.home : ref.away;
+  }
+}
+
 function createBracketMatch(m, opts = {}) {
   const compact = opts.compact !== false;
   const div = document.createElement("div");
@@ -1577,15 +1603,19 @@ function createBracketMatch(m, opts = {}) {
   const s = effectiveScore(m);
   const hWins = s.home !== null && s.away !== null && s.home > s.away;
   const aWins = s.home !== null && s.away !== null && s.away > s.home;
-  const homeIsPending = !m.home?.name_en && !!m.home?.label;
-  const awayIsPending = !m.away?.name_en && !!m.away?.label;
-  const homeName = m.home?.name || m.home?.label || "TBD";
-  const awayName = m.away?.name || m.away?.label || "TBD";
-  const homeFlag = !homeIsPending && m.home?.iso2
-    ? `<span class="fi fi-${m.home.iso2} flag-20" title="${escapeHtml(homeName)}"></span>`
+  // Resolver labels "Winner N" / "Loser N" al equipo real cuando el partido
+  // referenciado ya terminó. Esto permite que los ganadores avancen en el bracket.
+  const resolvedHome = resolveBracketLabel(m.home, "home");
+  const resolvedAway = resolveBracketLabel(m.away, "away");
+  const homeIsPending = !resolvedHome.name_en && !!resolvedHome.label;
+  const awayIsPending = !resolvedAway.name_en && !!resolvedAway.label;
+  const homeName = resolvedHome.name || resolvedHome.label || "TBD";
+  const awayName = resolvedAway.name || resolvedAway.label || "TBD";
+  const homeFlag = !homeIsPending && resolvedHome.iso2
+    ? `<span class="fi fi-${resolvedHome.iso2} flag-20" title="${escapeHtml(homeName)}"></span>`
     : `<span class="bracket-match-flag placeholder" aria-hidden="true"></span>`;
-  const awayFlag = !awayIsPending && m.away?.iso2
-    ? `<span class="fi fi-${m.away.iso2} flag-20" title="${escapeHtml(awayName)}"></span>`
+  const awayFlag = !awayIsPending && resolvedAway.iso2
+    ? `<span class="fi fi-${resolvedAway.iso2} flag-20" title="${escapeHtml(awayName)}"></span>`
     : `<span class="bracket-match-flag placeholder" aria-hidden="true"></span>`;
   // Badge de número de partido (Match 73, 74…) si está disponible. Solo
   // se muestra en partidos de fase eliminatoria (la API los asigna en
