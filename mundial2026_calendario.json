@@ -2845,7 +2845,15 @@
         "city": "Miami",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 0,
+        "away_score": 0,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 0,
+        "home_scorers": [],
+        "away_scorers": []
       },
       {
         "match_number": 70,
@@ -2889,7 +2897,41 @@
         "city": "Kansas City",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 3,
+        "away_score": 3,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 1,
+        "away_ht": 1,
+        "home_scorers": [
+          {
+            "player": "Rafik Belghali",
+            "minute": "45"
+          },
+          {
+            "player": "Riyad Mahrez",
+            "minute": "60"
+          },
+          {
+            "player": "Riyad Mahrez",
+            "minute": "90+3"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Marko Arnautovic",
+            "minute": "28"
+          },
+          {
+            "player": "Marcel Sabitzer",
+            "minute": "55"
+          },
+          {
+            "player": "Sasa Kalajdzic",
+            "minute": "90+6"
+          }
+        ]
       },
       {
         "match_number": 72,
@@ -2911,7 +2953,34 @@
         "city": "Dallas",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 1,
+        "away_score": 3,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 2,
+        "home_scorers": [
+          {
+            "player": "Mousa Al-Tamari",
+            "minute": "55"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Giovani Lo Celso",
+            "minute": "19"
+          },
+          {
+            "player": "Lautaro Martínez",
+            "minute": "31",
+            "note": "penalty"
+          },
+          {
+            "player": "Lionel Messi",
+            "minute": "80"
+          }
+        ]
       }
     ],
     "round_of_32": [
