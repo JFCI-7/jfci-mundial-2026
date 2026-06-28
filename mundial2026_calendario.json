@@ -2987,7 +2987,7 @@
       {
         "match_number": 73,
         "date": "2026-06-28",
-        "time": "TBD",
+        "time": "13:00",
         "timezone": "CST",
         "home_team": {
           "name": "2nd Group A",
@@ -2999,15 +2999,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Los Angeles",
-        "city": "Los Angeles",
+        "venue": "SoFi Stadium",
+        "city": "Los Ángeles",
         "country": "United States",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "15:00",
+        "time_cdmx": "13:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 74,
         "date": "2026-06-29",
-        "time": "TBD",
+        "time": "14:30",
         "timezone": "CST",
         "home_team": {
           "name": "1st Group E",
@@ -3019,15 +3022,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Boston",
-        "city": "Boston",
+        "venue": "Gillette Stadium",
+        "city": "Foxborough (Boston)",
         "country": "United States",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "16:30",
+        "time_cdmx": "14:30",
+        "timezone_et": "ET"
       },
       {
         "match_number": 75,
         "date": "2026-06-29",
-        "time": "TBD",
+        "time": "19:00",
         "timezone": "CST",
         "home_team": {
           "name": "1st Group F",
@@ -3039,15 +3045,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Monterrey",
+        "venue": "Estadio BBVA",
         "city": "Monterrey",
         "country": "Mexico",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "21:00",
+        "time_cdmx": "19:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 76,
         "date": "2026-06-29",
-        "time": "TBD",
+        "time": "11:00",
         "timezone": "CST",
         "home_team": {
           "name": "1st Group C",
@@ -3059,15 +3068,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Houston",
+        "venue": "NRG Stadium",
         "city": "Houston",
         "country": "United States",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "13:00",
+        "time_cdmx": "11:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 77,
         "date": "2026-06-30",
-        "time": "TBD",
+        "time": "15:00",
         "timezone": "CST",
         "home_team": {
           "name": "1st Group I",
@@ -3079,15 +3091,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio New York/New Jersey",
-        "city": "New York",
+        "venue": "MetLife Stadium",
+        "city": "East Rutherford (Nueva York/Nueva Jersey)",
         "country": "United States",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "17:00",
+        "time_cdmx": "15:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 78,
         "date": "2026-06-30",
-        "time": "TBD",
+        "time": "11:00",
         "timezone": "CST",
         "home_team": {
           "name": "2nd Group E",
@@ -3099,15 +3114,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Dallas",
-        "city": "Dallas",
+        "venue": "AT&T Stadium",
+        "city": "Arlington (Dallas)",
         "country": "United States",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "13:00",
+        "time_cdmx": "11:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 79,
         "date": "2026-06-30",
-        "time": "TBD",
+        "time": "19:00",
         "timezone": "CST",
         "home_team": {
           "name": "1st Group A",
@@ -3119,15 +3137,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Ciudad de México",
-        "city": "Mexico City",
+        "venue": "Estadio Azteca",
+        "city": "Ciudad de México",
         "country": "Mexico",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "21:00",
+        "time_cdmx": "19:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 80,
         "date": "2026-07-01",
-        "time": "TBD",
+        "time": "10:00",
         "timezone": "CST",
         "home_team": {
           "name": "1st Group L",
@@ -3139,15 +3160,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Atlanta",
+        "venue": "Mercedes-Benz Stadium",
         "city": "Atlanta",
         "country": "United States",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "12:00",
+        "time_cdmx": "10:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 81,
         "date": "2026-07-01",
-        "time": "TBD",
+        "time": "18:00",
         "timezone": "CST",
         "home_team": {
           "name": "1st Group D",
@@ -3159,15 +3183,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Bay Area",
-        "city": "San Francisco",
+        "venue": "Levi's Stadium",
+        "city": "Santa Clara",
         "country": "United States",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "20:00",
+        "time_cdmx": "18:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 82,
         "date": "2026-07-01",
-        "time": "TBD",
+        "time": "14:00",
         "timezone": "CST",
         "home_team": {
           "name": "1st Group G",
@@ -3179,15 +3206,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Seattle",
+        "venue": "Lumen Field",
         "city": "Seattle",
         "country": "United States",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "16:00",
+        "time_cdmx": "14:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 83,
         "date": "2026-07-02",
-        "time": "TBD",
+        "time": "17:00",
         "timezone": "CST",
         "home_team": {
           "name": "2nd Group K",
@@ -3199,15 +3229,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Toronto",
+        "venue": "BMO Field",
         "city": "Toronto",
         "country": "Canada",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "19:00",
+        "time_cdmx": "17:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 84,
         "date": "2026-07-02",
-        "time": "TBD",
+        "time": "13:00",
         "timezone": "CST",
         "home_team": {
           "name": "1st Group H",
@@ -3219,15 +3252,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Los Angeles",
-        "city": "Los Angeles",
+        "venue": "SoFi Stadium",
+        "city": "Los Ángeles",
         "country": "United States",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "15:00",
+        "time_cdmx": "13:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 85,
         "date": "2026-07-02",
-        "time": "TBD",
+        "time": "21:00",
         "timezone": "CST",
         "home_team": {
           "name": "1st Group B",
@@ -3239,15 +3275,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "BC Place Vancouver",
+        "venue": "BC Place",
         "city": "Vancouver",
         "country": "Canada",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "23:00",
+        "time_cdmx": "21:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 86,
         "date": "2026-07-03",
-        "time": "TBD",
+        "time": "16:00",
         "timezone": "CST",
         "home_team": {
           "name": "1st Group J",
@@ -3259,15 +3298,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Miami",
+        "venue": "Hard Rock Stadium",
         "city": "Miami",
         "country": "United States",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "18:00",
+        "time_cdmx": "16:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 87,
         "date": "2026-07-03",
-        "time": "TBD",
+        "time": "19:30",
         "timezone": "CST",
         "home_team": {
           "name": "1st Group K",
@@ -3279,15 +3321,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Kansas City",
+        "venue": "Arrowhead Stadium",
         "city": "Kansas City",
         "country": "United States",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "21:30",
+        "time_cdmx": "19:30",
+        "timezone_et": "ET"
       },
       {
         "match_number": 88,
         "date": "2026-07-03",
-        "time": "TBD",
+        "time": "12:00",
         "timezone": "CST",
         "home_team": {
           "name": "2nd Group D",
@@ -3299,17 +3344,20 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Dallas",
-        "city": "Dallas",
+        "venue": "AT&T Stadium",
+        "city": "Arlington (Dallas)",
         "country": "United States",
-        "stage": "Round of 32"
+        "stage": "Round of 32",
+        "time_et": "14:00",
+        "time_cdmx": "12:00",
+        "timezone_et": "ET"
       }
     ],
     "round_of_16": [
       {
         "match_number": 89,
         "date": "2026-07-04",
-        "time": "TBD",
+        "time": "15:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 74",
@@ -3321,15 +3369,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Philadelphia",
-        "city": "Philadelphia",
+        "venue": "Lincoln Financial Field",
+        "city": "Filadelfia",
         "country": "United States",
-        "stage": "Round of 16"
+        "stage": "Round of 16",
+        "time_et": "17:00",
+        "time_cdmx": "15:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 90,
         "date": "2026-07-04",
-        "time": "TBD",
+        "time": "11:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 73",
@@ -3341,15 +3392,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Houston",
+        "venue": "NRG Stadium",
         "city": "Houston",
         "country": "United States",
-        "stage": "Round of 16"
+        "stage": "Round of 16",
+        "time_et": "13:00",
+        "time_cdmx": "11:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 91,
         "date": "2026-07-05",
-        "time": "TBD",
+        "time": "14:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 76",
@@ -3361,15 +3415,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio New York/New Jersey",
-        "city": "New York",
+        "venue": "MetLife Stadium",
+        "city": "East Rutherford (Nueva York/Nueva Jersey)",
         "country": "United States",
-        "stage": "Round of 16"
+        "stage": "Round of 16",
+        "time_et": "16:00",
+        "time_cdmx": "14:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 92,
         "date": "2026-07-05",
-        "time": "TBD",
+        "time": "18:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 79",
@@ -3381,15 +3438,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Ciudad de México",
-        "city": "Mexico City",
+        "venue": "Estadio Azteca",
+        "city": "Ciudad de México",
         "country": "Mexico",
-        "stage": "Round of 16"
+        "stage": "Round of 16",
+        "time_et": "20:00",
+        "time_cdmx": "18:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 93,
         "date": "2026-07-06",
-        "time": "TBD",
+        "time": "13:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 83",
@@ -3401,15 +3461,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Dallas",
-        "city": "Dallas",
+        "venue": "AT&T Stadium",
+        "city": "Arlington (Dallas)",
         "country": "United States",
-        "stage": "Round of 16"
+        "stage": "Round of 16",
+        "time_et": "15:00",
+        "time_cdmx": "13:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 94,
         "date": "2026-07-06",
-        "time": "TBD",
+        "time": "18:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 81",
@@ -3421,15 +3484,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Seattle",
+        "venue": "Lumen Field",
         "city": "Seattle",
         "country": "United States",
-        "stage": "Round of 16"
+        "stage": "Round of 16",
+        "time_et": "20:00",
+        "time_cdmx": "18:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 95,
         "date": "2026-07-07",
-        "time": "TBD",
+        "time": "10:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 86",
@@ -3441,15 +3507,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Atlanta",
+        "venue": "Mercedes-Benz Stadium",
         "city": "Atlanta",
         "country": "United States",
-        "stage": "Round of 16"
+        "stage": "Round of 16",
+        "time_et": "12:00",
+        "time_cdmx": "10:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 96,
         "date": "2026-07-07",
-        "time": "TBD",
+        "time": "14:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 85",
@@ -3461,17 +3530,20 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "BC Place Vancouver",
+        "venue": "BC Place",
         "city": "Vancouver",
         "country": "Canada",
-        "stage": "Round of 16"
+        "stage": "Round of 16",
+        "time_et": "16:00",
+        "time_cdmx": "14:00",
+        "timezone_et": "ET"
       }
     ],
     "quarter_finals": [
       {
         "match_number": 97,
         "date": "2026-07-09",
-        "time": "TBD",
+        "time": "14:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 89",
@@ -3483,15 +3555,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Boston",
-        "city": "Boston",
+        "venue": "Gillette Stadium",
+        "city": "Foxborough (Boston)",
         "country": "United States",
-        "stage": "Quarter Finals"
+        "stage": "Quarter Finals",
+        "time_et": "16:00",
+        "time_cdmx": "14:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 98,
         "date": "2026-07-10",
-        "time": "TBD",
+        "time": "13:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 93",
@@ -3503,15 +3578,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Los Angeles",
-        "city": "Los Angeles",
+        "venue": "SoFi Stadium",
+        "city": "Los Ángeles",
         "country": "United States",
-        "stage": "Quarter Finals"
+        "stage": "Quarter Finals",
+        "time_et": "15:00",
+        "time_cdmx": "13:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 99,
         "date": "2026-07-11",
-        "time": "TBD",
+        "time": "15:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 91",
@@ -3523,15 +3601,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Miami",
+        "venue": "Hard Rock Stadium",
         "city": "Miami",
         "country": "United States",
-        "stage": "Quarter Finals"
+        "stage": "Quarter Finals",
+        "time_et": "17:00",
+        "time_cdmx": "15:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 100,
         "date": "2026-07-11",
-        "time": "TBD",
+        "time": "19:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 95",
@@ -3543,17 +3624,20 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Kansas City",
+        "venue": "Arrowhead Stadium",
         "city": "Kansas City",
         "country": "United States",
-        "stage": "Quarter Finals"
+        "stage": "Quarter Finals",
+        "time_et": "21:00",
+        "time_cdmx": "19:00",
+        "timezone_et": "ET"
       }
     ],
     "semi_finals": [
       {
         "match_number": 101,
         "date": "2026-07-14",
-        "time": "TBD",
+        "time": "13:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 97",
@@ -3565,15 +3649,18 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Dallas",
-        "city": "Dallas",
+        "venue": "AT&T Stadium",
+        "city": "Arlington (Dallas)",
         "country": "United States",
-        "stage": "Semi Finals"
+        "stage": "Semi Finals",
+        "time_et": "15:00",
+        "time_cdmx": "13:00",
+        "timezone_et": "ET"
       },
       {
         "match_number": 102,
         "date": "2026-07-15",
-        "time": "TBD",
+        "time": "13:00",
         "timezone": "CST",
         "home_team": {
           "name": "Winner 99",
@@ -3585,10 +3672,13 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Atlanta",
+        "venue": "Mercedes-Benz Stadium",
         "city": "Atlanta",
         "country": "United States",
-        "stage": "Semi Finals"
+        "stage": "Semi Finals",
+        "time_et": "15:00",
+        "time_cdmx": "13:00",
+        "timezone_et": "ET"
       }
     ],
     "third_place": [
@@ -3607,10 +3697,13 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio Miami",
+        "venue": "Hard Rock Stadium",
         "city": "Miami",
         "country": "United States",
-        "stage": "Third Place"
+        "stage": "Third Place",
+        "time_et": "17:00",
+        "time_cdmx": "15:00",
+        "timezone_et": "ET"
       }
     ],
     "final": [
@@ -3629,10 +3722,13 @@
           "flag": "❓",
           "code": "TBD"
         },
-        "venue": "Estadio New York/New Jersey",
-        "city": "New York",
+        "venue": "MetLife Stadium",
+        "city": "East Rutherford (Nueva York/Nueva Jersey)",
         "country": "United States",
-        "stage": "Final"
+        "stage": "Final",
+        "time_et": "15:00",
+        "time_cdmx": "13:00",
+        "timezone_et": "ET"
       }
     ]
   },

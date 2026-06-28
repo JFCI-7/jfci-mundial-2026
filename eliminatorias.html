@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=2" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
 </head>
 <body>
@@ -42,6 +42,7 @@
     <section class="view active">
       <h2 class="bebas section-title"><i class="ri-trophy-fill" aria-hidden="true"></i> <span data-i18n="bracket.title">Fase Eliminatoria</span></h2>
       <p class="text-muted">Los cruces se muestran conforme la fase de grupos finaliza y la API publica los clasificados.</p>
+      <p class="text-muted small mb-3"><i class="ri-calendar-line" aria-hidden="true"></i> <span data-i18n="bracket.phasesDates">16avos: 28 jun – 3 jul · Octavos: 4–7 jul · Cuartos: 9–11 jul · Semis: 14–15 jul · 3°: 18 jul · Final: 19 jul</span></p>
       <div id="knockout-container" class="knockout d-flex flex-column gap-3"></div>
     </section>
   </main>
@@ -92,10 +93,10 @@
   </div>
 
   <script src="db.js"></script>
-  <script src="seed.js?v=3"></script>
+  <script src="seed.js?v=5"></script>
   <script src="api.js"></script>
   <script src="i18n.js"></script>
   <script src="components.js"></script>
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>

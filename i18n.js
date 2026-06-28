@@ -202,6 +202,13 @@
       "bracket.empty": "Eliminatorias aún no definidas. Se publicarán cuando finalice la fase de grupos.",
       "bracket.matchCount": "{n} cruces",
       "bracket.round": "Ronda",
+      "bracket.phasesDates": "16avos: 28 jun – 3 jul · Octavos: 4–7 jul · Cuartos: 9–11 jul · Semis: 14–15 jul · 3°: 18 jul · Final: 19 jul",
+      "bracket.phaseDates.r32": "28 jun – 3 jul",
+      "bracket.phaseDates.r16": "4–7 jul",
+      "bracket.phaseDates.qf": "9–11 jul",
+      "bracket.phaseDates.sf": "14–15 jul",
+      "bracket.phaseDates.third": "18 jul",
+      "bracket.phaseDates.final": "19 jul",
 
       // ── Quiniela view ──
       "pred.title": "Quiniela del Mundial 2026",
@@ -633,6 +640,13 @@
       "bracket.empty": "Knockouts not yet defined. They will be published when the group stage ends.",
       "bracket.matchCount": "{n} ties",
       "bracket.round": "Round",
+      "bracket.phasesDates": "R32: Jun 28 – Jul 3 · R16: Jul 4–7 · QF: Jul 9–11 · SF: Jul 14–15 · 3rd: Jul 18 · Final: Jul 19",
+      "bracket.phaseDates.r32": "Jun 28 – Jul 3",
+      "bracket.phaseDates.r16": "Jul 4–7",
+      "bracket.phaseDates.qf": "Jul 9–11",
+      "bracket.phaseDates.sf": "Jul 14–15",
+      "bracket.phaseDates.third": "Jul 18",
+      "bracket.phaseDates.final": "Jul 19",
 
       // ── Quiniela view ──
       "pred.title": "World Cup 2026 Predictions",

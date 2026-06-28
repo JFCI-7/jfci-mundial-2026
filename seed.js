@@ -79,11 +79,12 @@ const Seed = (() => {
   //     devolver datos obsoletos.
   // v5: bump CACHE_KEY para invalidar cachés de browsers que tienen una versión
   //     incompleta del seed (36 matches en vez de 104).
-  // v6: bump CACHE_KEY para invalidar cachés con datos parciales (goles en
-  //     descuentos, dobletes y gráfica por minuto desactualizados).
-  const CACHE_KEY = "mundial2026_seed_cache_v6";
-  const LEGACY_CACHE_KEYS = ["mundial2026_seed_cache", "mundial2026_seed_cache_v2", "mundial2026_seed_cache_v3", "mundial2026_seed_cache_v5"];
-  const SEED_PAYLOAD_VERSION = 6;
+  // v8: bump CACHE_KEY + embed KO_SCHEDULE como hardcoded fallback.
+  //     Garantiza que los 32 partidos KO tengan fecha, hora, sede incluso
+  //     si el JSON o el localStorage sirven datos viejos.
+  const CACHE_KEY = "mundial2026_seed_cache_v8";
+  const LEGACY_CACHE_KEYS = ["mundial2026_seed_cache", "mundial2026_seed_cache_v2", "mundial2026_seed_cache_v3", "mundial2026_seed_cache_v5", "mundial2026_seed_cache_v6", "mundial2026_seed_cache_v7"];
+  const SEED_PAYLOAD_VERSION = 8;
 
   async function load() {
     // Migración silenciosa: si hay caché legacy, eliminarlo. La nueva
@@ -130,6 +131,45 @@ const Seed = (() => {
     return data;
   }
 
+  // Hardcoded fallback: fechas, horas (CDMX/ET) y sedes de los 32 partidos KO.
+  // Fuente: calendario oficial FIFA publicado en fifa.com, sportingnews.com,
+  // tycsports.com, informador.mx y mundiales-de-futbol.com (junio 2026).
+  // Se usa cuando el JSON local o el caché localStorage no tienen estos campos.
+  const KO_SCHEDULE = {
+    73: { time:"13:00", time_et:"15:00", time_cdmx:"13:00", venue:"SoFi Stadium",           city:"Los Ángeles",                               country:"United States" },
+    74: { time:"14:30", time_et:"16:30", time_cdmx:"14:30", venue:"Gillette Stadium",       city:"Foxborough (Boston)",                       country:"United States" },
+    75: { time:"19:00", time_et:"21:00", time_cdmx:"19:00", venue:"Estadio BBVA",           city:"Monterrey",                                 country:"Mexico" },
+    76: { time:"11:00", time_et:"13:00", time_cdmx:"11:00", venue:"NRG Stadium",            city:"Houston",                                   country:"United States" },
+    77: { time:"15:00", time_et:"17:00", time_cdmx:"15:00", venue:"MetLife Stadium",        city:"East Rutherford (Nueva York/Nueva Jersey)", country:"United States" },
+    78: { time:"11:00", time_et:"13:00", time_cdmx:"11:00", venue:"AT&T Stadium",           city:"Arlington (Dallas)",                        country:"United States" },
+    79: { time:"19:00", time_et:"21:00", time_cdmx:"19:00", venue:"Estadio Azteca",         city:"Ciudad de México",                          country:"Mexico" },
+    80: { time:"10:00", time_et:"12:00", time_cdmx:"10:00", venue:"Mercedes-Benz Stadium",  city:"Atlanta",                                   country:"United States" },
+    81: { time:"18:00", time_et:"20:00", time_cdmx:"18:00", venue:"Levi's Stadium",         city:"Santa Clara",                               country:"United States" },
+    82: { time:"14:00", time_et:"16:00", time_cdmx:"14:00", venue:"Lumen Field",            city:"Seattle",                                   country:"United States" },
+    83: { time:"17:00", time_et:"19:00", time_cdmx:"17:00", venue:"BMO Field",              city:"Toronto",                                   country:"Canada" },
+    84: { time:"13:00", time_et:"15:00", time_cdmx:"13:00", venue:"SoFi Stadium",           city:"Los Ángeles",                               country:"United States" },
+    85: { time:"21:00", time_et:"23:00", time_cdmx:"21:00", venue:"BC Place",               city:"Vancouver",                                 country:"Canada" },
+    86: { time:"16:00", time_et:"18:00", time_cdmx:"16:00", venue:"Hard Rock Stadium",      city:"Miami",                                     country:"United States" },
+    87: { time:"19:30", time_et:"21:30", time_cdmx:"19:30", venue:"Arrowhead Stadium",      city:"Kansas City",                               country:"United States" },
+    88: { time:"12:00", time_et:"14:00", time_cdmx:"12:00", venue:"AT&T Stadium",           city:"Arlington (Dallas)",                        country:"United States" },
+    89: { time:"15:00", time_et:"17:00", time_cdmx:"15:00", venue:"Lincoln Financial Field",city:"Filadelfia",                                country:"United States" },
+    90: { time:"11:00", time_et:"13:00", time_cdmx:"11:00", venue:"NRG Stadium",            city:"Houston",                                   country:"United States" },
+    91: { time:"14:00", time_et:"16:00", time_cdmx:"14:00", venue:"MetLife Stadium",        city:"East Rutherford (Nueva York/Nueva Jersey)", country:"United States" },
+    92: { time:"18:00", time_et:"20:00", time_cdmx:"18:00", venue:"Estadio Azteca",         city:"Ciudad de México",                          country:"Mexico" },
+    93: { time:"13:00", time_et:"15:00", time_cdmx:"13:00", venue:"AT&T Stadium",           city:"Arlington (Dallas)",                        country:"United States" },
+    94: { time:"18:00", time_et:"20:00", time_cdmx:"18:00", venue:"Lumen Field",            city:"Seattle",                                   country:"United States" },
+    95: { time:"10:00", time_et:"12:00", time_cdmx:"10:00", venue:"Mercedes-Benz Stadium",  city:"Atlanta",                                   country:"United States" },
+    96: { time:"14:00", time_et:"16:00", time_cdmx:"14:00", venue:"BC Place",               city:"Vancouver",                                 country:"Canada" },
+    97: { time:"14:00", time_et:"16:00", time_cdmx:"14:00", venue:"Gillette Stadium",       city:"Foxborough (Boston)",                       country:"United States" },
+    98: { time:"13:00", time_et:"15:00", time_cdmx:"13:00", venue:"SoFi Stadium",           city:"Los Ángeles",                               country:"United States" },
+    99: { time:"15:00", time_et:"17:00", time_cdmx:"15:00", venue:"Hard Rock Stadium",      city:"Miami",                                     country:"United States" },
+   100: { time:"19:00", time_et:"21:00", time_cdmx:"19:00", venue:"Arrowhead Stadium",      city:"Kansas City",                               country:"United States" },
+   101: { time:"13:00", time_et:"15:00", time_cdmx:"13:00", venue:"AT&T Stadium",           city:"Arlington (Dallas)",                        country:"United States" },
+   102: { time:"13:00", time_et:"15:00", time_cdmx:"13:00", venue:"Mercedes-Benz Stadium",  city:"Atlanta",                                   country:"United States" },
+   103: { time:"15:00", time_et:"17:00", time_cdmx:"15:00", venue:"Hard Rock Stadium",      city:"Miami",                                     country:"United States" },
+   104: { time:"13:00", time_et:"15:00", time_cdmx:"13:00", venue:"MetLife Stadium",        city:"East Rutherford (Nueva York/Nueva Jersey)", country:"United States" },
+  };
+
   function normalize(raw) {
     const teams = [];
     if (raw.groups) {
@@ -155,34 +195,42 @@ const Seed = (() => {
       for (const [section, list] of Object.entries(raw.matches)) {
         if (!Array.isArray(list)) continue;
         list.forEach(m => {
-          const homeIso = ISO_BY_NAME[m.home_team.name] || null;
-          const awayIso = ISO_BY_NAME[m.away_team.name] || null;
-          // Si el JSON trae score+status (partidos ya jugados), los respetamos.
-          // Si no, dejamos null/pending para que la API los rellene luego.
-          const hasScore = typeof m.home_score === "number" && typeof m.away_score === "number";
-          matches.push({
-            id: `seed-m${m.match_number}`,
-            source: "seed",
-            match_number: m.match_number,
-            stage: STAGE_MAP[m.stage] || section,
-            matchday: m.matchday || 0,
-            group: m.group || null,
-            home: {
-              ...m.home_team,
-              iso2: homeIso,
-              flag: homeIso ? `./vendor/flags/4x3/${homeIso}.svg` : null,
-              scorers: Array.isArray(m.home_scorers) ? m.home_scorers : [],
-            },
-            away: {
-              ...m.away_team,
-              iso2: awayIso,
-              flag: awayIso ? `./vendor/flags/4x3/${awayIso}.svg` : null,
-              scorers: Array.isArray(m.away_scorers) ? m.away_scorers : [],
-            },
-            date: parseDate(m.date, m.time),
-            venue: m.venue || "",
-            city: m.city || "",
-            country: m.country || "",
+            const homeIso = ISO_BY_NAME[m.home_team.name] || null;
+            const awayIso = ISO_BY_NAME[m.away_team.name] || null;
+            // Si el JSON trae score+status (partidos ya jugados), los respetamos.
+            // Si no, dejamos null/pending para que la API los rellene luego.
+            const hasScore = typeof m.home_score === "number" && typeof m.away_score === "number";
+            // Hardcoded fallback: si el JSON tiene time="TBD" (o no tiene time_et
+            // / time_cdmx), usamos KO_SCHEDULE que vive en este mismo archivo.
+            const ko = KO_SCHEDULE[m.match_number];
+            const timeVal = (m.time && m.time !== "TBD") ? m.time : (ko?.time || m.time);
+            const timeEt = m.time_et || ko?.time_et || null;
+            const timeCdmx = m.time_cdmx || ko?.time_cdmx || null;
+            matches.push({
+              id: `seed-m${m.match_number}`,
+              source: "seed",
+              match_number: m.match_number,
+              stage: STAGE_MAP[m.stage] || section,
+              matchday: m.matchday || 0,
+              group: m.group || null,
+              home: {
+                ...m.home_team,
+                iso2: homeIso,
+                flag: homeIso ? `./vendor/flags/4x3/${homeIso}.svg` : null,
+                scorers: Array.isArray(m.home_scorers) ? m.home_scorers : [],
+              },
+              away: {
+                ...m.away_team,
+                iso2: awayIso,
+                flag: awayIso ? `./vendor/flags/4x3/${awayIso}.svg` : null,
+                scorers: Array.isArray(m.away_scorers) ? m.away_scorers : [],
+              },
+              date: parseDate(m.date, timeVal),
+              time_et: timeEt,
+              time_cdmx: timeCdmx,
+              venue: m.venue || ko?.venue || "",
+              city: m.city || ko?.city || "",
+              country: m.country || ko?.country || "",
             home_score: hasScore ? m.home_score : null,
             away_score: hasScore ? m.away_score : null,
             status: hasScore ? (m.status || "finished") : "pending",

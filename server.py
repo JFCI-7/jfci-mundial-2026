@@ -91,6 +91,15 @@ class Handler(SimpleHTTPRequestHandler):
             return
         super().do_GET()
 
+    def end_headers(self):
+        # Anti-caching: fuerza al navegador a SIEMPRE revalidar con el servidor.
+        # Sin esto, el browser usa heurísticas de Last-Modified y sirve archivos
+        # viejos durante minutos/horas (el bug clásico de "no se ve el cambio").
+        self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+        self.send_header("Pragma", "no-cache")
+        self.send_header("Expires", "0")
+        super().end_headers()
+
     def do_PUT(self):
         if self.path.startswith("/api/predictions"):
             self._handle_predictions("PUT")

@@ -797,6 +797,25 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   z-index: 3;
 }
 
+/* ==== Meta línea: fecha y hora (CDMX) ====
+   Línea sutil al pie de la tarjeta con la fecha y hora del partido
+   (hora de Ciudad de México, la zona del público objetivo del proyecto).
+   El tooltip del div padre muestra día largo, ambas zonas y estadio. */
+.bracket-match-meta {
+  font-size: .6rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+  padding-top: .15rem;
+  margin-top: .2rem;
+  border-top: 1px dashed var(--border);
+  pointer-events: none;
+  line-height: 1.1;
+}
+.bracket-match-meta i { font-size: .7rem; opacity: .85; }
+
 .bracket-team {
   display: flex; align-items: center; gap: .35rem;
   min-width: 0;

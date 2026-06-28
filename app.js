@@ -1594,6 +1594,13 @@ function createBracketMatch(m, opts = {}) {
     ? `<span class="bracket-match-num">Match ${m.match_number}</span>`
     : "";
 
+  // Meta línea con fecha y hora (CDMX). El tooltip muestra día completo,
+  // ambas zonas horarias y estadio. Solo se muestra si hay fecha definida.
+  const locale = (window.I18N && I18N.lang === "en") ? "en-US" : "es-MX";
+  const metaHtml = buildBracketMeta(m, locale);
+  const tooltip = buildBracketTooltip(m, locale);
+  if (tooltip) div.title = tooltip;
+
   div.innerHTML = `
     ${matchNum}
     <div class="bracket-team ${hWins ? "adv" : ""} ${homeIsPending ? "pending" : ""}">
@@ -1606,6 +1613,7 @@ function createBracketMatch(m, opts = {}) {
       <span class="bracket-team-name">${escapeHtml(awayName)}</span>
       <span class="bracket-team-score bebas">${s.away !== null ? s.away : "—"}</span>
     </div>
+    ${metaHtml}
   `;
   // EDICIÓN DESHABILITADA — el bracket es solo lectura. Se comenta el handler
   // para que el click no abra el modal. El modal en sí sigue disponible para
@@ -1613,6 +1621,37 @@ function createBracketMatch(m, opts = {}) {
   // descomentar la siguiente línea.
   // div.addEventListener("click", () => openScoreModal(m.id));
   return div;
+}
+
+// Línea compacta de fecha+hora (CDMX) en el pie de la tarjeta.
+function buildBracketMeta(m, locale) {
+  if (!m.date) return "";
+  const d = new Date(m.date);
+  if (isNaN(d.getTime())) return "";
+  let dateStr, timeStr;
+  try {
+    dateStr = d.toLocaleDateString(locale, { day: "2-digit", month: "short" });
+    timeStr = d.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" });
+  } catch (_) { return ""; }
+  return `<div class="bracket-match-meta" aria-hidden="true"><i class="ri-calendar-line"></i> ${escapeHtml(dateStr)} · ${escapeHtml(timeStr)}</div>`;
+}
+
+// Tooltip con día largo, ambas zonas y estadio.
+function buildBracketTooltip(m, locale) {
+  if (!m.date) return "";
+  const d = new Date(m.date);
+  if (isNaN(d.getTime())) return "";
+  let longDate, timeCdmx;
+  try {
+    longDate  = d.toLocaleDateString(locale, { weekday: "long", day: "2-digit", month: "long", year: "numeric" });
+    timeCdmx  = d.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" });
+  } catch (_) { return ""; }
+  const cdmx = m.time_cdmx || timeCdmx;
+  const et   = m.time_et   || "—";
+  const venue = [m.venue, m.city, m.country].filter(Boolean).join(", ");
+  let tip = `${longDate} · ${cdmx} CDMX / ${et} ET`;
+  if (venue) tip += ` · ${venue}`;
+  return tip;
 }
 
 // ============== RENDER: PREDICTIONS ==============
