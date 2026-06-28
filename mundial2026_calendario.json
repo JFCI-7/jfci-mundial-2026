@@ -2762,7 +2762,24 @@
         "city": "New York",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 0,
+        "away_score": 2,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 0,
+        "away_ht": 0,
+        "home_scorers": [],
+        "away_scorers": [
+          {
+            "player": "Jude Bellingham",
+            "minute": "62"
+          },
+          {
+            "player": "Harry Kane",
+            "minute": "67"
+          }
+        ]
       },
       {
         "match_number": 68,
@@ -2784,7 +2801,29 @@
         "city": "Philadelphia",
         "country": "United States",
         "stage": "Group Stage",
-        "matchday": 3
+        "matchday": 3,
+        "home_score": 2,
+        "away_score": 1,
+        "status": "finished",
+        "time_elapsed": "90",
+        "home_ht": 1,
+        "away_ht": 0,
+        "home_scorers": [
+          {
+            "player": "Petar Sucic",
+            "minute": "31"
+          },
+          {
+            "player": "Nikola Vlasic",
+            "minute": "83"
+          }
+        ],
+        "away_scorers": [
+          {
+            "player": "Derrick Luckassen",
+            "minute": "73"
+          }
+        ]
       },
       {
         "match_number": 69,
