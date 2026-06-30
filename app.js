@@ -223,6 +223,8 @@ function ingestAPI(api) {
       }
       if (m.home_score !== null) existing.home_score = m.home_score;
       if (m.away_score !== null) existing.away_score = m.away_score;
+      if (m.home_penalty_score !== null) existing.home_penalty_score = m.home_penalty_score;
+      if (m.away_penalty_score !== null) existing.away_penalty_score = m.away_penalty_score;
       existing.status = m.status;
       existing.time_elapsed = m.time_elapsed;
       existing.apiId = m.apiId;
