@@ -1016,6 +1016,23 @@ function effectiveScore(m) {
   return { home: m.home_score, away: m.away_score, source: m.source || "api" };
 }
 
+function effectivePenaltyScore(m) {
+  return {
+    home: m.home_penalty_score != null ? m.home_penalty_score : null,
+    away: m.away_penalty_score != null ? m.away_penalty_score : null,
+  };
+}
+
+function getKnockoutWinner(m) {
+  const s = effectiveScore(m);
+  if (s.home === null || s.away === null) return null;
+  if (s.home !== s.away) return s.home > s.away ? "home" : "away";
+  const pen = effectivePenaltyScore(m);
+  if (pen.home === null || pen.away === null) return null;
+  if (pen.home !== pen.away) return pen.home > pen.away ? "home" : "away";
+  return null;
+}
+
 function stageLabel(s) {
   return {
     group: "Fase de grupos",
@@ -1268,8 +1285,10 @@ function createMatchCard(m) {
   const card = document.createElement("div");
   card.className = "match-card";
   const s = effectiveScore(m);
+  const pen = effectivePenaltyScore(m);
   const hasScore = s.home !== null && s.away !== null;
   const scoreText = hasScore ? `${s.home} - ${s.away}` : "– : –";
+  const penText = (pen.home !== null && pen.away !== null) ? `<div class="match-pen-score"><i class="ri-football-line" aria-hidden="true"></i> ${pen.home}-${pen.away} pen.</div>` : "";
   let dateOnly = "TBD", timeOnly = "—";
   if (m.date) {
     const d = new Date(m.date);
@@ -1312,7 +1331,7 @@ function createMatchCard(m) {
             </div>
             ${homeScorers}
           </div>
-          <div class="score ${m.status}">${scoreText}${overrideMark}</div>
+          <div class="score ${m.status}">${scoreText}${overrideMark}${penText}</div>
           <div class="team-col away">
             <div class="team-line">
               <span class="name">${awayName}</span>
@@ -1536,15 +1555,11 @@ function renderBracket() {
 }
 
 function buildChampionCell() {
-  // El campeón es el ganador de la Final. Si la Final no está terminada,
-  // mostrar placeholder.
   const finalMatch = STATE.matches.find(m => m.stage === "final");
   let championTeam = null;
   if (finalMatch && finalMatch.status === "finished") {
-    const s = effectiveScore(finalMatch);
-    if (s.home !== null && s.away !== null) {
-      championTeam = s.home > s.away ? finalMatch.home : (s.away > s.home ? finalMatch.away : null);
-    }
+    const w = getKnockoutWinner(finalMatch);
+    if (w) championTeam = w === "home" ? finalMatch.home : finalMatch.away;
   }
 
   const div = document.createElement("div");
@@ -1575,23 +1590,21 @@ function buildChampionCell() {
 function resolveBracketLabel(team, role) {
   if (!team) return team || {};
   const name = team.name || team.label || "";
-  // Parsear "Winner 73", "Loser 101", "Winner Match 73", etc.
   const m = name.match(/^(Winner|Loser)\s+(?:Match\s+)?(\d+)$/i);
-  if (!m) return team;  // no es un label, devolver tal cual
+  if (!m) return team;
   const isWinner = m[1].toLowerCase() === "winner";
   const refNum = Number(m[2]);
-  // Buscar el partido referenciado por match_number
   const ref = STATE.matches.find(x => x.match_number === refNum);
   if (!ref) return team;
-  // Verificar que el partido referenciado terminó
   if (ref.status !== "finished") return team;
   const sc = effectiveScore(ref);
   if (sc.home === null || sc.away === null) return team;
-  // Determinar ganador / perdedor
   if (isWinner) {
-    return sc.home > sc.away ? ref.home : ref.away;
+    const w = getKnockoutWinner(ref);
+    return w === "home" ? ref.home : w === "away" ? ref.away : (sc.home > sc.away ? ref.home : ref.away);
   } else {
-    return sc.home < sc.away ? ref.home : ref.away;
+    const w = getKnockoutWinner(ref);
+    return w === "home" ? ref.away : w === "away" ? ref.home : (sc.home < sc.away ? ref.home : ref.away);
   }
 }
 
@@ -1601,10 +1614,13 @@ function createBracketMatch(m, opts = {}) {
   div.className = `bracket-match bracket-match-${m.stage}`;
   div.dataset.round = m.stage;
   const s = effectiveScore(m);
-  const hWins = s.home !== null && s.away !== null && s.home > s.away;
-  const aWins = s.home !== null && s.away !== null && s.away > s.home;
-  // Resolver labels "Winner N" / "Loser N" al equipo real cuando el partido
-  // referenciado ya terminó. Esto permite que los ganadores avancen en el bracket.
+  const pen = effectivePenaltyScore(m);
+  const winner = getKnockoutWinner(m);
+  const hWins = winner === "home";
+  const aWins = winner === "away";
+  const penHtml = (pen.home !== null && pen.away !== null)
+    ? `<div class="bracket-pen-score"><i class="ri-football-line" aria-hidden="true"></i> ${pen.home}-${pen.away} pen.</div>`
+    : "";
   const resolvedHome = resolveBracketLabel(m.home, "home");
   const resolvedAway = resolveBracketLabel(m.away, "away");
   const homeIsPending = !resolvedHome.name_en && !!resolvedHome.label;
@@ -1617,15 +1633,10 @@ function createBracketMatch(m, opts = {}) {
   const awayFlag = !awayIsPending && resolvedAway.iso2
     ? `<span class="fi fi-${resolvedAway.iso2} flag-20" title="${escapeHtml(awayName)}"></span>`
     : `<span class="bracket-match-flag placeholder" aria-hidden="true"></span>`;
-  // Badge de número de partido (Match 73, 74…) si está disponible. Solo
-  // se muestra en partidos de fase eliminatoria (la API los asigna en
-  // api.js:113). No se muestra en TBD muy tempranos.
   const matchNum = m.match_number != null
     ? `<span class="bracket-match-num">Match ${m.match_number}</span>`
     : "";
 
-  // Meta línea con fecha y hora (CDMX). El tooltip muestra día completo,
-  // ambas zonas horarias y estadio. Solo se muestra si hay fecha definida.
   const locale = (window.I18N && I18N.lang === "en") ? "en-US" : "es-MX";
   const metaHtml = buildBracketMeta(m, locale);
   const tooltip = buildBracketTooltip(m, locale);
@@ -1643,6 +1654,7 @@ function createBracketMatch(m, opts = {}) {
       <span class="bracket-team-name">${escapeHtml(awayName)}</span>
       <span class="bracket-team-score bebas">${s.away !== null ? s.away : "—"}</span>
     </div>
+    ${penHtml}
     ${metaHtml}
   `;
   // EDICIÓN DESHABILITADA — el bracket es solo lectura. Se comenta el handler
@@ -2994,8 +3006,10 @@ function renderTimelineCard(m) {
   const s = effectiveScore(m);
   const d = new Date(m.date);
   const time = d.toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit" });
-  const hWins = s.home !== null && s.away !== null && s.home > s.away;
-  const aWins = s.home !== null && s.away !== null && s.away > s.home;
+  const pen = effectivePenaltyScore(m);
+  const winner = getKnockoutWinner(m);
+  const hWins = winner === "home";
+  const aWins = winner === "away";
   const stageText = (TIMELINE_STAGE_LABEL[m.stage] && TIMELINE_STAGE_LABEL[m.stage]()) || m.stage;
   const venue = m.venue || "";
 
@@ -3028,7 +3042,7 @@ function renderTimelineCard(m) {
             </div>
             ${homeScorers}
           </div>
-          <div class="tl-score">${s.home !== null ? s.home : "0"}<span class="tl-vs"> - </span>${s.away !== null ? s.away : "0"}</div>
+          <div class="tl-score">${s.home !== null ? s.home : "0"}<span class="tl-vs"> - </span>${s.away !== null ? s.away : "0"}${pen.home !== null && pen.away !== null ? `<div class="tl-pen-score"><i class="ri-football-line" aria-hidden="true"></i> ${pen.home}-${pen.away} pen.</div>` : ""}</div>
           <div class="tl-team tl-team-away ${aWins ? "tl-team-winner" : ""}">
             <div class="tl-team-line">
               <span class="tl-team-name">${escapeHtml(m.away.name)}</span>

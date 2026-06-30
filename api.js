@@ -258,6 +258,8 @@ const API = (() => {
       time_elapsed: timeElapsed,
       home_score: homeScore,
       away_score: awayScore,
+      home_penalty_score: g.home_penalty_score != null && g.home_penalty_score !== "null" ? Number(g.home_penalty_score) : null,
+      away_penalty_score: g.away_penalty_score != null && g.away_penalty_score !== "null" ? Number(g.away_penalty_score) : null,
       status,
       finished,
     };

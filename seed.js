@@ -233,6 +233,8 @@ const Seed = (() => {
               country: m.country || ko?.country || "",
             home_score: hasScore ? m.home_score : null,
             away_score: hasScore ? m.away_score : null,
+            home_penalty_score: m.home_penalty_score != null ? m.home_penalty_score : null,
+            away_penalty_score: m.away_penalty_score != null ? m.away_penalty_score : null,
             status: hasScore ? (m.status || "finished") : "pending",
             time_elapsed: hasScore ? (m.time_elapsed || "90") : "notstarted",
           });

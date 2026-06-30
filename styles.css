@@ -506,6 +506,15 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
 .score.finished { color: var(--secondary); }
 .score.live     { color: var(--primary); }
 .score.predicted { color: var(--accent-2); }
+.match-pen-score {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  letter-spacing: 0;
+  margin-top: 2px;
+  font-weight: 400;
+}
+.match-pen-score i { font-size: 0.5rem; margin-right: 1px; }
 
 .badge { font-size: .7rem; padding: .2rem .5rem; border-radius: 10px; font-weight: 700; text-transform: uppercase; }
 .badge-pending  { background: rgba(160,160,160,.2); color: var(--text); }
@@ -856,6 +865,17 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
 .bracket-team.pending { color: var(--text-muted); font-style: italic; }
 .bracket-team.pending .bracket-team-name { font-style: italic; }
 .bracket-team.adv.pending { color: var(--text-muted); }  /* si TBD gana, no resaltar */
+
+.bracket-pen-score {
+  grid-column: 1 / -1;
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 1px 0 0;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+.bracket-pen-score i { font-size: 0.6rem; margin-right: 1px; }
 
 /* ==== Conectores entre rondas ====
    Mitad izquierda: ::after en cada match no-final = línea horizontal
@@ -1360,6 +1380,14 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
 }
 .tl-card.tl-card-live .tl-score { color: var(--primary); }
 .tl-card.tl-card-finished .tl-score .tl-vs { color: var(--text-muted); }
+.tl-pen-score {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0;
+  margin-top: 1px;
+}
+.tl-pen-score i { font-size: 0.55rem; margin-right: 1px; }
 
 /* Foot: hora + sede + status badge, todo centrado */
 .tl-card-foot {
