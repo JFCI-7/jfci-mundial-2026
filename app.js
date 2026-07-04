@@ -1648,7 +1648,7 @@ function renderBracket() {
   champion.style.gridColumn = `${finalCol}`;
   champion.style.gridRow = "10 / span 2";
   champion.style.alignSelf = "stretch";
-    champion.style.transform = "translateY(-200px)";
+    champion.style.transform = "translateY(-400px)";
   grid.appendChild(champion);
 
   if (thirdMatch) {
@@ -1665,7 +1665,7 @@ function renderBracket() {
     third.style.gridColumn = `${finalCol}`;
     third.style.gridRow = "13";
     third.style.alignSelf = "start";
-    third.style.transform = "translateY(-100px)";
+    third.style.transform = "translateY(-200px)";
     third.classList.add("bracket-third-wrap");
     grid.appendChild(third);
   }
