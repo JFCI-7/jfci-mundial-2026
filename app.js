@@ -1640,25 +1640,24 @@ function renderBracket() {
     placeMatch(finalMatch, finalCol, "center", 0);
   }
 
-  // === CAMPEÓN y 3° LUGAR debajo del FINAL ===
-  // Row 1 (header) + rows 2-9 (R32) = 9 filas. Campeón en row 10, gap 50px, 3° en row 12.
+  // === CAMPEÓN y 3° LUGAR debajo del grid ===
+  // Se colocan FUERA del grid para que queden directamente debajo
+  // del Final sin las filas R32 de por medio. Margen superior ~20px.
+  wrapper.appendChild(grid);
+
+  const belowGrid = document.createElement("div");
+  belowGrid.className = "bracket-below-grid";
+
   const champion = buildChampionCell();
-  champion.style.gridColumn = `${finalCol}`;
-  champion.style.gridRow = "10";
-  champion.style.alignSelf = "start";
-  grid.appendChild(champion);
+  belowGrid.appendChild(champion);
 
   if (thirdMatch) {
-    // Fila 11 = gap 50px (definida en CSS). Tercer lugar en row 12.
     const third = createBracketMatch(thirdMatch, { compact: true });
-    third.style.gridColumn = `${finalCol}`;
-    third.style.gridRow = "12";
-    third.style.alignSelf = "start";
     third.classList.add("bracket-third-wrap");
-    grid.appendChild(third);
+    belowGrid.appendChild(third);
   }
 
-  wrapper.appendChild(grid);
+  wrapper.appendChild(belowGrid);
   container.appendChild(wrapper);
 }
 
