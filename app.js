@@ -875,6 +875,11 @@ function setupModals() {
       btn.classList.add("goal-active");
     });
   });
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape") return;
+    const open = document.querySelectorAll(".modal-mundial:not([hidden])");
+    if (open.length > 0) open[open.length - 1].hidden = true;
+  });
 }
 
 function openScoreModal(matchId) {
@@ -905,6 +910,116 @@ function openScoreModal(matchId) {
   if (clearBtn) clearBtn.style.display = override ? "inline-block" : "none";
 
   document.getElementById("modal").hidden = false;
+}
+
+function openMatchDetailModal(matchId) {
+  const m = STATE.matchesById.get(matchId);
+  if (!m) return;
+
+  const modal = document.getElementById("match-detail-modal");
+  if (!modal) return;
+
+  const resolvedHome = resolveBracketLabel(m.home, "home");
+  const resolvedAway = resolveBracketLabel(m.away, "away");
+
+  const homeName = resolvedHome.name || resolvedHome.label || "TBD";
+  const awayName = resolvedAway.name || resolvedAway.label || "TBD";
+
+  // Flags
+  const flagA = document.getElementById("detail-flag-a");
+  const flagB = document.getElementById("detail-flag-b");
+  if (resolvedHome.iso2) {
+    flagA.innerHTML = `<span class="fi fi-${resolvedHome.iso2}" style="font-size:2rem" title="${escapeHtml(homeName)}"></span>`;
+  } else {
+    flagA.innerHTML = `<span class="detail-flag-placeholder" title="${escapeHtml(homeName)}">${homeName[0] || "?"}</span>`;
+  }
+  if (resolvedAway.iso2) {
+    flagB.innerHTML = `<span class="fi fi-${resolvedAway.iso2}" style="font-size:2rem" title="${escapeHtml(awayName)}"></span>`;
+  } else {
+    flagB.innerHTML = `<span class="detail-flag-placeholder" title="${escapeHtml(awayName)}">${awayName[0] || "?"}</span>`;
+  }
+
+  // Names
+  document.getElementById("detail-name-a").textContent = homeName;
+  document.getElementById("detail-name-b").textContent = awayName;
+
+  // Stage badge
+  const stageEl = document.getElementById("detail-stage");
+  const matchNumStr = m.match_number != null ? ` · Partido ${m.match_number}` : "";
+  stageEl.textContent = stageLabel(m.stage) + matchNumStr;
+
+  // Score
+  const s = effectiveScore(m);
+  const pen = effectivePenaltyScore(m);
+  const scoreEl = document.getElementById("detail-score");
+  const penEl = document.getElementById("detail-pen");
+  if (s.home !== null && s.away !== null) {
+    scoreEl.textContent = `${s.home} - ${s.away}`;
+    scoreEl.style.color = "";
+  } else {
+    scoreEl.textContent = "vs";
+    scoreEl.style.color = "var(--text-muted)";
+  }
+  if (pen.home !== null && pen.away !== null) {
+    penEl.textContent = `Penales: ${pen.home} - ${pen.away}`;
+    penEl.style.display = "";
+  } else {
+    penEl.textContent = "";
+    penEl.style.display = "none";
+  }
+
+  // Status badge
+  const statusEl = document.getElementById("detail-status");
+  if (m.status === "live") {
+    statusEl.innerHTML = '<span class="badge badge-live"><i class="ri-live-line" aria-hidden="true"></i> En vivo</span>';
+  } else if (m.status === "finished") {
+    statusEl.innerHTML = '<span class="badge badge-finished"><i class="ri-check-line" aria-hidden="true"></i> Finalizado</span>';
+  } else {
+    statusEl.innerHTML = '<span class="badge badge-pending"><i class="ri-time-line" aria-hidden="true"></i> Pendiente</span>';
+  }
+
+  // Meta: date, time, venue
+  const metaEl = document.getElementById("detail-meta");
+  let metaHtml = "";
+  if (m.date) {
+    const d = new Date(m.date);
+    if (!isNaN(d.getTime())) {
+      const locale = (window.I18N && I18N.lang === "en") ? "en-US" : "es-MX";
+      const longDate = d.toLocaleDateString(locale, { weekday: "long", day: "2-digit", month: "long", year: "numeric" });
+      const timeCdmx = m.time_cdmx || d.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" });
+      const timeEt = m.time_et || "—";
+      metaHtml += `<div class="detail-meta-row"><i class="ri-calendar-line" aria-hidden="true"></i> <strong>${escapeHtml(longDate)}</strong></div>`;
+      metaHtml += `<div class="detail-meta-row"><i class="ri-time-line" aria-hidden="true"></i> ${escapeHtml(timeCdmx)} CDMX · ${escapeHtml(timeEt)} ET</div>`;
+    }
+  }
+  const venue = [m.venue, m.city, m.country].filter(Boolean).join(", ");
+  if (venue) {
+    metaHtml += `<div class="detail-meta-row"><i class="ri-map-pin-line" aria-hidden="true"></i> ${escapeHtml(venue)}</div>`;
+  }
+  metaEl.innerHTML = metaHtml || '<div class="detail-meta-row"><i class="ri-information-line" aria-hidden="true"></i> Información no disponible</div>';
+
+  // Scorers
+  const scorersEl = document.getElementById("detail-scorers");
+  const homeScorers = resolvedHome.scorers || m.home?.scorers || [];
+  const awayScorers = resolvedAway.scorers || m.away?.scorers || [];
+  if (homeScorers.length > 0 || awayScorers.length > 0) {
+    let sHtml = "";
+    if (homeScorers.length > 0) {
+      sHtml += `<div class="detail-scorers-section"><div class="detail-scorers-label"><i class="ri-football-line" aria-hidden="true"></i> ${escapeHtml(homeName)}</div>${renderScorersList(homeScorers)}</div>`;
+    }
+    if (awayScorers.length > 0) {
+      sHtml += `<div class="detail-scorers-section"><div class="detail-scorers-label"><i class="ri-football-line" aria-hidden="true"></i> ${escapeHtml(awayName)}</div>${renderScorersList(awayScorers)}</div>`;
+    }
+    scorersEl.innerHTML = sHtml;
+  } else if (m.status === "finished") {
+    scorersEl.innerHTML = '<div class="detail-scorers-empty">Sin goles registrados</div>';
+  } else if (m.status === "live") {
+    scorersEl.innerHTML = '<div class="detail-scorers-empty">Goleadores por confirmar</div>';
+  } else {
+    scorersEl.innerHTML = "";
+  }
+
+  modal.hidden = false;
 }
 
 function setFlag(img, team) {
@@ -1659,11 +1774,7 @@ function createBracketMatch(m, opts = {}) {
     ${penHtml}
     ${metaHtml}
   `;
-  // EDICIÓN DESHABILITADA — el bracket es solo lectura. Se comenta el handler
-  // para que el click no abra el modal. El modal en sí sigue disponible para
-  // otras vistas (calendario, grupos, quiniela). Para reactivar la edición,
-  // descomentar la siguiente línea.
-  // div.addEventListener("click", () => openScoreModal(m.id));
+  div.addEventListener("click", () => openMatchDetailModal(m.id));
   return div;
 }
 

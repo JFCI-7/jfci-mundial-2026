@@ -51,6 +51,33 @@
   <canvas id="confetti-canvas" aria-hidden="true"></canvas>
   <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
+  <div id="match-detail-modal" class="modal-mundial" hidden>
+    <div class="modal-overlay" data-close></div>
+    <div class="modal-dialog modal-detail-dialog">
+      <div class="modal-content modal-mundial-content">
+        <button class="btn-close-mundial" data-close aria-label="Cerrar"><i class="ri-close-line" aria-hidden="true"></i></button>
+        <div id="detail-stage" class="detail-stage-badge"></div>
+        <div class="detail-scoreboard">
+          <div class="detail-team">
+            <div id="detail-flag-a" class="detail-flag-wrap"></div>
+            <span id="detail-name-a" class="detail-team-name">—</span>
+          </div>
+          <div class="detail-score-wrap">
+            <span id="detail-score" class="detail-score bebas">—</span>
+            <span id="detail-pen" class="detail-pen"></span>
+          </div>
+          <div class="detail-team">
+            <div id="detail-flag-b" class="detail-flag-wrap"></div>
+            <span id="detail-name-b" class="detail-team-name">—</span>
+          </div>
+        </div>
+        <div id="detail-status" class="detail-status-wrap"></div>
+        <div id="detail-meta" class="detail-meta"></div>
+        <div id="detail-scorers" class="detail-scorers"></div>
+      </div>
+    </div>
+  </div>
+
   <div id="modal" class="modal-mundial" hidden>
     <div class="modal-overlay" data-close></div>
     <div class="modal-dialog modal-dialog-centered">
