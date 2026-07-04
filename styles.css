@@ -939,6 +939,38 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   z-index: 3;
 }
 
+/* ==== Indicador de partido EN VIVO en el bracket ====
+   Badge pulsante en la esquina superior izquierda + brillo
+   en el borde izquierdo para que destaque a primera vista. */
+.bracket-live-badge {
+  position: absolute;
+  top: -8px; left: 4px;
+  background: var(--primary);
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .6rem;
+  letter-spacing: 1px;
+  padding: 1px .4rem;
+  border-radius: 3px;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  gap: .2rem;
+  z-index: 4;
+  pointer-events: none;
+  animation: live-pulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 0 2px rgba(4,191,69,.35);
+}
+.bracket-match-live {
+  border-left-color: var(--primary) !important;
+  box-shadow: 0 0 12px rgba(4,191,69,.45);
+  animation: live-glow 2s ease-in-out infinite;
+}
+@keyframes live-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(4,191,69,.30); }
+  50%      { box-shadow: 0 0 18px rgba(4,191,69,.65); }
+}
+
 /* ==== Meta línea: fecha y hora (CDMX) ====
    Línea sutil al pie de la tarjeta con la fecha y hora del partido
    (hora de Ciudad de México, la zona del público objetivo del proyecto).

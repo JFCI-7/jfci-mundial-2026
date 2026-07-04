@@ -1760,6 +1760,12 @@ function createBracketMatch(m, opts = {}) {
   const matchNum = m.match_number != null
     ? `<span class="bracket-match-num">Match ${m.match_number}</span>`
     : "";
+  const isLive = m.status === "live";
+  if (isLive) div.classList.add("bracket-match-live");
+
+  const liveBadge = isLive
+    ? `<span class="bracket-live-badge"><i class="ri-live-line" aria-hidden="true"></i> EN VIVO</span>`
+    : "";
 
   const locale = (window.I18N && I18N.lang === "en") ? "en-US" : "es-MX";
   const metaHtml = buildBracketMeta(m, locale);
@@ -1768,6 +1774,7 @@ function createBracketMatch(m, opts = {}) {
 
   div.innerHTML = `
     ${matchNum}
+    ${liveBadge}
     <div class="bracket-team ${hWins ? "adv" : ""} ${homeIsPending ? "pending" : ""}">
       ${homeFlag}
       <span class="bracket-team-name">${escapeHtml(homeName)}</span>
