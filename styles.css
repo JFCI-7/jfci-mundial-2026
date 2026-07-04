@@ -1137,6 +1137,30 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   border-color: #FFD700;
   animation: champion-glow 2.5s ease-in-out infinite;
 }
+
+/* ==== Campeón: ajustes para tema claro ====
+   En fondo claro el dorado brillante se pierde. Usamos tonos más
+   oscuros/saturados y fondo cálido para que el campeón destaque. */
+.theme-light .bracket-champion {
+  background: linear-gradient(135deg, rgba(255,215,0,.25), rgba(255,193,7,.40));
+  border-color: #B8860B;
+  box-shadow:
+    0 0 0 4px rgba(255,215,0,.25),
+    0 0 22px rgba(184,134,11,.45),
+    inset 0 0 15px rgba(255,255,255,.20);
+}
+.theme-light .bracket-champion.is-pending {
+  background: linear-gradient(135deg, rgba(255,215,0,.18), rgba(255,193,7,.30));
+  border-color: #B8860B;
+}
+.theme-light .bracket-champion-trophy {
+  color: #B8860B;
+  filter: drop-shadow(0 0 5px rgba(184,134,11,.55));
+}
+.theme-light .bracket-champion-label {
+  color: #8B6508;
+  text-shadow: 0 0 4px rgba(255,255,255,.6);
+}
 .bracket-champion-trophy {
   font-size: 1.6rem;
   color: #FFD700;
