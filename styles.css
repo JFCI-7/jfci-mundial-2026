@@ -834,7 +834,7 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
      fecha/hora sin que el badge "MATCH N" de la tarjeta siguiente se
      encime con la meta de la tarjeta anterior) + 4 filas extra para
      CAMPEÓN y 3° LUGAR. */
-  grid-template-rows: auto repeat(8, 60px);
+  grid-template-rows: auto repeat(8, 90px) auto auto auto;
   column-gap: 2rem;        /* espacio entre columnas = lugar para conectores */
   row-gap: 0;
   min-width: 1100px;       /* fuerza scroll horizontal en pantallas chicas */
@@ -1098,26 +1098,6 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   padding: .25rem 0;
 }
 
-/* ==== Contenedor Campeón + 3° Lugar (fuera del grid) ==== */
-.bracket-below-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 250px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.bracket-below-grid .bracket-champion {
-  width: 100%;
-}
-.bracket-below-grid .bracket-third-wrap {
-  width: 100%;
-  margin-top: 50px;
-}
-
 /* ==== Campeón (celda grande debajo del FINAL) ==== */
 .bracket-champion {
   background: linear-gradient(135deg, rgba(4,191,69,.10), rgba(255,200,0,.15));
@@ -1235,12 +1215,9 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   .bracket-match[data-round="sf"]    { order: 8;  }
   .bracket-match[data-round="final"] { order: 10; }
 
-  /* Campeón y 3° Lugar están fuera del grid en .bracket-below-grid.
-     En mobile el contenedor fluye naturalmente después del bracket. */
-  .bracket-below-grid {
-    max-width: 100%;
-    margin-top: 1rem;
-  }
+  .bracket-champion     { order: 12; }
+  .bracket-third-label  { order: 13; }
+  .bracket-third-wrap   { order: 14; }
 }
 
 /* ===================================================
