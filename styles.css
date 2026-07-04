@@ -682,6 +682,25 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   word-break: break-word;
   max-width: 100%;
 }
+
+.detail-team-scorers {
+  width: 100%;
+  margin-top: .3rem;
+}
+.detail-team-scorers .scorer {
+  justify-content: center;
+  text-align: center;
+}
+.detail-team-scorers .scorers {
+  align-items: center;
+}
+.detail-scorers-empty {
+  font-size: .75rem;
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  padding: .2rem 0;
+}
 .detail-score-wrap {
   display: flex;
   flex-direction: column;
@@ -732,31 +751,6 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
 .detail-meta-row strong {
   color: var(--text);
   font-weight: 600;
-}
-
-.detail-scorers {
-  margin-top: .25rem;
-}
-.detail-scorers-label {
-  font-size: .75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  color: var(--text-muted);
-  margin-bottom: .3rem;
-  display: flex;
-  align-items: center;
-  gap: .3rem;
-}
-.detail-scorers-section {
-  margin-bottom: .6rem;
-}
-.detail-scorers-empty {
-  font-size: .8rem;
-  color: var(--text-muted);
-  font-style: italic;
-  text-align: center;
-  padding: .5rem 0;
 }
 
 /* ===================================================

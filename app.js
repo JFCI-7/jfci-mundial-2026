@@ -998,25 +998,26 @@ function openMatchDetailModal(matchId) {
   }
   metaEl.innerHTML = metaHtml || '<div class="detail-meta-row"><i class="ri-information-line" aria-hidden="true"></i> Información no disponible</div>';
 
-  // Scorers
-  const scorersEl = document.getElementById("detail-scorers");
+  // Scorers per team
+  const scorersAEl = document.getElementById("detail-scorers-a");
+  const scorersBEl = document.getElementById("detail-scorers-b");
   const homeScorers = resolvedHome.scorers || m.home?.scorers || [];
   const awayScorers = resolvedAway.scorers || m.away?.scorers || [];
-  if (homeScorers.length > 0 || awayScorers.length > 0) {
-    let sHtml = "";
-    if (homeScorers.length > 0) {
-      sHtml += `<div class="detail-scorers-section"><div class="detail-scorers-label"><i class="ri-football-line" aria-hidden="true"></i> ${escapeHtml(homeName)}</div>${renderScorersList(homeScorers)}</div>`;
-    }
-    if (awayScorers.length > 0) {
-      sHtml += `<div class="detail-scorers-section"><div class="detail-scorers-label"><i class="ri-football-line" aria-hidden="true"></i> ${escapeHtml(awayName)}</div>${renderScorersList(awayScorers)}</div>`;
-    }
-    scorersEl.innerHTML = sHtml;
-  } else if (m.status === "finished") {
-    scorersEl.innerHTML = '<div class="detail-scorers-empty">Sin goles registrados</div>';
-  } else if (m.status === "live") {
-    scorersEl.innerHTML = '<div class="detail-scorers-empty">Goleadores por confirmar</div>';
+
+  if (homeScorers.length > 0) {
+    scorersAEl.innerHTML = renderScorersList(homeScorers);
+  } else if (m.status === "finished" || m.status === "live") {
+    scorersAEl.innerHTML = '<div class="detail-scorers-empty">Sin goles</div>';
   } else {
-    scorersEl.innerHTML = "";
+    scorersAEl.innerHTML = "";
+  }
+
+  if (awayScorers.length > 0) {
+    scorersBEl.innerHTML = renderScorersList(awayScorers);
+  } else if (m.status === "finished" || m.status === "live") {
+    scorersBEl.innerHTML = '<div class="detail-scorers-empty">Sin goles</div>';
+  } else {
+    scorersBEl.innerHTML = "";
   }
 
   modal.hidden = false;
