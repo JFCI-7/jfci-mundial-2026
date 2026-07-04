@@ -1267,9 +1267,11 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   .bracket-third-label { text-align: left; margin-top: .25rem; }
   .bracket-third-wrap { border-left-color: var(--accent); }
   /* Campeón: celda grande centrada. */
-  .bracket-champion { padding: 1rem; gap: .5rem; }
+  .bracket-champion { padding: 1rem; gap: .5rem; transform: none; }
   .bracket-champion .flag-48 { width: 64px; height: 48px; }
   .bracket-champion-name { font-size: 1.2rem; }
+  /* Resetear transforms de desktop que mueven los elementos en el grid */
+  .bracket-third-label, .bracket-third-wrap { transform: none; }
 
   /* ==== Orden cronológico natural ====
      En mobile ocultamos los headers de la mitad derecha (r32-r, r16-r,
