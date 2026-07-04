@@ -1565,7 +1565,7 @@ function renderBracket() {
   // === Posiciones y spans ===
   // Cada mitad usa 8 filas "virtuales" (8 R32 por mitad). El span determina
   // el row span en cada round: r32=1, r16=2, qf=4, sf=8, final=16.
-  const rowSpan = { r32: 1, r16: 2, qf: 4, sf: 8, final: 16 };
+  const rowSpan = { r32: 1, r16: 2, qf: 4, sf: 8, final: 8 };
   // startRow: row inicial (1-based, +1 por el header). i ∈ [0..n-1] dentro de cada mitad.
   const startRow = {
     r32: i => i + 2,
@@ -1641,13 +1641,11 @@ function renderBracket() {
   }
 
   // === CAMPEÓN y 3° LUGAR debajo del FINAL ===
-  // El grid tiene: row 1 (header auto) + rows 2-9 (8 R32 de 50px) +
-  // rows 10-13 (4 filas auto). El FINAL ocupa rows 2-9 con span 8.
-  // Colocamos el CAMPEÓN en row 10 (span 2) y el 3° LUGAR en rows 12-13.
+  // Row 1 (header) + rows 2-9 (R32) = 9 filas. Campeón en row 10, 3° en 11-12.
   const champion = buildChampionCell();
   champion.style.gridColumn = `${finalCol}`;
-  champion.style.gridRow = "10 / span 2";
-  champion.style.alignSelf = "stretch";
+  champion.style.gridRow = "10";
+  champion.style.alignSelf = "start";
   grid.appendChild(champion);
 
   if (thirdMatch) {
@@ -1655,14 +1653,14 @@ function renderBracket() {
     const thirdLabel = document.createElement("div");
     thirdLabel.className = "bracket-third-label";
     thirdLabel.style.gridColumn = `${finalCol}`;
-    thirdLabel.style.gridRow = "12";
+    thirdLabel.style.gridRow = "11";
     thirdLabel.style.alignSelf = "end";
     thirdLabel.style.justifySelf = "center";
     thirdLabel.textContent = t("bracket.third");
     grid.appendChild(thirdLabel);
     const third = createBracketMatch(thirdMatch, { compact: true });
     third.style.gridColumn = `${finalCol}`;
-    third.style.gridRow = "13";
+    third.style.gridRow = "12";
     third.style.alignSelf = "start";
     third.classList.add("bracket-third-wrap");
     grid.appendChild(third);
