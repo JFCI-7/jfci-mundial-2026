@@ -953,14 +953,14 @@ function openMatchDetailModal(matchId) {
   const pen = effectivePenaltyScore(m);
   const scoreEl = document.getElementById("detail-score");
   const penEl = document.getElementById("detail-pen");
-  if (s.home !== null && s.away !== null) {
+  if (s.home !== null && s.away !== null && m.status !== "pending") {
     scoreEl.textContent = `${s.home} - ${s.away}`;
     scoreEl.style.color = "";
   } else {
     scoreEl.textContent = "vs";
     scoreEl.style.color = "var(--text-muted)";
   }
-  if (pen.home !== null && pen.away !== null) {
+  if (pen.home !== null && pen.away !== null && m.status !== "pending") {
     penEl.textContent = `Penales: ${pen.home} - ${pen.away}`;
     penEl.style.display = "";
   } else {
@@ -1733,12 +1733,15 @@ function createBracketMatch(m, opts = {}) {
   div.dataset.round = m.stage;
   const s = effectiveScore(m);
   const pen = effectivePenaltyScore(m);
+  const isPending = m.status === "pending";
   const winner = getKnockoutWinner(m);
   const hWins = winner === "home";
   const aWins = winner === "away";
-  const penHtml = (pen.home !== null && pen.away !== null)
+  const penHtml = (!isPending && pen.home !== null && pen.away !== null)
     ? `<div class="bracket-pen-score"><i class="ri-football-line" aria-hidden="true"></i> ${pen.home}-${pen.away} pen.</div>`
     : "";
+  const homeScore = isPending ? "—" : (s.home !== null ? s.home : "—");
+  const awayScore = isPending ? "—" : (s.away !== null ? s.away : "—");
   const resolvedHome = resolveBracketLabel(m.home, "home");
   const resolvedAway = resolveBracketLabel(m.away, "away");
   const homeIsPending = !resolvedHome.name_en && !!resolvedHome.label;
@@ -1765,12 +1768,12 @@ function createBracketMatch(m, opts = {}) {
     <div class="bracket-team ${hWins ? "adv" : ""} ${homeIsPending ? "pending" : ""}">
       ${homeFlag}
       <span class="bracket-team-name">${escapeHtml(homeName)}</span>
-      <span class="bracket-team-score bebas">${s.home !== null ? s.home : "—"}</span>
+      <span class="bracket-team-score bebas">${homeScore}</span>
     </div>
     <div class="bracket-team ${aWins ? "adv" : ""} ${awayIsPending ? "pending" : ""}">
       ${awayFlag}
       <span class="bracket-team-name">${escapeHtml(awayName)}</span>
-      <span class="bracket-team-score bebas">${s.away !== null ? s.away : "—"}</span>
+      <span class="bracket-team-score bebas">${awayScore}</span>
     </div>
     ${penHtml}
     ${metaHtml}
