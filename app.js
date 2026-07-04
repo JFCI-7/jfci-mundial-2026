@@ -1565,7 +1565,7 @@ function renderBracket() {
   // === Posiciones y spans ===
   // Cada mitad usa 8 filas "virtuales" (8 R32 por mitad). El span determina
   // el row span en cada round: r32=1, r16=2, qf=4, sf=8, final=16.
-  const rowSpan = { r32: 1, r16: 2, qf: 4, sf: 8, final: 4 };
+  const rowSpan = { r32: 1, r16: 2, qf: 4, sf: 8, final: 2 };
   // startRow: row inicial (1-based, +1 por el header). i ∈ [0..n-1] dentro de cada mitad.
   const startRow = {
     r32: i => i + 2,
