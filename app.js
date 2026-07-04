@@ -1648,7 +1648,7 @@ function renderBracket() {
   champion.style.gridColumn = `${finalCol}`;
   champion.style.gridRow = "10 / span 2";
   champion.style.alignSelf = "stretch";
-    champion.style.transform = "translateY(-400px)";
+  champion.style.transform = "translateY(-300px)";
   grid.appendChild(champion);
 
   if (thirdMatch) {
@@ -1656,10 +1656,11 @@ function renderBracket() {
     const thirdLabel = document.createElement("div");
     thirdLabel.className = "bracket-third-label";
     thirdLabel.style.gridColumn = `${finalCol}`;
-    thirdLabel.style.gridRow = "12";
+    thirdLabel.style.gridRow = "13";
     thirdLabel.style.alignSelf = "end";
     thirdLabel.style.justifySelf = "center";
     thirdLabel.textContent = t("bracket.third");
+    thirdLabel.style.transform = "translateY(-200px)";
     grid.appendChild(thirdLabel);
     const third = createBracketMatch(thirdMatch, { compact: true });
     third.style.gridColumn = `${finalCol}`;
@@ -1696,9 +1697,9 @@ function buildChampionCell() {
   } else {
     div.classList.add("is-pending");
     div.innerHTML = `
-      <div class="bracket-champion-trophy muted"><i class="ri-question-line" aria-hidden="true"></i></div>
-      <div class="bracket-champion-label muted">CAMPEÓN</div>
-      <div class="bracket-champion-name bebas muted">${escapeHtml(t("bracket.tbd"))}</div>
+      <div class="bracket-champion-trophy"><i class="ri-question-line" aria-hidden="true"></i></div>
+      <div class="bracket-champion-label">CAMPEÓN</div>
+      <div class="bracket-champion-name bebas">${escapeHtml(t("bracket.tbd"))}</div>
     `;
   }
   return div;

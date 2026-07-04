@@ -1100,8 +1100,8 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
 
 /* ==== Campeón (celda grande debajo del FINAL) ==== */
 .bracket-champion {
-  background: linear-gradient(135deg, rgba(4,191,69,.10), rgba(255,200,0,.15));
-  border: 2px solid var(--primary);
+  background: linear-gradient(135deg, rgba(255,215,0,.12), rgba(255,200,0,.20));
+  border: 2px solid #FFD700;
   border-radius: .85rem;
   padding: .85rem .5rem;
   display: flex; flex-direction: column;
@@ -1110,27 +1110,47 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   gap: .3rem;
   position: relative;
   z-index: 2;
-  box-shadow: 0 0 0 4px rgba(4,191,69,.10);
+  box-shadow:
+    0 0 0 4px rgba(255,215,0,.10),
+    0 0 20px rgba(255,215,0,.35),
+    inset 0 0 15px rgba(255,215,0,.08);
   min-height: 100px;
+  animation: champion-glow 2.5s ease-in-out infinite;
+}
+@keyframes champion-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 4px rgba(255,215,0,.10),
+      0 0 15px rgba(255,215,0,.30),
+      inset 0 0 10px rgba(255,215,0,.05);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(255,215,0,.20),
+      0 0 35px rgba(255,215,0,.65),
+      inset 0 0 20px rgba(255,215,0,.15);
+  }
 }
 .bracket-champion.is-pending {
   border-style: dashed;
-  background: transparent;
-  box-shadow: none;
-  border-color: var(--border);
+  background: linear-gradient(135deg, rgba(255,215,0,.06), rgba(255,200,0,.10));
+  border-color: #FFD700;
+  animation: champion-glow 2.5s ease-in-out infinite;
 }
 .bracket-champion-trophy {
   font-size: 1.6rem;
-  color: var(--primary);
+  color: #FFD700;
   line-height: 1;
+  filter: drop-shadow(0 0 4px rgba(255,215,0,.6));
 }
 .bracket-champion-trophy.muted { color: var(--text-muted); }
 .bracket-champion-label {
   font-family: 'Bebas Neue', sans-serif;
   font-size: .85rem;
   letter-spacing: 2px;
-  color: var(--primary);
+  color: #FFD700;
   text-transform: uppercase;
+  text-shadow: 0 0 6px rgba(255,215,0,.5);
 }
 .bracket-champion-label.muted { color: var(--text-muted); }
 .bracket-champion .flag-48 {
