@@ -2103,19 +2103,23 @@ function renderStats() {
   const finished = STATE.matches.filter(m => m.status === "finished").length;
   const live = STATE.matches.filter(m => m.status === "live").length;
   const pending = STATE.matches.filter(m => m.status === "pending").length;
+  // totalGoals solo cuenta partidos finalizados para que avgGoals
+  // sea consistente con su denominador (finished).
   let totalGoals = 0;
   STATE.matches.forEach(m => {
+    if (m.status !== "finished") return;
     const s = effectiveScore(m);
     if (s.home !== null && s.away !== null) totalGoals += s.home + s.away;
   });
   const goalsByTeam = new Map();
   const displayName = new Map();   // normKey → nombre original (para mostrar en top 8)
-  const teamsWithGoals = new Set(); // set de nombres de equipos que anotaron >0 goles
+  const teamsWithGoals = new Set(); // set de normKeys de equipos que anotaron >0 goles
   // Normalización mínima: lowercase + sin diacríticos + sin espacios.
   // Suficiente para colapsar "Mexico" / "México" / "MEX" sin alterar
   // "United States" → "USA" como sí hace normalizeName() del matchKey.
   const normKey = (s) => (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
   STATE.matches.forEach(m => {
+    if (m.status !== "finished") return;
     const s = effectiveScore(m);
     if (s.home === null || s.away === null) return;
     const h = m.home?.name; const a = m.away?.name;
@@ -2123,30 +2127,46 @@ function renderStats() {
       const hk = normKey(h);
       goalsByTeam.set(hk, (goalsByTeam.get(hk) || 0) + s.home);
       if (!displayName.has(hk)) displayName.set(hk, h);
-      if (s.home > 0) teamsWithGoals.add(h);
+      if (s.home > 0) teamsWithGoals.add(hk);
     }
     if (a) {
       const ak = normKey(a);
       goalsByTeam.set(ak, (goalsByTeam.get(ak) || 0) + s.away);
       if (!displayName.has(ak)) displayName.set(ak, a);
-      if (s.away > 0) teamsWithGoals.add(a);
+      if (s.away > 0) teamsWithGoals.add(ak);
     }
   });
+  const TOP_N_TEAMS = 8;
   const top = Array.from(goalsByTeam.entries())
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 8)
+    .slice(0, TOP_N_TEAMS)
     .map(([k, g]) => [displayName.get(k) || k, g]);
 
-  // Datos por jornada (goles acumulados)
+  // Datos por jornada (goles acumulados).
+  // La API asigna matchday 1-9 (grupos=1-3, KO=4-9). El seed local asigna
+  // matchday 1-3 a grupos y 0 a KO. Si matchday es 0 o null y el partido
+  // tiene goles, usamos el stage como clave de jornada para que los KO
+  // aparezcan en la gráfica.
   const goalsByMatchday = new Map();
   STATE.matches.forEach(m => {
-    if (!m.matchday) return;
+    if (m.status !== "finished") return;
     const s = effectiveScore(m);
-    if (s.home === null) return;
-    const cur = goalsByMatchday.get(m.matchday) || 0;
-    goalsByMatchday.set(m.matchday, cur + s.home + s.away);
+    if (s.home === null || s.away === null) return;
+    const md = m.matchday && m.matchday > 0 ? m.matchday : (m.stage || "ko");
+    const cur = goalsByMatchday.get(md) || 0;
+    goalsByMatchday.set(md, cur + s.home + s.away);
   });
-  const matchdays = Array.from(goalsByMatchday.keys()).sort((a, b) => a - b);
+  // Ordenar jornadas: matchdays numéricos primero (1-9), luego stages KO (r32, r16, ...).
+  const mdSortKey = (md) => {
+    if (typeof md === "number") return [0, md];
+    const order = { r32: 10, r16: 11, qf: 12, sf: 13, third: 14, final: 15 };
+    return [1, order[md] ?? 99];
+  };
+  const matchdays = Array.from(goalsByMatchday.keys()).sort((a, b) => {
+    const [oa, va] = mdSortKey(a);
+    const [ob, vb] = mdSortKey(b);
+    return oa - ob || va - vb;
+  });
   const goalsAcc = [];
   let acc = 0;
   for (const md of matchdays) {
@@ -2154,40 +2174,114 @@ function renderStats() {
     goalsAcc.push(acc);
   }
 
-  // Goleadores individuales (excluye autogoles)
-  // La API devuelve nombres inconsistentes para el mismo jugador (ej.
-  // "Kylian Mbappé" vs "K. Mbappé"). Usamos el apellido en minúsculas como
-  // key de agrupación y guardamos el nombre más largo como display name.
-  function scorerKey(name) {
+  // Goleadores individuales (excluye autogoles).
+  // La API devuelve nombres inconsistentes para el mismo jugador:
+  //  - "Kylian Mbappé" vs "K. Mbappé" (mismo jugador, formas distintas)
+  //  - "Jude Bellingham" vs "Jvd Blingham" (cipher corrupto en algunos partidos)
+  // Usamos el apellido en minúsculas + el equipo normalizado como key para
+  // agrupar y guardamos el nombre más largo como display name. El equipo
+  // en la key evita merges accidentales entre jugadores distintos con el
+  // mismo apellido (ej. Lautaro vs Lisandro Martínez).
+  function scorerKey(name, team) {
     if (!name) return "";
-    const parts = String(name).trim().split(/\s+/);
-    return parts[parts.length - 1].toLowerCase();
+    const normalized = String(name).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
+    const parts = normalized.split(/\s+/);
+    const last = parts[parts.length - 1];
+    const tk = normKey(team || "");
+    return tk ? `${last}|${tk}` : last;
+  }
+  // Mapa de cipher corrupto → nombre canónico (parcial). Se aplica
+  // antes de agrupar para que las dos formas cuenten juntas.
+  // Clave: apellido corrupto en minúsculas. Valor: apellido canónico.
+  // Solo cubre variantes observadas en la API al momento de la auditoría.
+  const CIPHER_FIX = {
+    "blingham": "bellingham",
+    "kin": "kane",
+    "kviinvnz": "quionones",
+    "mnzambi": "manzambi",
+    "khakpv": "gakpo",
+    "rhimi": "rahimi",
+    "gviih": "gueye",
+    "altmari": "al-tamari",
+  };
+  function fixCipherName(player) {
+    if (!player) return player;
+    const parts = String(player).trim().split(/\s+/);
+    const last = parts[parts.length - 1];
+    const key = last.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
+    if (CIPHER_FIX[key]) {
+      parts[parts.length - 1] = CIPHER_FIX[key];
+      return parts.join(" ");
+    }
+    return player;
   }
   const scorerMap = new Map();
+  // BUG #1 fallback: partidos finalizados con score > 0 pero sin scorers
+  // (ej. M89 Paraguay 0-1 France con away_scorers=null en la API).
+  // Atribuimos los goles faltantes a un bucket "Sin asignar" por equipo
+  // para que la suma coincida con el marcador real.
+  const unassignedByTeam = new Map(); // normKey(team) → count
   STATE.matches.forEach(m => {
     if (m.status !== "finished") return;
+    const s = effectiveScore(m);
+    if (s.home === null || s.away === null) return;
+    const homeScorers = (m.home?.scorers || m.home_scorers || [])
+      .filter(sc => sc.note !== "OG")
+      .length;
+    const awayScorers = (m.away?.scorers || m.away_scorers || [])
+      .filter(sc => sc.note !== "OG")
+      .length;
+    const homeMissing = Math.max(0, (s.home || 0) - homeScorers);
+    const awayMissing = Math.max(0, (s.away || 0) - awayScorers);
+    if (homeMissing > 0) {
+      const hk = normKey(m.home?.name);
+      unassignedByTeam.set(hk, (unassignedByTeam.get(hk) || 0) + homeMissing);
+    }
+    if (awayMissing > 0) {
+      const ak = normKey(m.away?.name);
+      unassignedByTeam.set(ak, (unassignedByTeam.get(ak) || 0) + awayMissing);
+    }
     const allScorers = [
-      ...(m.home?.scorers || m.home_scorers || []).map(s => ({ ...s, team: m.home?.name, iso2: m.home?.iso2 })),
-      ...(m.away?.scorers || m.away_scorers || []).map(s => ({ ...s, team: m.away?.name, iso2: m.away?.iso2 })),
+      ...(m.home?.scorers || m.home_scorers || []).map(sc => ({ ...sc, team: m.home?.name, iso2: m.home?.iso2 })),
+      ...(m.away?.scorers || m.away_scorers || []).map(sc => ({ ...sc, team: m.away?.name, iso2: m.away?.iso2 })),
     ];
-    allScorers.forEach(s => {
-      if (s.note === "OG") return;
-      const key = scorerKey(s.player);
+    allScorers.forEach(sc => {
+      if (sc.note === "OG") return;
+      const fixedName = fixCipherName(sc.player);
+      const key = scorerKey(fixedName, sc.team);
       if (!key) return;
-      const existing = scorerMap.get(key) || { name: s.player, team: s.team, iso2: s.iso2, goals: 0, lastMinute: 0 };
+      const existing = scorerMap.get(key) || { name: fixedName, team: sc.team, iso2: sc.iso2, goals: 0, lastMinute: 0 };
       // Preferir el nombre más descriptivo (más largo) para mostrar
-      if (s.player && s.player.length > (existing.name || "").length) {
-        existing.name = s.player;
+      if (fixedName && fixedName.length > (existing.name || "").length) {
+        existing.name = fixedName;
       }
       existing.goals++;
-      const min = parseInt(String(s.minute), 10) || 0;
+      const min = parseInt(String(sc.minute), 10) || 0;
       if (min > existing.lastMinute) existing.lastMinute = min;
       scorerMap.set(key, existing);
     });
   });
+  // Añadir buckets "Sin asignar" por equipo (BUG #1).
+  unassignedByTeam.forEach((count, tk) => {
+    const key = `sin-asignar|${tk}`;
+    const displayTeam = displayName.get(tk) || tk;
+    scorerMap.set(key, {
+      name: `Sin asignar (${displayTeam})`,
+      team: displayTeam,
+      iso2: null,
+      goals: count,
+      lastMinute: 0,
+      isUnassigned: true,
+    });
+  });
   const topScorers = Array.from(scorerMap.entries())
     .map(([_, d]) => d)
-    .sort((a, b) => b.goals - a.goals || a.lastMinute - b.lastMinute);
+    // Real scorers primero, "Sin asignar" al final para que no contaminen
+    // el top 10 visible.
+    .sort((a, b) => {
+      if (a.isUnassigned !== b.isUnassigned) return a.isUnassigned ? 1 : -1;
+      return b.goals - a.goals || a.lastMinute - b.lastMinute;
+    });
 
   // Distribución por fase
   const stageMap = { group: t("stage.group_short"), r32: t("stage.r32_short"), r16: t("stage.r16_short"), qf: t("stage.qf_short"), sf: t("stage.sf_short"), third: t("stage.tp_short"), final: t("stage.f_short") };
@@ -2201,6 +2295,7 @@ function renderStats() {
   // 1. Goleada del torneo (partido con más goles en total)
   let biggestWin = null;
   STATE.matches.forEach(m => {
+    if (m.status !== "finished") return;
     const s = effectiveScore(m);
     if (s.home === null || s.away === null) return;
     const total = s.home + s.away;
@@ -2215,6 +2310,8 @@ function renderStats() {
   const dobletes = [];
   STATE.matches.forEach(m => {
     if (m.status !== "finished") return;
+    const es = effectiveScore(m);
+    if (es.home === null || es.away === null) return;
     const allScorers = [
       ...(m.home?.scorers || m.home_scorers || []).map(s => ({ ...s, team: m.home?.name, iso2: m.home?.iso2 })),
       ...(m.away?.scorers || m.away_scorers || []).map(s => ({ ...s, team: m.away?.name, iso2: m.away?.iso2 })),
@@ -2222,14 +2319,15 @@ function renderStats() {
     const playerCount = new Map();
     allScorers.forEach(s => {
       if (s.note === "OG") return;
-      playerCount.set(s.player, (playerCount.get(s.player) || 0) + 1);
+      const fixed = fixCipherName(s.player);
+      playerCount.set(fixed, (playerCount.get(fixed) || 0) + 1);
     });
     playerCount.forEach((cnt, player) => {
-      if (cnt >= 3) hatTricks.push({ player, goals: cnt, match: `${m.home?.name} ${m.home_score}-${m.away_score} ${m.away?.name}` });
-      else if (cnt === 2) dobletes.push({ player, goals: cnt, match: `${m.home?.name} ${m.home_score}-${m.away_score} ${m.away?.name}` });
+      if (cnt >= 3) hatTricks.push({ player, goals: cnt, match: `${m.home?.name} ${es.home}-${es.away} ${m.away?.name}` });
+      else if (cnt === 2) dobletes.push({ player, goals: cnt, match: `${m.home?.name} ${es.home}-${es.away} ${m.away?.name}` });
     });
   });
-  console.log(`[renderStats] Hat-tricks: ${hatTricks.length}, Dobletes: ${dobletes.length}, Finalizados: ${STATE.matches.filter(m => m.status === 'finished').length}`);
+  console.log(`[renderStats] Hat-tricks: ${hatTricks.length}, Dobletes: ${dobletes.length}, Finalizados: ${finished}`);
   // 4. Goles en descuentos (stoppage time)
   let stoppageGoals = 0;
   let firstHalfGoals = 0;
@@ -2309,7 +2407,7 @@ function renderStats() {
         </div>
         ${topScorers.length === 0 ? '<p class="text-muted small">' + escapeHtml(t("common.empty")) + '</p>' :
           `<div class="stat-scorers-scroll" id="scorers-list">${
-            topScorers.slice(0, 10).map(s => `<div class="stat-row"><span>${s.iso2 ? `<span class="fi fi-${s.iso2} flag-24" title="${escapeHtml(s.team)}"></span> ` : ""}${escapeHtml(s.name)}</span><span class="v">${s.goals} goles</span></div>`).join("")
+            topScorers.slice(0, 10).map(s => `<div class="stat-row ${s.isUnassigned ? "text-muted" : ""}"><span>${s.iso2 ? `<span class="fi fi-${s.iso2} flag-24" title="${escapeHtml(s.team)}"></span> ` : ""}${escapeHtml(s.name)}</span><span class="v">${s.goals} goles</span></div>`).join("")
           }</div>
           ${topScorers.length > 10 ? `<div class="text-muted small mt-1 text-center">Mostrando top 10 de ${topScorers.length} goleadores</div>` : ""}`}
       </div>
@@ -2454,7 +2552,11 @@ function renderStats() {
   }
 
   // Render de las gráficas (después de inyectar el HTML, en el siguiente tick)
-  setTimeout(() => renderEchartsCharts({ finished, live, pending, stageCounts, top, matchdays, goalsAcc }), 0);
+  setTimeout(() => renderEchartsCharts({ finished, live, pending, stageCounts, top, matchdays, goalsAcc, matchdayLabels: matchdays.map(md => {
+    if (typeof md === "number") return "J" + md;
+    const labels = { r32: "16avos", r16: "Octavos", qf: "Cuartos", sf: "Semis", third: "3°", final: "Final" };
+    return labels[md] || md;
+  }) }), 0);
 }
 
 function getEchartsTheme() {
@@ -2553,7 +2655,7 @@ function renderEchartsCharts({ finished, live, pending, stageCounts, top, matchd
         nameLocation: "middle",
         nameGap: 26,
         nameTextStyle: { color: t.muted, fontSize: 11 },
-        data: matchdays.map(md => "J" + md),
+        data: opts.matchdayLabels || matchdays.map(md => "J" + md),
         axisLine: { lineStyle: { color: t.border } },
         axisLabel: { color: t.muted, fontSize: 11 },
       },
