@@ -2184,8 +2184,11 @@ function renderStats() {
   // mismo apellido (ej. Lautaro vs Lisandro Martínez).
   function scorerKey(name, team) {
     if (!name) return "";
-    const normalized = String(name).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
-    const parts = normalized.split(/\s+/);
+    // Normalizar y dividir por espacios para obtener el apellido.
+    // Importante: dividir ANTES de quitar espacios, si no el split no
+    // encuentra separadores y devuelve el nombre completo como un solo token.
+    const cleaned = String(name).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const parts = cleaned.trim().split(/\s+/);
     const last = parts[parts.length - 1];
     const tk = normKey(team || "");
     return tk ? `${last}|${tk}` : last;
