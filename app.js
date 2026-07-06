@@ -2597,7 +2597,7 @@ function getEchartsTheme() {
   };
 }
 
-function renderEchartsCharts({ finished, live, pending, stageCounts, top, matchdays, goalsAcc }) {
+function renderEchartsCharts({ finished, live, pending, stageCounts, top, matchdays, goalsAcc, matchdayLabels }) {
   if (typeof echarts === "undefined") {
     console.warn("[stats] ECharts no disponible");
     return;
@@ -2677,7 +2677,7 @@ function renderEchartsCharts({ finished, live, pending, stageCounts, top, matchd
         nameLocation: "middle",
         nameGap: 26,
         nameTextStyle: { color: t.muted, fontSize: 11 },
-        data: opts.matchdayLabels || matchdays.map(md => "J" + md),
+        data: matchdayLabels || matchdays.map(md => "J" + md),
         axisLine: { lineStyle: { color: t.border } },
         axisLabel: { color: t.muted, fontSize: 11 },
       },
