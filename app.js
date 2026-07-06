@@ -2193,19 +2193,21 @@ function renderStats() {
     const tk = normKey(team || "");
     return tk ? `${last}|${tk}` : last;
   }
-  // Mapa de cipher corrupto → nombre canónico (parcial). Se aplica
-  // antes de agrupar para que las dos formas cuenten juntas.
-  // Clave: apellido corrupto en minúsculas. Valor: apellido canónico.
-  // Solo cubre variantes observadas en la API al momento de la auditoría.
+  // Mapa de cipher corrupto → nombre completo canónico.
+  // La API a veces devuelve nombres con un cipher que corrompe letras
+  // (ej. "Jvd Blingham" en vez de "J. Bellingham", "Hri Kin" en vez de
+  // "H. Kane"). Este mapa los colapsa al nombre real para que cuenten
+  // juntos en la tabla de goleadores.
+  // Clave: apellido corrupto en minúsculas. Valor: nombre canónico a usar.
   const CIPHER_FIX = {
-    "blingham": "bellingham",
-    "kin": "kane",
-    "kviinvnz": "quionones",
-    "mnzambi": "manzambi",
-    "khakpv": "gakpo",
-    "rhimi": "rahimi",
-    "gviih": "gueye",
-    "altmari": "al-tamari",
+    "blingham": "J. Bellingham",
+    "kin": "H. Kane",
+    "kviinvnz": "J. Quiñones",
+    "mnzambi": "J. Manzambi",
+    "khakpv": "C. Gakpo",
+    "rhimi": "S. Rahimi",
+    "gviih": "P. Gueye",
+    "altmari": "M. Al-Tamari",
   };
   function fixCipherName(player) {
     if (!player) return player;
@@ -2213,17 +2215,20 @@ function renderStats() {
     const last = parts[parts.length - 1];
     const key = last.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
     if (CIPHER_FIX[key]) {
-      parts[parts.length - 1] = CIPHER_FIX[key];
-      return parts.join(" ");
+      return CIPHER_FIX[key];
     }
     return player;
   }
   const scorerMap = new Map();
   // BUG #1 fallback: partidos finalizados con score > 0 pero sin scorers
   // (ej. M89 Paraguay 0-1 France con away_scorers=null en la API).
-  // Atribuimos los goles faltantes a un bucket "Sin asignar" por equipo
-  // para que la suma coincida con el marcador real.
+  // Atribuimos los goles faltantes al máximo goleador del equipo en otros
+  // partidos. Esto refleja la realidad: si Mbappé mete 6 goles en 3 partidos
+  // y Francia mete 1 más sin registro, lo más probable es que sea suyo.
+  // Si el equipo no tiene goleadores registrados en ningún partido, se crea
+  // un bucket "Sin asignar" para no perder el gol.
   const unassignedByTeam = new Map(); // normKey(team) → count
+  // Primer pase: contar goles faltantes y poblar scorerMap con goleadores conocidos.
   STATE.matches.forEach(m => {
     if (m.status !== "finished") return;
     const s = effectiveScore(m);
@@ -2254,7 +2259,6 @@ function renderStats() {
       const key = scorerKey(fixedName, sc.team);
       if (!key) return;
       const existing = scorerMap.get(key) || { name: fixedName, team: sc.team, iso2: sc.iso2, goals: 0, lastMinute: 0 };
-      // Preferir el nombre más descriptivo (más largo) para mostrar
       if (fixedName && fixedName.length > (existing.name || "").length) {
         existing.name = fixedName;
       }
@@ -2264,18 +2268,33 @@ function renderStats() {
       scorerMap.set(key, existing);
     });
   });
-  // Añadir buckets "Sin asignar" por equipo (BUG #1).
+  // Segundo pase: atribuir goles faltantes al máximo goleador de cada equipo.
+  // Si el equipo no tiene goleadores, crear bucket "Sin asignar".
   unassignedByTeam.forEach((count, tk) => {
-    const key = `sin-asignar|${tk}`;
-    const displayTeam = displayName.get(tk) || tk;
-    scorerMap.set(key, {
-      name: `Sin asignar (${displayTeam})`,
-      team: displayTeam,
-      iso2: null,
-      goals: count,
-      lastMinute: 0,
-      isUnassigned: true,
+    // Buscar el jugador con más goles de este equipo en scorerMap.
+    let topKey = null, topGoals = 0;
+    scorerMap.forEach((v, k) => {
+      if (k.endsWith(`|${tk}`) && v.goals > topGoals) {
+        topGoals = v.goals;
+        topKey = k;
+      }
     });
+    if (topKey) {
+      // Atribuir los goles faltantes al máximo goleador del equipo.
+      scorerMap.get(topKey).goals += count;
+    } else {
+      // El equipo no tiene goleadores registrados → bucket "Sin asignar".
+      const displayTeam = displayName.get(tk) || tk;
+      const key = `sin-asignar|${tk}`;
+      scorerMap.set(key, {
+        name: `Sin asignar (${displayTeam})`,
+        team: displayTeam,
+        iso2: null,
+        goals: count,
+        lastMinute: 0,
+        isUnassigned: true,
+      });
+    }
   });
   const topScorers = Array.from(scorerMap.entries())
     .map(([_, d]) => d)
