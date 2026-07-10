@@ -1720,13 +1720,12 @@ function resolveBracketLabel(team, role) {
   if (ref.status !== "finished") return team;
   const sc = effectiveScore(ref);
   if (sc.home === null || sc.away === null) return team;
-  if (isWinner) {
-    const w = getKnockoutWinner(ref);
-    return w === "home" ? ref.home : w === "away" ? ref.away : (sc.home > sc.away ? ref.home : ref.away);
-  } else {
-    const w = getKnockoutWinner(ref);
-    return w === "home" ? ref.away : w === "away" ? ref.home : (sc.home < sc.away ? ref.home : ref.away);
-  }
+  const w = getKnockoutWinner(ref);
+  const resolved = isWinner
+    ? (w === "home" ? ref.home : w === "away" ? ref.away : (sc.home > sc.away ? ref.home : ref.away))
+    : (w === "home" ? ref.away : w === "away" ? ref.home : (sc.home < sc.away ? ref.home : ref.away));
+  const { scorers: _drop, ...rest } = resolved;
+  return rest;
 }
 
 function createBracketMatch(m, opts = {}) {
