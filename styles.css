@@ -2384,6 +2384,30 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   flex-shrink: 0;
 }
 
+/* Gol atribuido: la API devolvió score > 0 pero el autor no está
+   registrado. Se muestra con estilo diferente y un tag "atribuido"
+   para que el usuario sepa que es inferido. */
+.scorer.scorer-attributed {
+  background: rgba(255, 193, 7, .1);
+  border-color: rgba(255, 193, 7, .4);
+  font-style: italic;
+}
+.scorer.scorer-attributed i {
+  color: var(--accent, #FFC107);
+}
+.scorer-attrib-tag {
+  font-size: .65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: .1rem .4rem;
+  background: rgba(255, 193, 7, .2);
+  color: var(--accent, #FFC107);
+  border-radius: 4px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 
 /* ===================================================
    FATAL OVERLAY (CORS / file:// / seed load fail)

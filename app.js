@@ -442,6 +442,80 @@ function escapeHtml(s) {
   );
 }
 
+// Normalización mínima: lowercase + sin diacríticos + sin espacios.
+// Suficiente para colapsar "Mexico" / "México" / "MEX" sin alterar
+// "United States" → "USA" como sí hace normalizeName() del matchKey.
+function normKey(s) {
+  return (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
+}
+
+// Mapa de cipher corrupto → nombre canónico. La API a veces devuelve
+// nombres con un cipher que corrompe letras (ej. "Jvd Blingham" en vez
+// de "J. Bellingham"). Este mapa los colapsa al nombre real.
+const CIPHER_FIX_NAMES = {
+  blingham: "J. Bellingham",
+  kin: "H. Kane",
+  kviinvnz: "J. Quiñones",
+  mnzambi: "J. Manzambi",
+  khakpv: "C. Gakpo",
+  rhimi: "S. Rahimi",
+  gviih: "P. Gueye",
+  altmari: "M. Al-Tamari",
+};
+function fixCipherName(player) {
+  if (!player) return player;
+  const parts = String(player).trim().split(/\s+/);
+  const last = parts[parts.length - 1];
+  const key = last.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
+  return CIPHER_FIX_NAMES[key] || player;
+}
+
+// Construye un mapa equipo → {name, count} con el máximo goleador de
+// cada equipo en el torneo. Usado para atribuir goles faltantes cuando
+// la API devuelve score > 0 pero home_scorers/away_scorers es null.
+function buildTopScorersByTeam() {
+  const map = new Map();
+  STATE.matches.forEach(m => {
+    if (m.status !== "finished") return;
+    const sides = [
+      { scorers: m.home?.scorers || [], team: m.home?.name },
+      { scorers: m.away?.scorers || [], team: m.away?.name },
+    ];
+    sides.forEach(({ scorers, team }) => {
+      const tk = normKey(team);
+      if (!tk) return;
+      scorers.forEach(sc => {
+        if (sc.note === "OG") return;
+        const fixed = fixCipherName(sc.player);
+        if (!fixed) return;
+        const ex = map.get(tk);
+        if (!ex) map.set(tk, { name: fixed, count: 1, team });
+        else ex.count++;
+      });
+    });
+  });
+  return map;
+}
+
+// Atribuye goles faltantes (score - scorers.length) al máximo goleador
+// del equipo. Si el equipo no tiene goleadores registrados en ningún
+// partido, crea un bucket "Sin asignar (Team)".
+function attributeMissingGoals(scorers, expectedCount, teamName, topScorersByTeam) {
+  const actual = scorers.filter(sc => sc.note !== "OG").length;
+  const missing = Math.max(0, (expectedCount || 0) - actual);
+  if (missing === 0) return scorers;
+  const result = scorers.slice();
+  const top = topScorersByTeam.get(normKey(teamName));
+  for (let i = 0; i < missing; i++) {
+    if (top) {
+      result.push({ player: top.name, minute: null, attributed: true });
+    } else {
+      result.push({ player: `Sin asignar (${teamName || "?"})`, minute: null, attributed: true });
+    }
+  }
+  return result;
+}
+
 // ============== SERVER BANNER ==============
 function setupServerBanner() {
   const closeBtn = document.getElementById("server-banner-close");
@@ -998,11 +1072,16 @@ function openMatchDetailModal(matchId) {
   }
   metaEl.innerHTML = metaHtml || '<div class="detail-meta-row"><i class="ri-information-line" aria-hidden="true"></i> Información no disponible</div>';
 
-  // Scorers per team
+  // Scorers per team (with attribution fallback for missing goals)
   const scorersAEl = document.getElementById("detail-scorers-a");
   const scorersBEl = document.getElementById("detail-scorers-b");
-  const homeScorers = resolvedHome.scorers || m.home?.scorers || [];
-  const awayScorers = resolvedAway.scorers || m.away?.scorers || [];
+  const topScorersByTeam = buildTopScorersByTeam();
+  const homeScorers = (m.status === "finished" && s.home !== null)
+    ? attributeMissingGoals(m.home?.scorers || [], s.home, m.home?.name, topScorersByTeam)
+    : (m.home?.scorers || []);
+  const awayScorers = (m.status === "finished" && s.away !== null)
+    ? attributeMissingGoals(m.away?.scorers || [], s.away, m.away?.name, topScorersByTeam)
+    : (m.away?.scorers || []);
 
   if (homeScorers.length > 0) {
     scorersAEl.innerHTML = renderScorersList(homeScorers);
@@ -1391,6 +1470,9 @@ function renderMatches() {
 function renderScorersList(scorers) {
   if (!scorers || scorers.length === 0) return "";
   const items = scorers.map(s => {
+    if (s.attributed) {
+      return `<span class="scorer scorer-attributed" title="Gol atribuido: la API no registró el autor"><i class="ri-question-line" aria-hidden="true"></i> ${escapeHtml(s.player)} <span class="scorer-attrib-tag">atribuido</span></span>`;
+    }
     const minute = s.minute !== null && s.minute !== undefined
       ? ` <span class="scorer-min">${escapeHtml(String(s.minute))}'</span>`
       : "";
@@ -2113,10 +2195,6 @@ function renderStats() {
   const goalsByTeam = new Map();
   const displayName = new Map();   // normKey → nombre original (para mostrar en top 8)
   const teamsWithGoals = new Set(); // set de normKeys de equipos que anotaron >0 goles
-  // Normalización mínima: lowercase + sin diacríticos + sin espacios.
-  // Suficiente para colapsar "Mexico" / "México" / "MEX" sin alterar
-  // "United States" → "USA" como sí hace normalizeName() del matchKey.
-  const normKey = (s) => (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
   STATE.matches.forEach(m => {
     if (m.status !== "finished") return;
     const s = effectiveScore(m);
@@ -2191,32 +2269,6 @@ function renderStats() {
     const last = parts[parts.length - 1];
     const tk = normKey(team || "");
     return tk ? `${last}|${tk}` : last;
-  }
-  // Mapa de cipher corrupto → nombre completo canónico.
-  // La API a veces devuelve nombres con un cipher que corrompe letras
-  // (ej. "Jvd Blingham" en vez de "J. Bellingham", "Hri Kin" en vez de
-  // "H. Kane"). Este mapa los colapsa al nombre real para que cuenten
-  // juntos en la tabla de goleadores.
-  // Clave: apellido corrupto en minúsculas. Valor: nombre canónico a usar.
-  const CIPHER_FIX = {
-    "blingham": "J. Bellingham",
-    "kin": "H. Kane",
-    "kviinvnz": "J. Quiñones",
-    "mnzambi": "J. Manzambi",
-    "khakpv": "C. Gakpo",
-    "rhimi": "S. Rahimi",
-    "gviih": "P. Gueye",
-    "altmari": "M. Al-Tamari",
-  };
-  function fixCipherName(player) {
-    if (!player) return player;
-    const parts = String(player).trim().split(/\s+/);
-    const last = parts[parts.length - 1];
-    const key = last.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "");
-    if (CIPHER_FIX[key]) {
-      return CIPHER_FIX[key];
-    }
-    return player;
   }
   const scorerMap = new Map();
   // BUG #1 fallback: partidos finalizados con score > 0 pero sin scorers
