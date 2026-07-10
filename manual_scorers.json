@@ -1,0 +1,19 @@
+{
+  "_comment": "Override de goleadores para partidos donde la API devuelve scorers=null pero sí hay goles. Editar este archivo para agregar más partidos. match_number como clave, home_scorers/away_scorers como array de {player, minute, note}. minute es solo el número (sin apóstrofe, sin 'min'). note puede ser 'penalty', 'OG' o null.",
+  "89": {
+    "away_scorers": [
+      { "player": "Kylian Mbappé", "minute": "70", "note": "penalty" }
+    ]
+  },
+  "91": {
+    "home_scorers": [
+      { "player": "Neymar Jr", "minute": "90+10", "note": "penalty" }
+    ]
+  },
+  "92": {
+    "home_scorers": [
+      { "player": "Raul Jiménez", "minute": "69", "note": "penalty" },
+      { "player": "Julian Quiñones", "minute": "42" }
+    ]
+  }
+}

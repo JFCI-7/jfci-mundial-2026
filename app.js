@@ -100,6 +100,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+  await loadManualScorers();
+
   // Refrescar desde API
   const apiOk = await refreshFromAPI(true);
   if (!apiOk && seedOk) {
@@ -470,50 +472,21 @@ function fixCipherName(player) {
   return CIPHER_FIX_NAMES[key] || player;
 }
 
-// Construye un mapa equipo → {name, count} con el máximo goleador de
-// cada equipo en el torneo. Usado para atribuir goles faltantes cuando
-// la API devuelve score > 0 pero home_scorers/away_scorers es null.
-function buildTopScorersByTeam() {
-  const map = new Map();
-  STATE.matches.forEach(m => {
-    if (m.status !== "finished") return;
-    const sides = [
-      { scorers: m.home?.scorers || [], team: m.home?.name },
-      { scorers: m.away?.scorers || [], team: m.away?.name },
-    ];
-    sides.forEach(({ scorers, team }) => {
-      const tk = normKey(team);
-      if (!tk) return;
-      scorers.forEach(sc => {
-        if (sc.note === "OG") return;
-        const fixed = fixCipherName(sc.player);
-        if (!fixed) return;
-        const ex = map.get(tk);
-        if (!ex) map.set(tk, { name: fixed, count: 1, team });
-        else ex.count++;
-      });
-    });
-  });
-  return map;
-}
-
-// Atribuye goles faltantes (score - scorers.length) al máximo goleador
-// del equipo. Si el equipo no tiene goleadores registrados en ningún
-// partido, crea un bucket "Sin asignar (Team)".
-function attributeMissingGoals(scorers, expectedCount, teamName, topScorersByTeam) {
-  const actual = scorers.filter(sc => sc.note !== "OG").length;
-  const missing = Math.max(0, (expectedCount || 0) - actual);
-  if (missing === 0) return scorers;
-  const result = scorers.slice();
-  const top = topScorersByTeam.get(normKey(teamName));
-  for (let i = 0; i < missing; i++) {
-    if (top) {
-      result.push({ player: top.name, minute: null, attributed: true });
-    } else {
-      result.push({ player: `Sin asignar (${teamName || "?"})`, minute: null, attributed: true });
-    }
+// Override de goleadores para partidos donde la API devuelve scorers=null
+// pero sí hay goles registrados. Cargado desde manual_scorers.json al
+// iniciar. Estructura: { "match_number": { "home_scorers": [...], "away_scorers": [...] } }.
+let MANUAL_SCORERS = {};
+async function loadManualScorers() {
+  try {
+    const res = await fetch('./manual_scorers.json');
+    if (!res.ok) return;
+    const data = await res.json();
+    delete data._comment;
+    MANUAL_SCORERS = data;
+    console.log('[manual_scorers] Loaded overrides for matches:', Object.keys(data).join(', '));
+  } catch (e) {
+    console.warn('[manual_scorers] No se pudo cargar:', e);
   }
-  return result;
 }
 
 // ============== SERVER BANNER ==============
@@ -1072,15 +1045,15 @@ function openMatchDetailModal(matchId) {
   }
   metaEl.innerHTML = metaHtml || '<div class="detail-meta-row"><i class="ri-information-line" aria-hidden="true"></i> Información no disponible</div>';
 
-  // Scorers per team (with attribution fallback for missing goals)
+  // Scorers per team (manual override from manual_scorers.json takes precedence)
   const scorersAEl = document.getElementById("detail-scorers-a");
   const scorersBEl = document.getElementById("detail-scorers-b");
-  const topScorersByTeam = buildTopScorersByTeam();
-  const homeScorers = (m.status === "finished" && s.home !== null)
-    ? attributeMissingGoals(m.home?.scorers || [], s.home, m.home?.name, topScorersByTeam)
+  const manual = (m.match_number != null && MANUAL_SCORERS[m.match_number]) || {};
+  const homeScorers = manual.home_scorers !== undefined
+    ? manual.home_scorers
     : (m.home?.scorers || []);
-  const awayScorers = (m.status === "finished" && s.away !== null)
-    ? attributeMissingGoals(m.away?.scorers || [], s.away, m.away?.name, topScorersByTeam)
+  const awayScorers = manual.away_scorers !== undefined
+    ? manual.away_scorers
     : (m.away?.scorers || []);
 
   if (homeScorers.length > 0) {
@@ -1470,9 +1443,6 @@ function renderMatches() {
 function renderScorersList(scorers) {
   if (!scorers || scorers.length === 0) return "";
   const items = scorers.map(s => {
-    if (s.attributed) {
-      return `<span class="scorer scorer-attributed" title="Gol atribuido: la API no registró el autor"><i class="ri-question-line" aria-hidden="true"></i> ${escapeHtml(s.player)} <span class="scorer-attrib-tag">atribuido</span></span>`;
-    }
     const minute = s.minute !== null && s.minute !== undefined
       ? ` <span class="scorer-min">${escapeHtml(String(s.minute))}'</span>`
       : "";
