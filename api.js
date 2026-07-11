@@ -200,17 +200,35 @@ const API = (() => {
     const homeScore = g.home_score === "null" || g.home_score == null ? null : Number(g.home_score);
     const awayScore = g.away_score === "null" || g.away_score == null ? null : Number(g.away_score);
     const finished  = String(g.finished).toUpperCase() === "TRUE";
-    const timeElapsed = g.time_elapsed || "notstarted";
+    let timeElapsed = g.time_elapsed || "notstarted";
 
-    let status = "pending";
-    if (finished) status = "finished";
-    else if (timeElapsed && timeElapsed !== "notstarted" && timeElapsed !== "null") status = "live";
-
-    // Parse "06/11/2026 13:00" → ISO
+    // Parse "06/11/2026 13:00" → ISO. local_date viene en hora local del venue.
+    // La usamos luego para validar que el partido ya arrancó antes de marcarlo live.
     let isoDate = null;
     if (g.local_date) {
       const m = g.local_date.match(/^(\d{2})\/(\d{2})\/(\d{4})\s+(\d{2}):(\d{2})/);
       if (m) isoDate = `${m[3]}-${m[1]}-${m[2]}T${m[4]}:${m[5]}`;
+    }
+
+    let status = "pending";
+    if (finished) {
+      status = "finished";
+    } else if (timeElapsed && timeElapsed !== "notstarted" && timeElapsed !== "null") {
+      // La API afirma que el partido está en vivo. Verificamos contra el kickoff
+      // programado (local_date): si el partido aún no arranca, la API está
+      // desactualizada o bugueada — worldcup26.ir a veces reporta
+      // time_elapsed="live" horas antes del pitazo inicial (caso real: match 99
+      // QF Norway vs England, kickoff 07/11 17:00 ET, API marcaba "live" desde
+      // la mañana). Tratamos local_date como hora local del browser: cualquier
+      // offset de zona horaria queda del lado seguro ("pending").
+      const kickoffMs = isoDate ? new Date(isoDate).getTime() : NaN;
+      const hasStarted = isNaN(kickoffMs) || Date.now() >= kickoffMs;
+      if (hasStarted) {
+        status = "live";
+      } else {
+        status = "pending";
+        timeElapsed = "notstarted";
+      }
     }
 
     // La API no incluye iso2; lo derivamos del nombre del equipo usando

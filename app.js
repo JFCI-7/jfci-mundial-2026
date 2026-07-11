@@ -181,6 +181,27 @@ function setStatus(source, ts) {
 }
 
 // ============== INGEST ==============
+// Recalcula el status de un match a partir de la API + el calendario del seed.
+// Defensa contra la API worldcup26.ir reportando time_elapsed="live" antes
+// del kickoff: si el seed tiene una fecha futura, el status queda "pending"
+// sin importar lo que diga la API. El `date` del seed vive en hora de México
+// (CST, UTC-6), consistente con el resto de la app.
+function reconcileMatchStatus(m) {
+  if (!m) return;
+  if (m.finished) { m.status = "finished"; return; }
+  if (m.date) {
+    const kickoffMs = new Date(m.date).getTime();
+    if (!isNaN(kickoffMs) && Date.now() < kickoffMs) {
+      m.status = "pending";
+      m.time_elapsed = "notstarted";
+      return;
+    }
+  }
+  const te = m.time_elapsed;
+  if (te && te !== "notstarted" && te !== "null") m.status = "live";
+  else m.status = "pending";
+}
+
 function ingestSeed(seed) {
   (seed.teams || []).forEach(t => {
     STATE.teams.set(t.name, t);
@@ -230,6 +251,10 @@ function ingestAPI(api) {
       existing.status = m.status;
       existing.time_elapsed = m.time_elapsed;
       existing.apiId = m.apiId;
+      existing.finished = m.finished;
+      // Defensa secundaria contra worldcup26.ir reportando "live" antes del
+      // kickoff. Si el seed trae una fecha futura, reconciliamos el status.
+      reconcileMatchStatus(existing);
       if (m.home.name_en && m.home.name_en !== "TBD") {
         // Preservar iso2/flag del seed si la API no los trae (api.js pone iso2:null).
         const seedHome = existing.home || {};
@@ -1112,7 +1137,7 @@ function onClearOverride() {
   if (!confirm("¿Restaurar marcador oficial (de la API)?")) return;
   DB.clearUserScore(currentMatchId);
   const m = STATE.matchesById.get(currentMatchId);
-  if (m && m.source === "api") m.status = m.finished ? "finished" : (m.time_elapsed && m.time_elapsed !== "notstarted" ? "live" : "pending");
+  if (m && m.source === "api") reconcileMatchStatus(m);
   document.getElementById("modal").hidden = true;
   renderForPage();
 }
