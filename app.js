@@ -1319,17 +1319,20 @@ function renderLiveCard(m) {
   const rawMin = m.time_elapsed;
   const hasNumericMinute = rawMin && rawMin !== "live" && rawMin !== "notstarted" && !isNaN(Number(rawMin));
   const minuteHtml = hasNumericMinute ? `<div class="live-minute">${escapeHtml(String(rawMin))}'</div>` : "";
+  const liveScorePending = m.status === "live" && (m.time_elapsed == null || m.time_elapsed === "notstarted");
+  const homeScoreHtml = liveScorePending ? "—" : (s.home !== null ? s.home : "0");
+  const awayScoreHtml = liveScorePending ? "—" : (s.away !== null ? s.away : "0");
   return `
     <a href="calendario.html" class="live-card live-card-live" aria-label="Partido en vivo">
       <div class="live-team">
         <span class="fi fi-${m.home.iso2} flag-24" title="${escapeHtml(m.home.name)}"></span>
         <span class="live-team-name">${escapeHtml(m.home.name)}</span>
-        <span class="bebas live-score">${s.home !== null ? s.home : "0"}</span>
+        <span class="bebas live-score">${homeScoreHtml}</span>
       </div>
       <div class="live-team">
         <span class="fi fi-${m.away.iso2} flag-24" title="${escapeHtml(m.away.name)}"></span>
         <span class="live-team-name">${escapeHtml(m.away.name)}</span>
-        <span class="bebas live-score">${s.away !== null ? s.away : "0"}</span>
+        <span class="bebas live-score">${awayScoreHtml}</span>
       </div>
       ${minuteHtml}
     </a>
@@ -1498,8 +1501,17 @@ function createMatchCard(m) {
   card.className = "match-card";
   const s = effectiveScore(m);
   const pen = effectivePenaltyScore(m);
-  const hasScore = s.home !== null && s.away !== null;
-  const scoreText = hasScore ? `${s.home} - ${s.away}` : "– : –";
+  // Si el partido está "live" pero el API no mandó datos frescos (time_elapsed
+  // en null porque lo inferimos del calendario), el marcador también puede
+  // estar stale. Mostramos "– : –" en lugar del 0-0 que sugeriría
+  // erróneamente que el partido va 0-0. Caso real: match 100 Argentina vs
+  // Switzerland, kickoff 19:00 CST, la API seguía reportando 0-0 90+ min
+  // después.
+  const liveScorePending = m.status === "live" && (m.time_elapsed == null || m.time_elapsed === "notstarted");
+  const homeScore = liveScorePending ? null : s.home;
+  const awayScore = liveScorePending ? null : s.away;
+  const hasScore = homeScore !== null && awayScore !== null;
+  const scoreText = hasScore ? `${homeScore} - ${awayScore}` : "– : –";
   const penText = (pen.home !== null && pen.away !== null) ? `<div class="match-pen-score"><i class="ri-football-line" aria-hidden="true"></i> ${pen.home}-${pen.away} pen.</div>` : "";
   let dateOnly = "TBD", timeOnly = "—";
   if (m.date) {
@@ -1836,8 +1848,15 @@ function createBracketMatch(m, opts = {}) {
   const penHtml = (!isPending && pen.home !== null && pen.away !== null)
     ? `<div class="bracket-pen-score"><i class="ri-football-line" aria-hidden="true"></i> ${pen.home}-${pen.away} pen.</div>`
     : "";
-  const homeScore = isPending ? "—" : (s.home !== null ? s.home : "—");
-  const awayScore = isPending ? "—" : (s.away !== null ? s.away : "—");
+  // Si el partido está "live" pero el API no mandó datos frescos (time_elapsed
+  // en null porque lo inferimos del calendario en reconcileMatchStatus), el
+  // marcador también puede estar stale. Mostramos "—" en vez del 0-0 que
+  // sugeriría erróneamente que el partido va 0-0. Caso real: match 100
+  // Argentina vs Switzerland, kickoff 19:00 CST, la API seguía reportando
+  // 0-0 / notstarted / sin goleadores 90+ min después.
+  const liveScorePending = m.status === "live" && (m.time_elapsed == null || m.time_elapsed === "notstarted");
+  const homeScore = isPending || liveScorePending ? "—" : (s.home !== null ? s.home : "—");
+  const awayScore = isPending || liveScorePending ? "—" : (s.away !== null ? s.away : "—");
   const resolvedHome = resolveBracketLabel(m.home, "home");
   const resolvedAway = resolveBracketLabel(m.away, "away");
   const homeIsPending = !resolvedHome.name_en && !!resolvedHome.label;
@@ -1855,9 +1874,12 @@ function createBracketMatch(m, opts = {}) {
     : "";
   const isLive = m.status === "live";
   if (isLive) div.classList.add("bracket-match-live");
+  if (liveScorePending) div.classList.add("bracket-match-live-syncing");
 
   const liveBadge = isLive
-    ? `<span class="bracket-live-badge"><i class="ri-live-line" aria-hidden="true"></i> EN VIVO</span>`
+    ? (liveScorePending
+        ? `<span class="bracket-live-badge bracket-live-badge-syncing"><span class="nav-spinner-dot" aria-hidden="true"></span> EN VIVO</span>`
+        : `<span class="bracket-live-badge"><i class="ri-live-line" aria-hidden="true"></i> EN VIVO</span>`)
     : "";
 
   const locale = (window.I18N && I18N.lang === "en") ? "en-US" : "es-MX";
@@ -1913,6 +1935,12 @@ function buildBracketTooltip(m, locale) {
   const venue = [m.venue, m.city, m.country].filter(Boolean).join(", ");
   let tip = `${longDate} · ${cdmx} CDMX / ${et} ET`;
   if (venue) tip += ` · ${venue}`;
+  // Si detectamos "live" por heurística (API stale), avisamos al usuario
+  // que el marcador se está sincronizando.
+  const liveScorePending = m.status === "live" && (m.time_elapsed == null || m.time_elapsed === "notstarted");
+  if (liveScorePending) {
+    tip += " · Marcador sincronizándose (API en vivo, datos en breve)";
+  }
   return tip;
 }
 
@@ -3327,13 +3355,16 @@ function renderTimelineCard(m) {
   const stageText = (TIMELINE_STAGE_LABEL[m.stage] && TIMELINE_STAGE_LABEL[m.stage]()) || m.stage;
   const venue = m.venue || "";
 
+  const liveScorePending = m.status === "live" && (m.time_elapsed == null || m.time_elapsed === "notstarted");
   const timeDisplay = m.status === "live" && m.time_elapsed && m.time_elapsed !== "live" && m.time_elapsed !== "notstarted"
     ? `${escapeHtml(String(m.time_elapsed))}'`
     : escapeHtml(time);
   const stageDisplay = `${escapeHtml(stageText)}${m.group ? " · G" + escapeHtml(m.group) : ""}`;
 
   const statusBadge = m.status === "live"
-    ? `<span class="tl-status-badge tl-status-live"><span class="nav-spinner-dot" style="width:6px;height:6px;margin:0"></span> EN VIVO</span>`
+    ? (liveScorePending
+        ? `<span class="tl-status-badge tl-status-live tl-status-syncing" title="Marcador sincronizándose"><span class="nav-spinner-dot" style="width:6px;height:6px;margin:0"></span> EN VIVO</span>`
+        : `<span class="tl-status-badge tl-status-live"><span class="nav-spinner-dot" style="width:6px;height:6px;margin:0"></span> EN VIVO</span>`)
     : m.status === "finished"
     ? `<span class="tl-status-badge tl-status-finished"><i class="ri-checkbox-circle-fill" aria-hidden="true"></i> FINAL</span>`
     : "";
@@ -3356,7 +3387,7 @@ function renderTimelineCard(m) {
             </div>
             ${homeScorers}
           </div>
-          <div class="tl-score">${s.home !== null ? s.home : "0"}<span class="tl-vs"> - </span>${s.away !== null ? s.away : "0"}${pen.home !== null && pen.away !== null ? `<div class="tl-pen-score"><i class="ri-football-line" aria-hidden="true"></i> ${pen.home}-${pen.away} pen.</div>` : ""}</div>
+          <div class="tl-score">${liveScorePending ? "—" : (s.home !== null ? s.home : "0")}<span class="tl-vs"> - </span>${liveScorePending ? "—" : (s.away !== null ? s.away : "0")}${pen.home !== null && pen.away !== null ? `<div class="tl-pen-score"><i class="ri-football-line" aria-hidden="true"></i> ${pen.home}-${pen.away} pen.</div>` : ""}</div>
           <div class="tl-team tl-team-away ${aWins ? "tl-team-winner" : ""}">
             <div class="tl-team-line">
               <span class="tl-team-name">${escapeHtml(m.away.name)}</span>

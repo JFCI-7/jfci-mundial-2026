@@ -966,6 +966,15 @@ a, button, .match-card, .group-card, .bracket-match, .pred-card, [role="button"]
   box-shadow: 0 0 12px rgba(4,191,69,.45);
   animation: live-glow 2s ease-in-out infinite;
 }
+/* Variante "EN VIVO" cuando el API aún no ha enviado el marcador (la API
+   suele quedarse en "notstarted" / 0-0 los primeros minutos del partido).
+   Mantenemos el glow verde pero el badge lleva spinner en vez del icono
+   estático y atenuamos el score para señalizar que se está sincronizando. */
+.bracket-live-badge-syncing {
+  background: var(--accent, #6805F2);
+  box-shadow: 0 0 0 2px rgba(104,5,242,.35);
+}
+.bracket-match-live-syncing .bracket-team-score { color: var(--text-muted); font-weight: 500; }
 @keyframes live-glow {
   0%, 100% { box-shadow: 0 0 8px rgba(4,191,69,.30); }
   50%      { box-shadow: 0 0 18px rgba(4,191,69,.65); }
