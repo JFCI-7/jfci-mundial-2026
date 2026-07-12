@@ -229,6 +229,18 @@ const API = (() => {
         status = "pending";
         timeElapsed = "notstarted";
       }
+    } else if (isoDate) {
+      // La API quedó en "notstarted" aunque el kickoff ya pasó. Caso real:
+      // match 100 Argentina vs Switzerland, kickoff 19:00 CST, API seguía en
+      // "notstarted" 90 min después. Sin esta rama el badge "EN VIVO" no
+      // aparecía. Marcamos como "live" para que el bracket refleje que el
+      // partido está en curso. Si la API después marca finished=true, el
+      // primer branch de esta función lo resolverá en el próximo refresh.
+      const kickoffMs = new Date(isoDate).getTime();
+      if (!isNaN(kickoffMs) && Date.now() >= kickoffMs) {
+        status = "live";
+        timeElapsed = null;
+      }
     }
 
     // La API no incluye iso2; lo derivamos del nombre del equipo usando

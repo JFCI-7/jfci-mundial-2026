@@ -182,18 +182,35 @@ function setStatus(source, ts) {
 
 // ============== INGEST ==============
 // Recalcula el status de un match a partir de la API + el calendario del seed.
-// Defensa contra la API worldcup26.ir reportando time_elapsed="live" antes
-// del kickoff: si el seed tiene una fecha futura, el status queda "pending"
-// sin importar lo que diga la API. El `date` del seed vive en hora de México
-// (CST, UTC-6), consistente con el resto de la app.
+// Defensa contra inconsistencias de worldcup26.ir:
+//   - Si el seed tiene una fecha futura → "pending" (API a veces marca "live"
+//     prematuramente, p.ej. match 99 Norway vs England el día previo).
+//   - Si el kickoff ya pasó y la API quedó en "notstarted" → "live". La API
+//     suele tardar unos minutos en actualizar time_elapsed al iniciar un
+//     partido (caso real: match 100 Argentina vs Switzerland, kickoff 19:00
+//     CST, API seguía en "notstarted" 90 min después). Sin esta lógica el
+//     badge "EN VIVO" no aparecía para partidos recién arrancados.
+//   - "finished" si la API marca finished=true.
+// El `date` del seed vive en hora de México (CST, UTC-6), consistente con
+// el resto de la app.
 function reconcileMatchStatus(m) {
   if (!m) return;
   if (m.finished) { m.status = "finished"; return; }
   if (m.date) {
     const kickoffMs = new Date(m.date).getTime();
-    if (!isNaN(kickoffMs) && Date.now() < kickoffMs) {
-      m.status = "pending";
-      m.time_elapsed = "notstarted";
+    if (!isNaN(kickoffMs)) {
+      if (Date.now() < kickoffMs) {
+        m.status = "pending";
+        m.time_elapsed = "notstarted";
+        return;
+      }
+      // El kickoff ya pasó. La API a veces se queda en "notstarted" durante
+      // los primeros minutos de un partido que sí arrancó a tiempo. Si la
+      // API no reporta finished=true, confiamos en el calendario y marcamos
+      // como "live". (Si la API finalmente reporta finished, el primer
+      // branch de la función lo resolverá en el próximo refresh.)
+      m.status = "live";
+      if (m.time_elapsed === "notstarted") m.time_elapsed = null;
       return;
     }
   }
